@@ -7,6 +7,16 @@ export const metadata: Metadata = {
     "Designing State Affairs' first AI product: an enterprise policy-intelligence platform that helped land Walmart and DoorDash as customers.",
 };
 
+/*
+ * IMAGE EXPORTS (Anton): from Figma "360 Views Design" (2ftkxAYp2q8KO9uZ5qg1Sk),
+ * export at 2x PNG into public/work/ :
+ *  - node 8166:12002 ("page" — overview w/ What You Need To Know + state map) → sa-360-overview.png
+ *  - node 9200:153294 ("just created" — What's Changed empty state)          → sa-whats-changed-empty.png
+ *  - a filled What's Changed panel (e.g. under 9200:152374 "this week")      → sa-whats-changed.png
+ *  - AI Chat frame (file cL6yXY2m9udDWQUtR80hpi — need node link)            → sa-ai-chat.png
+ * Then replace <ImageSlot> with <Image src="/work/..." /> (next/image).
+ * Screen real data before export — swap in demo data if any client info is visible.
+ */
 export default function StateAffairs() {
   return (
     <article>
