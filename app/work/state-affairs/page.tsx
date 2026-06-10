@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
 import { CaseHeader, Section, ImageSlot, NextCase } from "@/components/CaseStudy";
+import CaseNav from "@/components/CaseNav";
+
+const sections = [
+  { id: "context", label: "Context" },
+  { id: "problem", label: "The hard problem" },
+  { id: "decision", label: "The decision" },
+  { id: "craft", label: "Craft" },
+  { id: "outcome", label: "Outcome" },
+];
 
 export const metadata: Metadata = {
   title: "State Affairs — Policy Intelligence AI | Anton Castro",
@@ -26,6 +35,7 @@ export const metadata: Metadata = {
 export default function StateAffairs() {
   return (
     <article>
+      <CaseNav sections={sections} />
       <CaseHeader
         company="State Affairs — Policy Intelligence"
         title="Turning dense policy data into decisions enterprise teams act on"
@@ -37,7 +47,7 @@ export default function StateAffairs() {
         ]}
       />
 
-      <Section kicker="Context" title="High stakes, dense data, skeptical buyers">
+      <Section id="context" kicker="Context" title="High stakes, dense data, skeptical buyers">
         <p>
           State-level policy moves fast and the people tracking it — corporate policy
           teams, trade associations — drown in legislative text, committee schedules,
@@ -54,7 +64,7 @@ export default function StateAffairs() {
         </p>
       </Section>
 
-      <Section kicker="The hard problem" title="Aggregation isn't insight">
+      <Section id="problem" kicker="The hard problem" title="Aggregation isn't insight">
         <p>
           I led 360° Views and AI Chat — the company&apos;s first AI features. V1 could
           already answer impressively specific queries: <em>&quot;show me all the bills on
@@ -74,7 +84,7 @@ export default function StateAffairs() {
         <ImageSlot caption="AI Chat: cited, personalized answers over legislative data" />
       </Section>
 
-      <Section kicker="The decision" title="Three robust skills — then a fourth that answers 'what changed?'">
+      <Section id="decision" kicker="The decision" title="Three robust skills — then a fourth that answers 'what changed?'">
         <p>
           Working with our AI/ML product and engineering leads, I focused V1 on
           three skills we could make genuinely robust: <strong>Bill Compare</strong>,{" "}
@@ -95,7 +105,7 @@ export default function StateAffairs() {
         <ImageSlot caption="What's Changed: top-five movement insights in 360° View context" />
       </Section>
 
-      <Section kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
+      <Section id="craft" kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
         <p>
           All of this meant digesting the language of government — bills,
           legislative process, regulatory nuance — and translating it into
@@ -106,7 +116,7 @@ export default function StateAffairs() {
         <ImageSlot caption="Voice & tone: how the product cites, hedges, and escalates" />
       </Section>
 
-      <Section kicker="Outcome" title="Validated with the people who'd bet their jobs on it">
+      <Section id="outcome" kicker="Outcome" title="Validated with the people who'd bet their jobs on it">
         <p>
           We piloted the four skills with policy experts at Intuit, DoorDash,
           Walmart, and Mastercard — co-validating not just whether each skill

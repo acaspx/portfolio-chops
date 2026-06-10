@@ -36,16 +36,18 @@ export function CaseHeader({
 }
 
 export function Section({
+  id,
   kicker,
   title,
   children,
 }: {
+  id?: string;
   kicker: string;
   title: string;
   children: ReactNode;
 }) {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-12">
+    <section id={id} className="mx-auto max-w-3xl px-6 py-12 scroll-mt-24">
       <Reveal>
         <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
         <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>

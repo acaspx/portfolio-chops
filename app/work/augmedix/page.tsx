@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import { CaseHeader, Section, Todo, ImageSlot, NextCase } from "@/components/CaseStudy";
+import CaseNav from "@/components/CaseNav";
+
+const sections = [
+  { id: "context", label: "Context" },
+  { id: "problem", label: "The hard problem" },
+  { id: "system", label: "The system" },
+  { id: "outcome", label: "Outcome" },
+];
 
 export const metadata: Metadata = {
   title: "Augmedix — AI Clinical Documentation | Anton Castro",
@@ -10,6 +18,7 @@ export const metadata: Metadata = {
 export default function Augmedix() {
   return (
     <article>
+      <CaseNav sections={sections} />
       <CaseHeader
         company="Augmedix (acquired by Commure, $139M)"
         title="Scaling AI clinical documentation from one product to four"
@@ -21,7 +30,7 @@ export default function Augmedix() {
         ]}
       />
 
-      <Section kicker="Context" title="Clinicians were paying for AI with their evenings">
+      <Section id="context" kicker="Context" title="Clinicians were paying for AI with their evenings">
         <p>
           Healthcare systems face a worsening clinician shortage; documentation is a
           leading driver of burnout, with notes written on personal time long after
@@ -31,7 +40,7 @@ export default function Augmedix() {
         </p>
       </Section>
 
-      <Section kicker="The hard problem" title="One AI, four products, zero tolerance for error">
+      <Section id="problem" kicker="The hard problem" title="One AI, four products, zero tolerance for error">
         <p>
           Growth meant expanding from one offering to four — across web and mobile,
           emergency and primary care — without fragmenting the experience or the
@@ -49,7 +58,7 @@ export default function Augmedix() {
         </Todo>
       </Section>
 
-      <Section kicker="System" title="A design system that let nine PMs ship without breaking the product">
+      <Section id="system" kicker="System" title="A design system that let nine PMs ship without breaking the product">
         <p>
           I built the web and mobile design system in Figma that kept four fast-moving
           product lines consistent — the connective tissue that let me work across
@@ -60,7 +69,7 @@ export default function Augmedix() {
         <ImageSlot caption="Agentic AI integration in the core documentation flow" />
       </Section>
 
-      <Section kicker="Outcome" title="+65% engagement, then an acquisition">
+      <Section id="outcome" kicker="Outcome" title="+65% engagement, then an acquisition">
         <p>
           Engagement grew 65% in a year as the product line expanded from one
           offering to four. In late 2024, Augmedix was acquired by Commure for
