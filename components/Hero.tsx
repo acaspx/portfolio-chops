@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 
 const links = [
   { href: "#work", label: "Work" },
-  { href: "#prototypes", label: "Prototypes" },
+  { href: "#prototypes", label: "Founded & built" },
   { href: "#experience", label: "Experience" },
   { href: "https://www.linkedin.com/in/antoncastroe/", label: "LinkedIn", external: true },
   { href: "mailto:ac.design.px@gmail.com", label: "Email" },

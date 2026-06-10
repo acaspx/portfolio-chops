@@ -8,7 +8,7 @@ import AboutModal from "@/components/AboutModal";
 
 const links = [
   { href: "/#work", label: "Work" },
-  { href: "/#prototypes", label: "Prototypes" },
+  { href: "/#prototypes", label: "Founded" },
   { href: "/#experience", label: "Experience" },
   { href: "mailto:ac.design.px@gmail.com", label: "Contact" },
 ];

@@ -1,16 +1,18 @@
 import Reveal from "@/components/Reveal";
 
-type Project = {
-  name: string;
-  status: string;
-  description: string;
-  href: string;
-  cta: string;
+// TODO(Anton): fill the featured app's real details (name, one-liner, link,
+// stack, traction metric). Add a screenshot at public/work/app-hero.png.
+const featured = {
+  name: "[App name]",
+  status: "Shipped · Live",
+  description:
+    "TODO — one tight paragraph: what it does, who it's for, and one traction signal (users, downloads, revenue, or a story). Built and shipped solo.",
+  stack: ["Swift", "React", "Claude"],
+  href: "https://example.com", // App Store / live URL
+  cta: "See it live",
 };
 
-// TODO(Anton): replace descriptions with real one-liners + add demo videos/GIFs.
-// This section is your design-engineer proof — ship at least two real artifacts.
-const projects: Project[] = [
+const projects = [
   {
     name: "portfolio-chops",
     status: "You're looking at it",
@@ -31,17 +33,56 @@ const projects: Project[] = [
 
 export default function SideProjects() {
   return (
-    <section id="prototypes" aria-label="Prototypes and side projects" className="border-t border-line">
+    <section id="prototypes" aria-label="Founded and built" className="border-t border-line">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <Reveal>
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-            Prototypes & side projects
+            Founded & built
           </h2>
           <p className="mt-4 max-w-xl text-muted">
-            Where I settle design arguments in code — built with React, Swift, and Claude.
+            Where I settle design arguments in code — designed, built, and shipped by me.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+
+        {/* Featured: the shipped app */}
+        <Reveal>
+          <a
+            href={featured.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-10 grid gap-6 rounded-xl border border-line bg-ink/[0.02] p-6 transition-colors hover:border-accent/50 sm:grid-cols-[1.2fr_1fr] sm:p-8"
+          >
+            <div>
+              <div className="flex flex-wrap items-baseline gap-3">
+                <h3 className="text-2xl font-medium tracking-tight group-hover:text-accent transition-colors">
+                  {featured.name}
+                </h3>
+                <span className="rounded-full bg-accent/10 px-3 py-0.5 font-mono text-[11px] font-semibold text-accent">
+                  {featured.status}
+                </span>
+              </div>
+              <p className="mt-3 text-muted leading-relaxed">{featured.description}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {featured.stack.map((t) => (
+                  <li
+                    key={t}
+                    className="rounded-full border border-line px-3 py-0.5 font-mono text-[11px] text-muted"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <span className="link-line mt-5 inline-block text-sm">{featured.cta} →</span>
+            </div>
+            {/* TODO(Anton): drop public/work/app-hero.png to fill this */}
+            <div className="grid min-h-[200px] place-items-center rounded-lg border border-dashed border-line bg-ink/[0.03]">
+              <span className="font-mono text-xs text-muted">app-hero.png</span>
+            </div>
+          </a>
+        </Reveal>
+
+        {/* Prototypes & experiments */}
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.1}>
               <a
