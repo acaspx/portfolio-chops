@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, ImageSlot, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, Section, CaseImage, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 const sections = [
@@ -17,20 +17,13 @@ export const metadata: Metadata = {
 };
 
 /*
- * IMAGE EXPORTS (Anton): from Figma "360 Views Design" (2ftkxAYp2q8KO9uZ5qg1Sk),
- * export at 2x PNG into public/work/ :
- *  - node 8166:12002 ("page" — overview w/ What You Need To Know + state map) → sa-360-overview.png
- *  - node 9200:153294 ("just created" — What's Changed empty state)          → sa-whats-changed-empty.png
- *  - a filled What's Changed panel (e.g. under 9200:152374 "this week")      → sa-whats-changed.png
- * From "AI Chat v1" (cL6yXY2m9udDWQUtR80hpi) — these node links are BOARDS, pick
- * the polished frame inside each:
- *  - One desktop chat answer WITH citations visible (boards at 4970:43590
- *    "no chat → side chat → full chat", or 8089:22718)                        → sa-ai-chat.png
- *  - "Custom Report Skill" flow strip (board 6182:2, steps 01 Intake → Recap)
- *    exported as one wide image — process rigor evidence                      → sa-report-skill-flow.png
- * Then replace <ImageSlot> with <Image src="/work/..." /> (next/image).
- * Screen real data before export — swap in demo data if any client info is visible
- * (e.g. "Laura M." in 360 Views, real bill numbers/positions).
+ * IMAGES (Anton): save the product screenshots into public/work/ as:
+ *  sa-360-overview.png  — Surveillance Pricing 360 View (briefing + map + AI agent)
+ *  sa-whats-changed.png — "most important since your last visit" priority panel
+ *  sa-bill-detail.png   — A9349 bill page (AI Analysis + momentum forecast)
+ *  sa-portfolio.png     — Energy Bills table + Create 360 View
+ *  sa-ai-chat.png       — AI agent chat panel crop (skills `/` input visible)
+ * All demo data (verify before publish). 16:9-ish; CaseImage handles sizing.
  */
 export default function StateAffairs() {
   return (
@@ -81,7 +74,11 @@ export default function StateAffairs() {
           things: trust signals in the UI (citations on every claim) and
           personalization that closes the so-what gap.
         </p>
-        <ImageSlot caption="AI Chat: cited, personalized answers over legislative data" />
+        <CaseImage
+          src="/work/sa-ai-chat.png"
+          alt="State Affairs AI agent panel identifying the most advanced bills and offering to build a 360 view from them"
+          caption="The AI agent: cited bill insights, then 'Would you like to build a 360 view from these bills?'"
+        />
       </Section>
 
       <Section id="decision" kicker="The decision" title="Three robust skills — then a fourth that answers 'what changed?'">
@@ -101,8 +98,16 @@ export default function StateAffairs() {
           activity — since the user&apos;s last visit. It turns a data product into a
           briefing that starts where you left off.
         </p>
-        <ImageSlot caption="The four skills: Bill Compare, Create a Report, Generate 360° View, What's Changed" />
-        <ImageSlot caption="What's Changed: top-five movement insights in 360° View context" />
+        <CaseImage
+          src="/work/sa-360-overview.png"
+          alt="A 360° View: AI briefing, active-states map, legislative progress, attention, geographic reach, passage forecast, and top movers"
+          caption="A generated 360° View — briefing, momentum, forecast, and top movers in one surface"
+        />
+        <CaseImage
+          src="/work/sa-whats-changed.png"
+          alt="What's Changed panel: the most important items since your last visit, ranked high to medium priority"
+          caption="What's Changed in production: 'Here's what's most important since your last visit' — ranked, in 360° View context"
+        />
       </Section>
 
       <Section id="craft" kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
@@ -113,7 +118,16 @@ export default function StateAffairs() {
           overhaul underneath us. The voice and tone system I defined had to hold
           both: credible to policy experts, legible to the executives they brief.
         </p>
-        <ImageSlot caption="Voice & tone: how the product cites, hedges, and escalates" />
+        <CaseImage
+          src="/work/sa-bill-detail.png"
+          alt="Bill detail page with AI analysis, momentum score with reasoning, legislative progress, and team management panel"
+          caption="Bill detail: AI analysis that cites, a momentum forecast that explains its reasoning — the voice system at work"
+        />
+        <CaseImage
+          src="/work/sa-portfolio.png"
+          alt="Bill portfolio table with AI activity insight and Create 360 View action"
+          caption="Where teams live: the portfolio view, with AI insight and 360° View one click away"
+        />
       </Section>
 
       <Section id="outcome" kicker="Outcome" title="Validated with the people who'd bet their jobs on it">

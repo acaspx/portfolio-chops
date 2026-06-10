@@ -19,9 +19,9 @@ const works: Work[] = [
       { value: "First", label: "enterprise contracts" },
     ],
     images: [
-      { file: "sa-360-overview.png", alt: "360° View overview with insight panel and state map" },
-      { file: "sa-ai-chat.png", alt: "AI Chat answer with citations" },
-      { file: "sa-whats-changed.png", alt: "What's Changed skill in 360° View context" },
+      { file: "sa-360-overview.png", alt: "360° View overview with AI briefing and state map" },
+      { file: "sa-bill-detail.png", alt: "Bill detail with AI analysis and momentum forecast" },
+      { file: "sa-whats-changed.png", alt: "What's Changed priority panel since last visit" },
     ],
   },
   {
