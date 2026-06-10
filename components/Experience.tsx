@@ -1,6 +1,8 @@
 import Reveal from "@/components/Reveal";
+import LogoBadge from "@/components/LogoBadge";
 
 type Role = {
+  slug: string;
   company: string;
   title: string;
   dates: string;
@@ -10,88 +12,84 @@ type Role = {
 };
 
 // Canonical facts — must match resume exactly. See CLAUDE.md content rules.
+// Logos: drop PNGs into public/logos/<slug>.png (monogram fallback until then).
 const roles: Role[] = [
   {
+    slug: "state-affairs",
     company: "State Affairs",
-    title: "Sr. Interaction Designer — Policy Intelligence",
+    title: "Sr. Interaction Designer · Policy Intelligence",
     dates: "Feb 2026 – Present",
     summary:
-      "First AI product: enterprise SaaS for state-level policy teams. System architecture, voice & tone, interaction patterns — helped land first enterprise contracts (Walmart, DoorDash, trade associations).",
+      "Designed the company's first AI product — enterprise SaaS for state-level policy teams.",
     keyProjects: [
       {
-        name: "360° Views",
-        detail:
-          "Topic-centric intelligence views with AI-personalized data, static or dynamic — piloted with policy experts at Intuit, DoorDash, Walmart, and Mastercard.",
+        name: "AI Chat",
+        detail: "Four skills with citations on every claim — piloted with Intuit, DoorDash, Walmart, Mastercard.",
       },
       {
-        name: "AI Chat",
-        detail:
-          "Four skills (Bill Compare, Create a Report, Generate 360° View, What's Changed) with citations on every claim — closing the gap between aggregation and insight.",
+        name: "360° Views",
+        detail: "AI-personalized topic intelligence; helped land the first enterprise contracts.",
       },
     ],
     tags: ["0→1", "Enterprise AI", "Product Strategy"],
   },
   {
+    slug: "custoria",
     company: "Custoria Labs",
-    title: "Founding Designer — AI & Growth",
+    title: "Founding Designer · AI & Growth",
     dates: "Oct 2025 – Present",
     summary:
-      "AI-powered appraisal and insurance-claims ecosystem from zero: capture-to-share flow, design system, encrypted biometric-locked sharing vault.",
-    tags: ["Founding Designer", "Design System", "Security UX"],
+      "Design from zero for an AI appraisal & insurance-claims ecosystem: capture-to-share flow, design system, encrypted sharing vault.",
+    tags: ["Founding Designer", "Design Systems", "Security UX"],
   },
   {
+    slug: "augmedix",
     company: "Augmedix",
-    title: "Product Designer — AI & Growth",
+    title: "Product Designer · AI & Growth",
     dates: "Oct 2023 – Nov 2024",
     summary:
-      "AI clinical documentation, web + mobile, through the $139M acquisition by Commure.",
+      "AI clinical documentation through the $139M acquisition by Commure.",
     keyProjects: [
-      {
-        name: "Product expansion",
-        detail: "+65% engagement in a year while growing from one offering to four.",
-      },
-      {
-        name: "Agentic AI integration",
-        detail:
-          "Folded a new agentic AI model into the core documentation flow with nine PMs and AI leads — shipped in four months.",
-      },
-      {
-        name: "Design system",
-        detail: "Built the web + mobile design system keeping four fast-moving product lines consistent.",
-      },
+      { name: "Growth", detail: "+65% engagement in a year, expanding one offering to four." },
+      { name: "Agentic AI", detail: "Shipped a new agentic model into the core flow in four months, with nine PMs." },
+      { name: "Design system", detail: "Web + mobile system keeping four product lines consistent." },
     ],
     tags: ["Agentic AI", "Design Systems", "Healthcare"],
   },
   {
+    slug: "rocket",
     company: "Rocket",
     title: "Conversational AI Experience Designer",
     dates: "Sep 2022 – Aug 2023",
     summary:
-      "Founding designer on Liv, Rocket's AI assistant serving millions of homeowners (B2B2C). Cut client onboarding time 75% by rethinking the conversation flow.",
+      "Founding designer on Liv, Rocket's AI assistant for millions of homeowners — cut client onboarding 75%.",
     tags: ["Conversational AI", "B2B2C"],
   },
   {
+    slug: "adl",
     company: "Anti-Defamation League",
     title: "Product Designer",
     dates: "Jun 2021 – May 2022",
     summary:
-      "Built a library of 120+ interaction demos cutting concept-to-prototype time by six months; design work anchoring partnerships with Twitch, Discord, and YouTube.",
+      "120+ interaction demos cutting concept-to-prototype time by six months; design anchoring Twitch, Discord & YouTube partnerships.",
     tags: ["Prototyping", "Partnerships"],
   },
   {
+    slug: "intuit",
     company: "Intuit",
     title: "Product Designer",
     dates: "May 2020 – Aug 2020",
     summary:
-      "Lifted QuickBooks new-customer conversion 22% with ML-driven personalization; reworked onboarding used by 25M+ people.",
+      "+22% QuickBooks new-customer conversion via ML-driven personalization; onboarding used by 25M+ people.",
     tags: ["ML Personalization", "Growth"],
   },
   {
+    slug: "ea",
     company: "Electronic Arts",
     title: "UX/UI Design Intern",
     dates: "May 2019 – Aug 2019",
     summary:
-      "Designed NBA Live's \"My Player Mode\" in Alpha; led the visual-assets team with build-ready specs for engineering.",
+      "Designed NBA Live's \"My Player Mode\" in Alpha; led the visual-assets team.",
     tags: ["Games", "Visual Design"],
   },
 ];
@@ -105,18 +103,21 @@ export default function Experience() {
         </Reveal>
         <ol className="mt-10">
           {roles.map((r, i) => (
-            <li key={r.company + r.dates}>
+            <li key={r.slug}>
               <Reveal delay={Math.min(i * 0.05, 0.3)}>
-                <div className="grid gap-2 border-t border-line py-8 sm:grid-cols-[200px_1fr] sm:gap-8">
-                  <div className="font-mono text-xs text-muted pt-1">{r.dates}</div>
+                <div className="grid grid-cols-[24px_40px_1fr] gap-4 border-t border-line py-8 sm:grid-cols-[32px_40px_1fr_140px] sm:gap-6">
+                  <span className="pt-2 font-mono text-xs text-muted">{i + 1}.</span>
+                  <LogoBadge slug={r.slug} name={r.company} />
                   <div>
-                    <h3 className="text-lg font-medium tracking-tight">
+                    <h3 className="font-medium tracking-tight">
                       {r.company}
-                      <span className="text-muted font-normal"> — {r.title}</span>
+                      <span className="block text-sm font-normal text-muted sm:inline sm:before:content-['_·_']">
+                        {r.title}
+                      </span>
                     </h3>
-                    <p className="mt-2 text-sm text-muted leading-relaxed max-w-2xl">{r.summary}</p>
+                    <p className="mt-2 text-sm text-muted leading-relaxed max-w-xl">{r.summary}</p>
                     {r.keyProjects && (
-                      <dl className="mt-4 space-y-2 max-w-2xl">
+                      <dl className="mt-3 space-y-1.5 max-w-xl">
                         {r.keyProjects.map((kp) => (
                           <div key={kp.name} className="text-sm leading-relaxed">
                             <dt className="inline font-medium">{kp.name}: </dt>
@@ -136,6 +137,9 @@ export default function Experience() {
                       ))}
                     </ul>
                   </div>
+                  <span className="col-start-3 font-mono text-xs text-muted sm:col-start-4 sm:pt-2 sm:text-right">
+                    {r.dates}
+                  </span>
                 </div>
               </Reveal>
             </li>
