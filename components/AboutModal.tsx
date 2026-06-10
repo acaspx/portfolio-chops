@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 type Card = {
@@ -88,9 +89,13 @@ export default function AboutModal({
   onClose: () => void;
 }) {
   const [index, setIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Portal target only exists client-side
+  useEffect(() => setMounted(true), []);
 
   const next = useCallback(() => setIndex((i) => (i + 1) % cards.length), []);
   const prev = useCallback(() => setIndex((i) => (i - 1 + cards.length) % cards.length), []);
@@ -131,7 +136,11 @@ export default function AboutModal({
   const card = cards[index];
   const peek = cards[(index + 1) % cards.length];
 
-  return (
+  if (!mounted) return null;
+
+  // Portaled to <body>: the sticky header's backdrop-filter creates a CSS
+  // containing block that would otherwise trap position:fixed inside it.
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -163,7 +172,7 @@ export default function AboutModal({
               ref={closeRef}
               onClick={onClose}
               aria-label="Close"
-              className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full border border-line bg-paper text-xl shadow-sm hover:text-accent"
+              className="fixed right-6 top-6 grid h-12 w-12 place-items-center rounded-full border border-line bg-paper text-2xl shadow-md transition-transform hover:scale-105 hover:text-accent"
             >
               ×
             </button>
@@ -243,6 +252,7 @@ export default function AboutModal({
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
