@@ -4,6 +4,10 @@ Personal portfolio for Anton Castro (Sr. Product Designer / Design Engineer, SF)
 Career goal: Sr/Staff Product Designer or Design Engineer roles now; Lead/Manager within 3 years.
 Benchmark: https://www.korolev.uk/ — typography-first, motion-precise, clearly hand-coded.
 
+## Repo
+
+Remote: `github.com/acaspx/portfolio-chops` — this is the only repo for the portfolio code. Do NOT push portfolio code to `acaspx/CLabs` (separate project; it's only *featured* in the SideProjects section).
+
 ## Stack
 
 Next.js 15 (App Router, static output) · Tailwind CSS 4 (`@theme` tokens in `app/globals.css`) · Motion (`motion/react`) · TypeScript strict.
@@ -17,7 +21,10 @@ Next.js 15 (App Router, static output) · Tailwind CSS 4 (`@theme` tokens in `ap
 - `app/work/state-affairs/page.tsx` — flagship case study (0→1 enterprise AI)
 - `app/work/augmedix/page.tsx` — merged Augmedix platform story
 - `components/CaseStudy.tsx` — CaseHeader / Section / Todo / ImageSlot / NextCase primitives
-- `components/Reveal.tsx` — scroll-reveal wrapper; `Hero.tsx`, `WorkCard.tsx`, `Nav.tsx` (reading-progress bar on /work/*)
+- `components/Reveal.tsx` — scroll-reveal wrapper; `Hero.tsx`, `WorkCard.tsx` (metric chips), `Nav.tsx` (reading-progress bar on /work/*)
+- `components/Marquee.tsx` (company strip), `SideProjects.tsx` (GitHub-linked prototypes — TODO descriptions), `Experience.tsx` (canonical resume timeline)
+
+Reference sites: korolev.uk (motion restraint), alexnguyen.online (metric chips, side-projects-as-proof, experience timeline).
 
 ## Content rules (critical — credibility)
 

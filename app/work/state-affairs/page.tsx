@@ -16,7 +16,7 @@ export default function StateAffairs() {
         meta={[
           { label: "Role", value: "Sr. Interaction Designer (first design hire on AI)" },
           { label: "Timeline", value: "Feb 2026 – Present" },
-          { label: "Scope", value: "0→1 product, system architecture, voice & tone, interaction patterns" },
+          { label: "Scope", value: "Led 360° Views + AI Chat — the company's first AI features. System architecture, voice & tone, interaction patterns" },
           { label: "Outcome", value: "First enterprise contracts: Walmart, DoorDash, trade associations" },
         ]}
       />
@@ -35,34 +35,56 @@ export default function StateAffairs() {
         </Todo>
       </Section>
 
-      <Section kicker="The hard problem" title="How much should the AI conclude on its own?">
+      <Section kicker="The hard problem" title="Aggregation isn't insight">
         <p>
-          Policy teams act on this information in front of executives and regulators.
-          A hallucinated bill summary isn&apos;t an embarrassing chatbot moment — it&apos;s a
-          briefing that gets someone fired. The core design question wasn&apos;t the
-          interface; it was the trust contract: what the AI asserts, what it hedges,
-          and where it shows its sources.
+          I led 360° Views and AI Chat — the company&apos;s first AI features. V1 could
+          already answer impressively specific queries: <em>&quot;show me all the bills on
+          this topic, in this state, by this legislator.&quot;</em> Pilot testers were
+          impressed. And then they kept asking the same thing: <strong>&quot;so
+          what?&quot;</strong> Aggregating legislative data wasn&apos;t the product — knowing
+          what it meant for <em>their</em> business was.
         </p>
         <p>
-          I used research with policy teams to map which workflows deserved AI
-          leverage at all, then designed interaction patterns around verifiable
-          output — every claim traceable to the underlying bill text or reporting.
+          Policy teams act on this in front of executives and regulators; a wrong
+          or merely shallow answer doesn&apos;t just disappoint, it erodes the trust the
+          whole platform depends on while you&apos;re trying to win enterprise contracts.
+          So instead of expanding query coverage, I argued for going deeper on fewer
+          things: trust signals in the UI (citations on every claim) and
+          personalization that closes the so-what gap.
         </p>
-        <ImageSlot caption="Interaction pattern: AI summary with inline source traceability" />
-        <Todo>
-          The specific tradeoff story: one decision where you argued for less (or
-          more) automation than stakeholders wanted, and what happened.
-        </Todo>
+        <ImageSlot caption="AI Chat: cited, personalized answers over legislative data" />
       </Section>
 
-      <Section kicker="System" title="Architecture, voice, and patterns — designed as one system">
+      <Section kicker="The decision" title="Three robust skills — then a fourth that answers 'what changed?'">
         <p>
-          As the product&apos;s first designer I defined its system architecture, its
-          voice and tone, and its reusable interaction patterns together, so every
-          future feature inherits the same trust contract instead of renegotiating it.
+          Working with our AI/ML product and engineering leads, I focused V1 on
+          three skills we could make genuinely robust: <strong>Bill Compare</strong>,{" "}
+          <strong>Create a Report</strong>, and <strong>Generate 360° View</strong> —
+          where AI Chat builds a 360° View around an individual user&apos;s needs,
+          probabilistically personalizing its data, with the user choosing between a
+          static or dynamic view. Get it right on the first try, and users trust the
+          platform as a reliable source.
         </p>
-        <ImageSlot caption="System map: skills/workflows architecture" />
-        <ImageSlot caption="Voice & tone: how the product hedges, cites, and escalates" />
+        <p>
+          As 360° Views matured, I made the call to add a fourth skill:{" "}
+          <strong>What&apos;s Changed</strong>. Opened in the context of a 360° View, the
+          AI surfaces the top five insights on what&apos;s moved — bills, momentum,
+          activity — since the user&apos;s last visit. It turns a data product into a
+          briefing that starts where you left off.
+        </p>
+        <ImageSlot caption="The four skills: Bill Compare, Create a Report, Generate 360° View, What's Changed" />
+        <ImageSlot caption="What's Changed: top-five movement insights in 360° View context" />
+      </Section>
+
+      <Section kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
+        <p>
+          All of this meant digesting the language of government — bills,
+          legislative process, regulatory nuance — and translating it into
+          conversational, intuitive experiences, while the company ran a full brand
+          overhaul underneath us. The voice and tone system I defined had to hold
+          both: credible to policy experts, legible to the executives they brief.
+        </p>
+        <ImageSlot caption="Voice & tone: how the product cites, hedges, and escalates" />
       </Section>
 
       <Section kicker="Outcome" title="The first enterprise contracts">

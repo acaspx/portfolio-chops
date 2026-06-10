@@ -13,11 +13,11 @@ type Project = {
 const projects: Project[] = [
   {
     name: "portfolio-chops",
-    status: "In progress",
+    status: "You're looking at it",
     description:
-      "TODO — describe: interaction experiments / this site's source. What it demonstrates, what it's built with.",
+      "The source of this site — Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
     href: "https://github.com/acaspx/portfolio-chops",
-    cta: "View on GitHub",
+    cta: "View source on GitHub",
   },
   {
     name: "CLabs",
