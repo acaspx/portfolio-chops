@@ -13,9 +13,15 @@ export const metadata: Metadata = {
  *  - node 8166:12002 ("page" — overview w/ What You Need To Know + state map) → sa-360-overview.png
  *  - node 9200:153294 ("just created" — What's Changed empty state)          → sa-whats-changed-empty.png
  *  - a filled What's Changed panel (e.g. under 9200:152374 "this week")      → sa-whats-changed.png
- *  - AI Chat frame (file cL6yXY2m9udDWQUtR80hpi — need node link)            → sa-ai-chat.png
+ * From "AI Chat v1" (cL6yXY2m9udDWQUtR80hpi) — these node links are BOARDS, pick
+ * the polished frame inside each:
+ *  - One desktop chat answer WITH citations visible (boards at 4970:43590
+ *    "no chat → side chat → full chat", or 8089:22718)                        → sa-ai-chat.png
+ *  - "Custom Report Skill" flow strip (board 6182:2, steps 01 Intake → Recap)
+ *    exported as one wide image — process rigor evidence                      → sa-report-skill-flow.png
  * Then replace <ImageSlot> with <Image src="/work/..." /> (next/image).
- * Screen real data before export — swap in demo data if any client info is visible.
+ * Screen real data before export — swap in demo data if any client info is visible
+ * (e.g. "Laura M." in 360 Views, real bill numbers/positions).
  */
 export default function StateAffairs() {
   return (
