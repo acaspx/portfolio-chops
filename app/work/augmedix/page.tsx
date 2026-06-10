@@ -5,6 +5,7 @@ import CaseNav from "@/components/CaseNav";
 const sections = [
   { id: "context", label: "Context" },
   { id: "problem", label: "The hard problem" },
+  { id: "decision", label: "The decision" },
   { id: "system", label: "The system" },
   { id: "outcome", label: "Outcome" },
 ];
@@ -51,11 +52,33 @@ export default function Augmedix() {
           of the final note.
         </p>
         <ImageSlot caption="Workflow: clinician ↔ AI ↔ documentation specialist loop" />
-        <Todo>
-          One concrete design decision with a tradeoff (e.g., where you fought rigid
-          guardrails vs. personalization — templates, preferences — and the
-          adoption result).
-        </Todo>
+      </Section>
+
+      <Section id="decision" kicker="The decision" title="One-size-fits-all vs. the flexibility flywheel">
+        <p>
+          Under tight deadlines and real AI constraints, our PMs advocated a
+          one-size-fits-all workflow — the clearest path to shipping. I argued the
+          opposite, and not on empathy grounds alone: rigid workflows would cap the
+          AI itself. I brought visual examples and system mappings showing a modular
+          alternative — templates, preferences, self-serve settings — where feedback
+          intake was built into the product, so every clinician who adapted the tool
+          to their workflow generated the engagement and corrections the models
+          needed to improve.
+        </p>
+        <p>
+          The evidence came from quantitative feedback and onsite visits to HCA
+          hospitals: clinicians weren&apos;t rejecting AI — they were rejecting being
+          told how to work. Flexible, self-serve systems meant easier adoption in
+          their specific workflows, which meant sustained engagement, which meant
+          better LLM output as we scaled.
+        </p>
+        <p>
+          The team shipped the modular approach within the timeline and engineering
+          resources we had. The pilot grew from <strong>25 clinicians to contracts
+          for thousands</strong> across HCA and Sutter Health.
+        </p>
+        <ImageSlot caption="System mapping: modular workflows with feedback intake built in" />
+        <ImageSlot caption="Personalization: templates, preferences, self-serve settings" />
       </Section>
 
       <Section id="system" kicker="System" title="A design system that let nine PMs ship without breaking the product">
