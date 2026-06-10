@@ -83,6 +83,7 @@ export default function AboutModal({
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const next = useCallback(() => setIndex((i) => (i + 1) % cards.length), []);
   const prev = useCallback(() => setIndex((i) => (i - 1 + cards.length) % cards.length), []);
@@ -96,6 +97,23 @@ export default function AboutModal({
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
+      // Focus trap: keep Tab cycling inside the dialog
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, a[href], [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+        if (e.shiftKey && (active === first || !dialogRef.current.contains(active))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (active === last || !dialogRef.current.contains(active))) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -118,6 +136,7 @@ export default function AboutModal({
           onClick={onClose}
         >
           <div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="About Anton Castro"

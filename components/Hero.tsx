@@ -9,6 +9,7 @@ const links = [
   { href: "https://www.linkedin.com/in/antoncastroe/", label: "LinkedIn", external: true },
   { href: "mailto:ac.design.px@gmail.com", label: "Email" },
   { href: "https://github.com/acaspx", label: "GitHub", external: true },
+  { href: "/resume.pdf", label: "Resume ↓", external: true },
 ];
 
 export default function Hero() {

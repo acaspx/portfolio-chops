@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 // next/font/google (Inter / JetBrains Mono) when building locally.
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://antoncastro.design"), // TODO(Anton): set your real domain
   title: "Anton Castro — Product Designer & Design Engineer",
   description:
     "Anton Castro designs AI products that ship and scale — from first prototype to design system to enterprise contract. SF-based, 0→1 four times across healthcare, fintech, and govtech AI.",
