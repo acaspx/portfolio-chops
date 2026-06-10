@@ -1,6 +1,9 @@
 import Hero from "@/components/Hero";
 import WorkCard, { type Work } from "@/components/WorkCard";
 import Reveal from "@/components/Reveal";
+import Marquee from "@/components/Marquee";
+import SideProjects from "@/components/SideProjects";
+import Experience from "@/components/Experience";
 
 const works: Work[] = [
   {
@@ -11,6 +14,10 @@ const works: Work[] = [
     year: "2026",
     result:
       "First AI product; system architecture, voice & interaction patterns. Helped land first enterprise contracts with policy teams at Walmart and DoorDash.",
+    metrics: [
+      { value: "0→1", label: "first AI product" },
+      { value: "First", label: "enterprise contracts" },
+    ],
   },
   {
     slug: "augmedix",
@@ -20,6 +27,11 @@ const works: Work[] = [
     year: "2023–24",
     result:
       "+65% engagement in a year; agentic AI shipped into the core flow in four months; acquired by Commure for $139M.",
+    metrics: [
+      { value: "+65%", label: "engagement" },
+      { value: "1→4", label: "offerings" },
+      { value: "$139M", label: "acquisition" },
+    ],
   },
   {
     company: "Rocket",
@@ -27,6 +39,7 @@ const works: Work[] = [
     tags: "Conversational AI",
     year: "2022–23",
     result: "Client onboarding time cut 75% by redesigning the conversation flow.",
+    metrics: [{ value: "−75%", label: "onboarding time" }],
     comingSoon: true,
   },
 ];
@@ -50,6 +63,8 @@ export default function Home() {
   return (
     <>
       <Hero />
+
+      <Marquee />
 
       <section id="work" aria-label="Selected work" className="mx-auto max-w-5xl px-6 pb-24">
         <Reveal>
@@ -85,6 +100,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <SideProjects />
+
+      <Experience />
 
       <section aria-label="Contact" className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-24 text-center">

@@ -6,6 +6,8 @@ import { motion, useScroll, useSpring } from "motion/react";
 
 const links = [
   { href: "/#work", label: "Work" },
+  { href: "/#prototypes", label: "Prototypes" },
+  { href: "/#experience", label: "Experience" },
   { href: "/#about", label: "About" },
   { href: "mailto:ac.design.px@gmail.com", label: "Contact" },
 ];

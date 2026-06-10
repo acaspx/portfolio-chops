@@ -10,6 +10,7 @@ export type Work = {
   tags: string;
   year: string;
   result: string;
+  metrics?: { value: string; label: string }[];
   comingSoon?: boolean;
 };
 
@@ -42,6 +43,19 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
             </motion.span>
           </h3>
           <p className="mt-3 text-sm text-muted">{work.result}</p>
+          {work.metrics && (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {work.metrics.map((m) => (
+                <li
+                  key={m.label}
+                  className="rounded-full border border-line bg-ink/[0.03] px-3 py-1 font-mono text-xs transition-colors group-hover:border-accent/40"
+                >
+                  <strong className="font-semibold">{m.value}</strong>{" "}
+                  <span className="text-muted">{m.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div className="flex items-center gap-4 font-mono text-xs text-muted shrink-0">
           <span>{work.year}</span>
