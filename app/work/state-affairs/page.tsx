@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, Todo, ImageSlot, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, Section, ImageSlot, NextCase } from "@/components/CaseStudy";
 
 export const metadata: Metadata = {
   title: "State Affairs — Policy Intelligence AI | Anton Castro",
@@ -45,10 +45,13 @@ export default function StateAffairs() {
           journalists. It didn&apos;t have a product that turned that raw material into
           decisions, and it had never shipped AI.
         </p>
-        <Todo>
-          1–2 sentences on the business stakes: why now, what failure would have
-          meant (revenue model, competitive pressure).
-        </Todo>
+        <p>
+          These were the company&apos;s first AI features, shipping while the business
+          was converting its journalism and data into an enterprise platform — and
+          while a full rebrand ran underneath. If users didn&apos;t trust the AI on
+          first contact, there was no second chance at the contracts the company
+          was built to win.
+        </p>
       </Section>
 
       <Section kicker="The hard problem" title="Aggregation isn't insight">
@@ -103,17 +106,24 @@ export default function StateAffairs() {
         <ImageSlot caption="Voice & tone: how the product cites, hedges, and escalates" />
       </Section>
 
-      <Section kicker="Outcome" title="The first enterprise contracts">
+      <Section kicker="Outcome" title="Validated with the people who'd bet their jobs on it">
         <p>
-          The work focused the product on the highest-impact workflows and gave
-          enterprise buyers something they could trust in front of their own
-          leadership — helping land State Affairs&apos; first enterprise contracts with
-          policy teams at Walmart, DoorDash, and trade associations.
+          We piloted the four skills with policy experts at Intuit, DoorDash,
+          Walmart, and Mastercard — co-validating not just whether each skill
+          worked, but how it should be <em>invoked</em>: mapping the natural-language
+          questions each persona actually asks across their org, and tuning the
+          skills to answer them. That co-design is what turned pilots into
+          adoption, and adoption into State Affairs&apos; first enterprise contracts
+          with policy teams at Walmart, DoorDash, and trade associations.
         </p>
-        <Todo>
-          What you&apos;d do differently / what&apos;s next — one honest paragraph. Confirm
-          all client names are cleared for publication; swap to descriptors if not.
-        </Todo>
+        <p>
+          What I&apos;d change in V2: the skills&apos; <em>output</em> should be as adaptive
+          as their input. Customizable notifications, a 360° View that shows as
+          much or as little as each user wants, and the ability to make those
+          adjustments in a couple of AI Chat queries — the assistant getting
+          context-aware enough that the platform becomes modular to each org and
+          each user, shaped by their onboarding and every previous conversation.
+        </p>
       </Section>
 
       <NextCase href="/work/augmedix" label="Augmedix — scaling AI clinical documentation" />
