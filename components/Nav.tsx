@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "motion/react";
+import AboutModal from "@/components/AboutModal";
 
 const links = [
   { href: "/#work", label: "Work" },
   { href: "/#prototypes", label: "Prototypes" },
   { href: "/#experience", label: "Experience" },
-  { href: "/#about", label: "About" },
   { href: "mailto:ac.design.px@gmail.com", label: "Contact" },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
+  const [aboutOpen, setAboutOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
   const isCaseStudy = pathname?.startsWith("/work");
@@ -38,15 +40,32 @@ export default function Nav() {
           anton castro<span className="text-accent">_</span>
         </Link>
         <ul className="flex items-center gap-6 text-sm">
-          {links.map((l) => (
+          {links.slice(0, 3).map((l) => (
             <li key={l.label}>
               <Link href={l.href} className="link-line text-muted hover:text-ink transition-colors">
                 {l.label}
               </Link>
             </li>
           ))}
+          <li>
+            <button
+              onClick={() => setAboutOpen(true)}
+              className="link-line text-muted hover:text-ink transition-colors"
+            >
+              About
+            </button>
+          </li>
+          <li>
+            <Link
+              href="mailto:ac.design.px@gmail.com"
+              className="link-line text-muted hover:text-ink transition-colors"
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </header>
   );
 }

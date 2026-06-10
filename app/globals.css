@@ -70,6 +70,16 @@ body {
   outline-offset: 3px;
 }
 
+/* Checker accent strip (About modal) */
+.checker {
+  background-image: repeating-conic-gradient(
+    var(--color-accent) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 24px 24px;
+  opacity: 0.55;
+}
+
 /* Company marquee */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
