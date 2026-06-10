@@ -70,14 +70,14 @@ body {
   outline-offset: 3px;
 }
 
-/* Checker accent strip (About modal) */
+/* Checker accent strip (About modal) — colored via `color` on the element */
 .checker {
   background-image: repeating-conic-gradient(
-    var(--color-accent) 0% 25%,
+    currentColor 0% 25%,
     transparent 0% 50%
   );
   background-size: 24px 24px;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 /* Company marquee */

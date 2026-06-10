@@ -132,7 +132,7 @@ export default function Augmedix() {
         </p>
       </Section>
 
-      <NextCase href="/work/state-affairs" label="State Affairs — policy intelligence AI" />
+      <NextCase href="/work/rocket" label="Rocket — Liv, conversational AI" />
     </article>
   );
 }

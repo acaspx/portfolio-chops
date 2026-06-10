@@ -8,6 +8,7 @@ type Card = {
   title: string;
   body: string[];
   visual: "photo" | "principles" | "tools" | "service";
+  tint: string; // per-card accent for checkers + subtle gradient
 };
 
 const cards: Card[] = [
@@ -19,6 +20,7 @@ const cards: Card[] = [
       "Currently Sr. Interaction Designer at State Affairs, building policy intelligence — the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
     ],
     visual: "photo",
+    tint: "#2447ff",
   },
   {
     kicker: "HOW",
@@ -28,6 +30,7 @@ const cards: Card[] = [
       "The prototype is the argument — I settle design debates in code, not decks.",
     ],
     visual: "principles",
+    tint: "#15803d",
   },
   {
     kicker: "WHAT",
@@ -37,6 +40,7 @@ const cards: Card[] = [
       "Four AI products taught me the hard problem isn't the model — it's deciding what the AI does alone, and where people stay in the loop.",
     ],
     visual: "tools",
+    tint: "#b45309",
   },
   {
     kicker: "BEFORE",
@@ -46,29 +50,32 @@ const cards: Card[] = [
       "BFA in Human-Computer Interaction, MBA in Design Strategy. Always up for a coffee chat. ☕",
     ],
     visual: "service",
+    tint: "#be185d",
   },
 ];
 
-function CardVisual({ kind }: { kind: Card["visual"] }) {
-  if (kind === "photo") {
-    return (
-      <div className="relative h-full min-h-[220px] overflow-hidden rounded-xl border border-line bg-ink/[0.04]">
-        {/* TODO(Anton): drop public/about-photo.jpg and swap for <Image fill /> */}
+function CardVisual({ kind, tint }: { kind: Card["visual"]; tint: string }) {
+  const glyph =
+    kind === "principles" ? "◳" : kind === "tools" ? "⌘" : kind === "service" ? "⚓" : null;
+  return (
+    <div
+      className="relative h-full min-h-[260px] overflow-hidden rounded-xl sm:min-h-[320px]"
+      style={{ background: `linear-gradient(160deg, ${tint}14 0%, ${tint}30 100%)` }}
+    >
+      {kind === "photo" ? (
+        // TODO(Anton): drop public/about-photo.jpg and swap for <Image fill className="object-cover" />
         <div className="grid h-full place-items-center font-mono text-xs text-muted">
           about-photo.jpg
         </div>
-        <div className="checker absolute inset-x-0 top-0 h-6" aria-hidden />
-        <div className="checker absolute inset-x-0 bottom-0 h-6" aria-hidden />
-      </div>
-    );
-  }
-  const glyph = kind === "principles" ? "◳" : kind === "tools" ? "⌘" : "⚓";
-  return (
-    <div className="relative grid h-full min-h-[220px] place-items-center overflow-hidden rounded-xl border border-line bg-ink/[0.04]">
-      <span aria-hidden className="text-7xl text-accent/70">
-        {glyph}
-      </span>
-      <div className="checker absolute inset-x-0 bottom-0 h-6" aria-hidden />
+      ) : (
+        <div className="grid h-full place-items-center">
+          <span aria-hidden className="text-7xl" style={{ color: tint }}>
+            {glyph}
+          </span>
+        </div>
+      )}
+      <div className="checker absolute inset-x-0 top-0 h-6" style={{ color: tint }} aria-hidden />
+      <div className="checker absolute inset-x-0 bottom-0 h-6" style={{ color: tint }} aria-hidden />
     </div>
   );
 }
@@ -97,7 +104,6 @@ export default function AboutModal({
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
-      // Focus trap: keep Tab cycling inside the dialog
       if (e.key === "Tab" && dialogRef.current) {
         const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
           'button, a[href], [tabindex]:not([tabindex="-1"])'
@@ -132,9 +138,19 @@ export default function AboutModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 grid place-items-center bg-paper/70 backdrop-blur-md p-4"
+          className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-paper/80 backdrop-blur-md p-4 sm:p-8"
           onClick={onClose}
         >
+          {/* Soft rainbow glow behind the deck */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-[18%] h-64 w-[42rem] max-w-[90vw] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+            style={{
+              background:
+                "linear-gradient(90deg, #f9a8d4, #fde68a, #86efac, #93c5fd, #d8b4fe)",
+            }}
+          />
+
           <div
             ref={dialogRef}
             role="dialog"
@@ -147,32 +163,38 @@ export default function AboutModal({
               ref={closeRef}
               onClick={onClose}
               aria-label="Close"
-              className="absolute -top-12 right-0 grid h-10 w-10 place-items-center rounded-full border border-line bg-paper text-lg hover:text-accent"
+              className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full border border-line bg-paper text-xl shadow-sm hover:text-accent"
             >
               ×
             </button>
 
-            {/* Peeking next card */}
+            {/* Next card peeking from behind */}
             <div
               aria-hidden
-              className="absolute inset-x-3 -top-3 h-16 rounded-2xl border border-line bg-paper/90 px-8 pt-3 font-bold tracking-tight text-ink/30 overflow-hidden select-none"
+              className="absolute inset-x-4 -top-4 h-20 overflow-hidden rounded-2xl border border-line bg-white/95 shadow-sm select-none"
             >
-              {peek.kicker}
+              <div className="checker h-4 w-1/2" style={{ color: peek.tint }} />
+              <p className="px-7 pt-1.5 text-2xl font-bold tracking-tight text-ink/25">
+                {peek.kicker}
+              </p>
             </div>
 
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.div
                 key={index}
-                initial={reduce ? false : { opacity: 0, y: 24, scale: 0.97 }}
+                initial={reduce ? false : { opacity: 0, y: 28, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -24, scale: 0.97 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -28, scale: 0.97 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 onClick={next}
-                className="relative grid cursor-pointer gap-6 rounded-2xl border border-line bg-paper p-6 shadow-xl sm:grid-cols-[280px_1fr] sm:p-8"
+                className="relative grid cursor-pointer gap-6 rounded-2xl border border-line p-5 shadow-2xl sm:grid-cols-[300px_1fr] sm:p-6"
+                style={{
+                  background: `linear-gradient(150deg, #ffffff 55%, ${card.tint}0d 100%)`,
+                }}
               >
-                <CardVisual kind={card.visual} />
-                <div>
-                  <p className="text-3xl font-bold tracking-tight leading-none">{card.kicker}</p>
+                <CardVisual kind={card.visual} tint={card.tint} />
+                <div className="py-1 sm:py-3">
+                  <p className="text-4xl font-bold tracking-tight leading-none">{card.kicker}</p>
                   <p className="font-serif text-2xl italic tracking-tight text-ink/80">
                     {card.title}
                   </p>
@@ -193,9 +215,11 @@ export default function AboutModal({
                     onClick={() => setIndex(i)}
                     aria-label={`Card ${i + 1}: ${c.kicker} ${c.title}`}
                     aria-current={i === index}
-                    className={`h-2 rounded-full transition-all ${
-                      i === index ? "w-6 bg-accent" : "w-2 bg-line hover:bg-muted"
-                    }`}
+                    className="h-2 rounded-full transition-all"
+                    style={{
+                      width: i === index ? 24 : 8,
+                      background: i === index ? card.tint : "var(--color-line)",
+                    }}
                   />
                 ))}
               </div>
@@ -203,14 +227,14 @@ export default function AboutModal({
                 <button
                   onClick={prev}
                   aria-label="Previous card"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-line bg-paper hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-line bg-paper shadow-sm hover:text-accent"
                 >
                   ←
                 </button>
                 <button
                   onClick={next}
                   aria-label="Next card"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-line bg-paper hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-line bg-paper shadow-sm hover:text-accent"
                 >
                   →
                 </button>

@@ -44,13 +44,22 @@ const works: Work[] = [
     ],
   },
   {
+    slug: "rocket",
     company: "Rocket",
     title: "Liv — a conversational AI serving millions of homeowners",
     tags: "Conversational AI",
     year: "2022–23",
     result: "Client onboarding time cut 75% by redesigning the conversation flow.",
-    metrics: [{ value: "−75%", label: "onboarding time" }],
-    comingSoon: true,
+    metrics: [
+      { value: "−75%", label: "onboarding time" },
+      { value: "+22%", label: "banker routing" },
+      { value: "94%", label: "routing accuracy" },
+    ],
+    images: [
+      { file: "rk-hero.png", alt: "Liv chat on Rocket's homepage" },
+      { file: "rk-patterns.png", alt: "Conversation design pattern library" },
+      { file: "rk-routing.png", alt: "Banker console routing accuracy" },
+    ],
   },
 ];
 
