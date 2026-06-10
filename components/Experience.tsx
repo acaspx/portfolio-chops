@@ -5,6 +5,7 @@ type Role = {
   title: string;
   dates: string;
   summary: string;
+  keyProjects?: { name: string; detail: string }[];
   tags: string[];
 };
 
@@ -16,6 +17,18 @@ const roles: Role[] = [
     dates: "Feb 2026 – Present",
     summary:
       "First AI product: enterprise SaaS for state-level policy teams. System architecture, voice & tone, interaction patterns — helped land first enterprise contracts (Walmart, DoorDash, trade associations).",
+    keyProjects: [
+      {
+        name: "360° Views",
+        detail:
+          "Topic-centric intelligence views with AI-personalized data, static or dynamic — piloted with policy experts at Intuit, DoorDash, Walmart, and Mastercard.",
+      },
+      {
+        name: "AI Chat",
+        detail:
+          "Four skills (Bill Compare, Create a Report, Generate 360° View, What's Changed) with citations on every claim — closing the gap between aggregation and insight.",
+      },
+    ],
     tags: ["0→1", "Enterprise AI", "Product Strategy"],
   },
   {
@@ -31,7 +44,22 @@ const roles: Role[] = [
     title: "Product Designer — AI & Growth",
     dates: "Oct 2023 – Nov 2024",
     summary:
-      "AI clinical documentation, web + mobile, through the $139M acquisition by Commure. +65% engagement in a year; 1→4 offerings; agentic AI shipped into the core flow in four months; built the web + mobile design system.",
+      "AI clinical documentation, web + mobile, through the $139M acquisition by Commure.",
+    keyProjects: [
+      {
+        name: "Product expansion",
+        detail: "+65% engagement in a year while growing from one offering to four.",
+      },
+      {
+        name: "Agentic AI integration",
+        detail:
+          "Folded a new agentic AI model into the core documentation flow with nine PMs and AI leads — shipped in four months.",
+      },
+      {
+        name: "Design system",
+        detail: "Built the web + mobile design system keeping four fast-moving product lines consistent.",
+      },
+    ],
     tags: ["Agentic AI", "Design Systems", "Healthcare"],
   },
   {
@@ -87,6 +115,16 @@ export default function Experience() {
                       <span className="text-muted font-normal"> — {r.title}</span>
                     </h3>
                     <p className="mt-2 text-sm text-muted leading-relaxed max-w-2xl">{r.summary}</p>
+                    {r.keyProjects && (
+                      <dl className="mt-4 space-y-2 max-w-2xl">
+                        {r.keyProjects.map((kp) => (
+                          <div key={kp.name} className="text-sm leading-relaxed">
+                            <dt className="inline font-medium">{kp.name}: </dt>
+                            <dd className="inline text-muted">{kp.detail}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
                     <ul className="mt-3 flex flex-wrap gap-2">
                       {r.tags.map((t) => (
                         <li
@@ -104,10 +142,26 @@ export default function Experience() {
           ))}
         </ol>
         <Reveal>
-          <p className="mt-8 font-mono text-xs text-muted">
-            BFA Human-Computer Interaction · MBA Design Strategy (CCA, 2025) · U.S. Navy, Petty
-            Officer Second Class (2012–2016)
-          </p>
+          <h3 className="mt-16 font-mono text-xs uppercase tracking-widest text-muted">
+            Education & service
+          </h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-3 border-t border-line pt-8">
+            <div>
+              <p className="font-medium">California College of the Arts</p>
+              <p className="mt-1 text-sm text-muted">MBA, Design Strategy (2025)</p>
+              <p className="text-sm text-muted">BFA, Human-Computer Interaction</p>
+            </div>
+            <div>
+              <p className="font-medium">ELVTR</p>
+              <p className="mt-1 text-sm text-muted">AI Product Design Certification</p>
+            </div>
+            <div>
+              <p className="font-medium">U.S. Navy</p>
+              <p className="mt-1 text-sm text-muted">
+                Petty Officer Second Class, Engineer (2012–2016)
+              </p>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>

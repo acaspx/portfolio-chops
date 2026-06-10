@@ -18,6 +18,11 @@ const works: Work[] = [
       { value: "0→1", label: "first AI product" },
       { value: "First", label: "enterprise contracts" },
     ],
+    images: [
+      { file: "sa-360-overview.png", alt: "360° View overview with insight panel and state map" },
+      { file: "sa-ai-chat.png", alt: "AI Chat answer with citations" },
+      { file: "sa-whats-changed.png", alt: "What's Changed skill in 360° View context" },
+    ],
   },
   {
     slug: "augmedix",
@@ -31,6 +36,11 @@ const works: Work[] = [
       { value: "+65%", label: "engagement" },
       { value: "1→4", label: "offerings" },
       { value: "$139M", label: "acquisition" },
+    ],
+    images: [
+      { file: "ax-web-app.png", alt: "Augmedix web app documentation flow" },
+      { file: "ax-mobile.png", alt: "Augmedix Assist mobile app" },
+      { file: "ax-design-system.png", alt: "Augmedix design system components" },
     ],
   },
   {
@@ -79,16 +89,16 @@ export default function Home() {
         </div>
       </section>
 
+      <SideProjects />
+
+      <Experience />
+
       <section id="about" aria-label="About" className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-24 grid gap-12 sm:grid-cols-[1fr_1.5fr]">
           <Reveal>
             <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
               How I work
             </h2>
-            <p className="mt-6 text-lg leading-relaxed">
-              Six years across Intuit, EA, Rocket, ADL, Augmedix, and two founding
-              roles. BFA in HCI, MBA in Design Strategy, U.S. Navy before that.
-            </p>
           </Reveal>
           <div className="flex flex-col gap-10">
             {principles.map((p, i) => (
@@ -100,10 +110,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <SideProjects />
-
-      <Experience />
 
       <section aria-label="Contact" className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-24 text-center">

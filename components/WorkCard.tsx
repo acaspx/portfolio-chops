@@ -11,6 +11,8 @@ export type Work = {
   year: string;
   result: string;
   metrics?: { value: string; label: string }[];
+  /** filenames under public/work/ — rendered as a visual strip above the text */
+  images?: { file: string; alt: string }[];
   comingSoon?: boolean;
 };
 
@@ -28,6 +30,20 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
         work.comingSoon ? "opacity-60" : ""
       }`}
     >
+      {work.images && (
+        <div className="mb-8 grid grid-cols-3 gap-3">
+          {work.images.map((img) => (
+            // TODO(Anton): once exports exist in public/work/, swap div for
+            // <Image src={`/work/${img.file}`} alt={img.alt} fill className="object-cover" />
+            <div
+              key={img.file}
+              className="aspect-[4/3] overflow-hidden rounded-lg border border-dashed border-line bg-ink/[0.03] grid place-items-center transition-transform duration-500 group-hover:scale-[1.015]"
+            >
+              <span className="px-3 text-center font-mono text-[10px] text-muted">{img.file}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
         <div className="max-w-xl">
           <p className="font-mono text-xs uppercase tracking-widest text-muted">
