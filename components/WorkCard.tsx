@@ -1,7 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+
+/** Card thumbnail: renders /work/<file> if it exists, dashed placeholder if not. */
+function CardImage({ file, alt }: { file: string; alt: string }) {
+  const [missing, setMissing] = useState(false);
+  return (
+    <div className="aspect-[4/3] overflow-hidden rounded-lg border border-line bg-ink/[0.03] transition-transform duration-500 group-hover:scale-[1.015]">
+      {missing ? (
+        <div className="grid h-full place-items-center border border-dashed border-line rounded-lg">
+          <span className="px-3 text-center font-mono text-[10px] text-muted">{file}</span>
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`/work/${file}`}
+          alt={alt}
+          loading="lazy"
+          className="h-full w-full object-cover object-top"
+          onError={() => setMissing(true)}
+        />
+      )}
+    </div>
+  );
+}
 
 export type Work = {
   slug?: string;
@@ -33,14 +57,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       {work.images && (
         <div className="mb-8 grid grid-cols-3 gap-3">
           {work.images.map((img) => (
-            // TODO(Anton): once exports exist in public/work/, swap div for
-            // <Image src={`/work/${img.file}`} alt={img.alt} fill className="object-cover" />
-            <div
-              key={img.file}
-              className="aspect-[4/3] overflow-hidden rounded-lg border border-dashed border-line bg-ink/[0.03] grid place-items-center transition-transform duration-500 group-hover:scale-[1.015]"
-            >
-              <span className="px-3 text-center font-mono text-[10px] text-muted">{img.file}</span>
-            </div>
+            <CardImage key={img.file} file={img.file} alt={img.alt} />
           ))}
         </div>
       )}

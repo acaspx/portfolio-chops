@@ -1,6 +1,31 @@
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import type { ReactNode } from "react";
+
+/** Real case study image (file must exist in public/). 16:9 deck exports. */
+export function CaseImage({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="my-6">
+      <Image
+        src={src}
+        alt={alt}
+        width={1920}
+        height={1080}
+        className="w-full rounded-lg border border-line"
+      />
+      <figcaption className="mt-2 font-mono text-xs text-muted">{caption}</figcaption>
+    </figure>
+  );
+}
 
 export function CaseHeader({
   company,
