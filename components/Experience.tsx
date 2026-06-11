@@ -7,7 +7,6 @@ type Role = {
   title: string;
   dates: string;
   summary: string;
-  keyProjects?: { name: string; detail: string }[];
   tags: string[];
 };
 
@@ -20,27 +19,17 @@ const roles: Role[] = [
     title: "Sr. Interaction Designer · Policy Intelligence",
     dates: "Feb 2026 – Present",
     summary:
-      "Designed the company's first AI product — enterprise SaaS for state-level policy teams.",
-    keyProjects: [
-      {
-        name: "AI Chat",
-        detail: "Four skills with citations on every claim — piloted with Intuit, DoorDash, Walmart, Mastercard.",
-      },
-      {
-        name: "360° Views",
-        detail: "AI-personalized topic intelligence; helped land the first enterprise contracts.",
-      },
-    ],
+      "The company's first AI product: led 360° Views and AI Chat, helping land the first enterprise contracts.",
     tags: ["0→1", "Enterprise AI", "Product Strategy"],
   },
   {
     slug: "custoria",
     company: "Custoria Labs",
-    title: "Founding Designer · AI & Growth",
+    title: "Co-founder & Founding Designer",
     dates: "Oct 2025 – Present",
     summary:
-      "Design from zero for an AI appraisal & insurance-claims ecosystem: capture-to-share flow, design system, encrypted sharing vault.",
-    tags: ["Founding Designer", "Design Systems", "Security UX"],
+      "A digital vault for the things people value most — designed and coded; in App Store review.",
+    tags: ["Founder", "Swift", "Security UX"],
   },
   {
     slug: "augmedix",
@@ -48,12 +37,7 @@ const roles: Role[] = [
     title: "Product Designer · AI & Growth",
     dates: "Oct 2023 – Nov 2024",
     summary:
-      "AI clinical documentation through the $139M acquisition by Commure.",
-    keyProjects: [
-      { name: "Growth", detail: "+65% engagement in a year, expanding one offering to four." },
-      { name: "Agentic AI", detail: "Shipped a new agentic model into the core flow in four months, with nine PMs." },
-      { name: "Design system", detail: "Web + mobile system keeping four product lines consistent." },
-    ],
+      "AI clinical documentation: +65% engagement, one offering to four, through the $139M Commure acquisition.",
     tags: ["Agentic AI", "Design Systems", "Healthcare"],
   },
   {
@@ -62,7 +46,7 @@ const roles: Role[] = [
     title: "Conversational AI Experience Designer",
     dates: "Sep 2022 – Aug 2023",
     summary:
-      "Founding designer on Liv, Rocket's AI assistant for millions of homeowners — cut client onboarding 75%.",
+      "Founding designer on Liv, the AI assistant for millions of homeowners — onboarding time cut 75%.",
     tags: ["Conversational AI", "B2B2C"],
   },
   {
@@ -71,26 +55,17 @@ const roles: Role[] = [
     title: "Product Designer",
     dates: "Jun 2021 – May 2022",
     summary:
-      "120+ interaction demos cutting concept-to-prototype time by six months; design anchoring Twitch, Discord & YouTube partnerships.",
+      "120+ interaction demos; design anchoring the Twitch, Discord & YouTube partnerships.",
     tags: ["Prototyping", "Partnerships"],
   },
   {
     slug: "intuit",
-    company: "Intuit",
-    title: "Product Designer",
-    dates: "May 2020 – Aug 2020",
+    company: "Intuit & Electronic Arts",
+    title: "Product Design Internships",
+    dates: "2019 – 2020",
     summary:
-      "+22% QuickBooks new-customer conversion via ML-driven personalization; onboarding used by 25M+ people.",
-    tags: ["ML Personalization", "Growth"],
-  },
-  {
-    slug: "ea",
-    company: "Electronic Arts",
-    title: "UX/UI Design Intern",
-    dates: "May 2019 – Aug 2019",
-    summary:
-      "Designed NBA Live's \"My Player Mode\" in Alpha; led the visual-assets team.",
-    tags: ["Games", "Visual Design"],
+      "Intuit: +22% QuickBooks conversion via ML personalization. EA: NBA Live's My Player Mode.",
+    tags: ["ML Personalization", "Games"],
   },
 ];
 
@@ -105,7 +80,7 @@ export default function Experience() {
           {roles.map((r, i) => (
             <li key={r.slug}>
               <Reveal delay={Math.min(i * 0.05, 0.3)}>
-                <div className="grid grid-cols-[24px_40px_1fr] gap-4 border-t border-line py-8 sm:grid-cols-[32px_40px_1fr_140px] sm:gap-6">
+                <div className="grid grid-cols-[24px_40px_1fr] gap-4 border-t border-line py-7 sm:grid-cols-[32px_40px_1fr_140px] sm:gap-6">
                   <span className="pt-2 font-mono text-xs text-muted">{i + 1}.</span>
                   <LogoBadge slug={r.slug} name={r.company} />
                   <div>
@@ -116,16 +91,6 @@ export default function Experience() {
                       </span>
                     </h3>
                     <p className="mt-2 text-sm text-muted leading-relaxed max-w-xl">{r.summary}</p>
-                    {r.keyProjects && (
-                      <dl className="mt-3 space-y-1.5 max-w-xl">
-                        {r.keyProjects.map((kp) => (
-                          <div key={kp.name} className="text-sm leading-relaxed">
-                            <dt className="inline font-medium">{kp.name}: </dt>
-                            <dd className="inline text-muted">{kp.detail}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                    )}
                     <ul className="mt-3 flex flex-wrap gap-2">
                       {r.tags.map((t) => (
                         <li
@@ -146,18 +111,13 @@ export default function Experience() {
           ))}
         </ol>
         <Reveal>
-          <h3 className="mt-16 font-mono text-xs uppercase tracking-widest text-muted">
-            Education & service
-          </h3>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3 border-t border-line pt-8">
+          <div className="mt-14 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
             <div>
               <p className="font-medium">California College of the Arts</p>
-              <p className="mt-1 text-sm text-muted">MBA, Design Strategy (2025)</p>
-              <p className="text-sm text-muted">BFA, Human-Computer Interaction</p>
-            </div>
-            <div>
-              <p className="font-medium">ELVTR</p>
-              <p className="mt-1 text-sm text-muted">AI Product Design Certification</p>
+              <p className="mt-1 text-sm text-muted">
+                MBA, Design Strategy (2025) · BFA, Human-Computer Interaction
+              </p>
+              <p className="text-sm text-muted">ELVTR — AI Product Design Certification</p>
             </div>
             <div>
               <p className="font-medium">U.S. Navy</p>

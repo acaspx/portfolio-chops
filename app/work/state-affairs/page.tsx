@@ -6,7 +6,6 @@ const sections = [
   { id: "context", label: "Context" },
   { id: "problem", label: "The hard problem" },
   { id: "decision", label: "The decision" },
-  { id: "craft", label: "Craft" },
   { id: "outcome", label: "Outcome" },
 ];
 
@@ -21,7 +20,6 @@ export const metadata: Metadata = {
  *  sa-360-overview.png  — Surveillance Pricing 360 View (briefing + map + AI agent)
  *  sa-whats-changed.png — "most important since your last visit" priority panel
  *  sa-bill-detail.png   — A9349 bill page (AI Analysis + momentum forecast)
- *  sa-portfolio.png     — Energy Bills table + Create 360 View
  *  sa-ai-chat.png       — AI agent chat panel crop (skills `/` input visible)
  * All demo data (verify before publish). 16:9-ish; CaseImage handles sizing.
  */
@@ -111,24 +109,15 @@ export default function StateAffairs() {
           alt="What's Changed panel: the most important items since your last visit, ranked high to medium priority"
           caption="What's Changed in production: 'Here's what's most important since your last visit' — ranked, in 360° View context"
         />
-      </Section>
-
-      <Section id="craft" kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
         <p>
-          The product&apos;s language had to translate government — bills, process,
-          regulatory nuance — into conversational experiences. The voice and tone
-          system I defined holds both audiences: credible to policy experts,
-          legible to the executives they brief.
+          Underneath the skills sat a voice and tone system that translates
+          government — bills, process, regulatory nuance — for two audiences at
+          once: credible to policy experts, legible to the executives they brief.
         </p>
         <CaseImage
           src="/work/sa-bill-detail.png"
           alt="Bill detail page with AI analysis, momentum score with reasoning, legislative progress, and team management panel"
           caption="Bill detail: AI analysis that cites, a momentum forecast that explains its reasoning — the voice system at work"
-        />
-        <CaseImage
-          src="/work/sa-portfolio.png"
-          alt="Bill portfolio table with AI activity insight and Create 360 View action"
-          caption="Where teams live: the portfolio view, with AI insight and 360° View one click away"
         />
       </Section>
 

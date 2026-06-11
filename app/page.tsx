@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import WorkCard, { type Work } from "@/components/WorkCard";
 import Reveal from "@/components/Reveal";
-import Marquee from "@/components/Marquee";
 import SideProjects from "@/components/SideProjects";
 import Experience from "@/components/Experience";
 
@@ -13,7 +12,7 @@ const works: Work[] = [
     tags: "0→1 Enterprise AI",
     year: "2026",
     result:
-      "First AI product; system architecture, voice & interaction patterns. Helped land first enterprise contracts with policy teams at Walmart and DoorDash.",
+      "System architecture, voice, and interaction patterns — for policy teams at Walmart, DoorDash, and trade associations.",
     metrics: [
       { value: "0→1", label: "first AI product" },
       { value: "First", label: "enterprise contracts" },
@@ -31,7 +30,7 @@ const works: Work[] = [
     tags: "AI Platform & Design Systems",
     year: "2023–24",
     result:
-      "+65% engagement in a year; agentic AI shipped into the core flow in four months; acquired by Commure for $139M.",
+      "Agentic AI shipped into the core documentation flow in four months — through the Commure acquisition.",
     metrics: [
       { value: "+65%", label: "engagement" },
       { value: "1→4", label: "offerings" },
@@ -49,7 +48,7 @@ const works: Work[] = [
     title: "Liv — a conversational AI serving millions of homeowners",
     tags: "Conversational AI",
     year: "2022–23",
-    result: "Client onboarding time cut 75% by redesigning the conversation flow.",
+    result: "A conversation design system that rebuilt onboarding — and earned the bankers' trust.",
     metrics: [
       { value: "−75%", label: "onboarding time" },
       { value: "+22%", label: "banker routing" },
@@ -63,27 +62,10 @@ const works: Work[] = [
   },
 ];
 
-const principles = [
-  {
-    t: "Design for consistency, build for flexibility",
-    d: "Systems thinking over screens. Every product I ship leaves behind a design system the team can move fast in.",
-  },
-  {
-    t: "The prototype is the argument",
-    d: "I settle design debates in code — React, Swift, or whatever gets the idea in front of users fastest.",
-  },
-  {
-    t: "AI needs a human contract",
-    d: "Four AI products taught me the hard problem isn't the model — it's deciding what the AI does alone, and where people stay in the loop.",
-  },
-];
-
 export default function Home() {
   return (
     <>
       <Hero />
-
-      <Marquee />
 
       <section id="work" aria-label="Selected work" className="mx-auto max-w-5xl px-6 pb-24">
         <Reveal>
@@ -101,24 +83,6 @@ export default function Home() {
       <SideProjects />
 
       <Experience />
-
-      <section id="about" aria-label="About" className="border-t border-line">
-        <div className="mx-auto max-w-5xl px-6 py-24 grid gap-12 sm:grid-cols-[1fr_1.5fr]">
-          <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-              How I work
-            </h2>
-          </Reveal>
-          <div className="flex flex-col gap-10">
-            {principles.map((p, i) => (
-              <Reveal key={p.t} delay={i * 0.1}>
-                <h3 className="text-xl font-medium tracking-tight">{p.t}</h3>
-                <p className="mt-2 text-muted leading-relaxed">{p.d}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section aria-label="Contact" className="border-t border-line">
         <div className="mx-auto max-w-5xl px-6 py-24 text-center">
