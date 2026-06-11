@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import FaceLogo from "@/components/FaceLogo";
 
 const links = [
   { href: "https://www.linkedin.com/in/antoncastroe/", label: "LinkedIn", external: true },
@@ -20,13 +21,7 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
       <motion.div {...fade(0)} className="flex items-center gap-5">
-        {/* TODO(Anton): drop a photo at public/avatar.jpg and swap this for <Image> */}
-        <div
-          aria-hidden
-          className="grid h-16 w-16 shrink-0 place-items-center rounded-full border border-line bg-ink/[0.04] font-mono text-lg"
-        >
-          AC
-        </div>
+        <FaceLogo className="h-16 w-16 shrink-0" />
         <div>
           <h1 className="text-3xl sm:text-4xl font-medium tracking-tighter">Anton Castro</h1>
           <p className="mt-1 text-muted">Product Designer & Design Engineer in San Francisco</p>

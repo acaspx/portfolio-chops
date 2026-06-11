@@ -64,10 +64,16 @@ function CardVisual({ kind, tint }: { kind: Card["visual"]; tint: string }) {
       style={{ background: `linear-gradient(160deg, ${tint}14 0%, ${tint}30 100%)` }}
     >
       {kind === "photo" ? (
-        // TODO(Anton): drop public/about-photo.jpg and swap for <Image fill className="object-cover" />
-        <div className="grid h-full place-items-center font-mono text-xs text-muted">
-          about-photo.jpg
-        </div>
+        // Drop public/about-photo.jpg (speaking photo); placeholder shows until then
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/about-photo.jpg"
+          alt="Anton Castro speaking on stage"
+          className="absolute inset-0 h-full w-full object-cover"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = "none";
+          }}
+        />
       ) : (
         <div className="grid h-full place-items-center">
           <span aria-hidden className="text-7xl" style={{ color: tint }}>
