@@ -1,15 +1,14 @@
 import Reveal from "@/components/Reveal";
 
-// TODO(Anton): fill the featured app's real details (name, one-liner, link,
-// stack, traction metric). Add a screenshot at public/work/app-hero.png.
+// TODO(Anton): app screenshot at public/work/app-hero.png; App Store link once live.
 const featured = {
-  name: "[App name]",
-  status: "Shipped · Live",
+  name: "Custoria",
+  status: "In App Store review",
   description:
-    "TODO — one tight paragraph: what it does, who it's for, and one traction signal (users, downloads, revenue, or a story). Built and shipped solo.",
-  stack: ["Swift", "React", "Claude"],
-  href: "https://example.com", // App Store / live URL
-  cta: "See it live",
+    "A digital vault for people's and businesses' most valuable possessions — AI-powered appraisal and insurance claims, secured by an encrypted, biometric-locked vault with owner-set sharing permissions. Co-founded with Yiyi Qin; born from our MBA Design Strategy thesis.",
+  stack: ["Swift", "AI/ML", "Claude"], // TODO: confirm stack
+  href: "/work/custoria",
+  cta: "Read the case study",
 };
 
 const projects = [
