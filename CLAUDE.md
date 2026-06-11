@@ -13,7 +13,7 @@ Remote: `github.com/acaspx/portfolio-chops` — this is the only repo for the po
 Next.js 15 (App Router, static output) · Tailwind CSS 4 (`@theme` tokens in `app/globals.css`) · Motion (`motion/react`) · TypeScript strict.
 
 - `npm run dev` / `npm run build`. The production build must always pass.
-- Fonts: system stack now; optional Inter + JetBrains Mono via next/font (see README).
+- Fonts: self-hosted @fontsource — Inter Variable (body) + Fraunces Variable (serif display: case titles, italic accents). Don't use next/font/google (blocked in some build environments).
 
 ## Structure
 

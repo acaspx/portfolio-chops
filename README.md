@@ -37,19 +37,9 @@ All dates/metrics match your resume (canonical facts). If the resume changes, ch
 
 ## Fonts
 
-Currently a system stack (SF Pro on Apple devices) because Google Fonts is
-blocked in the build sandbox. To use Inter + JetBrains Mono locally, restore
-in `app/layout.tsx`:
-
-```tsx
-import { Inter, JetBrains_Mono } from "next/font/google";
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-var", display: "swap" });
-// <html lang="en" className={`${inter.variable} ${mono.variable}`}>
-```
-
-and in `app/globals.css` set `--font-sans: var(--font-inter), ...` and
-`--font-mono: var(--font-mono-var), ...`.
+Self-hosted via npm (no Google Fonts dependency): **Inter Variable** (body/UI)
++ **Fraunces Variable** (serif display — case study titles, italic accents).
+Imported in `app/layout.tsx`, mapped in `app/globals.css` `@theme`.
 
 ## Motion notes
 
