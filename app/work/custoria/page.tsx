@@ -31,29 +31,36 @@ export default function Custoria() {
         ]}
       />
 
-      <Section id="origin" kicker="Origin" title="Born in a strategy classroom, not a hackathon">
+      <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
         <p>
-          Custoria started as our MBA Design Strategy (DMBA) thesis — a data privacy
-          and security application. The strategy training mattered more than the
-          original idea: we were taught to interrogate the business model behind
-          the design, and the interrogation is what killed v1.
+          Custoria began as our MBA Design Strategy (DMBA) thesis: a consumer data
+          privacy and security app. It found product-market fit — and we killed it
+          anyway. The strategy interrogation we&apos;d been trained to run exposed the
+          real problem: distribution. Privacy is owned by legacy trust brands
+          (Norton, McAfee), privacy-first challengers (DuckDuckGo, Brave), and
+          platforms that embed it free (Apple, Google). When your competitors are
+          already installed, already trusted, or already free, a better product
+          doesn&apos;t win — a different market does.
         </p>
-        <Todo>
-          Interview Q1: what was the original privacy/security app, and what did
-          you learn that killed it?
-        </Todo>
       </Section>
 
-      <Section id="pivot" kicker="The pivot" title="From protecting data to protecting what it represents">
+      <Section id="pivot" kicker="The pivot" title="From protecting data to proving ownership">
         <p>
-          We pivoted to a digital vault SaaS for people&apos;s and businesses&apos; most
-          valuable possessions — AI-powered appraisal and insurance claims built on
-          top of a security foundation we&apos;d already designed.
+          The wedge came from my co-founder, Yiyi Qin, who works in the jewelry and
+          art gallery world: galleries, collectors, and appraisers carry real
+          privacy, insurance, and consignment risk around the objects they hold —
+          and track ownership with tools that were never designed for it. The
+          market is niche but hungry: roughly 19,000–25,000 commercial galleries
+          across 3,500+ cities, plus the much larger long tail of collectors,
+          appraisers, hobbyists, and small businesses.
         </p>
-        <Todo>
-          Interview Q2: the pivot moment — what signal (user, market, advisor)
-          triggered it, and what carried over from v1?
-        </Todo>
+        <p>
+          Our privacy playbook mapped cleanly onto it. Custoria became a digital
+          vault for the things people value most: capture an item in seconds, keep
+          storage and tracking effortless, and prove ownership and value — or
+          transfer it — with security and privacy as the product&apos;s spine, not a
+          settings page.
+        </p>
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="Trust people with their irreplaceables">
