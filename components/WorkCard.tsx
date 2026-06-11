@@ -8,7 +8,7 @@ import { motion, useReducedMotion } from "motion/react";
 function CardImage({ file, alt }: { file: string; alt: string }) {
   const [missing, setMissing] = useState(false);
   return (
-    <div className="aspect-[4/3] overflow-hidden rounded-lg border border-line bg-ink/[0.03] transition-transform duration-500 group-hover:scale-[1.015]">
+    <div className="aspect-[16/10] overflow-hidden rounded-lg border border-line bg-ink/[0.03] transition-transform duration-500 group-hover:scale-[1.015]">
       {missing ? (
         <div className="grid h-full place-items-center border border-dashed border-line rounded-lg">
           <span className="px-3 text-center font-mono text-[10px] text-muted">{file}</span>

@@ -48,7 +48,7 @@ export default function Hero() {
 
       <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
         Hi, I&apos;m Anton 👋 — I design AI products that{" "}
-        <em className="not-italic text-accent">ship and scale</em>: 0→1 four times
+        <em className="font-serif italic text-accent">ship and scale</em>: 0→1 four times
         across healthcare, fintech, and govtech, prototyping in code along the way.
         My craft: design for consistency, build for flexibility.
       </motion.p>

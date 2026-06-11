@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/fraunces";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
-// Using system font stack (SF Pro on macOS) — see README to switch to
-// next/font/google (Inter / JetBrains Mono) when building locally.
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://antoncastro.design"), // TODO(Anton): set your real domain

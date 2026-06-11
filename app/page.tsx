@@ -90,8 +90,8 @@ export default function Home() {
             <p className="font-mono text-xs uppercase tracking-widest text-muted">
               Currently designing policy intelligence at State Affairs
             </p>
-            <h2 className="mt-6 text-4xl sm:text-5xl font-medium tracking-tighter">
-              Let&apos;s build something that ships.
+            <h2 className="mt-6 font-serif text-4xl sm:text-5xl font-medium tracking-tight">
+              Let&apos;s build something that <em className="text-accent">ships</em>.
             </h2>
             <a
               href="mailto:ac.design.px@gmail.com"

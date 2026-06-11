@@ -41,7 +41,7 @@ export function CaseImage({
         alt={alt}
         width={1920}
         height={1080}
-        className="w-full rounded-lg border border-line"
+        className="w-full rounded-lg border border-line shadow-sm"
       />
       <figcaption className="mt-2 font-mono text-xs text-muted">{caption}</figcaption>
     </figure>
@@ -61,7 +61,7 @@ export function CaseHeader({
     <header className="mx-auto max-w-3xl px-6 pt-20 pb-14">
       <Reveal>
         <p className="font-mono text-xs uppercase tracking-widest text-muted">{company}</p>
-        <h1 className="mt-4 text-4xl sm:text-5xl font-medium tracking-tighter leading-[1.1]">
+        <h1 className="mt-4 font-serif text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
           {title}
         </h1>
       </Reveal>
