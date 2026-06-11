@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, CaseImage, Hi, ImageSlot, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
+import ShareDemo from "@/components/ShareDemo";
 
 export const metadata: Metadata = {
   title: "Custoria — Founding a Digital Vault | Anton Castro",
@@ -20,6 +21,7 @@ export default function Custoria() {
   return (
     <article>
       <CaseNav sections={sections} />
+      <CaseHero src="/work/cu-hero.png" alt="Custoria Labs brand title" />
       <CaseHeader
         company="Custoria Labs — co-founded with Yiyi Qin"
         title="Founding Custoria: a digital vault for what people value most"
@@ -96,7 +98,7 @@ export default function Custoria() {
           and expiring access links doing the enforcement the legalese usually
           pretends to.
         </p>
-        <ImageSlot caption="The share model: field-level disclosure, time-boxed access, owner anonymity" />
+        <ShareDemo />
       </Section>
 
       <Section id="building" kicker="Building it" title="Designed and coded by the same two hands">

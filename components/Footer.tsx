@@ -3,7 +3,16 @@ export default function Footer() {
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-mono text-xs text-muted">
-          © {new Date().getFullYear()} Anton Castro — designed & built by me, in code.
+          © {new Date().getFullYear()} Anton Castro — designed & built by me,{" "}
+          <a
+            href="https://github.com/acaspx/portfolio-chops"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-line hover:text-ink"
+          >
+            in code
+          </a>
+          .
         </p>
         <ul className="flex gap-5 text-sm">
           <li>

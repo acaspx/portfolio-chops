@@ -39,9 +39,9 @@ export default function Nav() {
         >
           anton castro<span className="text-accent">_</span>
         </Link>
-        <ul className="flex items-center gap-6 text-sm">
+        <ul className="flex items-center gap-5 sm:gap-6 text-sm">
           {links.slice(0, 3).map((l) => (
-            <li key={l.label}>
+            <li key={l.label} className="hidden sm:list-item">
               <Link href={l.href} className="link-line text-muted hover:text-ink transition-colors">
                 {l.label}
               </Link>
