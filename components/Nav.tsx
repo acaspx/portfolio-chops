@@ -22,7 +22,7 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper/80 border-b border-line">
-      {/* Reading progress — only on case studies */}
+      {/* Reading progress - only on case studies */}
       {isCaseStudy && (
         <motion.div
           className="absolute bottom-0 left-0 right-0 h-px bg-accent origin-left"

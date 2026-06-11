@@ -19,7 +19,7 @@ const cards: Card[] = [
     title: "I am",
     body: [
       "My name is Anton, and I design AI products that ship and scale.",
-      "Currently Sr. Interaction Designer at State Affairs, building policy intelligence — the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
+      "Currently Sr. Interaction Designer at State Affairs, building policy intelligence, the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
     ],
     visual: "photo",
     photo: "/about-photo.jpg",
@@ -30,7 +30,7 @@ const cards: Card[] = [
     title: "I work",
     body: [
       "Design for consistency, build for flexibility. Every product I ship leaves behind a system the team can move fast in.",
-      "The prototype is the argument — I settle design debates in code, not decks.",
+      "The prototype is the argument: I settle design debates in code, not decks.",
     ],
     visual: "principles",
     tint: "#15803d",
@@ -39,8 +39,8 @@ const cards: Card[] = [
     kicker: "WHAT",
     title: "I build with",
     body: [
-      "Figma to Framer to React and Swift — these days deep into AI-assisted prototyping with Claude and Cursor.",
-      "Four AI products taught me the hard problem isn't the model — it's deciding what the AI does alone, and where people stay in the loop.",
+      "Figma to Framer to React and Swift, and these days deep into AI-assisted prototyping with Claude and Cursor.",
+      "Four AI products taught me the hard problem isn't the model. It's deciding what the AI does alone, and where people stay in the loop.",
     ],
     visual: "tools",
     tint: "#b45309",
@@ -49,7 +49,7 @@ const cards: Card[] = [
     kicker: "BEFORE",
     title: "All this",
     body: [
-      "U.S. Navy engineer, four years — where I learned that systems fail at their seams, and discipline is a design material.",
+      "U.S. Navy engineer, four years. That's where I learned that systems fail at their seams, and discipline is a design material.",
       "BFA in Human-Computer Interaction, MBA in Design Strategy. Always up for a coffee chat. ☕",
     ],
     visual: "service",

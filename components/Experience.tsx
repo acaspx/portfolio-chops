@@ -10,7 +10,7 @@ type Role = {
   tags: string[];
 };
 
-// Canonical facts — must match resume exactly. See CLAUDE.md content rules.
+// Canonical facts - must match resume exactly. See CLAUDE.md content rules.
 // Logos: drop PNGs into public/logos/<slug>.png (monogram fallback until then).
 const roles: Role[] = [
   {
@@ -28,7 +28,7 @@ const roles: Role[] = [
     title: "Co-founder & Founding Designer",
     dates: "Oct 2025 – Present",
     summary:
-      "A digital vault for the things people value most — designed and coded; in App Store review.",
+      "A digital vault for the things people value most, designed and coded; in App Store review.",
     tags: ["Founder", "Swift", "Security UX"],
   },
   {
@@ -46,7 +46,7 @@ const roles: Role[] = [
     title: "Conversational AI Experience Designer",
     dates: "Sep 2022 – Aug 2023",
     summary:
-      "Founding designer on Liv, the AI assistant for millions of homeowners — onboarding time cut 75%.",
+      "Founding designer on Liv, the AI assistant for millions of homeowners; onboarding time cut 75%.",
     tags: ["Conversational AI", "B2B2C"],
   },
   {
@@ -117,7 +117,7 @@ export default function Experience() {
               <p className="mt-1 text-sm text-muted">
                 MBA, Design Strategy (2025) · BFA, Human-Computer Interaction
               </p>
-              <p className="text-sm text-muted">ELVTR — AI Product Design Certification</p>
+              <p className="text-sm text-muted">ELVTR · AI Product Design Certification</p>
             </div>
             <div>
               <p className="font-medium">U.S. Navy</p>

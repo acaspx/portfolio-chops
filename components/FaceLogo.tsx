@@ -1,5 +1,5 @@
 /**
- * Anton's face mark — closed eyes, easy smile. Hand-drawn as SVG so it stays
+ * Anton's face mark - closed eyes, easy smile. Hand-drawn as SVG so it stays
  * crisp at any size and inherits no image request.
  */
 export default function FaceLogo({ className }: { className?: string }) {
@@ -19,7 +19,7 @@ export default function FaceLogo({ className }: { className?: string }) {
         strokeWidth="5"
         strokeLinecap="round"
       />
-      {/* right eye — slightly smaller, a touch lower */}
+      {/* right eye - slightly smaller, a touch lower */}
       <path
         d="M62 43 c 2.5 8, 12 8, 14.5 -1"
         fill="none"

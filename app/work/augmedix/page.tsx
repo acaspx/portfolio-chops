@@ -11,7 +11,7 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
-  title: "Augmedix — AI Clinical Documentation | Anton Castro",
+  title: "Augmedix · AI Clinical Documentation | Anton Castro",
   description:
     "Scaling AI clinical documentation from one product to four: +65% engagement, agentic AI shipped in four months, $139M acquisition by Commure.",
 };
@@ -39,7 +39,7 @@ export default function Augmedix() {
         <p>
           Healthcare systems face a worsening clinician shortage; documentation is a
           leading driver of burnout, with notes written on personal time long after
-          patients leave. Augmedix&apos;s AI drafted clinical notes — but as a single
+          patients leave. Augmedix&apos;s AI drafted clinical notes, but as a single
           product with a single rigid workflow, in a market where every clinic,
           specialty, and clinician works differently.
         </p>
@@ -47,12 +47,12 @@ export default function Augmedix() {
 
       <Section id="problem" kicker="The hard problem" title="One AI, four products, zero tolerance for error">
         <p>
-          Growth meant expanding from one offering to four — across web and mobile,
-          emergency and primary care — without fragmenting the experience or the
+          Growth meant expanding from one offering to four, across web and mobile,
+          emergency and primary care, without fragmenting the experience or the
           team&apos;s velocity. Research made two things clear:{" "}
           <Hi>~40% of clinicians wanted a human in the loop</Hi>, and{" "}
           <Hi>30% asked for a desktop workflow</Hi> to finish notes where they
-          already lived — the EHR. We rebuilt around both: capture on the move,
+          already lived: the EHR. We rebuilt around both. Capture on the move,
           finish at the desk, specialist support one tap away.
         </p>
         <CaseImage
@@ -69,16 +69,16 @@ export default function Augmedix() {
 
       <Section id="decision" kicker="The decision" title="One-size-fits-all vs. the flexibility flywheel">
         <p>
-          Under tight deadlines, our PMs advocated a one-size-fits-all workflow —
+          Under tight deadlines, our PMs advocated a one-size-fits-all workflow,
           the clearest path to shipping. I argued the opposite, and not on empathy
           grounds alone: <Hi>rigid workflows would cap the AI itself</Hi>. My
-          system mappings showed a modular alternative — templates, preferences,
-          self-serve settings — where every clinician who adapted the tool
+          system mappings showed a modular alternative (templates, preferences,
+          self-serve settings) where every clinician who adapted the tool
           generated the feedback the models needed to improve.
         </p>
         <p>
           The evidence came from onsite visits to HCA hospitals: clinicians
-          weren&apos;t rejecting AI — they were rejecting being told how to work. We
+          weren&apos;t rejecting AI; they were rejecting being told how to work. We
           shipped the modular approach within the timeline we had, and it became
           the foundation the product scaled on.
         </p>
@@ -87,7 +87,7 @@ export default function Augmedix() {
       <Section id="system" kicker="System" title="A design system that let nine PMs ship without breaking the product">
         <p>
           I built the web and mobile design system in Figma that kept four fast-moving
-          product lines consistent — the connective tissue that let me work across
+          product lines consistent: the connective tissue that let me work across
           nine PMs and AI leads, fold a new agentic AI model into the core flow, and
           ship it in four months.
         </p>
@@ -106,20 +106,20 @@ export default function Augmedix() {
       <Section id="outcome" kicker="Outcome" title="+65% engagement, then an acquisition">
         <p>
           <Hi>Engagement grew 65% in a year</Hi> as the product line went from one
-          offering to four — measured on notes volume, workflow completion, and
+          offering to four, measured on notes volume, workflow completion, and
           transcription accuracy. Not vanity metrics: they proved the promise that
-          turns a pilot into a workflow — capture the conversation, deliver a note
+          turns a pilot into a workflow: capture the conversation, deliver a note
           clinicians trust into the EHR.
         </p>
         <p>
           The pilot scaled from <Hi>25 clinicians to contracts for thousands</Hi>{" "}
           across HCA and Sutter Health. In late 2024, Augmedix was{" "}
-          <Hi>acquired by Commure for $139M</Hi> — the design system and product
+          <Hi>acquired by Commure for $139M</Hi>. The design system and product
           breadth were part of what made the platform worth buying.
         </p>
       </Section>
 
-      <NextCase href="/work/rocket" label="Rocket — Liv, conversational AI" />
+      <NextCase href="/work/rocket" label="Rocket · Liv, conversational AI" />
     </article>
   );
 }

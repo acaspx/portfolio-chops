@@ -8,7 +8,7 @@ export type CaseSection = { id: string; label: string };
 /**
  * Persistent side rail for case studies. Tracks the section in view via
  * IntersectionObserver and highlights it; click scrolls smoothly (native,
- * via scroll-behavior: smooth on <html>). Hidden below xl — the sticky
+ * via scroll-behavior: smooth on <html>). Hidden below xl - the sticky
  * top nav + reading progress bar covers small screens.
  */
 export default function CaseNav({ sections }: { sections: CaseSection[] }) {

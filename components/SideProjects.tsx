@@ -17,7 +17,7 @@ const projects = [
     name: "portfolio-chops",
     status: "You're looking at it",
     description:
-      "The source of this site — Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
+      "The source of this site: Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
     href: "https://github.com/acaspx/portfolio-chops",
     cta: "View source on GitHub",
   },
@@ -32,7 +32,7 @@ export default function SideProjects() {
             Founded & built
           </h2>
           <p className="mt-4 max-w-xl text-muted">
-            Where I settle design arguments in code — designed, built, and shipped by me.
+            Where I settle design arguments in code. Designed, built, and shipped by me.
           </p>
         </Reveal>
 

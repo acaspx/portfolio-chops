@@ -107,7 +107,7 @@ export function Section({
 export function Todo({ children }: { children: ReactNode }) {
   return (
     <div className="rounded-lg border border-dashed border-accent/50 bg-accent/5 px-5 py-4 font-mono text-sm text-accent">
-      TODO — {children}
+      TODO - {children}
     </div>
   );
 }
@@ -117,7 +117,7 @@ export function ImageSlot({ caption }: { caption: string }) {
     <figure className="my-6">
       <div className="aspect-[16/10] w-full rounded-lg border border-dashed border-line bg-ink/[0.03] grid place-items-center">
         <span className="font-mono text-xs text-muted px-6 text-center">
-          image slot — {caption}
+          image slot - {caption}
         </span>
       </div>
       <figcaption className="mt-2 font-mono text-xs text-muted">{caption}</figcaption>

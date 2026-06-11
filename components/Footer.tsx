@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ink text-paper">
-      {/* Aurora — three ribbons on offset cycles */}
+      {/* Aurora - three ribbons on offset cycles */}
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-70">
         <div className="aurora-ribbon aurora-a left-[-10%] top-[-40%] h-[120%] w-[70%]" />
         <div className="aurora-ribbon aurora-b right-[-15%] top-[-30%] h-[110%] w-[65%]" />
@@ -12,7 +12,7 @@ export default function Footer() {
 
       <div className="relative mx-auto flex max-w-5xl flex-col gap-4 px-6 py-14 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-mono text-xs text-paper/70">
-          © {new Date().getFullYear()} Anton Castro — designed & built by me,{" "}
+          © {new Date().getFullYear()} Anton Castro · designed & built by me,{" "}
           <a
             href="https://github.com/acaspx/portfolio-chops"
             target="_blank"

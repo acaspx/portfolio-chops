@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 /**
- * Interactive demo of Custoria's share model — the three dials, live.
+ * Interactive demo of Custoria's share model - the three dials, live.
  * Built in code because the prototype is the argument.
  */
 
@@ -32,7 +32,7 @@ export default function ShareDemo() {
   return (
     <figure className="my-8">
       <div className="grid gap-4 rounded-xl border border-line bg-ink/[0.02] p-5 sm:grid-cols-[1fr_1.1fr] sm:p-6">
-        {/* Controls — the owner's three dials */}
+        {/* Controls - the owner's three dials */}
         <div>
           <p className="font-mono text-[11px] uppercase tracking-widest text-muted">
             1 · What gets shared
@@ -106,7 +106,7 @@ export default function ShareDemo() {
           </button>
         </div>
 
-        {/* Live preview — what the recipient sees */}
+        {/* Live preview - what the recipient sees */}
         <div>
           <p className="font-mono text-[11px] uppercase tracking-widest text-muted">
             What the recipient sees
@@ -142,7 +142,7 @@ export default function ShareDemo() {
                 </AnimatePresence>
                 {fields.every((f) => !f.on) && (
                   <p className="text-sm italic text-muted">
-                    Nothing shared — the owner controls every field.
+                    Nothing shared. The owner controls every field.
                   </p>
                 )}
               </dl>
@@ -155,7 +155,7 @@ export default function ShareDemo() {
         </div>
       </div>
       <figcaption className="mt-2 font-mono text-xs text-muted">
-        The share model, live — built in React for this case study. Toggle the dials.
+        The share model, live. Built in React for this case study. Toggle the dials.
       </figcaption>
     </figure>
   );

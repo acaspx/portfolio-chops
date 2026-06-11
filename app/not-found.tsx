@@ -9,7 +9,7 @@ export default function NotFound() {
           This page didn&apos;t <em className="text-accent">ship</em>.
         </h1>
         <p className="mt-4 text-muted">
-          Either it moved, or it never made the cut — every good product has one.
+          Either it moved, or it never made the cut. Every good product has one.
         </p>
         <Link
           href="/"

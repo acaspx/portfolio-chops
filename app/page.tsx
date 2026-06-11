@@ -12,7 +12,7 @@ const works: Work[] = [
     tags: "0→1 Enterprise AI",
     year: "2026",
     result:
-      "System architecture, voice, and interaction patterns — for policy teams at Walmart, DoorDash, and trade associations.",
+      "System architecture, voice, and interaction patterns for policy teams at Walmart, DoorDash, and trade associations.",
     metrics: [
       { value: "0→1", label: "first AI product" },
       { value: "First", label: "enterprise contracts" },
@@ -30,7 +30,7 @@ const works: Work[] = [
     tags: "AI Platform & Design Systems",
     year: "2023–24",
     result:
-      "Agentic AI shipped into the core documentation flow in four months — through the Commure acquisition.",
+      "Agentic AI shipped into the core documentation flow in four months, through the Commure acquisition.",
     metrics: [
       { value: "+65%", label: "engagement" },
       { value: "1→4", label: "offerings" },
@@ -45,10 +45,10 @@ const works: Work[] = [
   {
     slug: "rocket",
     company: "Rocket",
-    title: "Liv — a conversational AI serving millions of homeowners",
+    title: "Liv, a conversational AI serving millions of homeowners",
     tags: "Conversational AI",
     year: "2022–23",
-    result: "A conversation design system that rebuilt onboarding — and earned the bankers' trust.",
+    result: "A conversation design system that rebuilt onboarding and earned the bankers' trust.",
     metrics: [
       { value: "−75%", label: "onboarding time" },
       { value: "+22%", label: "banker routing" },

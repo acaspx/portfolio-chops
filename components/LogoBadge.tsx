@@ -5,7 +5,7 @@ import { useState } from "react";
 /**
  * Company logo with graceful fallback: tries /logos/<slug>.png; if missing,
  * renders a monogram badge. Drop real logos into public/logos/ and they
- * appear automatically — no code change, no broken images.
+ * appear automatically - no code change, no broken images.
  */
 export default function LogoBadge({ slug, name }: { slug: string; name: string }) {
   const [failed, setFailed] = useState(false);

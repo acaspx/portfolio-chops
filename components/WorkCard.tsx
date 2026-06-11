@@ -35,7 +35,7 @@ export type Work = {
   year: string;
   result: string;
   metrics?: { value: string; label: string }[];
-  /** filenames under public/work/ — rendered as a visual strip above the text */
+  /** filenames under public/work/ - rendered as a visual strip above the text */
   images?: { file: string; alt: string }[];
   comingSoon?: boolean;
 };
@@ -64,7 +64,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
         <div className="max-w-xl">
           <p className="font-mono text-xs uppercase tracking-widest text-muted">
-            {work.company} — {work.tags}
+            {work.company} · {work.tags}
           </p>
           <h3 className="mt-2 text-2xl sm:text-3xl font-medium tracking-tight">
             <motion.span

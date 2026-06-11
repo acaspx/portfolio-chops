@@ -4,7 +4,7 @@ import { useState } from "react";
 import Reveal from "@/components/Reveal";
 
 /**
- * iPhone 16-style device frame, drawn in CSS — drop any portrait screenshot
+ * iPhone 16-style device frame, drawn in CSS - drop any portrait screenshot
  * in /public/work and it renders framed: titanium bezel, Dynamic Island,
  * correct 19.5:9 proportions. Falls back to a labeled slot if the file
  * doesn't exist yet.
@@ -44,7 +44,7 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Row of framed phones with one shared caption — the bevyip-style mobile showcase. */
+/** Row of framed phones with one shared caption - the bevyip-style mobile showcase. */
 export function PhoneRow({
   phones,
   caption,
