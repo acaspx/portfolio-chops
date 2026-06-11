@@ -11,6 +11,7 @@ const featured = {
   cta: "Read the case study",
 };
 
+// CLabs intentionally omitted until it has a real story to tell.
 const projects = [
   {
     name: "portfolio-chops",
@@ -19,14 +20,6 @@ const projects = [
       "The source of this site — Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
     href: "https://github.com/acaspx/portfolio-chops",
     cta: "View source on GitHub",
-  },
-  {
-    name: "CLabs",
-    status: "Prototype",
-    description:
-      "TODO — describe: what this prototype does, what it's built with, what you learned.",
-    href: "https://github.com/acaspx/CLabs",
-    cta: "View on GitHub",
   },
 ];
 
@@ -81,7 +74,7 @@ export default function SideProjects() {
         </Reveal>
 
         {/* Prototypes & experiments */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <div className="mt-6 grid gap-6 sm:grid-cols-1">
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.1}>
               <a
