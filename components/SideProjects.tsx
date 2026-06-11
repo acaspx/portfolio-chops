@@ -6,7 +6,7 @@ const featured = {
   status: "In App Store review",
   description:
     "A digital vault for people's and businesses' most valuable possessions — AI-powered appraisal and insurance claims, secured by an encrypted, biometric-locked vault with owner-set sharing permissions. Co-founded with Yiyi Qin; born from our MBA Design Strategy thesis.",
-  stack: ["Swift", "AI/ML", "Claude"], // TODO: confirm stack
+  stack: ["Swift", "Gemini Flash", "iOS"],
   href: "/work/custoria",
   cta: "Read the case study",
 };

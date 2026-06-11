@@ -105,6 +105,14 @@ export default function Custoria() {
           valuable things actually happens.
         </p>
         <ImageSlot caption="Capture: scan → AI identification → metadata, categories, and tags filled in" />
+        <p>
+          Coding it changed how I design. Owning the dependencies forced me to
+          think about systems at scale; owning the data pipeline taught me it&apos;s a
+          differentiator, not plumbing. And it surfaced the intangibles a Figma
+          file can&apos;t capture: how fast the app feels, how reliably it behaves —
+          the qualities users now expect from AI-native products, and judge in the
+          first thirty seconds.
+        </p>
       </Section>
 
       <Section id="status" kicker="Where it stands" title="In review, and what's next">
