@@ -63,17 +63,30 @@ export default function Custoria() {
         </p>
       </Section>
 
-      <Section id="problem" kicker="The hard problem" title="Trust people with their irreplaceables">
+      <Section id="problem" kicker="The hard problem" title="Sharing that proves, without exposing">
         <p>
-          The security and sharing model is the product: an encrypted,
-          biometric-locked vault with owner-set, customizable sharing permissions —
-          security that feels like ownership, not friction.
+          The security and sharing model is the product. The vault is encrypted and
+          biometric-locked — but the hard design problem was the share: an owner
+          needs to prove ownership, value, and authenticity to an insurer,
+          appraiser, or buyer <em>without</em> surrendering their privacy.
         </p>
-        <ImageSlot caption="The vault: capture-to-share flow with owner-set permissions" />
-        <Todo>
-          Interview Q3: one hard security-UX decision (e.g., what does sharing a
-          possession's record actually expose, and what did you argue about?)
-        </Todo>
+        <p>
+          The model we designed gives the owner three dials: <strong>what</strong> —
+          field-level control over which facts a share exposes (ownership, value,
+          brand, authenticity, date of purchase); <strong>how long</strong> —
+          every share is time-boxed; and <strong>who they are</strong> — shares can
+          carry the owner&apos;s name or stay anonymous, because sometimes proving
+          you own something and revealing who you are shouldn&apos;t be the same act.
+        </p>
+        <p>
+          Every shared record carries a Custoria watermark and stamp of
+          authenticity, generated when we scan the item and its proof of purchase.
+          It does two jobs: it makes the record trustworthy to the person receiving
+          it — and it puts our brand in front of exactly the insurers, appraisers,
+          and buyers we need to reach. The distribution lesson that killed v1,
+          designed into v2.
+        </p>
+        <ImageSlot caption="The share model: field-level disclosure, time-boxed access, owner anonymity" />
       </Section>
 
       <Section id="building" kicker="Building it" title="Designed and coded by the same two hands">
