@@ -9,7 +9,8 @@ type Card = {
   title: string;
   body: string[];
   visual: "photo" | "principles" | "tools" | "service";
-  tint: string; // per-card accent for checkers + subtle gradient
+  photo?: string; // optional image; falls back to tinted glyph until file exists
+  tint: string; // per-card accent
 };
 
 const cards: Card[] = [
@@ -21,6 +22,7 @@ const cards: Card[] = [
       "Currently Sr. Interaction Designer at State Affairs, building policy intelligence — the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
     ],
     visual: "photo",
+    photo: "/about-photo.jpg",
     tint: "#2447ff",
   },
   {
@@ -51,38 +53,35 @@ const cards: Card[] = [
       "BFA in Human-Computer Interaction, MBA in Design Strategy. Always up for a coffee chat. ☕",
     ],
     visual: "service",
+    photo: "/military-1.jpg",
     tint: "#be185d",
   },
 ];
 
-function CardVisual({ kind, tint }: { kind: Card["visual"]; tint: string }) {
+function CardVisual({ kind, tint, photo }: { kind: Card["visual"]; tint: string; photo?: string }) {
   const glyph =
-    kind === "principles" ? "◳" : kind === "tools" ? "⌘" : kind === "service" ? "⚓" : null;
+    kind === "principles" ? "◳" : kind === "tools" ? "⌘" : kind === "service" ? "⚓" : "☺";
   return (
     <div
       className="relative h-full min-h-[260px] overflow-hidden rounded-xl sm:min-h-[320px]"
       style={{ background: `linear-gradient(160deg, ${tint}14 0%, ${tint}30 100%)` }}
     >
-      {kind === "photo" ? (
-        // Drop public/about-photo.jpg (speaking photo); placeholder shows until then
+      <div className="grid h-full place-items-center">
+        <span aria-hidden className="text-7xl" style={{ color: tint }}>
+          {glyph}
+        </span>
+      </div>
+      {photo && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src="/about-photo.jpg"
-          alt="Anton Castro speaking on stage"
+          src={photo}
+          alt=""
           className="absolute inset-0 h-full w-full object-cover"
           onError={(e) => {
             (e.target as HTMLImageElement).style.display = "none";
           }}
         />
-      ) : (
-        <div className="grid h-full place-items-center">
-          <span aria-hidden className="text-7xl" style={{ color: tint }}>
-            {glyph}
-          </span>
-        </div>
       )}
-      <div className="checker absolute inset-x-0 top-0 h-6" style={{ color: tint }} aria-hidden />
-      <div className="checker absolute inset-x-0 bottom-0 h-6" style={{ color: tint }} aria-hidden />
     </div>
   );
 }
@@ -188,8 +187,8 @@ export default function AboutModal({
               aria-hidden
               className="absolute inset-x-4 -top-4 h-20 overflow-hidden rounded-2xl border border-line bg-white/95 shadow-sm select-none"
             >
-              <div className="checker h-4 w-1/2" style={{ color: peek.tint }} />
-              <p className="px-7 pt-1.5 text-2xl font-bold tracking-tight text-ink/25">
+              <div className="h-1.5 w-full" style={{ background: peek.tint, opacity: 0.35 }} />
+              <p className="px-7 pt-2 text-2xl font-bold tracking-tight text-ink/25">
                 {peek.kicker}
               </p>
             </div>
@@ -207,7 +206,7 @@ export default function AboutModal({
                   background: `linear-gradient(150deg, #ffffff 55%, ${card.tint}0d 100%)`,
                 }}
               >
-                <CardVisual kind={card.visual} tint={card.tint} />
+                <CardVisual kind={card.visual} tint={card.tint} photo={card.photo} />
                 <div className="py-1 sm:py-3">
                   <p className="text-4xl font-bold tracking-tight leading-none">{card.kicker}</p>
                   <p className="font-serif text-2xl italic tracking-tight text-ink/80">

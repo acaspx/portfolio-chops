@@ -73,12 +73,14 @@ body {
 
 /* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
 .bg-landing {
+  /* Neutral soft-gray clouds, bright upper-left, grounded dark base — per reference */
   background:
-    radial-gradient(90% 70% at 15% 8%, rgba(255, 255, 255, 0.85), transparent 60%),
-    radial-gradient(70% 55% at 85% 25%, rgba(22, 20, 15, 0.045), transparent 65%),
-    radial-gradient(60% 45% at 45% 60%, rgba(22, 20, 15, 0.03), transparent 70%),
-    radial-gradient(120% 45% at 50% 104%, rgba(22, 20, 15, 0.14), transparent 72%),
-    var(--color-paper);
+    radial-gradient(85% 65% at 12% 6%, rgba(255, 255, 255, 0.95), transparent 58%),
+    radial-gradient(55% 45% at 62% 22%, rgba(40, 40, 42, 0.1), transparent 65%),
+    radial-gradient(45% 40% at 88% 55%, rgba(40, 40, 42, 0.12), transparent 68%),
+    radial-gradient(50% 40% at 35% 65%, rgba(40, 40, 42, 0.07), transparent 70%),
+    radial-gradient(130% 32% at 50% 103%, rgba(15, 15, 16, 0.4), transparent 70%),
+    #eeedeb;
 }
 .bg-landing::after {
   content: "";
