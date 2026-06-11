@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 const sections = [
@@ -29,6 +29,11 @@ export default function StateAffairs() {
   return (
     <article>
       <CaseNav sections={sections} />
+      {/* Drop the marketing hero into public/work/sa-hero-raw.png and I'll crop the text overlay out → sa-hero.png */}
+      <CaseHero
+        src="/work/sa-hero.png"
+        alt="A policy professional reviewing the State Affairs intelligence dashboard on a laptop"
+      />
       <CaseHeader
         company="State Affairs — Policy Intelligence"
         title="Turning dense policy data into decisions enterprise teams act on"

@@ -3,6 +3,22 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import type { ReactNode } from "react";
 
+/** Full-bleed hero image at the top of a case study. */
+export function CaseHero({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6">
+      <Image
+        src={src}
+        alt={alt}
+        width={2600}
+        height={870}
+        priority
+        className="w-full rounded-2xl border border-line object-cover"
+      />
+    </div>
+  );
+}
+
 /** Real case study image (file must exist in public/). 16:9 deck exports. */
 export function CaseImage({
   src,

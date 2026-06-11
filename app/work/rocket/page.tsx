@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 export const metadata: Metadata = {
@@ -19,6 +19,10 @@ export default function Rocket() {
   return (
     <article>
       <CaseNav sections={sections} />
+      <CaseHero
+        src="/work/rk-hero.png"
+        alt="Rocket Mortgage homepage with the Liv chat assistant open"
+      />
       <CaseHeader
         company="Rocket"
         title="Meeting homeowners where they are — designing Liv, Rocket's conversational AI"
@@ -40,11 +44,6 @@ export default function Rocket() {
           assistant embodying Rocket&apos;s brand across the ecosystem — Homes,
           Mortgage, Loans, and Money — serving millions of homeowners, B2B2C.
         </p>
-        <CaseImage
-          src="/work/rk-hero.png"
-          alt="Rocket Mortgage homepage with the Liv chat assistant open"
-          caption="Liv on Rocket's front door — trust, in a legacy industry"
-        />
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="A chatbot can't fake its way through a mortgage">

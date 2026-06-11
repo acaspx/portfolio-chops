@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 const sections = [
@@ -20,6 +20,10 @@ export default function Augmedix() {
   return (
     <article>
       <CaseNav sections={sections} />
+      <CaseHero
+        src="/work/ax-mobile.png"
+        alt="Augmedix Assist marketing hero: phone showing an AI-drafted clinical note, with HCA, AdventHealth, CommonSpirit, and Sutter Health logos"
+      />
       <CaseHeader
         company="Augmedix (acquired by Commure, $139M)"
         title="Scaling AI clinical documentation from one product to four"
@@ -88,11 +92,6 @@ export default function Augmedix() {
           The team shipped the modular approach within the timeline and engineering
           resources we had — and it became the foundation the product scaled on.
         </p>
-        <CaseImage
-          src="/work/ax-mobile.png"
-          alt="Augmedix mobile app marketing hero with HCA, AdventHealth, CommonSpirit, and Sutter Health logos"
-          caption="The product at scale — trusted by leading healthcare systems"
-        />
       </Section>
 
       <Section id="system" kicker="System" title="A design system that let nine PMs ship without breaking the product">
