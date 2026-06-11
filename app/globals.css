@@ -71,6 +71,24 @@ body {
   outline-offset: 3px;
 }
 
+/* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
+.bg-landing {
+  background:
+    radial-gradient(90% 70% at 15% 8%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(70% 55% at 85% 25%, rgba(22, 20, 15, 0.045), transparent 65%),
+    radial-gradient(60% 45% at 45% 60%, rgba(22, 20, 15, 0.03), transparent 70%),
+    radial-gradient(120% 45% at 50% 104%, rgba(22, 20, 15, 0.14), transparent 72%),
+    var(--color-paper);
+}
+.bg-landing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+}
+
 /* Checker accent strip (About modal) — colored via `color` on the element */
 .checker {
   background-image: repeating-conic-gradient(
