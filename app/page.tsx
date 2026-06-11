@@ -19,7 +19,7 @@ const works: Work[] = [
     ],
     images: [
       { file: "sa-360-overview.png", alt: "360° View overview with AI briefing and state map" },
-      { file: "sa-bill-detail.png", alt: "Bill detail with AI analysis and momentum forecast" },
+      { file: "sa-bills.png", alt: "Bills grouped by AI momentum score" },
       { file: "sa-whats-changed.png", alt: "What's Changed priority panel since last visit" },
     ],
   },
