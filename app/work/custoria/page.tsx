@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, Todo, ImageSlot, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, Section, CaseImage, ImageSlot, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 export const metadata: Metadata = {
@@ -53,6 +53,14 @@ export default function Custoria() {
           ~20,000 commercial galleries worldwide, plus the long tail of collectors,
           appraisers, and small businesses.
         </p>
+        <blockquote className="border-l-2 border-accent pl-5 italic text-ink/75">
+          &quot;Every time an agent takes that Yayoi Kusama Pumpkin for a client
+          viewing, I&apos;m on edge. As a gallery manager, once the work leaves my
+          hands, I can&apos;t sleep.&quot;
+          <footer className="mt-2 not-italic font-mono text-xs text-muted">
+            — gallery manager, pilot research
+          </footer>
+        </blockquote>
         <p>
           Our privacy playbook mapped cleanly onto it. Custoria became a digital
           vault for the things people value most: capture an item in seconds, keep
@@ -84,6 +92,12 @@ export default function Custoria() {
           buyers we need to reach — the distribution lesson that killed v1,
           designed into v2.
         </p>
+        <p>
+          Underneath it all: zero-knowledge, end-to-end encryption — even Custoria
+          can&apos;t see inside your vault — with blockchain-backed chain of ownership
+          and expiring access links doing the enforcement the legalese usually
+          pretends to.
+        </p>
         <ImageSlot caption="The share model: field-level disclosure, time-boxed access, owner anonymity" />
       </Section>
 
@@ -100,7 +114,11 @@ export default function Custoria() {
           gets stronger. The vault isn&apos;t an archive — it&apos;s where the work of
           owning valuable things happens.
         </p>
-        <ImageSlot caption="Capture: scan → AI identification → metadata, categories, and tags filled in" />
+        <CaseImage
+          src="/work/cu-capture.png"
+          alt="Three app screens showing Custoria's computer-vision capture flow"
+          caption="How Custoria works: computer-vision capture → AI identification → structured, searchable record"
+        />
         <p>
           Coding it changed how I design. Owning the dependencies forced me to
           think about systems at scale; owning the data pipeline taught me it&apos;s a
@@ -111,11 +129,18 @@ export default function Custoria() {
         </p>
       </Section>
 
-      <Section id="status" kicker="Where it stands" title="In review, and what's next">
-        <Todo>
-          Interview Q5: traction/validation so far (pilot users, businesses,
-          waitlist?) and the next milestone after App Store approval.
-        </Todo>
+      <Section id="status" kicker="Where it stands" title="Piloted, measured, in review">
+        <p>
+          We&apos;ve been MVP pilot-testing since late 2025, and the early numbers say
+          the workflow replacement is real: in pilot use, item records were{" "}
+          <strong>2× more accurate</strong> on details, value, origin, and
+          ownership than manual methods, with a <strong>~90% reduction in
+          loss-and-risk exposure</strong> from human workflows.
+        </p>
+        <p>
+          The app is in Apple App Store review now. Next: launch, and converting
+          the gallery pilot network into the first paying customers.
+        </p>
       </Section>
 
       <NextCase href="/work/state-affairs" label="State Affairs — policy intelligence AI" />

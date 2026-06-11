@@ -66,10 +66,13 @@ export default function SideProjects() {
               </ul>
               <span className="link-line mt-5 inline-block text-sm">{featured.cta} →</span>
             </div>
-            {/* TODO(Anton): drop public/work/app-hero.png to fill this */}
-            <div className="grid min-h-[200px] place-items-center rounded-lg border border-dashed border-line bg-ink/[0.03]">
-              <span className="font-mono text-xs text-muted">app-hero.png</span>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/work/app-hero.png"
+              alt="Custoria app: computer-vision capture flow across three screens"
+              loading="lazy"
+              className="min-h-[200px] w-full rounded-lg border border-line object-cover"
+            />
           </a>
         </Reveal>
 
