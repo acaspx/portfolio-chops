@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 import ShareDemo from "@/components/ShareDemo";
+import { PhoneRow } from "@/components/PhoneFrame";
 
 export const metadata: Metadata = {
   title: "Custoria — Founding a Digital Vault | Anton Castro",
@@ -114,10 +115,13 @@ export default function Custoria() {
           gets stronger. The vault isn&apos;t an archive — it&apos;s where the work of
           owning valuable things happens.
         </p>
-        <CaseImage
-          src="/work/cu-capture.png"
-          alt="Three app screens showing Custoria's computer-vision capture flow"
-          caption="How Custoria works: computer-vision capture → AI identification → structured, searchable record"
+        <PhoneRow
+          phones={[
+            { src: "/work/cu-vault.png", alt: "Custoria vault home: total value, items, smart filters" },
+            { src: "/work/cu-item.png", alt: "Item detail: Heath Ceramic clock with estimated value, share and edit actions" },
+            { src: "/work/cu-settings.png", alt: "Settings: Face ID security and account overview" },
+          ]}
+          caption="The vault, live on iOS — capture, value, and control in three surfaces"
         />
         <p>
           Coding it changed how I design. Owning the dependencies forced me to
