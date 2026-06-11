@@ -54,11 +54,9 @@ export default function StateAffairs() {
           decisions, and it had never shipped AI.
         </p>
         <p>
-          These were the company&apos;s first AI features, shipping while the business
-          was converting its journalism and data into an enterprise platform — and
-          while a full rebrand ran underneath. If users didn&apos;t trust the AI on
-          first contact, there was no second chance at the contracts the company
-          was built to win.
+          These were the company&apos;s first AI features, shipping mid-rebrand while
+          the business converted its journalism into an enterprise platform. If
+          users didn&apos;t trust the AI on first contact, there was no second chance.
         </p>
       </Section>
 
@@ -117,11 +115,10 @@ export default function StateAffairs() {
 
       <Section id="craft" kicker="Craft under constraint" title="Translating legislatese, mid-rebrand">
         <p>
-          All of this meant digesting the language of government — bills,
-          legislative process, regulatory nuance — and translating it into
-          conversational, intuitive experiences, while the company ran a full brand
-          overhaul underneath us. The voice and tone system I defined had to hold
-          both: credible to policy experts, legible to the executives they brief.
+          The product&apos;s language had to translate government — bills, process,
+          regulatory nuance — into conversational experiences. The voice and tone
+          system I defined holds both audiences: credible to policy experts,
+          legible to the executives they brief.
         </p>
         <CaseImage
           src="/work/sa-bill-detail.png"

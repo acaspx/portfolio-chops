@@ -49,14 +49,12 @@ export default function Augmedix() {
         <p>
           Growth meant expanding from one offering to four — across web and mobile,
           emergency and primary care — without fragmenting the experience or the
-          team&apos;s velocity. And clinicians made one thing clear in research: they
-          wanted AI with humans reachable in the loop, not a black box — in our
-          research, <strong>~40% preferred keeping a human in the loop</strong>, and{" "}
+          team&apos;s velocity. Research made two things clear:{" "}
+          <strong>~40% of clinicians preferred a human in the loop</strong>, and{" "}
           <strong>30% asked for a desktop workflow</strong> to finalize notes where
-          they already lived: the EHR. We rebuilt the product around both — generated
-          notes a medical documentation specialist could access and refine with the
-          clinician always in control, and a web app built 1:1 with mobile so
-          clinicians could capture on the move and finish at their desk.
+          they already lived — the EHR. We rebuilt around both: generated notes a
+          documentation specialist could refine with the clinician in control, and
+          a web app built 1:1 with mobile — capture on the move, finish at the desk.
         </p>
         <CaseImage
           src="/work/ax-platform.png"

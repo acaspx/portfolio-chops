@@ -50,11 +50,10 @@ export default function Hero() {
       </motion.nav>
 
       <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
-        Hi, I&apos;m Anton 👋 — a technical product designer with a knack for systems
-        thinking and finding hidden problems throughout the product value chain. I
-        design AI products that <em className="not-italic text-accent">ship and scale</em> —
-        0→1 four times across healthcare, fintech, and govtech — and I prototype in
-        code. My craft: design for consistency, build for flexibility.
+        Hi, I&apos;m Anton 👋 — I design AI products that{" "}
+        <em className="not-italic text-accent">ship and scale</em>: 0→1 four times
+        across healthcare, fintech, and govtech, prototyping in code along the way.
+        My craft: design for consistency, build for flexibility.
       </motion.p>
 
       <motion.div {...fade(0.3)} className="mt-8 flex items-center gap-6">

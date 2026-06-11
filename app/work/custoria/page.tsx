@@ -49,10 +49,9 @@ export default function Custoria() {
           The wedge came from my co-founder, Yiyi Qin, who works in the jewelry and
           art gallery world: galleries, collectors, and appraisers carry real
           privacy, insurance, and consignment risk around the objects they hold —
-          and track ownership with tools that were never designed for it. The
-          market is niche but hungry: roughly 19,000–25,000 commercial galleries
-          across 3,500+ cities, plus the much larger long tail of collectors,
-          appraisers, hobbyists, and small businesses.
+          and track ownership with tools never designed for it. Niche but hungry:
+          ~20,000 commercial galleries worldwide, plus the long tail of collectors,
+          appraisers, and small businesses.
         </p>
         <p>
           Our privacy playbook mapped cleanly onto it. Custoria became a digital
@@ -80,10 +79,9 @@ export default function Custoria() {
         </p>
         <p>
           Every shared record carries a Custoria watermark and stamp of
-          authenticity, generated when we scan the item and its proof of purchase.
-          It does two jobs: it makes the record trustworthy to the person receiving
-          it — and it puts our brand in front of exactly the insurers, appraisers,
-          and buyers we need to reach. The distribution lesson that killed v1,
+          authenticity. It does two jobs: makes the record trustworthy to whoever
+          receives it, and puts our brand in front of the insurers, appraisers, and
+          buyers we need to reach — the distribution lesson that killed v1,
           designed into v2.
         </p>
         <ImageSlot caption="The share model: field-level disclosure, time-boxed access, owner anonymity" />
@@ -99,10 +97,8 @@ export default function Custoria() {
         </p>
         <p>
           Documentation compounds it: add a receipt or certificate and the record
-          gets stronger — richer proof of ownership and authenticity, a more
-          compelling digital asset. The capture flow is designed as a workflow
-          replacement, not an archive: the vault is where the work of owning
-          valuable things actually happens.
+          gets stronger. The vault isn&apos;t an archive — it&apos;s where the work of
+          owning valuable things happens.
         </p>
         <ImageSlot caption="Capture: scan → AI identification → metadata, categories, and tags filled in" />
         <p>
