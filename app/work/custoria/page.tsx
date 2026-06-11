@@ -91,14 +91,20 @@ export default function Custoria() {
 
       <Section id="building" kicker="Building it" title="Designed and coded by the same two hands">
         <p>
-          As co-founder I own design end-to-end — and the code. The capture-to-share
-          flow, the design system, and the iOS app itself.
+          As co-founder I own design end-to-end — and the code. Custoria is a
+          native iOS app in Swift, with Gemini Flash doing the unglamorous work
+          that makes the vault effortless: scan an item and the AI identifies it,
+          fills in the metadata — value, brand, identification — and labels it
+          with categories and tags. No forms, no manual cataloging.
         </p>
-        <ImageSlot caption="App: AI-powered capture and appraisal flow" />
-        <Todo>
-          Interview Q4: the AI's concrete job (appraisal? capture? claims?), the
-          stack, and one thing building it taught you that designing alone wouldn&apos;t.
-        </Todo>
+        <p>
+          Documentation compounds it: add a receipt or certificate and the record
+          gets stronger — richer proof of ownership and authenticity, a more
+          compelling digital asset. The capture flow is designed as a workflow
+          replacement, not an archive: the vault is where the work of owning
+          valuable things actually happens.
+        </p>
+        <ImageSlot caption="Capture: scan → AI identification → metadata, categories, and tags filled in" />
       </Section>
 
       <Section id="status" kicker="Where it stands" title="In review, and what's next">
