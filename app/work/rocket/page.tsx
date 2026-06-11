@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 export const metadata: Metadata = {
@@ -36,13 +36,12 @@ export default function Rocket() {
 
       <Section id="context" kicker="Context" title="A legacy industry, at the worst possible moment">
         <p>
-          A mortgage is the biggest financial decision most people ever make — and
-          buyers were facing a market whiplashed by the pandemic: rate spikes,
-          economic uncertainty, record-low home buying. Rocket&apos;s research showed{" "}
-          <strong>~32% of customers dropping off during onboarding</strong>. The
-          mandate: meet customers where they are with Liv, a conversational
-          assistant embodying Rocket&apos;s brand across the ecosystem — Homes,
-          Mortgage, Loans, and Money — serving millions of homeowners, B2B2C.
+          A mortgage is the biggest financial decision most people make — and
+          buyers were facing rate spikes, economic uncertainty, and record-low
+          home buying. Research showed <Hi>~32% of customers dropping off during
+          onboarding</Hi>. The mandate: meet them where they are with Liv, a
+          conversational assistant across Rocket&apos;s ecosystem — Homes, Mortgage,
+          Loans, Money — serving <Hi>millions of homeowners</Hi>.
         </p>
       </Section>
 
@@ -65,12 +64,11 @@ export default function Rocket() {
       <Section id="system" kicker="The system" title="A conversation design system, not a script">
         <p>
           I owned Liv&apos;s end-to-end journey and visual voice, and built the
-          conversation patterns that made it scalable: <strong>Pitstop</strong>,{" "}
-          <strong>Queueing</strong>, <strong>Interstitial</strong>, and{" "}
-          <strong>Agent Intro</strong> — reusable states for pacing a conversation,
-          holding context while users wait, and handing off to a human with the
-          context intact. Rethinking the onboarding conversation flow around these
-          patterns cut client onboarding time 75%.
+          conversation patterns that made it scalable — Pitstop, Queueing,
+          Interstitial, Agent Intro: reusable states for pacing a conversation,
+          holding context, and handing off to a human without losing it.
+          Rebuilding onboarding around these patterns{" "}
+          <Hi>cut client onboarding time 75%</Hi>.
         </p>
         <CaseImage
           src="/work/rk-patterns.png"
@@ -81,20 +79,18 @@ export default function Rocket() {
 
       <Section id="outcome" kicker="Outcome" title="Trusted by users — and by the bankers behind them">
         <p>
-          Where Liv was in production, engagement with Rocket rose{" "}
-          <strong>11% across platforms</strong>, and routing to a lending banker or
-          agent increased <strong>22%</strong>. The number I&apos;m proudest of is the
-          quietest one: <strong>94% of loan bankers reported Liv was routing them
-          the correct client</strong>, categorized from chat inputs — the human side
-          of the loop trusting the AI side.
+          Where Liv ran, <Hi>engagement rose 11%</Hi> and{" "}
+          <Hi>routing to a lending banker increased 22%</Hi>. The number I&apos;m
+          proudest of is the quietest one: <Hi>94% of loan bankers said Liv was
+          routing them the correct client</Hi> — the human side of the loop
+          trusting the AI side.
         </p>
         <p>
-          What didn&apos;t go to plan: conversion stayed softer than engagement, as
-          rates kept buyers on the sidelines — a reminder that no conversation
-          design outruns market conditions. And bankers needed real training on how
-          client data flowed into their workflow; the next time I ship a human
-          handoff, the human&apos;s onboarding gets designed as deliberately as the
-          user&apos;s.
+          What didn&apos;t go to plan: conversion stayed softer than engagement as
+          rates kept buyers sidelined — no conversation design outruns market
+          conditions. And bankers needed real training on how client data reached
+          them; next time I ship a human handoff, the human&apos;s onboarding gets
+          designed as deliberately as the user&apos;s.
         </p>
         <CaseImage
           src="/work/rk-routing.png"

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, Section, CaseImage, ImageSlot, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, Section, CaseImage, Hi, ImageSlot, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 export const metadata: Metadata = {
@@ -33,14 +33,13 @@ export default function Custoria() {
 
       <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
         <p>
-          Custoria began as our MBA Design Strategy (DMBA) thesis: a consumer data
-          privacy and security app. It found product-market fit — and we killed it
-          anyway. The strategy interrogation we&apos;d been trained to run exposed the
-          real problem: distribution. Privacy is owned by legacy trust brands
-          (Norton, McAfee), privacy-first challengers (DuckDuckGo, Brave), and
-          platforms that embed it free (Apple, Google). When your competitors are
-          already installed, already trusted, or already free, a better product
-          doesn&apos;t win — a different market does.
+          Custoria began as our MBA Design Strategy thesis: a consumer data privacy
+          app. <Hi>It found product-market fit — and we killed it anyway.</Hi> The
+          strategy interrogation exposed the real problem: distribution. Privacy is
+          owned by legacy trust brands (Norton, McAfee), privacy-first challengers
+          (DuckDuckGo, Brave), and platforms that embed it free (Apple, Google).
+          When your competitors are already installed, trusted, or free, a better
+          product doesn&apos;t win — a different market does.
         </p>
       </Section>
 
@@ -49,9 +48,9 @@ export default function Custoria() {
           The wedge came from my co-founder, Yiyi Qin, who works in the jewelry and
           art gallery world: galleries, collectors, and appraisers carry real
           privacy, insurance, and consignment risk around the objects they hold —
-          and track ownership with tools never designed for it. Niche but hungry:
-          ~20,000 commercial galleries worldwide, plus the long tail of collectors,
-          appraisers, and small businesses.
+          and track ownership with tools never designed for it. Niche but hungry:{" "}
+          <Hi>~20,000 commercial galleries worldwide</Hi>, plus the long tail of
+          collectors, appraisers, and small businesses.
         </p>
         <blockquote className="border-l-2 border-accent pl-5 italic text-ink/75">
           &quot;Every time an agent takes that Yayoi Kusama Pumpkin for a client
@@ -78,12 +77,11 @@ export default function Custoria() {
           appraiser, or buyer <em>without</em> surrendering their privacy.
         </p>
         <p>
-          The model we designed gives the owner three dials: <strong>what</strong> —
-          field-level control over which facts a share exposes (ownership, value,
-          brand, authenticity, date of purchase); <strong>how long</strong> —
-          every share is time-boxed; and <strong>who they are</strong> — shares can
-          carry the owner&apos;s name or stay anonymous, because sometimes proving
-          you own something and revealing who you are shouldn&apos;t be the same act.
+          The model gives the owner three dials: <Hi>what</Hi> — field-level
+          control over which facts a share exposes; <Hi>how long</Hi> — every
+          share is time-boxed; <Hi>who they are</Hi> — named or anonymous, because
+          proving you own something and revealing who you are shouldn&apos;t be the
+          same act.
         </p>
         <p>
           Every shared record carries a Custoria watermark and stamp of
@@ -131,15 +129,14 @@ export default function Custoria() {
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, in review">
         <p>
-          We&apos;ve been MVP pilot-testing since late 2025, and the early numbers say
-          the workflow replacement is real: in pilot use, item records were{" "}
-          <strong>2× more accurate</strong> on details, value, origin, and
-          ownership than manual methods, with a <strong>~90% reduction in
-          loss-and-risk exposure</strong> from human workflows.
+          MVP pilots have run since late 2025, and the numbers say the workflow
+          replacement is real: item records <Hi>2× more accurate</Hi> on details,
+          value, origin, and ownership than manual methods, and a{" "}
+          <Hi>~90% reduction in loss-and-risk exposure</Hi>.
         </p>
         <p>
-          The app is in Apple App Store review now. Next: launch, and converting
-          the gallery pilot network into the first paying customers.
+          The app is <Hi>in Apple App Store review</Hi> now. Next: launch, and
+          converting the gallery pilot network into the first paying customers.
         </p>
       </Section>
 

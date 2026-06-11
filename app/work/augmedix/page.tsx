@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 const sections = [
@@ -50,11 +50,10 @@ export default function Augmedix() {
           Growth meant expanding from one offering to four — across web and mobile,
           emergency and primary care — without fragmenting the experience or the
           team&apos;s velocity. Research made two things clear:{" "}
-          <strong>~40% of clinicians preferred a human in the loop</strong>, and{" "}
-          <strong>30% asked for a desktop workflow</strong> to finalize notes where
-          they already lived — the EHR. We rebuilt around both: generated notes a
-          documentation specialist could refine with the clinician in control, and
-          a web app built 1:1 with mobile — capture on the move, finish at the desk.
+          <Hi>~40% of clinicians wanted a human in the loop</Hi>, and{" "}
+          <Hi>30% asked for a desktop workflow</Hi> to finish notes where they
+          already lived — the EHR. We rebuilt around both: capture on the move,
+          finish at the desk, specialist support one tap away.
         </p>
         <CaseImage
           src="/work/ax-platform.png"
@@ -70,25 +69,18 @@ export default function Augmedix() {
 
       <Section id="decision" kicker="The decision" title="One-size-fits-all vs. the flexibility flywheel">
         <p>
-          Under tight deadlines and real AI constraints, our PMs advocated a
-          one-size-fits-all workflow — the clearest path to shipping. I argued the
-          opposite, and not on empathy grounds alone: rigid workflows would cap the
-          AI itself. I brought visual examples and system mappings showing a modular
-          alternative — templates, preferences, self-serve settings — where feedback
-          intake was built into the product, so every clinician who adapted the tool
-          to their workflow generated the engagement and corrections the models
-          needed to improve.
+          Under tight deadlines, our PMs advocated a one-size-fits-all workflow —
+          the clearest path to shipping. I argued the opposite, and not on empathy
+          grounds alone: <Hi>rigid workflows would cap the AI itself</Hi>. My
+          system mappings showed a modular alternative — templates, preferences,
+          self-serve settings — where every clinician who adapted the tool
+          generated the feedback the models needed to improve.
         </p>
         <p>
-          The evidence came from quantitative feedback and onsite visits to HCA
-          hospitals: clinicians weren&apos;t rejecting AI — they were rejecting being
-          told how to work. Flexible, self-serve systems meant easier adoption in
-          their specific workflows, which meant sustained engagement, which meant
-          better LLM output as we scaled.
-        </p>
-        <p>
-          The team shipped the modular approach within the timeline and engineering
-          resources we had — and it became the foundation the product scaled on.
+          The evidence came from onsite visits to HCA hospitals: clinicians
+          weren&apos;t rejecting AI — they were rejecting being told how to work. We
+          shipped the modular approach within the timeline we had, and it became
+          the foundation the product scaled on.
         </p>
       </Section>
 
@@ -113,19 +105,17 @@ export default function Augmedix() {
 
       <Section id="outcome" kicker="Outcome" title="+65% engagement, then an acquisition">
         <p>
-          Engagement grew 65% in a year as the product line expanded from one
-          offering to four — measured across the three drivers we&apos;d defined as
-          success: <strong>notes volume</strong>, <strong>workflow completion
-          efficiency</strong>, and <strong>visit transcription accuracy</strong>.
-          Those weren&apos;t vanity metrics; they validated the core promise — capture
-          the conversation, deliver a note clinicians trust into the EHR — which is
-          what turns a pilot into a workflow.
+          <Hi>Engagement grew 65% in a year</Hi> as the product line went from one
+          offering to four — measured on notes volume, workflow completion, and
+          transcription accuracy. Not vanity metrics: they proved the promise that
+          turns a pilot into a workflow — capture the conversation, deliver a note
+          clinicians trust into the EHR.
         </p>
         <p>
-          The pilot scaled from 25 clinicians to contracts for thousands across HCA
-          and Sutter Health. In late 2024, Augmedix was acquired by Commure for
-          $139M — the design system and product breadth were part of what made the
-          platform worth buying.
+          The pilot scaled from <Hi>25 clinicians to contracts for thousands</Hi>{" "}
+          across HCA and Sutter Health. In late 2024, Augmedix was{" "}
+          <Hi>acquired by Commure for $139M</Hi> — the design system and product
+          breadth were part of what made the platform worth buying.
         </p>
       </Section>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, NextCase } from "@/components/CaseStudy";
+import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import CaseNav from "@/components/CaseNav";
 
 const sections = [
@@ -45,35 +45,29 @@ export default function StateAffairs() {
 
       <Section id="context" kicker="Context" title="High stakes, dense data, skeptical buyers">
         <p>
-          State-level policy moves fast and the people tracking it — corporate policy
-          teams, trade associations — drown in legislative text, committee schedules,
+          Corporate policy teams drown in legislative text, committee schedules,
           and fragmented local reporting. State Affairs had the data and the
-          journalists. It didn&apos;t have a product that turned that raw material into
-          decisions, and it had never shipped AI.
-        </p>
-        <p>
-          These were the company&apos;s first AI features, shipping mid-rebrand while
-          the business converted its journalism into an enterprise platform. If
-          users didn&apos;t trust the AI on first contact, there was no second chance.
+          journalists — but no product turning raw material into decisions, and it
+          had never shipped AI. I led <Hi>360° Views and AI Chat, the company&apos;s
+          first AI features</Hi>, shipping mid-rebrand. If users didn&apos;t trust the
+          AI on first contact, there was no second chance.
         </p>
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="Aggregation isn't insight">
         <p>
-          I led 360° Views and AI Chat — the company&apos;s first AI features. V1 could
-          already answer impressively specific queries: <em>&quot;show me all the bills on
-          this topic, in this state, by this legislator.&quot;</em> Pilot testers were
-          impressed. And then they kept asking the same thing: <strong>&quot;so
-          what?&quot;</strong> Aggregating legislative data wasn&apos;t the product — knowing
-          what it meant for <em>their</em> business was.
+          V1 could answer impressively specific queries: <em>&quot;show me all the
+          bills on this topic, in this state, by this legislator.&quot;</em> Pilot
+          testers were impressed — and kept asking the same thing:{" "}
+          <Hi>&quot;so what?&quot;</Hi> Aggregating legislative data wasn&apos;t the
+          product. Knowing what it meant for <em>their</em> business was.
         </p>
         <p>
-          Policy teams act on this in front of executives and regulators; a wrong
-          or merely shallow answer doesn&apos;t just disappoint, it erodes the trust the
-          whole platform depends on while you&apos;re trying to win enterprise contracts.
-          So instead of expanding query coverage, I argued for going deeper on fewer
-          things: trust signals in the UI (citations on every claim) and
-          personalization that closes the so-what gap.
+          A shallow answer here doesn&apos;t just disappoint — policy teams act on it
+          in front of executives and regulators. So instead of expanding query
+          coverage, I argued for going deeper on fewer things:{" "}
+          <Hi>citations on every claim</Hi>, and personalization that closes the
+          so-what gap.
         </p>
         <CaseImage
           src="/work/sa-ai-chat.png"
@@ -84,20 +78,17 @@ export default function StateAffairs() {
 
       <Section id="decision" kicker="The decision" title="Three robust skills — then a fourth that answers 'what changed?'">
         <p>
-          Working with our AI/ML product and engineering leads, I focused V1 on
-          three skills we could make genuinely robust: <strong>Bill Compare</strong>,{" "}
-          <strong>Create a Report</strong>, and <strong>Generate 360° View</strong> —
-          where AI Chat builds a 360° View around an individual user&apos;s needs,
-          probabilistically personalizing its data, with the user choosing between a
-          static or dynamic view. Get it right on the first try, and users trust the
-          platform as a reliable source.
+          With our AI/ML product and engineering leads, I focused V1 on three
+          skills we could make genuinely robust: Bill Compare, Create a Report,
+          and Generate 360° View — AI Chat building a personalized 360° View
+          around each user&apos;s needs. Get it right on the first try, and users
+          trust the platform.
         </p>
         <p>
           As 360° Views matured, I made the call to add a fourth skill:{" "}
-          <strong>What&apos;s Changed</strong>. Opened in the context of a 360° View, the
-          AI surfaces the top five insights on what&apos;s moved — bills, momentum,
-          activity — since the user&apos;s last visit. It turns a data product into a
-          briefing that starts where you left off.
+          <Hi>What&apos;s Changed</Hi> — the top five things that moved since your
+          last visit. It turns a data product into a briefing that starts where
+          you left off.
         </p>
         <CaseImage
           src="/work/sa-360-overview.png"
@@ -123,21 +114,16 @@ export default function StateAffairs() {
 
       <Section id="outcome" kicker="Outcome" title="Validated with the people who'd bet their jobs on it">
         <p>
-          We piloted the four skills with policy experts at Intuit, DoorDash,
-          Walmart, and Mastercard — co-validating not just whether each skill
-          worked, but how it should be <em>invoked</em>: mapping the natural-language
-          questions each persona actually asks across their org, and tuning the
-          skills to answer them. That co-design is what turned pilots into
-          adoption, and adoption into State Affairs&apos; first enterprise contracts
-          with policy teams at Walmart, DoorDash, and trade associations.
+          We piloted the four skills with policy experts at{" "}
+          <Hi>Intuit, DoorDash, Walmart, and Mastercard</Hi> — co-validating not
+          just whether each skill worked, but how each persona would actually{" "}
+          <em>ask</em> for it. That co-design turned pilots into adoption, and
+          adoption into <Hi>State Affairs&apos; first enterprise contracts</Hi>.
         </p>
         <p>
-          What I&apos;d change in V2: the skills&apos; <em>output</em> should be as adaptive
-          as their input. Customizable notifications, a 360° View that shows as
-          much or as little as each user wants, and the ability to make those
-          adjustments in a couple of AI Chat queries — the assistant getting
-          context-aware enough that the platform becomes modular to each org and
-          each user, shaped by their onboarding and every previous conversation.
+          What I&apos;d change in V2: make the skills&apos; <em>output</em> as adaptive as
+          their input — notifications, view depth, all adjustable in a couple of
+          chat queries, until the platform is modular to each org and user.
         </p>
       </Section>
 

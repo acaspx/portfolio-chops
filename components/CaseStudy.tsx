@@ -3,6 +3,11 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import type { ReactNode } from "react";
 
+/** Inline highlight for the numbers and outcomes recruiters scan for. */
+export function Hi({ children }: { children: ReactNode }) {
+  return <span className="font-semibold text-accent">{children}</span>;
+}
+
 /** Full-bleed hero image at the top of a case study. */
 export function CaseHero({ src, alt }: { src: string; alt: string }) {
   return (
