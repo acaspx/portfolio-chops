@@ -73,14 +73,15 @@ body {
 
 /* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
 .bg-landing {
-  /* Neutral soft-gray clouds, bright upper-left, grounded dark base — per reference */
+  /* Reference gradient structure (bright upper-left, drifting clouds, grounded
+     dark base) translated into the warm paper/ink palette */
   background:
-    radial-gradient(85% 65% at 12% 6%, rgba(255, 255, 255, 0.95), transparent 58%),
-    radial-gradient(55% 45% at 62% 22%, rgba(40, 40, 42, 0.1), transparent 65%),
-    radial-gradient(45% 40% at 88% 55%, rgba(40, 40, 42, 0.12), transparent 68%),
-    radial-gradient(50% 40% at 35% 65%, rgba(40, 40, 42, 0.07), transparent 70%),
-    radial-gradient(130% 32% at 50% 103%, rgba(15, 15, 16, 0.4), transparent 70%),
-    #eeedeb;
+    radial-gradient(85% 65% at 12% 6%, rgba(255, 254, 250, 0.95), transparent 58%),
+    radial-gradient(55% 45% at 62% 22%, rgba(58, 52, 40, 0.1), transparent 65%),
+    radial-gradient(45% 40% at 88% 55%, rgba(58, 52, 40, 0.12), transparent 68%),
+    radial-gradient(50% 40% at 35% 65%, rgba(58, 52, 40, 0.07), transparent 70%),
+    radial-gradient(130% 32% at 50% 103%, rgba(22, 20, 15, 0.38), transparent 70%),
+    #f2f0ea;
 }
 .bg-landing::after {
   content: "";
