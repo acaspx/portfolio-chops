@@ -117,11 +117,11 @@ export default function Custoria() {
         </p>
         <PhoneRow
           phones={[
-            { src: "/work/cu-vault.png", alt: "Custoria vault home: total value, items, smart filters" },
-            { src: "/work/cu-item.png", alt: "Item detail: Heath Ceramic clock with estimated value, share and edit actions" },
-            { src: "/work/cu-settings.png", alt: "Settings: Face ID security and account overview" },
+            { src: "/work/cu-scan.png", alt: "AI scan identifying a vintage Rolex Submariner at 94% confidence with estimated value" },
+            { src: "/work/cu-vault.png", alt: "Encrypted vault: portfolio value and item list, AES-256 with zero-knowledge encryption" },
+            { src: "/work/cu-analytics.png", alt: "Analytics: total portfolio value, yearly trend, and category breakdown" },
           ]}
-          caption="The vault, live on iOS: capture, value, and control in three surfaces"
+          caption="Live on iOS: scan it, protect it, know its worth"
         />
         <p>
           Coding it changed how I design. Owning the dependencies forced me to
