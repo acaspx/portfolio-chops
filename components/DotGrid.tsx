@@ -56,9 +56,9 @@ export default function DotGrid({ className }: { className?: string }) {
           const r = BASE_R + (MAX_R - BASE_R) * t;
           let fill: string;
           if (t > 0.65) {
-            fill = `rgba(139, 92, 246, ${0.45 + t * 0.55})`; // violet core
+            fill = `rgba(139, 92, 246, ${0.45 + t * 0.55})`; // --color-violet core
           } else if (t > 0.05) {
-            fill = `rgba(79, 124, 255, ${0.25 + t * 0.75})`; // accent blue ring
+            fill = `rgba(36, 71, 255, ${0.25 + t * 0.75})`; // --color-accent ring
           } else {
             fill = "rgba(247, 245, 240, 0.16)"; // dim paper at rest
           }

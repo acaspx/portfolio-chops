@@ -25,6 +25,8 @@ const cards: Card[] = [
     photo: "/about-photo.jpg",
     tint: "#2447ff",
   },
+  // Single color family across the deck: accent for content cards,
+  // violet reserved for the closing card. Decorative color is tokenized.
   {
     kicker: "HOW",
     title: "I work",
@@ -33,7 +35,7 @@ const cards: Card[] = [
       "The prototype is the argument: I settle design debates in code, not decks.",
     ],
     visual: "principles",
-    tint: "#15803d",
+    tint: "#2447ff",
   },
   {
     kicker: "WHAT",
@@ -43,7 +45,7 @@ const cards: Card[] = [
       "Four AI products taught me the hard problem isn't the model. It's deciding what the AI does alone, and where people stay in the loop.",
     ],
     visual: "tools",
-    tint: "#b45309",
+    tint: "#2447ff",
   },
   {
     kicker: "BEFORE",
@@ -54,7 +56,7 @@ const cards: Card[] = [
     ],
     visual: "service",
     photo: "/military-1.jpg",
-    tint: "#be185d",
+    tint: "#8b5cf6",
   },
 ];
 
