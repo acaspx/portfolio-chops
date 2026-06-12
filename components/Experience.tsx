@@ -110,23 +110,6 @@ export default function Experience() {
             </li>
           ))}
         </ol>
-        <Reveal>
-          <div className="mt-14 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
-            <div>
-              <p className="font-medium">California College of the Arts</p>
-              <p className="mt-1 text-sm text-muted">
-                MBA, Design Strategy (2025) · BFA, Human-Computer Interaction
-              </p>
-              <p className="text-sm text-muted">ELVTR · AI Product Design Certification</p>
-            </div>
-            <div>
-              <p className="font-medium">U.S. Navy</p>
-              <p className="mt-1 text-sm text-muted">
-                Petty Officer Second Class, Engineer (2012–2016)
-              </p>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
