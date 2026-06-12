@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const base = "https://antoncastro.design"; // TODO(Anton): set your real domain
+const base = "https://studioacas.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
