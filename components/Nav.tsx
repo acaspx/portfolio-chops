@@ -5,6 +5,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "motion/react";
 import AboutModal from "@/components/AboutModal";
+import AsteriskMark from "@/components/AsteriskMark";
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -35,9 +36,10 @@ export default function Nav() {
       >
         <Link
           href="/"
-          className="font-mono text-sm tracking-tight text-ink hover:text-accent transition-colors"
+          aria-label="Home"
+          className="text-ink hover:text-accent transition-colors"
         >
-          anton castro<span className="text-accent">_</span>
+          <AsteriskMark className="h-6 w-6" />
         </Link>
         <ul className="flex items-center gap-5 sm:gap-6 text-sm">
           {links.slice(0, 3).map((l) => (
