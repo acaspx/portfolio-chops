@@ -94,11 +94,10 @@ export function Section({
 }) {
   return (
     <section id={id} className="mx-auto max-w-3xl px-6 py-12 scroll-mt-24">
-      <Reveal>
-        <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
-        <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
-        <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
-      </Reveal>
+      {/* No scroll reveal on reading pages: content should simply be there. */}
+      <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
+      <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
+      <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
     </section>
   );
 }

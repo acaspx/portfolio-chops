@@ -3,6 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
+// The asterisk mark, dense state: the site's brand chrome.
 export default function Icon() {
   return new ImageResponse(
     (
@@ -17,29 +18,23 @@ export default function Icon() {
           borderRadius: 8,
         }}
       >
-        <svg viewBox="0 0 100 100" width="28" height="28">
-          <circle cx="50" cy="50" r="46" fill="#ffffff" />
-          <path
-            d="M30 39 c 3 10, 15 10, 18 0"
-            fill="none"
-            stroke="#2b2b2b"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-          <path
-            d="M62 43 c 2.5 8, 12 8, 14.5 -1"
-            fill="none"
-            stroke="#2b2b2b"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-          <path
-            d="M44 62 c 3.5 7, 13 7, 16.5 0"
-            fill="none"
-            stroke="#2b2b2b"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
+        <svg viewBox="0 0 100 100" width="24" height="24">
+          {[0, 30, 60, 90, 120, 150].map((deg) => {
+            const rad = (deg * Math.PI) / 180;
+            const r = 38;
+            return (
+              <line
+                key={deg}
+                x1={50 - r * Math.cos(rad)}
+                y1={50 - r * Math.sin(rad)}
+                x2={50 + r * Math.cos(rad)}
+                y2={50 + r * Math.sin(rad)}
+                stroke="#f7f5f0"
+                strokeWidth="9"
+                strokeLinecap="round"
+              />
+            );
+          })}
         </svg>
       </div>
     ),
