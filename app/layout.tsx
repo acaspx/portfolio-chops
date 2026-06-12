@@ -4,6 +4,7 @@ import "@fontsource-variable/fraunces";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://antoncastro.design"), // TODO(Anton): set your real domain
@@ -30,6 +31,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <CustomCursor />
         <Nav />
         <main id="main" className="flex-1">
           {children}

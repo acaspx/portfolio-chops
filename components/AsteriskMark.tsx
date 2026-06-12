@@ -4,19 +4,23 @@ import { motion, useReducedMotion } from "motion/react";
 
 /**
  * Asterisk mark: rests at 3 strokes (6 rays), blooms to 6 strokes (12 rays)
- * on hover with a gentle rotation. Drawn in currentColor so it adapts to any
- * surface. Reusable: pass className for sizing/color, set `hover={false}`
- * to render the dense state statically.
+ * with a gentle rotation. Drawn in currentColor so it adapts to any surface.
+ *
+ * Two modes:
+ * - Uncontrolled (default): blooms on its own hover (nav home button).
+ * - Controlled: pass `dense` as a boolean and the bloom follows it
+ *   (custom cursor, static decorative uses).
  */
 export default function AsteriskMark({
   className,
-  dense = false,
+  dense,
 }: {
   className?: string;
   dense?: boolean;
 }) {
   const reduce = useReducedMotion();
-  // Full-diameter strokes through center. Base: 0/60/120. Bloom: 30/90/150.
+  const controlled = dense !== undefined;
+
   const baseAngles = [0, 60, 120];
   const bloomAngles = [30, 90, 150];
   const line = (angle: number) => {
@@ -35,8 +39,8 @@ export default function AsteriskMark({
       viewBox="0 0 100 100"
       className={className}
       initial={false}
-      animate={dense ? "hover" : undefined}
-      whileHover={dense ? undefined : "hover"}
+      animate={controlled ? (dense ? "hover" : "rest") : "rest"}
+      whileHover={controlled ? undefined : "hover"}
       variants={{
         rest: { rotate: 0 },
         hover: { rotate: 30 },
@@ -67,7 +71,6 @@ export default function AsteriskMark({
             rest: { opacity: 0 },
             hover: { opacity: 1 },
           }}
-          initial={dense ? undefined : { opacity: 0 }}
           transition={
             reduce
               ? { duration: 0 }
