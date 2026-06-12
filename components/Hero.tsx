@@ -53,7 +53,7 @@ export default function Hero() {
           href="https://calendly.com/ac-design-px/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-ink text-paper px-6 py-3 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-[0.98]"
+          className="rounded-full bg-cta text-paper px-6 py-3 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-[0.98]"
         >
           Book a coffee chat ☕
         </a>

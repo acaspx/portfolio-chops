@@ -97,7 +97,7 @@ export default function Home() {
             </h2>
             <a
               href="mailto:ac.design.px@gmail.com"
-              className="mt-10 inline-block rounded-full bg-ink text-paper px-8 py-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-[0.98]"
+              className="mt-10 inline-block rounded-full bg-cta text-paper px-8 py-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               ac.design.px@gmail.com
             </a>
