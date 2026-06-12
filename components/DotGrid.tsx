@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Interactive dot field (canvas). Dots near the pointer grow and shift
- * from dim paper to accent blue, then violet at the core. The pointer
- * position is lerped for a soft trailing feel. Renders a static grid
- * when idle; the rAF loop only runs while there's motion to show.
+ * Interactive asterisk field (canvas). A grid of small 6-ray asterisks on
+ * paper; near the pointer they grow, rotate, and shift from dim ink to
+ * accent blue with a violet core. Pointer position is lerped for a soft
+ * trailing feel; the rAF loop sleeps once settled. Static under
+ * prefers-reduced-motion.
  */
 export default function DotGrid({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,10 +18,11 @@ export default function DotGrid({ className }: { className?: string }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const GAP = 26;
-    const BASE_R = 1.4;
-    const MAX_R = 3.6;
-    const RADIUS = 130; // influence radius around pointer
+    const GAP = 32;
+    const BASE_R = 2.6; // half-length of a spoke at rest
+    const MAX_R = 6.5; // half-length at the pointer
+    const RADIUS = 130; // influence radius
+    const ANGLES = [0, Math.PI / 3, (2 * Math.PI) / 3]; // 3 strokes = 6 rays
 
     let width = 0;
     let height = 0;
@@ -28,7 +30,6 @@ export default function DotGrid({ className }: { className?: string }) {
     let raf = 0;
     let running = false;
 
-    // Actual and lerped pointer (lerp gives the trail)
     const target = { x: -9999, y: -9999 };
     const cursor = { x: -9999, y: -9999 };
 
@@ -45,28 +46,32 @@ export default function DotGrid({ className }: { className?: string }) {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      ctx.lineCap = "round";
       for (let x = GAP / 2; x < width; x += GAP) {
         for (let y = GAP / 2; y < height; y += GAP) {
-          const dx = x - cursor.x;
-          const dy = y - cursor.y;
-          const dist = Math.hypot(dx, dy);
-          // 1 at the pointer, 0 at the influence edge, eased
+          const dist = Math.hypot(x - cursor.x, y - cursor.y);
           const t = dist < RADIUS ? Math.pow(1 - dist / RADIUS, 2) : 0;
 
           const r = BASE_R + (MAX_R - BASE_R) * t;
-          let fill: string;
+          const spin = t * 0.6; // up to ~34° of rotation near the pointer
           if (t > 0.65) {
-            fill = `rgba(139, 92, 246, ${0.45 + t * 0.55})`; // --color-violet core
+            ctx.strokeStyle = `rgba(139, 92, 246, ${0.55 + t * 0.45})`; // --color-violet core
           } else if (t > 0.05) {
-            fill = `rgba(36, 71, 255, ${0.25 + t * 0.75})`; // --color-accent ring
+            ctx.strokeStyle = `rgba(36, 71, 255, ${0.35 + t * 0.65})`; // --color-accent ring
           } else {
-            fill = "rgba(247, 245, 240, 0.16)"; // dim paper at rest
+            ctx.strokeStyle = "rgba(22, 20, 15, 0.22)"; // dim ink at rest
           }
+          ctx.lineWidth = 1.1 + t * 0.7;
 
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fillStyle = fill;
-          ctx.fill();
+          for (const a of ANGLES) {
+            const ang = a + spin;
+            const dx = Math.cos(ang) * r;
+            const dy = Math.sin(ang) * r;
+            ctx.beginPath();
+            ctx.moveTo(x - dx, y - dy);
+            ctx.lineTo(x + dx, y + dy);
+            ctx.stroke();
+          }
         }
       }
     };
@@ -75,7 +80,6 @@ export default function DotGrid({ className }: { className?: string }) {
       cursor.x += (target.x - cursor.x) * 0.18;
       cursor.y += (target.y - cursor.y) * 0.18;
       draw();
-      // Keep animating until the lerp settles
       if (Math.hypot(target.x - cursor.x, target.y - cursor.y) > 0.5) {
         raf = requestAnimationFrame(tick);
       } else {

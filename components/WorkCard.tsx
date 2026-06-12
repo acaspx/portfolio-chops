@@ -92,17 +92,8 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
         </div>
         <div className="flex items-center gap-4 font-mono text-xs text-muted shrink-0">
           <span>{work.year}</span>
-          {work.comingSoon ? (
+          {work.comingSoon && (
             <span className="rounded-full border border-line px-3 py-1">coming soon</span>
-          ) : (
-            <motion.span
-              aria-hidden
-              variants={{ hover: { x: 6, color: "var(--color-accent)" } }}
-              transition={{ duration: 0.35 }}
-              className="inline-block text-lg"
-            >
-              →
-            </motion.span>
           )}
         </div>
       </div>
