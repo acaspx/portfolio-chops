@@ -22,7 +22,9 @@ export default function DotGrid({ className }: { className?: string }) {
     const BASE_R = 2.6; // half-length of a spoke at rest
     const MAX_R = 6.5; // half-length at the pointer
     const RADIUS = 130; // influence radius
-    const ANGLES = [0, Math.PI / 3, (2 * Math.PI) / 3]; // 3 strokes = 6 rays
+    // Same grammar as the nav mark: 3 strokes at rest, 6 when blooming
+    const ANGLES = [0, Math.PI / 3, (2 * Math.PI) / 3];
+    const BLOOM = [Math.PI / 6, Math.PI / 2, (5 * Math.PI) / 6];
 
     let width = 0;
     let height = 0;
@@ -71,6 +73,20 @@ export default function DotGrid({ className }: { className?: string }) {
             ctx.moveTo(x - dx, y - dy);
             ctx.lineTo(x + dx, y + dy);
             ctx.stroke();
+          }
+          // Densify near the pointer: the second stroke set fades in with proximity
+          if (t > 0.05) {
+            ctx.globalAlpha = Math.min(1, t * 1.4);
+            for (const a of BLOOM) {
+              const ang = a + spin;
+              const dx = Math.cos(ang) * r;
+              const dy = Math.sin(ang) * r;
+              ctx.beginPath();
+              ctx.moveTo(x - dx, y - dy);
+              ctx.lineTo(x + dx, y + dy);
+              ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
           }
         }
       }
