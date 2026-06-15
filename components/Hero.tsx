@@ -56,20 +56,6 @@ export default function Hero() {
         </a>
         .
       </motion.p>
-
-      <motion.div {...fade(0.3)} className="mt-8 flex items-center gap-6">
-        <a
-          href="https://calendly.com/ac-design-px/30min"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-cta text-paper px-6 py-3 text-sm font-medium emboss-cta transition-transform hover:scale-[1.03] active:scale-[0.98]"
-        >
-          Book a coffee chat ☕
-        </a>
-        <a href="#work" className="link-line text-sm text-muted hover:text-ink">
-          Selected work ↓
-        </a>
-      </motion.div>
     </section>
   );
 }
