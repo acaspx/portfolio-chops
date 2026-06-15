@@ -22,7 +22,7 @@ const cards: Card[] = [
       "Currently Sr. Interaction Designer at State Affairs, building policy intelligence, the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
     ],
     visual: "photo",
-    photo: "/about-photo.jpg",
+    photo: "/about-photo-bw.jpg",
     tint: "#2447ff",
   },
   // Single color family across the deck: accent for content cards,
@@ -31,10 +31,11 @@ const cards: Card[] = [
     kicker: "HOW",
     title: "I work",
     body: [
-      "Design for consistency, build for flexibility. Every product I ship leaves behind a system the team can move fast in.",
-      "The prototype is the argument: I settle design debates in code, not decks.",
+      "I lead with the story. Before any pixels, I make the problem legible: what's broken, who it's hurting, and why it's worth solving now. Clarity is the unlock.",
+      "From there I build momentum. Sharp narratives and working prototypes bring people along, turn ambiguity into shared direction, and get the work that matters shipped.",
     ],
     visual: "principles",
+    photo: "/how-i-work.jpg",
     tint: "#2447ff",
   },
   {
@@ -55,7 +56,7 @@ const cards: Card[] = [
       "BFA in Human-Computer Interaction, MBA in Design Strategy. Always up for a coffee chat. ☕",
     ],
     visual: "service",
-    photo: "/military-1.jpg",
+    photo: "/military-1-bw.jpg",
     tint: "#8b5cf6",
   },
 ];
