@@ -8,6 +8,8 @@ type Role = {
   dates: string;
   summary: string;
   tags: string[];
+  /** External link to the company / project site (company name becomes a link). */
+  href?: string;
 };
 
 // Canonical facts - must match resume exactly. See CLAUDE.md content rules.
@@ -21,6 +23,7 @@ const roles: Role[] = [
     summary:
       "The company's first AI product: led 360° Views and AI Chat, helping land the first enterprise contracts.",
     tags: ["0→1", "Enterprise AI", "Product Strategy"],
+    href: "https://stateaffairs.com/",
   },
   {
     slug: "custoria",
@@ -30,6 +33,7 @@ const roles: Role[] = [
     summary:
       "A digital vault for the things people value most, designed and coded; in App Store review.",
     tags: ["Founder", "Swift", "Security UX"],
+    href: "https://custorialabs.io/",
   },
   {
     slug: "augmedix",
@@ -39,6 +43,7 @@ const roles: Role[] = [
     summary:
       "AI clinical documentation: +65% engagement, one offering to four, through the $139M Commure acquisition.",
     tags: ["Agentic AI", "Design Systems", "Healthcare"],
+    href: "https://www.augmedix.com/",
   },
   {
     slug: "rocket",
@@ -48,6 +53,7 @@ const roles: Role[] = [
     summary:
       "Founding designer on Liv, the AI assistant for millions of homeowners; onboarding time cut 75%.",
     tags: ["Conversational AI", "B2B2C"],
+    href: "https://www.rocketmortgage.com/",
   },
   {
     slug: "adl",
@@ -57,6 +63,7 @@ const roles: Role[] = [
     summary:
       "120+ interaction demos; design anchoring the Twitch, Discord & YouTube partnerships.",
     tags: ["Prototyping", "Partnerships"],
+    href: "https://socialpatterns.adl.org/",
   },
   {
     slug: "intuit",
@@ -85,7 +92,19 @@ export default function Experience() {
                   <LogoBadge slug={r.slug} name={r.company} />
                   <div>
                     <h3 className="font-medium tracking-tight">
-                      {r.company}
+                      {r.href ? (
+                        <a
+                          href={r.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="link-line hover:text-accent transition-colors"
+                        >
+                          {r.company}
+                          <span aria-hidden className="ml-1 text-muted">↗</span>
+                        </a>
+                      ) : (
+                        r.company
+                      )}
                       <span className="block text-sm font-normal text-muted sm:inline sm:before:content-['_·_']">
                         {r.title}
                       </span>
