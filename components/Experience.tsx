@@ -8,8 +8,6 @@ type Role = {
   dates: string;
   summary: string;
   tags: string[];
-  /** Optional horizontal wordmark logo (shown as a chip instead of the square badge). */
-  wordmark?: string;
 };
 
 // Canonical facts - must match resume exactly. See CLAUDE.md content rules.
@@ -23,7 +21,6 @@ const roles: Role[] = [
     summary:
       "The company's first AI product: led 360° Views and AI Chat, helping land the first enterprise contracts.",
     tags: ["0→1", "Enterprise AI", "Product Strategy"],
-    wordmark: "/logos/state-affairs.svg",
   },
   {
     slug: "custoria",
@@ -83,16 +80,9 @@ export default function Experience() {
           {roles.map((r, i) => (
             <li key={r.slug}>
               <Reveal delay={Math.min(i * 0.05, 0.3)}>
-                <div className="grid grid-cols-[24px_5rem_1fr] gap-4 border-t border-line py-7 sm:grid-cols-[32px_5rem_1fr_140px] sm:gap-6">
+                <div className="grid grid-cols-[24px_40px_1fr] gap-4 border-t border-line py-7 sm:grid-cols-[32px_40px_1fr_140px] sm:gap-6">
                   <span className="pt-2 font-mono text-xs text-muted">{i + 1}.</span>
-                  {r.wordmark ? (
-                    <span className="inline-flex h-10 items-center justify-self-start self-start rounded-lg border border-line bg-white px-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={r.wordmark} alt={r.company} className="h-2.5 w-auto" />
-                    </span>
-                  ) : (
-                    <LogoBadge slug={r.slug} name={r.company} />
-                  )}
+                  <LogoBadge slug={r.slug} name={r.company} />
                   <div>
                     <h3 className="font-medium tracking-tight">
                       {r.company}
