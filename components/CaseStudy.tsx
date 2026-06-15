@@ -9,14 +9,24 @@ export function Hi({ children }: { children: ReactNode }) {
 }
 
 /** Full-bleed hero image at the top of a case study. */
-export function CaseHero({ src, alt }: { src: string; alt: string }) {
+export function CaseHero({
+  src,
+  alt,
+  width = 2600,
+  height = 870,
+}: {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}) {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6">
       <Image
         src={src}
         alt={alt}
-        width={2600}
-        height={870}
+        width={width}
+        height={height}
         priority
         className="w-full rounded-2xl border border-line object-cover"
       />

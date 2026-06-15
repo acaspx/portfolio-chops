@@ -44,6 +44,38 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+/** Grid of framed phones, each with its own step label + descriptor. */
+export function PhoneShowcase({
+  phones,
+  caption,
+}: {
+  phones: { src: string; alt: string; step: string; note: string }[];
+  caption?: string;
+}) {
+  return (
+    <Reveal>
+      <figure className="my-12">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3">
+          {phones.map((p) => (
+            <div key={p.src} className="flex flex-col">
+              <PhoneFrame src={p.src} alt={p.alt} />
+              <p className="mt-3.5 text-center font-mono text-[11px] uppercase tracking-widest text-accent">
+                {p.step}
+              </p>
+              <p className="mx-auto mt-1 max-w-[210px] text-center text-[13px] leading-snug text-muted">
+                {p.note}
+              </p>
+            </div>
+          ))}
+        </div>
+        {caption && (
+          <figcaption className="mt-6 text-center font-mono text-xs text-muted">{caption}</figcaption>
+        )}
+      </figure>
+    </Reveal>
+  );
+}
+
 /** Row of framed phones with one shared caption - the bevyip-style mobile showcase. */
 export function PhoneRow({
   phones,

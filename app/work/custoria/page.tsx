@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
+import { PhoneShowcase } from "@/components/PhoneFrame";
 
 export const metadata: Metadata = {
   title: "Custoria · Founding a Digital Vault | Anton Castro",
@@ -119,6 +120,17 @@ export default function Custoria() {
           the qualities users now expect from AI-native products and judge in the
           first thirty seconds.
         </p>
+        <PhoneShowcase
+          phones={[
+            { src: "/work/cu-capture.png", alt: "Custoria AI camera scan capturing photos of an item", step: "Capture", note: "Snap a few photos. No forms, no manual entry." },
+            { src: "/work/cu-analyze.png", alt: "Photos captured, ready to analyze with AI", step: "Analyze", note: "One tap hands the photos to Gemini Flash." },
+            { src: "/work/cu-identify.png", alt: "AI-identified Heath Ceramics wall clock valued at $180", step: "Identify", note: "It names the piece, prices it, files the record." },
+            { src: "/work/cu-vault.png", alt: "My Vault showing total value and item list", step: "Vault", note: "Everything you own, valued and searchable." },
+            { src: "/work/cu-share.png", alt: "Ownership and sharing controls for an item", step: "Share", note: "Field-level, time-boxed control over who sees what." },
+            { src: "/work/cu-prove.png", alt: "Generate appraisal and proof-of-ownership reports", step: "Prove", note: "Appraisal and proof-of-ownership reports on demand." },
+          ]}
+          caption="Live on iOS: capture to vault, and the proof that travels with it."
+        />
       </Section>
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, in review">
