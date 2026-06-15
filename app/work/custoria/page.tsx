@@ -13,7 +13,12 @@ export const metadata: Metadata = {
 export default function Custoria() {
   return (
     <article>
-      <CaseHero src="/work/cu-hero.png" alt="Custoria Labs brand title" />
+      <CaseHero
+        src="/work/cu-hero.jpg"
+        alt="The Custoria Labs web app open on a laptop in a jewelry studio: a private vault catalog of fine pieces"
+        width={2200}
+        height={1100}
+      />
       <CaseLayout
         company="Custoria Labs · co-founded with Yiyi Qin"
         title="Founding Custoria: a digital vault for what people value most"
