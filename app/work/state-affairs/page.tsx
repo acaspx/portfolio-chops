@@ -1,14 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
-import CaseNav from "@/components/CaseNav";
-
-const sections = [
-  { id: "context", label: "Context" },
-  { id: "problem", label: "The hard problem" },
-  { id: "decision", label: "The decision" },
-  { id: "outcome", label: "Outcome" },
-];
-
+import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 export const metadata: Metadata = {
   title: "State Affairs · Policy Intelligence AI | Anton Castro",
   description:
@@ -19,13 +10,12 @@ export const metadata: Metadata = {
 export default function StateAffairs() {
   return (
     <article>
-      <CaseNav sections={sections} />
       {/* Drop the marketing hero into public/work/sa-hero-raw.png and I'll crop the text overlay out → sa-hero.png */}
       <CaseHero
         src="/work/sa-hero.png"
         alt="A policy professional reviewing the State Affairs intelligence dashboard on a laptop"
       />
-      <CaseHeader
+      <CaseLayout
         company="State Affairs · Policy Intelligence"
         title="Turning dense policy data into decisions enterprise teams act on"
         meta={[
@@ -34,7 +24,7 @@ export default function StateAffairs() {
           { label: "Scope", value: "Led 360° Views + AI Chat, the company's first AI features. System architecture, voice & tone, interaction patterns" },
           { label: "Outcome", value: "First enterprise contracts: Walmart, DoorDash, trade associations" },
         ]}
-      />
+      >
 
       <Section id="context" kicker="Context" title="High stakes, dense data, skeptical buyers">
         <p>
@@ -129,6 +119,8 @@ export default function StateAffairs() {
           chat queries, until the platform is modular to each org and user.
         </p>
       </Section>
+
+      </CaseLayout>
 
       <NextCase href="/work/augmedix" label="Augmedix · scaling AI clinical documentation" />
     </article>

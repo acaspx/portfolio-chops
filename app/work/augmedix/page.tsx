@@ -1,15 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
-import CaseNav from "@/components/CaseNav";
-
-const sections = [
-  { id: "context", label: "Context" },
-  { id: "problem", label: "The hard problem" },
-  { id: "decision", label: "The decision" },
-  { id: "system", label: "The system" },
-  { id: "outcome", label: "Outcome" },
-];
-
+import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 export const metadata: Metadata = {
   title: "Augmedix · AI Clinical Documentation | Anton Castro",
   description:
@@ -19,12 +9,11 @@ export const metadata: Metadata = {
 export default function Augmedix() {
   return (
     <article>
-      <CaseNav sections={sections} />
       <CaseHero
         src="/work/ax-mobile.png"
         alt="Augmedix Assist marketing hero: phone showing an AI-drafted clinical note, with HCA, AdventHealth, CommonSpirit, and Sutter Health logos"
       />
-      <CaseHeader
+      <CaseLayout
         company="Augmedix (acquired by Commure, $139M)"
         title="Scaling AI clinical documentation from one product to four"
         meta={[
@@ -33,7 +22,7 @@ export default function Augmedix() {
           { label: "Scope", value: "Web + mobile products, design system, agentic AI integration" },
           { label: "Outcome", value: "+65% engagement in a year; acquisition by Commure (2024)" },
         ]}
-      />
+      >
 
       <Section id="context" kicker="Context" title="Clinicians were paying for AI with their evenings">
         <p>
@@ -118,6 +107,8 @@ export default function Augmedix() {
           breadth were part of what made the platform worth buying.
         </p>
       </Section>
+
+      </CaseLayout>
 
       <NextCase href="/work/rocket" label="Rocket · Liv, conversational AI" />
     </article>

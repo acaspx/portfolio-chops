@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
-import CaseNav from "@/components/CaseNav";
+import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import ShareDemo from "@/components/ShareDemo";
-import { PhoneRow } from "@/components/PhoneFrame";
+import CaptureJourney from "@/components/CaptureJourney";
 
 export const metadata: Metadata = {
   title: "Custoria · Founding a Digital Vault | Anton Castro",
@@ -10,20 +9,11 @@ export const metadata: Metadata = {
     "Co-founding Custoria: from MBA Design Strategy thesis to an AI-powered digital vault for people's most valuable possessions, now in App Store review.",
 };
 
-const sections = [
-  { id: "origin", label: "Origin" },
-  { id: "pivot", label: "The pivot" },
-  { id: "problem", label: "The hard problem" },
-  { id: "building", label: "Building it" },
-  { id: "status", label: "Where it stands" },
-];
-
 export default function Custoria() {
   return (
     <article>
-      <CaseNav sections={sections} />
       <CaseHero src="/work/cu-hero.png" alt="Custoria Labs brand title" />
-      <CaseHeader
+      <CaseLayout
         company="Custoria Labs · co-founded with Yiyi Qin"
         title="Founding Custoria: a digital vault for what people value most"
         meta={[
@@ -32,7 +22,7 @@ export default function Custoria() {
           { label: "Scope", value: "0→1: strategy, capture-to-share flow, design system, security model, iOS build" },
           { label: "Status", value: "In Apple App Store review" },
         ]}
-      />
+      >
 
       <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
         <p>
@@ -104,6 +94,12 @@ export default function Custoria() {
 
       <Section id="building" kicker="Building it" title="Designed and coded by the same two hands">
         <p>
+          The whole product is one flow: point a camera at something you own and,
+          seconds later, it&apos;s a protected, valued record in your vault. Here is
+          that path, and who does the work at each step.
+        </p>
+        <CaptureJourney />
+        <p>
           As co-founder I own design end-to-end, and the code. Custoria is a
           native iOS app in Swift, with Gemini Flash doing the unglamorous work
           that makes the vault effortless: scan an item and the AI identifies it,
@@ -115,14 +111,6 @@ export default function Custoria() {
           gets stronger. The vault isn&apos;t an archive; it&apos;s where the work of
           owning valuable things happens.
         </p>
-        <PhoneRow
-          phones={[
-            { src: "/work/cu-scan.png", alt: "AI scan identifying a vintage Rolex Submariner at 94% confidence with estimated value" },
-            { src: "/work/cu-vault.png", alt: "Encrypted vault: portfolio value and item list, AES-256 with zero-knowledge encryption" },
-            { src: "/work/cu-analytics.png", alt: "Analytics: total portfolio value, yearly trend, and category breakdown" },
-          ]}
-          caption="Live on iOS: scan it, protect it, know its worth"
-        />
         <p>
           Coding it changed how I design. Owning the dependencies forced me to
           think about systems at scale; owning the data pipeline taught me it&apos;s a
@@ -145,6 +133,8 @@ export default function Custoria() {
           converting the gallery pilot network into the first paying customers.
         </p>
       </Section>
+
+      </CaseLayout>
 
       <NextCase href="/work/state-affairs" label="State Affairs · policy intelligence AI" />
     </article>

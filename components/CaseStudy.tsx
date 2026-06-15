@@ -48,36 +48,69 @@ export function CaseImage({
   );
 }
 
-export function CaseHeader({
+type Meta = { label: string; value: string };
+
+/** Vertical details list used in the sticky rail and the mobile header block. */
+function DetailsList({ meta }: { meta: Meta[] }) {
+  return (
+    <dl className="space-y-5">
+      {meta.map((m) => (
+        <div key={m.label}>
+          <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">
+            {m.label}
+          </dt>
+          <dd className="mt-1.5 text-sm leading-snug text-ink/90">{m.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/**
+ * Two-column case body: scrolling content on the left, a persistent details
+ * rail on the right that sticks through the whole read. Below lg the rail
+ * collapses into a static block beneath the title. CaseHero sits above this.
+ */
+export function CaseLayout({
   company,
   title,
   meta,
+  children,
 }: {
   company: string;
   title: string;
-  meta: { label: string; value: string }[];
+  meta: Meta[];
+  children: ReactNode;
 }) {
   return (
-    <header className="mx-auto max-w-3xl px-6 pt-20 pb-14">
-      <Reveal>
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">{company}</p>
-        <h1 className="mt-4 font-serif text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
-          {title}
-        </h1>
-      </Reveal>
-      <Reveal delay={0.15}>
-        <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4 border-t border-line pt-8">
-          {meta.map((m) => (
-            <div key={m.label}>
-              <dt className="font-mono text-[11px] uppercase tracking-widest text-muted">
-                {m.label}
-              </dt>
-              <dd className="mt-2 text-sm leading-snug">{m.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </Reveal>
-    </header>
+    <div className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14">
+      {/* Main scrolling column */}
+      <div className="min-w-0">
+        <header className="pt-16 pb-8">
+          <Reveal>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">{company}</p>
+            <h1 className="mt-4 max-w-[46rem] font-serif text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
+              {title}
+            </h1>
+          </Reveal>
+          {/* Mobile-only details: stacked under the title */}
+          <div className="mt-8 border-t border-line pt-6 lg:hidden">
+            <DetailsList meta={meta} />
+          </div>
+        </header>
+        {children}
+      </div>
+
+      {/* Persistent details rail (lg+) */}
+      <aside className="hidden lg:block pt-16">
+        <div className="sticky top-28 border-l border-line pl-6">
+          <p className="mb-5 font-mono text-[11px] uppercase tracking-widest text-accent">
+            Details
+          </p>
+          <DetailsList meta={meta} />
+        </div>
+      </aside>
+    </div>
   );
 }
 
@@ -93,11 +126,13 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-3xl px-6 py-12 scroll-mt-24">
+    <section id={id} className="py-10 scroll-mt-28">
       {/* No scroll reveal on reading pages: content should simply be there. */}
-      <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
-      <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
-      <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
+      <div className="max-w-[44rem]">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
+        <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
+        <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
+      </div>
     </section>
   );
 }

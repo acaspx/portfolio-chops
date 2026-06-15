@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { CaseHeader, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
-import CaseNav from "@/components/CaseNav";
+import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 
 export const metadata: Metadata = {
   title: "Rocket · Liv, Conversational AI | Anton Castro",
@@ -8,22 +7,14 @@ export const metadata: Metadata = {
     "Founding designer on Liv, Rocket's AI assistant for millions of homeowners: −75% client onboarding time, +22% routing to lending bankers, 94% routing accuracy.",
 };
 
-const sections = [
-  { id: "context", label: "Context" },
-  { id: "problem", label: "The hard problem" },
-  { id: "system", label: "The system" },
-  { id: "outcome", label: "Outcome" },
-];
-
 export default function Rocket() {
   return (
     <article>
-      <CaseNav sections={sections} />
       <CaseHero
         src="/work/rk-hero.png"
         alt="Rocket Mortgage homepage with the Liv chat assistant open"
       />
-      <CaseHeader
+      <CaseLayout
         company="Rocket"
         title="Meeting homeowners where they are: designing Liv, Rocket's conversational AI"
         meta={[
@@ -32,7 +23,7 @@ export default function Rocket() {
           { label: "Scope", value: "End-to-end conversation journey, visual voice, conversation design system (B2B2C)" },
           { label: "Outcome", value: "−75% client onboarding time · +22% routing to lending bankers · 94% routing accuracy" },
         ]}
-      />
+      >
 
       <Section id="context" kicker="Context" title="A legacy industry, at the worst possible moment">
         <p>
@@ -98,6 +89,8 @@ export default function Rocket() {
           caption="Banker-side view: correct-client routing, before and after"
         />
       </Section>
+
+      </CaseLayout>
 
       <NextCase href="/work/state-affairs" label="State Affairs · policy intelligence AI" />
     </article>

@@ -37,7 +37,7 @@ export default function Nav() {
         <Link
           href="/"
           aria-label="Home"
-          className="text-ink hover:text-accent transition-colors"
+          className="grid h-10 w-10 place-items-center rounded-xl bg-paper/70 text-ink emboss emboss-hover transition-colors hover:text-accent"
         >
           <AsteriskMark className="h-6 w-6" />
         </Link>

@@ -50,7 +50,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       whileHover={reduce ? undefined : "hover"}
-      className={`group relative border-t border-line py-10 ${
+      className={`group relative rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8 ${
         work.comingSoon ? "opacity-60" : ""
       }`}
     >

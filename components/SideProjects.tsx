@@ -1,6 +1,6 @@
 import Reveal from "@/components/Reveal";
 
-// TODO(Anton): app screenshot at public/work/app-hero.png; App Store link once live.
+// TODO(Anton): swap CTA to App Store link once the app is live.
 const featured = {
   name: "Custoria",
   status: "In App Store review",
@@ -40,9 +40,7 @@ export default function SideProjects() {
         <Reveal>
           <a
             href={featured.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-10 grid gap-6 rounded-xl border border-line bg-ink/[0.02] p-6 transition-colors hover:border-accent/50 sm:grid-cols-[1.2fr_1fr] sm:p-8"
+            className="group mt-10 grid gap-6 rounded-xl bg-paper/70 p-6 emboss emboss-hover sm:grid-cols-[1.2fr_1fr] sm:p-8"
           >
             <div>
               <div className="flex flex-wrap items-baseline gap-3">
@@ -84,7 +82,7 @@ export default function SideProjects() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block h-full rounded-xl border border-line bg-ink/[0.02] p-6 transition-colors hover:border-accent/50"
+                className="group block h-full rounded-xl bg-paper/70 p-6 emboss emboss-hover"
               >
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="font-mono text-base font-semibold tracking-tight group-hover:text-accent transition-colors">
