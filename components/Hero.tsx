@@ -42,11 +42,10 @@ export default function Hero() {
       </motion.nav>
 
       <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
-        I&apos;m Anton, a product designer building AI products for high-stakes work,
-        where the real design problem is{" "}
-        <em className="font-serif italic text-accent">trust</em>: helping people act on
-        dense, consequential information without getting it wrong. 0→1 four times across
-        healthcare, fintech, and govtech. I prototype and ship in code, including{" "}
+        Welcome, I&apos;m Anton, a product designer building intuitive AI-native products
+        for high-stakes work, where the real problem is{" "}
+        <em className="font-serif italic text-accent">trust</em>. 0→1 four times across
+        healthcare, fintech, and govtech. I design and ship in code, including{" "}
         <a
           href="https://github.com/acaspx/portfolio-chops"
           target="_blank"
