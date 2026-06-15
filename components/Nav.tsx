@@ -5,18 +5,19 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "motion/react";
 import AboutModal from "@/components/AboutModal";
+import ContactCard from "@/components/ContactCard";
 import AsteriskMark from "@/components/AsteriskMark";
 
 const links = [
   { href: "/#work", label: "Work" },
   { href: "/#prototypes", label: "Founded" },
   { href: "/#experience", label: "Experience" },
-  { href: "mailto:ac.design.px@gmail.com", label: "Contact" },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
   const isCaseStudy = pathname?.startsWith("/work");
@@ -58,16 +59,17 @@ export default function Nav() {
             </button>
           </li>
           <li>
-            <Link
-              href="mailto:ac.design.px@gmail.com"
+            <button
+              onClick={() => setContactOpen(true)}
               className="link-line text-muted hover:text-ink transition-colors"
             >
               Contact
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
+      <ContactCard open={contactOpen} onClose={() => setContactOpen(false)} />
     </header>
   );
 }
