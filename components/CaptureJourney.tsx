@@ -45,7 +45,7 @@ const steps: Step[] = [
     n: "02",
     actor: "you",
     title: "Review",
-    what: "The app confirms it has enough — “Ready for AI analysis.”",
+    what: "The app confirms it has enough: “Ready for AI analysis.”",
     note: "Confidence is shown before the work starts, not just after.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
@@ -72,7 +72,7 @@ const steps: Step[] = [
     n: "04",
     actor: "ai",
     title: "Identify",
-    what: "Name, brand, model, year, condition, rarity, value — as fields.",
+    what: "Name, brand, model, year, condition, rarity, value, as fields.",
     note: "Structured and editable, never a chat blob the owner can't inspect.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
@@ -86,7 +86,7 @@ const steps: Step[] = [
     actor: "ai",
     title: "Confirm",
     what: "92% confidence shown; the owner edits any field, then saves.",
-    note: "The AI proposes, the owner disposes — final say stays with the human.",
+    note: "The AI proposes, the owner disposes; final say stays with the human.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
         <path {...stroke} d="M12 3l2.3 1.7 2.8-.3 1 2.6 2.3 1.6-.6 2.8.6 2.8-2.3 1.6-1 2.6-2.8-.3L12 21l-2.3-1.7-2.8.3-1-2.6L3.6 15.4l.6-2.8-.6-2.8 2.3-1.6 1-2.6 2.8.3z" />

@@ -5,7 +5,7 @@ const featured = {
   name: "Custoria",
   status: "In App Store review",
   description:
-    "A digital vault for the things people value most: AI-powered capture, appraisal, and proof of ownership in a biometric-locked vault. Co-founded with Yiyi Qin; born from our MBA Design Strategy thesis.",
+    "A digital vault for the things people value most: AI-powered capture, appraisal, and proof of ownership in a biometric-locked vault. I designed it and built the native iOS app in Swift. Design and code, one pair of hands. Co-founded with Yiyi Qin; born from our MBA Design Strategy thesis.",
   stack: ["Swift", "Gemini Flash", "iOS"],
   href: "/work/custoria",
   cta: "Read the case study",
