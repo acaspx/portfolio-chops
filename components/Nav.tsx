@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "motion/react";
 import AboutModal from "@/components/AboutModal";
@@ -18,6 +18,7 @@ export default function Nav() {
   const pathname = usePathname();
   const [aboutOpen, setAboutOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const contactBtnRef = useRef<HTMLButtonElement>(null);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
   const isCaseStudy = pathname?.startsWith("/work");
@@ -58,18 +59,25 @@ export default function Nav() {
               About
             </button>
           </li>
-          <li>
+          <li className="relative">
             <button
-              onClick={() => setContactOpen(true)}
+              ref={contactBtnRef}
+              onClick={() => setContactOpen((o) => !o)}
+              aria-haspopup="dialog"
+              aria-expanded={contactOpen}
               className="link-line text-muted hover:text-ink transition-colors"
             >
               Contact
             </button>
+            <ContactCard
+              open={contactOpen}
+              onClose={() => setContactOpen(false)}
+              anchorRef={contactBtnRef}
+            />
           </li>
         </ul>
       </nav>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
-      <ContactCard open={contactOpen} onClose={() => setContactOpen(false)} />
     </header>
   );
 }

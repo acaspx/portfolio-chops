@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 /** Letterpress text-shadow: ink pressed into bone paper. */
@@ -39,126 +38,126 @@ const INK = "#23211c";
 const BONE = "#e9e5db";
 const RULE = "#cdc6b6";
 
-export default function ContactCard({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [mounted, setMounted] = useState(false);
+/**
+ * Contact "calling card" as an anchored popover (no screen overlay).
+ * Renders below the Contact button; closes on click-away, Escape, or selection.
+ * Position is set by the relative parent in the Nav.
+ */
+export default function ContactCard({
+  open,
+  onClose,
+  anchorRef,
+}: {
+  open: boolean;
+  onClose: () => void;
+  anchorRef?: RefObject<HTMLButtonElement | null>;
+}) {
   const reduce = useReducedMotion();
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (!open) return;
-    closeRef.current?.focus();
-    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (
+        cardRef.current &&
+        !cardRef.current.contains(t) &&
+        !anchorRef?.current?.contains(t)
+      ) {
+        onClose();
+      }
     };
-  }, [open, onClose]);
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onDown);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onDown);
+    };
+  }, [open, onClose, anchorRef]);
 
-  if (!mounted) return null;
-
-  return createPortal(
+  return (
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 z-50 grid place-items-center bg-ink/30 p-4 backdrop-blur-sm"
+          ref={cardRef}
+          role="dialog"
+          aria-label="Contact Anton Castro"
+          initial={reduce ? false : { opacity: 0, y: -8, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            background: BONE,
+            color: INK,
+            border: "1px solid #d6d0c1",
+            boxShadow: "0 18px 44px rgba(24,20,12,0.22), inset 0 1px 0 rgba(255,255,255,0.5)",
+            transformOrigin: "top right",
+          }}
+          className="absolute right-0 top-full z-50 mt-3 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-md px-7 py-7 text-left"
         >
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Contact Anton Castro"
-            onClick={(e) => e.stopPropagation()}
-            initial={reduce ? false : { opacity: 0, y: 18, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-sm overflow-hidden rounded-md px-8 py-9"
+          {/* paper grain */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
             style={{
-              background: BONE,
-              color: INK,
-              border: "1px solid #d6d0c1",
-              boxShadow: "0 24px 60px rgba(24,20,12,0.28), inset 0 1px 0 rgba(255,255,255,0.5)",
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
             }}
-          >
-            {/* paper grain */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-              }}
-            />
+          />
 
-            <button
-              ref={closeRef}
-              onClick={onClose}
-              aria-label="Close"
-              className="absolute right-3.5 top-3 text-lg leading-none opacity-45 transition-opacity hover:opacity-90"
-              style={press}
-            >
-              ×
-            </button>
-
-            {/* Header: name + role, engraved */}
-            <div className="text-center">
-              <p className="font-serif text-2xl tracking-[0.04em]" style={press}>
-                Anton Castro
-              </p>
-              <p className="mt-2 font-serif text-[11px] uppercase tracking-[0.34em] opacity-70" style={press}>
-                Lead Product Designer
-              </p>
-            </div>
-
-            <div className="my-6 h-px w-full" style={{ background: RULE }} />
-
-            {/* Contact options */}
-            <ul className="-mx-2">
-              {options.map((o) => (
-                <li key={o.label}>
-                  <a
-                    href={o.href}
-                    {...(o.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group flex items-center gap-4 rounded px-2 py-2.5 transition-colors"
-                    style={{ color: INK }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(35,33,28,0.05)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                  >
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ border: `1px solid ${RULE}` }}>
-                      {o.icon}
-                    </span>
-                    <span className="flex-1">
-                      <span className="block font-serif text-[15px] leading-tight" style={press}>
-                        {o.label}
-                      </span>
-                      <span className="block font-serif text-[12px] italic leading-tight opacity-55">
-                        {o.value}
-                      </span>
-                    </span>
-                    <span aria-hidden className="opacity-35 transition-transform group-hover:translate-x-0.5">
-                      ↗
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-6 h-px w-full" style={{ background: RULE }} />
-            <p className="mt-4 text-center font-serif text-[10px] uppercase tracking-[0.32em] opacity-55" style={press}>
-              Based in San Francisco
+          {/* Header: name + role, engraved */}
+          <div className="text-center">
+            <p className="font-serif text-xl tracking-[0.04em]" style={press}>
+              Anton Castro
             </p>
-          </motion.div>
+            <p className="mt-1.5 font-serif text-[10px] uppercase tracking-[0.34em] opacity-70" style={press}>
+              Lead Product Designer
+            </p>
+          </div>
+
+          <div className="my-5 h-px w-full" style={{ background: RULE }} />
+
+          {/* Contact options */}
+          <ul className="-mx-2">
+            {options.map((o) => (
+              <li key={o.label}>
+                <a
+                  href={o.href}
+                  {...(o.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  onClick={onClose}
+                  className="group flex items-center gap-3.5 rounded px-2 py-2 transition-colors"
+                  style={{ color: INK }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(35,33,28,0.05)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                >
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full" style={{ border: `1px solid ${RULE}` }}>
+                    {o.icon}
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-serif text-[14px] leading-tight" style={press}>
+                      {o.label}
+                    </span>
+                    <span className="block font-serif text-[11px] italic leading-tight opacity-55">
+                      {o.value}
+                    </span>
+                  </span>
+                  <span aria-hidden className="opacity-35 transition-transform group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-5 h-px w-full" style={{ background: RULE }} />
+          <p className="mt-3.5 text-center font-serif text-[9px] uppercase tracking-[0.32em] opacity-55" style={press}>
+            Based in San Francisco
+          </p>
         </motion.div>
       )}
-    </AnimatePresence>,
-    document.body
+    </AnimatePresence>
   );
 }
