@@ -57,16 +57,39 @@ export default function ContactCard({
 
   useEffect(() => {
     if (!open) return;
+    const card = cardRef.current;
+    const focusables = () =>
+      card
+        ? Array.from(
+            card.querySelectorAll<HTMLElement>('a[href], button, [tabindex]:not([tabindex="-1"])')
+          )
+        : [];
+    // Move focus into the card so keyboard users land on the first option.
+    focusables()[0]?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "Tab") {
+        const f = focusables();
+        if (f.length === 0) return;
+        const first = f[0];
+        const last = f[f.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey && active === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     const onDown = (e: MouseEvent) => {
       const t = e.target as Node;
-      if (
-        cardRef.current &&
-        !cardRef.current.contains(t) &&
-        !anchorRef?.current?.contains(t)
-      ) {
+      if (card && !card.contains(t) && !anchorRef?.current?.contains(t)) {
         onClose();
       }
     };
@@ -75,6 +98,8 @@ export default function ContactCard({
     return () => {
       window.removeEventListener("keydown", onKey);
       document.removeEventListener("mousedown", onDown);
+      // Return focus to the trigger when the card closes.
+      anchorRef?.current?.focus();
     };
   }, [open, onClose, anchorRef]);
 

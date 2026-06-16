@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import FadeImage from "@/components/FadeImage";
 import type { ReactNode } from "react";
 
 /** Inline highlight for the numbers and outcomes recruiters scan for. */
@@ -46,7 +47,7 @@ export function CaseImage({
 }) {
   return (
     <figure className="my-6">
-      <Image
+      <FadeImage
         src={src}
         alt={alt}
         width={1920}

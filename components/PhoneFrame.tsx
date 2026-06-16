@@ -12,9 +12,9 @@ import Reveal from "@/components/Reveal";
 export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   const [missing, setMissing] = useState(false);
   return (
-    <div className="relative mx-auto w-full max-w-[260px]">
+    <div className="relative mx-auto w-full max-w-[260px] transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5">
       {/* Bezel */}
-      <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.8rem] bg-[#1b1b1d] p-[7px] shadow-xl ring-1 ring-black/20">
+      <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.8rem] bg-[#1b1b1d] p-[7px] shadow-xl ring-1 ring-black/20 transition-shadow duration-300 hover:shadow-2xl">
         {/* Edge highlight */}
         <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[2.8rem] ring-1 ring-inset ring-white/15" />
         {/* Screen */}

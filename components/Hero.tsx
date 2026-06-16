@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import FaceLogo from "@/components/FaceLogo";
+import AsteriskMark from "@/components/AsteriskMark";
 
 const links = [
   { href: "https://www.linkedin.com/in/antoncastroe/", label: "LinkedIn", external: true },
@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
       <motion.div {...fade(0)} className="flex items-center gap-5">
-        <FaceLogo className="h-16 w-16 shrink-0" />
+        <AsteriskMark className="h-14 w-14 shrink-0 text-ink" />
         <div>
           <h1 className="text-3xl sm:text-4xl font-medium tracking-tighter">Anton Castro</h1>
           <p className="mt-1 text-muted">Product Designer & Design Engineer in San Francisco</p>
