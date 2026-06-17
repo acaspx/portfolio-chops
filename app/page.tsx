@@ -96,10 +96,12 @@ export default function Home() {
               Let&apos;s build something that <em className="text-accent">ships</em>.
             </h2>
             <a
-              href="mailto:ac.design.px@gmail.com"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-10 inline-block rounded-full bg-cta text-paper px-8 py-4 text-sm font-medium emboss-cta transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
-              ac.design.px@gmail.com
+              Resume ↓
             </a>
           </Reveal>
         </div>

@@ -3,13 +3,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import AsteriskMark from "@/components/AsteriskMark";
 
-const links = [
-  { href: "https://www.linkedin.com/in/antoncastroe/", label: "LinkedIn", external: true },
-  { href: "mailto:ac.design.px@gmail.com", label: "Email" },
-  { href: "https://github.com/acaspx", label: "GitHub", external: true },
-  { href: "/resume.pdf", label: "Resume ↓", external: true },
-];
-
 export default function Hero() {
   const reduce = useReducedMotion();
   const fade = (delay: number) => ({
@@ -28,18 +21,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <motion.nav {...fade(0.1)} aria-label="Profile" className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-        {links.map((l) => (
-          <a
-            key={l.label}
-            href={l.href}
-            className="link-line text-muted hover:text-ink"
-            {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          >
-            {l.label}
-          </a>
-        ))}
-      </motion.nav>
 
       <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
         Welcome, I&apos;m Anton, a product designer building intuitive AI-native products
