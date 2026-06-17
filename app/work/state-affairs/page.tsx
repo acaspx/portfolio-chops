@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 export const metadata: Metadata = {
   title: "State Affairs · Policy Intelligence AI | Anton Castro",
   description:
@@ -26,14 +26,22 @@ export default function StateAffairs() {
         ]}
       >
 
+      <CaseLead
+        hook="State Affairs' first AI product. I led the design that turned dense, high-stakes policy data into decisions, and helped land the company's first enterprise contracts."
+        stats={[
+          { value: "0→1", label: "the company's first AI product" },
+          { value: "4", label: "AI skills, robust not broad" },
+          { value: "First", label: "enterprise contracts" },
+        ]}
+      />
+
       <Section id="context" kicker="Context" title="High stakes, dense data, skeptical buyers">
         <p>
           Corporate policy teams drown in legislative text, committee schedules,
           and fragmented local reporting. State Affairs had the data and the
-          journalists, but no product turning raw material into decisions, and it
-          had never shipped AI. I led <Hi>360° Views and AI Chat, the company&apos;s
-          first AI features</Hi>, shipping mid-rebrand. If users didn&apos;t trust the
-          AI on first contact, there was no second chance.
+          journalists but no product turning it into decisions, and had never
+          shipped AI. I led <Hi>360° Views and AI Chat</Hi> through the rebrand. If
+          users didn&apos;t trust the AI on first contact, there was no second chance.
         </p>
       </Section>
 
@@ -74,11 +82,6 @@ export default function StateAffairs() {
           you left off.
         </p>
         <CaseImage
-          src="/work/sa-skills.png"
-          alt="AI Chat with the expanded skills menu open"
-          caption="The skills system: focused, invocable, robust"
-        />
-        <CaseImage
           src="/work/sa-360-overview.png"
           alt="AI Chat generating a 360° View: briefing, active-states map, momentum and forecast in one surface"
           caption="Generate 360° View: the AI builds the briefing surface around the user's needs"
@@ -93,11 +96,6 @@ export default function StateAffairs() {
           government (bills, process, regulatory nuance) for two audiences at
           once: credible to policy experts, legible to the executives they brief.
         </p>
-        <CaseImage
-          src="/work/sa-bills.png"
-          alt="Bills grouped by AI momentum score, with tracking and assignment"
-          caption="Bills grouped by AI momentum: scored, tracked, and assigned, with the reasoning visible"
-        />
       </Section>
 
       <Section id="outcome" kicker="Outcome" title="Validated with the people who'd bet their jobs on it">

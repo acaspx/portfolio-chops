@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 
 export const metadata: Metadata = {
   title: "Rocket · Liv, Conversational AI | Anton Castro",
@@ -24,6 +24,15 @@ export default function Rocket() {
           { label: "Outcome", value: "−75% client onboarding time · +22% routing to lending bankers · 94% routing accuracy" },
         ]}
       >
+
+      <CaseLead
+        hook="Founding designer on Liv, Rocket's conversational AI for millions of homeowners. The whole game was trust: knowing when the AI should stop talking and hand off to a human."
+        stats={[
+          { value: "−75%", label: "client onboarding time" },
+          { value: "+22%", label: "routing to lending bankers" },
+          { value: "94%", label: "banker-rated routing accuracy" },
+        ]}
+      />
 
       <Section id="context" kicker="Context" title="A legacy industry, at the worst possible moment">
         <p>

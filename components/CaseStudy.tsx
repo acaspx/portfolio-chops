@@ -125,6 +125,41 @@ export function CaseLayout({
   );
 }
 
+/**
+ * Case opener built for the 10-second skim: one hook sentence stating
+ * outcome + stakes, then a row of 3 big scannable stats. Sits at the top of
+ * the case, above the first section.
+ */
+export function CaseLead({
+  hook,
+  stats,
+}: {
+  hook: string;
+  stats: { value: string; label: string }[];
+}) {
+  return (
+    <Reveal>
+      <div className="max-w-[44rem] border-b border-line pb-9">
+        <p className="text-xl font-medium leading-snug tracking-tight text-ink/90 sm:text-2xl">
+          {hook}
+        </p>
+        <div className="mt-7 flex flex-wrap gap-x-10 gap-y-5">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="font-serif text-3xl font-medium leading-none tracking-tight text-accent sm:text-[2.5rem]">
+                {s.value}
+              </div>
+              <div className="mt-1.5 max-w-[12rem] font-mono text-[11px] uppercase tracking-widest text-muted">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 export function Section({
   id,
   kicker,

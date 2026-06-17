@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 export const metadata: Metadata = {
   title: "Augmedix · AI Clinical Documentation | Anton Castro",
   description:
@@ -23,6 +23,15 @@ export default function Augmedix() {
           { label: "Outcome", value: "+65% engagement in a year; acquisition by Commure (2024)" },
         ]}
       >
+
+      <CaseLead
+        hook="Scaling Augmedix's AI clinical documentation from one product to four, then through a $139M acquisition. I owned the design system and the call that let it scale without fragmenting."
+        stats={[
+          { value: "+65%", label: "engagement in a year" },
+          { value: "1→4", label: "products, web and mobile" },
+          { value: "$139M", label: "acquisition by Commure" },
+        ]}
+      />
 
       <Section id="context" kicker="Context" title="Clinicians were paying for AI with their evenings">
         <p>
@@ -56,7 +65,7 @@ export default function Augmedix() {
         />
       </Section>
 
-      <Section id="decision" kicker="The decision" title="One-size-fits-all vs. the flexibility flywheel">
+      <Section id="decision" kicker="The decision" title="A flexibility flywheel, and the system that shipped it">
         <p>
           Under tight deadlines, our PMs advocated a one-size-fits-all workflow,
           the clearest path to shipping. I argued the opposite, and not on empathy
@@ -71,14 +80,11 @@ export default function Augmedix() {
           shipped the modular approach within the timeline we had, and it became
           the foundation the product scaled on.
         </p>
-      </Section>
-
-      <Section id="system" kicker="System" title="A design system that let nine PMs ship without breaking the product">
         <p>
-          I built the web and mobile design system in Figma that kept four fast-moving
-          product lines consistent: the connective tissue that let me work across
-          nine PMs and AI leads, fold a new agentic AI model into the core flow, and
-          ship it in four months.
+          To make the modular approach work across four fast-moving product lines,
+          I built the web and mobile design system in Figma: the connective tissue
+          that let me work across nine PMs and AI leads, fold a new agentic AI model
+          into the core flow, and ship it in four months.
         </p>
         <CaseImage
           src="/work/ax-design-system.png"

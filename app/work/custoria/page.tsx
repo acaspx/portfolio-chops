@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
 import { PhoneShowcase } from "@/components/PhoneFrame";
@@ -29,6 +29,15 @@ export default function Custoria() {
           { label: "Status", value: "In Apple App Store review" },
         ]}
       >
+
+      <CaseLead
+        hook="Co-founding Custoria: a digital vault for what people value most. I designed it end to end and built the iOS app in Swift, design and code in one pair of hands."
+        stats={[
+          { value: "2×", label: "more accurate item records" },
+          { value: "~90%", label: "less loss-and-risk exposure" },
+          { value: "In review", label: "Apple App Store" },
+        ]}
+      />
 
       <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
         <p>
