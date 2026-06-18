@@ -10,7 +10,6 @@ const custoria: Work = {
   result:
     "Galleries and collectors track priceless objects with tools never built for it. I co-founded Custoria, designed it end to end, and built the iOS app in Swift.",
   metrics: [
-    { value: "2×", label: "more accurate records" },
     { value: "iOS", label: "designed + built" },
     { value: "Available", label: "on the App Store" },
   ],
