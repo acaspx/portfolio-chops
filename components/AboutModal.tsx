@@ -23,7 +23,7 @@ const cards: Card[] = [
     ],
     visual: "photo",
     photo: "/about-photo-bw.jpg",
-    tint: "#2447ff",
+    tint: "#0e6f88",
   },
   // Single color family across the deck: accent for content cards,
   // violet reserved for the closing card. Decorative color is tokenized.
@@ -36,7 +36,7 @@ const cards: Card[] = [
     ],
     visual: "principles",
     photo: "/how-i-work.jpg",
-    tint: "#2447ff",
+    tint: "#0e6f88",
   },
   {
     kicker: "WHAT",
@@ -46,7 +46,7 @@ const cards: Card[] = [
       "Four AI products taught me the hard problem isn't the model. It's deciding what the AI does alone, and where people stay in the loop.",
     ],
     visual: "tools",
-    tint: "#2447ff",
+    tint: "#0e6f88",
   },
   {
     kicker: "BEFORE",

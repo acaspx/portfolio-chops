@@ -81,7 +81,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
               {work.metrics.map((m) => (
                 <li
                   key={m.label}
-                  className="rounded-md border border-accent/20 bg-gradient-to-br from-accent/[0.14] via-accent/[0.05] to-transparent px-3 py-1 font-mono text-xs transition-colors group-hover:border-accent/45"
+                  className="chip-soft rounded-md border border-accent/20 px-3 py-1 font-mono text-xs transition-colors group-hover:border-accent/45"
                 >
                   <strong className="font-semibold">{m.value}</strong>{" "}
                   <span className="text-muted">{m.label}</span>

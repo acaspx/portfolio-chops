@@ -30,7 +30,7 @@ export default function OgImage() {
           </div>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 600, letterSpacing: -2 }}>
             that{" "}
-            <span style={{ color: "#2447ff", marginLeft: 18, marginRight: 18 }}>
+            <span style={{ color: "#0e6f88", marginLeft: 18, marginRight: 18 }}>
               ship and scale.
             </span>
           </div>

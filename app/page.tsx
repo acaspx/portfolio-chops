@@ -99,7 +99,7 @@ export default function Home() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-10 inline-block rounded-full bg-cta text-paper px-8 py-4 text-sm font-medium emboss-cta transition-transform hover:scale-[1.03] active:scale-[0.98]"
+              className="mt-10 inline-block rounded-full cta-metal px-8 py-4 text-sm font-medium transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               Resume ↓
             </a>

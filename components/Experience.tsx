@@ -114,7 +114,7 @@ export default function Experience() {
                       {r.tags.map((t) => (
                         <li
                           key={t}
-                          className="rounded-full border border-line px-3 py-0.5 font-mono text-[11px] text-muted"
+                          className="chip-soft rounded-md border border-accent/20 px-3 py-0.5 font-mono text-[11px] text-muted"
                         >
                           {t}
                         </li>
