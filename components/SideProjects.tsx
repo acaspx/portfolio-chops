@@ -2,12 +2,22 @@ import Reveal from "@/components/Reveal";
 
 const projects = [
   {
+    name: "Custoria",
+    status: "Live on iOS",
+    description:
+      "A digital vault for what people value most. Co-founded, designed end to end, and built as a native iOS app in Swift with Gemini Flash doing the cataloging. Now on the App Store.",
+    href: "/work/custoria",
+    cta: "Read the case study",
+    internal: true,
+  },
+  {
     name: "portfolio-chops",
     status: "You're looking at it",
     description:
       "The source of this site: Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
     href: "https://github.com/acaspx/portfolio-chops",
     cta: "View source on GitHub",
+    internal: false,
   },
 ];
 
@@ -24,13 +34,12 @@ export default function SideProjects() {
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-1">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.1}>
               <a
                 href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(p.internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 className="group block h-full rounded-xl bg-paper/70 p-6 emboss emboss-hover"
               >
                 <div className="flex items-baseline justify-between gap-4">

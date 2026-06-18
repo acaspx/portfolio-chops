@@ -24,23 +24,6 @@ const works: Work[] = [
     ],
   },
   {
-    slug: "custoria",
-    company: "Custoria Labs",
-    title: "Founding a digital vault for what people value most",
-    tags: "0→1 · B2C · iOS",
-    year: "2025",
-    result:
-      "Galleries and collectors track priceless objects with tools never built for it. I co-founded Custoria, designed it end to end, and built the iOS app in Swift.",
-    metrics: [
-      { value: "2×", label: "more accurate records" },
-      { value: "iOS", label: "designed + built" },
-      { value: "Available", label: "on the App Store" },
-    ],
-    images: [
-      { file: "cu-hero.jpg", alt: "The Custoria Labs web app on a laptop in a jewelry studio" },
-    ],
-  },
-  {
     slug: "augmedix",
     company: "Augmedix",
     title: "Scaling AI clinical documentation from one product to four",
