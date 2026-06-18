@@ -27,7 +27,7 @@ const works: Work[] = [
     slug: "custoria",
     company: "Custoria Labs",
     title: "Founding a digital vault for what people value most",
-    tags: "0→1 · Founder · iOS",
+    tags: "0→1 · B2C · iOS",
     year: "2025",
     result:
       "Galleries and collectors track priceless objects with tools never built for it. I co-founded Custoria, designed it end to end, and built the iOS app in Swift.",
