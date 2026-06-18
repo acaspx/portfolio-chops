@@ -153,17 +153,17 @@ html.asterisk-cursor summary {
   pointer-events: none;
 }
 
-/* Main CTAs: richer metallic accent fill + grain, deep-accent text. */
+/* Main primary CTAs: full brushed-metal accent fill + grain, white text. */
 .cta-metal {
   position: relative;
   overflow: hidden;
-  color: color-mix(in srgb, var(--color-accent) 72%, #04121a);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  color: #f2f8f9;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 72%, #000);
   background: linear-gradient(
     140deg,
-    color-mix(in srgb, var(--color-accent) 42%, transparent),
-    color-mix(in srgb, var(--color-accent) 20%, transparent) 50%,
-    color-mix(in srgb, var(--color-accent) 34%, transparent)
+    color-mix(in srgb, var(--color-accent) 75%, #ffffff) 0%,
+    var(--color-accent) 46%,
+    color-mix(in srgb, var(--color-accent) 68%, #000) 100%
   );
 }
 .cta-metal::after {
@@ -171,7 +171,7 @@ html.asterisk-cursor summary {
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.16;
+  opacity: 0.2;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
