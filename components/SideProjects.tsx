@@ -1,25 +1,26 @@
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
-const projects = [
-  {
-    name: "Custoria",
-    status: "Live on iOS",
-    description:
-      "A digital vault for what people value most. Co-founded, designed end to end, and built as a native iOS app in Swift with Gemini Flash doing the cataloging. Now on the App Store.",
-    href: "/work/custoria",
-    cta: "Read the case study",
-    internal: true,
-  },
-  {
-    name: "portfolio-chops",
-    status: "You're looking at it",
-    description:
-      "The source of this site: Next.js 15, Tailwind 4, and Motion, designed and built by me. Every interaction you've seen here is in this repo.",
-    href: "https://github.com/acaspx/portfolio-chops",
-    cta: "View source on GitHub",
-    internal: false,
-  },
-];
+const custoria = {
+  href: "/work/custoria",
+  company: "Custoria Labs",
+  tags: "0→1 · B2C · iOS",
+  year: "2025",
+  title: "Founding a digital vault for what people value most",
+  result:
+    "Galleries and collectors track priceless objects with tools never built for it. I co-founded Custoria, designed it end to end, and built the iOS app in Swift.",
+  metrics: [
+    { value: "2×", label: "more accurate records" },
+    { value: "iOS", label: "designed + built" },
+    { value: "Available", label: "on the App Store" },
+  ],
+  phones: [
+    { file: "cu-capture.png", alt: "Custoria AI camera scan capturing an item" },
+    { file: "cu-identify.png", alt: "AI-identified item with value and metadata" },
+    { file: "cu-vault.png", alt: "My Vault showing total value and item list" },
+    { file: "cu-prove.png", alt: "Proof-of-ownership and appraisal reports" },
+  ],
+};
 
 export default function SideProjects() {
   return (
@@ -34,27 +35,89 @@ export default function SideProjects() {
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {projects.map((p, i) => (
-            <Reveal key={p.name} delay={i * 0.1}>
-              <a
-                href={p.href}
-                {...(p.internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-                className="group block h-full rounded-xl bg-paper/70 p-6 emboss emboss-hover"
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-mono text-base font-semibold tracking-tight group-hover:text-accent transition-colors">
-                    {p.name}
-                  </h3>
-                  <span className="rounded-full border border-line px-3 py-0.5 font-mono text-[11px] text-muted shrink-0">
-                    {p.status}
-                  </span>
+        <div className="mt-10 space-y-6">
+          {/* Custoria - full-width case-study card */}
+          <Reveal>
+            <Link href={custoria.href} className="block focus-visible:outline-accent">
+              <article className="group relative rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8">
+                {/* System view: the web app, how it was implemented */}
+                <div className="overflow-hidden rounded-lg border border-line bg-ink/[0.03]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/work/cu-hero.jpg"
+                    alt="The Custoria Labs web app on a laptop in a jewelry studio: a private vault catalog"
+                    loading="lazy"
+                    className="aspect-[2/1] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+                  />
                 </div>
-                <p className="mt-3 text-sm text-muted leading-relaxed">{p.description}</p>
-                <span className="link-line mt-4 inline-block text-sm">{p.cta} →</span>
-              </a>
-            </Reveal>
-          ))}
+                {/* Mobile previews: the shipped iOS flow */}
+                <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {custoria.phones.map((p) => (
+                    <div
+                      key={p.file}
+                      className="aspect-[9/19.5] overflow-hidden rounded-lg border border-line bg-ink/[0.03]"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`/work/${p.file}`}
+                        alt={p.alt}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+                  <div className="max-w-xl">
+                    <p className="font-mono text-xs uppercase tracking-widest text-muted">
+                      {custoria.company} · {custoria.tags}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-medium tracking-tight sm:text-3xl">
+                      {custoria.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-muted">{custoria.result}</p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {custoria.metrics.map((m) => (
+                        <li
+                          key={m.label}
+                          className="chip-soft rounded-md border border-accent/20 px-3 py-1 font-mono text-xs transition-colors group-hover:border-accent/45"
+                        >
+                          <strong className="font-semibold">{m.value}</strong>{" "}
+                          <span className="text-muted">{m.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <span className="shrink-0 font-mono text-xs text-muted">{custoria.year}</span>
+                </div>
+              </article>
+            </Link>
+          </Reveal>
+
+          {/* portfolio-chops - full-width repo card */}
+          <Reveal delay={0.1}>
+            <a
+              href="https://github.com/acaspx/portfolio-chops"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8"
+            >
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="font-mono text-base font-semibold tracking-tight transition-colors group-hover:text-accent">
+                  portfolio-chops
+                </h3>
+                <span className="shrink-0 rounded-full border border-line px-3 py-0.5 font-mono text-[11px] text-muted">
+                  You&apos;re looking at it
+                </span>
+              </div>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
+                The source of this site: Next.js 15, Tailwind 4, and Motion, designed and built
+                by me. Every interaction you&apos;ve seen here is in this repo.
+              </p>
+              <span className="link-line mt-4 inline-block text-sm">View source on GitHub →</span>
+            </a>
+          </Reveal>
         </div>
       </div>
     </section>
