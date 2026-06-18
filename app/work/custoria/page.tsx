@@ -14,10 +14,10 @@ export default function Custoria() {
   return (
     <article>
       <CaseHero
-        src="/work/cu-hero.jpg"
-        alt="The Custoria Labs web app open on a laptop in a jewelry studio: a private vault catalog of fine pieces"
-        width={2200}
-        height={1100}
+        src="/work/cu-event.jpg"
+        alt="Anton Castro presenting Custoria Labs at a demo day, the 'How Custoria Labs Works' slide projected behind him to a seated audience"
+        width={2600}
+        height={1083}
       />
       <CaseLayout
         company="Custoria Labs · co-founded with Yiyi Qin"
