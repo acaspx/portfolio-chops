@@ -70,6 +70,16 @@ export default function Rocket() {
           Rebuilding onboarding around these patterns{" "}
           <Hi>cut client onboarding time 75%</Hi>.
         </p>
+        <p>
+          The craft was in the unhappy path. Liv was designed to{" "}
+          <Hi>hand off on low confidence rather than guess</Hi>: when it
+          wasn&apos;t sure, it stopped talking, summarized what it had, and queued a
+          human instead of bluffing through a mortgage question. Each handoff
+          carried the full conversation context to the banker, so the homeowner
+          never restarted from zero. That is what the 94% correct-routing number
+          really measures: not just who Liv routed to, but how much the human
+          already knew when the conversation landed in front of them.
+        </p>
         <CaseImage
           src="/work/rk-patterns.png"
           alt="Conversation design patterns: Pitstop, Queueing, Interstitial, and Agent Intro flows"
