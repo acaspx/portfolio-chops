@@ -12,7 +12,7 @@ const works: Work[] = [
     tags: "0→1 Enterprise AI",
     year: "2026",
     result:
-      "System architecture, voice, and interaction patterns for policy teams at Walmart, DoorDash, and trade associations.",
+      "They had the data and the journalists but no product turning it into decisions, and had never shipped AI. I led their first AI product to its first enterprise contracts.",
     metrics: [
       { value: "0→1", label: "first AI product" },
       { value: "First", label: "enterprise contracts" },
@@ -24,13 +24,30 @@ const works: Work[] = [
     ],
   },
   {
+    slug: "custoria",
+    company: "Custoria Labs",
+    title: "Founding a digital vault for what people value most",
+    tags: "0→1 · Founder · iOS",
+    year: "2025",
+    result:
+      "Galleries and collectors track priceless objects with tools never built for it. I co-founded Custoria, designed it end to end, and built the iOS app in Swift.",
+    metrics: [
+      { value: "2×", label: "more accurate records" },
+      { value: "iOS", label: "designed + built" },
+      { value: "Available", label: "on the App Store" },
+    ],
+    images: [
+      { file: "cu-hero.jpg", alt: "The Custoria Labs web app on a laptop in a jewelry studio" },
+    ],
+  },
+  {
     slug: "augmedix",
     company: "Augmedix",
     title: "Scaling AI clinical documentation from one product to four",
     tags: "AI Platform & Design Systems",
     year: "2023–24",
     result:
-      "Agentic AI shipped into the core documentation flow in four months, through the Commure acquisition.",
+      "Documentation was burning out clinicians. I scaled the AI from one product to four without fragmenting it, into a $139M acquisition.",
     metrics: [
       { value: "+65%", label: "engagement" },
       { value: "1→4", label: "offerings" },
@@ -48,7 +65,8 @@ const works: Work[] = [
     title: "Liv, a conversational AI serving millions of homeowners",
     tags: "Conversational AI",
     year: "2022–23",
-    result: "A conversation design system that rebuilt onboarding and earned the bankers' trust.",
+    result:
+      "Homeowners were abandoning onboarding at the worst possible moment. I rebuilt it around a conversation system to connect clients with the right banker and data they can trust.",
     metrics: [
       { value: "−75%", label: "onboarding time" },
       { value: "+22%", label: "banker routing" },

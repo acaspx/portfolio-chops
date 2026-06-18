@@ -10,7 +10,7 @@ import AsteriskMark from "@/components/AsteriskMark";
 
 const links = [
   { href: "/#work", label: "Work" },
-  { href: "/#prototypes", label: "Founded" },
+  { href: "/#prototypes", label: "Code" },
   { href: "/#experience", label: "Experience" },
 ];
 

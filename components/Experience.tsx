@@ -31,7 +31,7 @@ const roles: Role[] = [
     title: "Co-founder & Founding Designer",
     dates: "Oct 2025 – Present",
     summary:
-      "A digital vault for the things people value most, designed and coded; in App Store review.",
+      "A digital vault for the things people value most, designed and coded; now on the App Store.",
     tags: ["Founder", "Swift", "Security UX"],
     href: "https://custorialabs.io/",
   },

@@ -55,7 +55,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       }`}
     >
       {work.images && (
-        <div className="mb-8 grid grid-cols-3 gap-3">
+        <div className={`mb-8 grid gap-3 ${work.images.length === 1 ? "grid-cols-1" : "grid-cols-3"}`}>
           {work.images.map((img) => (
             <CardImage key={img.file} file={img.file} alt={img.alt} />
           ))}

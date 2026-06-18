@@ -7,7 +7,7 @@ import { PhoneShowcase } from "@/components/PhoneFrame";
 export const metadata: Metadata = {
   title: "Custoria · Founding a Digital Vault | Anton Castro",
   description:
-    "Co-founding Custoria: from MBA Design Strategy thesis to an AI-powered digital vault for people's most valuable possessions, now in App Store review.",
+    "Co-founding Custoria: from MBA Design Strategy thesis to an AI-powered digital vault for people's most valuable possessions, now available on the App Store.",
 };
 
 export default function Custoria() {
@@ -26,7 +26,7 @@ export default function Custoria() {
           { label: "Role", value: "Co-founder & Founding Designer: design, strategy, and code" },
           { label: "Timeline", value: "Oct 2025 – Present" },
           { label: "Scope", value: "0→1: strategy, capture-to-share flow, design system, security model, iOS build" },
-          { label: "Status", value: "In Apple App Store review" },
+          { label: "Status", value: "Available on the App Store" },
         ]}
       >
 
@@ -35,7 +35,7 @@ export default function Custoria() {
         stats={[
           { value: "2×", label: "more accurate item records" },
           { value: "~90%", label: "less loss-and-risk exposure" },
-          { value: "In review", label: "Apple App Store" },
+          { value: "Available", label: "on the App Store" },
         ]}
       />
 
@@ -147,7 +147,7 @@ export default function Custoria() {
         />
       </Section>
 
-      <Section id="status" kicker="Where it stands" title="Piloted, measured, in review">
+      <Section id="status" kicker="Where it stands" title="Piloted, measured, and shipped">
         <p>
           MVP pilots have run since late 2025, and the numbers say the workflow
           replacement is real: item records <Hi>2× more accurate</Hi> on details,
@@ -155,8 +155,8 @@ export default function Custoria() {
           <Hi>~90% reduction in loss-and-risk exposure</Hi>.
         </p>
         <p>
-          The app is <Hi>in Apple App Store review</Hi> now. Next: launch, and
-          converting the gallery pilot network into the first paying customers.
+          The app is <Hi>available on the App Store</Hi> now. Next: converting
+          the gallery pilot network into the first paying customers.
         </p>
       </Section>
 
