@@ -46,6 +46,7 @@ const cards: Card[] = [
       "Four AI products taught me the hard problem isn't the model. It's deciding what the AI does alone, and where people stay in the loop.",
     ],
     visual: "tools",
+    photo: "/build-with.jpg",
     tint: "#0e6f88",
   },
   {
