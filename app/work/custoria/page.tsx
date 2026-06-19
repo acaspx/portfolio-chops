@@ -28,6 +28,7 @@ export default function Custoria() {
           { label: "Scope", value: "0→1: strategy, capture-to-share flow, design system, security model, iOS build" },
           { label: "Status", value: "Available on the App Store" },
         ]}
+        appStore="https://apps.apple.com/us/app/custoria-vault/id6777615531"
       >
 
       <CaseLead

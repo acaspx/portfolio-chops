@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import AppStoreBadge from "@/components/AppStoreBadge";
 
 /** Card thumbnail: renders /work/<file> if it exists, dashed placeholder if not. */
 function CardImage({ file, alt }: { file: string; alt: string }) {
@@ -37,13 +38,16 @@ export type Work = {
   metrics?: { value: string; label: string }[];
   /** filenames under public/work/ - rendered as a visual strip above the text */
   images?: { file: string; alt: string }[];
+  /** App Store URL - renders a Download badge inside the card */
+  appStore?: string;
   comingSoon?: boolean;
 };
 
 export default function WorkCard({ work, index }: { work: Work; index: number }) {
   const reduce = useReducedMotion();
+  const linked = !work.comingSoon && work.slug;
 
-  const inner = (
+  return (
     <motion.article
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -89,6 +93,18 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
               ))}
             </ul>
           )}
+          {work.appStore && (
+            <a
+              href={work.appStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`Download ${work.company} on the App Store`}
+              className="relative z-[2] mt-5 inline-block transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <AppStoreBadge className="h-10 w-auto" />
+            </a>
+          )}
         </div>
         <div className="flex items-center gap-4 font-mono text-xs text-muted shrink-0">
           <span>{work.year}</span>
@@ -97,14 +113,16 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
           )}
         </div>
       </div>
+
+      {/* Stretched link makes the whole card navigate, while the App Store badge
+          (z-2) stays independently clickable. */}
+      {linked && (
+        <Link
+          href={`/work/${work.slug}`}
+          aria-label={`Read the ${work.company} case study`}
+          className="absolute inset-0 z-[1] rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        />
+      )}
     </motion.article>
-  );
-
-  if (work.comingSoon || !work.slug) return inner;
-
-  return (
-    <Link href={`/work/${work.slug}`} className="block focus-visible:outline-accent">
-      {inner}
-    </Link>
   );
 }

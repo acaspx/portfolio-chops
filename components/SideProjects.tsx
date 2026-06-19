@@ -13,6 +13,7 @@ const custoria: Work = {
     { value: "iOS", label: "designed + built" },
     { value: "Available", label: "on the App Store" },
   ],
+  appStore: "https://apps.apple.com/us/app/custoria-vault/id6777615531",
   images: [
     { file: "cu-mobile.png", alt: "The Custoria iOS app: AI camera scan, an identified item with its value, and the vault" },
     { file: "cu-hero.jpg", alt: "The Custoria web app on a laptop in a jewelry studio: a private vault catalog" },

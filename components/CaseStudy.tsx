@@ -2,7 +2,23 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import FadeImage from "@/components/FadeImage";
+import AppStoreBadge from "@/components/AppStoreBadge";
 import type { ReactNode } from "react";
+
+/** App Store download link + badge, shared by the rail and mobile header. */
+function AppStoreLink({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Download on the App Store"
+      className="inline-block transition-transform hover:scale-[1.03] active:scale-[0.98]"
+    >
+      <AppStoreBadge className="h-10 w-auto" />
+    </a>
+  );
+}
 
 /** Inline highlight for the numbers and outcomes recruiters scan for. */
 export function Hi({ children }: { children: ReactNode }) {
@@ -86,11 +102,13 @@ export function CaseLayout({
   company,
   title,
   meta,
+  appStore,
   children,
 }: {
   company: string;
   title: string;
   meta: Meta[];
+  appStore?: string;
   children: ReactNode;
 }) {
   return (
@@ -107,6 +125,11 @@ export function CaseLayout({
           {/* Mobile-only details: stacked under the title */}
           <div className="mt-8 border-t border-line pt-6 lg:hidden">
             <DetailsList meta={meta} />
+            {appStore && (
+              <div className="mt-7">
+                <AppStoreLink href={appStore} />
+              </div>
+            )}
           </div>
         </header>
         {children}
@@ -119,6 +142,11 @@ export function CaseLayout({
             Details
           </p>
           <DetailsList meta={meta} />
+          {appStore && (
+            <div className="mt-8">
+              <AppStoreLink href={appStore} />
+            </div>
+          )}
         </div>
       </aside>
     </div>
