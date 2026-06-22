@@ -7,6 +7,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 import AboutModal from "@/components/AboutModal";
 import ContactCard from "@/components/ContactCard";
 import AsteriskMark from "@/components/AsteriskMark";
+import SocialLinks from "@/components/SocialLinks";
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -73,6 +74,14 @@ export default function Nav() {
               open={contactOpen}
               onClose={() => setContactOpen(false)}
               anchorRef={contactBtnRef}
+            />
+          </li>
+          <li aria-hidden className="hidden h-4 w-px bg-line sm:block" />
+          <li>
+            <SocialLinks
+              className="hidden items-center gap-0.5 sm:flex"
+              linkClassName="grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:text-accent"
+              iconClassName="h-[18px] w-[18px]"
             />
           </li>
         </ul>
