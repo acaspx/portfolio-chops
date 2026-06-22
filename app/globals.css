@@ -73,14 +73,10 @@ body {
   outline-offset: 3px;
 }
 
-/* While the asterisk cursor stands in over clickable UI, hide the native one */
+/* While the asterisk cursor is active, hide the native one everywhere */
 html.asterisk-cursor,
-html.asterisk-cursor a,
-html.asterisk-cursor button,
-html.asterisk-cursor [role="button"],
-html.asterisk-cursor label,
-html.asterisk-cursor summary {
-  cursor: none;
+html.asterisk-cursor * {
+  cursor: none !important;
 }
 
 /* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
