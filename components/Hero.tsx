@@ -17,7 +17,7 @@ export default function Hero() {
         <AsteriskMark className="h-14 w-14 shrink-0 text-ink" />
         <div>
           <h1 className="text-3xl sm:text-4xl font-medium tracking-tighter">Anton Castro</h1>
-          <p className="mt-1 text-muted">Product Designer & Design Engineer in San Francisco</p>
+          <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
         </div>
       </motion.div>
 
