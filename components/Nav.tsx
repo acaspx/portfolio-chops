@@ -37,54 +37,56 @@ export default function Nav() {
         aria-label="Main"
         className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4"
       >
-        <Link
-          href="/"
-          aria-label="Home"
-          className="grid h-10 w-10 place-items-center rounded-xl bg-paper/70 text-ink emboss emboss-hover transition-colors hover:text-accent"
-        >
-          <AsteriskMark className="h-6 w-6" />
-        </Link>
-        <ul className="flex items-center gap-5 sm:gap-6 text-sm">
-          {links.slice(0, 3).map((l) => (
-            <li key={l.label} className="hidden sm:list-item">
-              <Link href={l.href} className="link-line text-muted hover:text-ink transition-colors">
-                {l.label}
-              </Link>
+        {/* Left: home mark + site navigation */}
+        <div className="flex items-center gap-8 sm:gap-10">
+          <Link
+            href="/"
+            aria-label="Home"
+            className="grid h-10 w-10 place-items-center rounded-xl bg-paper/70 text-ink emboss emboss-hover transition-colors hover:text-accent"
+          >
+            <AsteriskMark className="h-6 w-6" />
+          </Link>
+          <ul className="flex items-center gap-5 sm:gap-6 text-sm">
+            {links.slice(0, 3).map((l) => (
+              <li key={l.label} className="hidden sm:list-item">
+                <Link href={l.href} className="link-line text-muted hover:text-ink transition-colors">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <button
+                onClick={() => setAboutOpen(true)}
+                className="link-line text-muted hover:text-ink transition-colors"
+              >
+                About
+              </button>
             </li>
-          ))}
-          <li>
-            <button
-              onClick={() => setAboutOpen(true)}
-              className="link-line text-muted hover:text-ink transition-colors"
-            >
-              About
-            </button>
-          </li>
-          <li className="relative">
-            <button
-              ref={contactBtnRef}
-              onClick={() => setContactOpen((o) => !o)}
-              aria-haspopup="dialog"
-              aria-expanded={contactOpen}
-              className="link-line text-muted hover:text-ink transition-colors"
-            >
-              Contact
-            </button>
-            <ContactCard
-              open={contactOpen}
-              onClose={() => setContactOpen(false)}
-              anchorRef={contactBtnRef}
-            />
-          </li>
-          <li aria-hidden className="hidden h-4 w-px bg-line sm:block" />
-          <li>
-            <SocialLinks
-              className="hidden items-center gap-0.5 sm:flex"
-              linkClassName="grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:text-accent"
-              iconClassName="h-[18px] w-[18px]"
-            />
-          </li>
-        </ul>
+            <li className="relative">
+              <button
+                ref={contactBtnRef}
+                onClick={() => setContactOpen((o) => !o)}
+                aria-haspopup="dialog"
+                aria-expanded={contactOpen}
+                className="link-line text-muted hover:text-ink transition-colors"
+              >
+                Contact
+              </button>
+              <ContactCard
+                open={contactOpen}
+                onClose={() => setContactOpen(false)}
+                anchorRef={contactBtnRef}
+              />
+            </li>
+          </ul>
+        </div>
+
+        {/* Right: social links, kept right-aligned */}
+        <SocialLinks
+          className="hidden items-center gap-0.5 sm:flex"
+          linkClassName="grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:text-accent"
+          iconClassName="h-[18px] w-[18px]"
+        />
       </nav>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </header>
