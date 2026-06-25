@@ -51,24 +51,32 @@ export function CaseHero({
   );
 }
 
-/** Real case study image (file must exist in public/). 16:9 deck exports. */
+/**
+ * Real case study image (file must exist in public/). Defaults to a 16:9 box;
+ * pass the image's real width/height for any non-16:9 export so it renders at
+ * its natural aspect instead of being squished.
+ */
 export function CaseImage({
   src,
   alt,
   caption,
+  width = 1920,
+  height = 1080,
 }: {
   src: string;
   alt: string;
   caption: string;
+  width?: number;
+  height?: number;
 }) {
   return (
     <figure className="my-6">
       <FadeImage
         src={src}
         alt={alt}
-        width={1920}
-        height={1080}
-        className="w-full rounded-lg border border-line shadow-sm"
+        width={width}
+        height={height}
+        className="h-auto w-full rounded-lg border border-line shadow-sm"
       />
       <figcaption className="mt-2 font-mono text-xs text-muted">{caption}</figcaption>
     </figure>

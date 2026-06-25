@@ -13,6 +13,8 @@ export default function Augmedix() {
       <CaseHero
         src="/work/ax-mobile.png"
         alt="Augmedix Assist marketing hero: phone showing an AI-drafted clinical note, with HCA, AdventHealth, CommonSpirit, and Sutter Health logos"
+        width={1920}
+        height={1080}
       />
       <CaseLayout
         company="Augmedix (acquired by Commure, $139M)"
@@ -71,6 +73,8 @@ export default function Augmedix() {
           src="/work/ax-research.png"
           alt="Research stats: 30% requested desktop workflow, ~40% preferred a human in the loop"
           caption="The research that drove both pivots"
+          width={3285}
+          height={1274}
         />
       </Section>
 
@@ -131,6 +135,8 @@ export default function Augmedix() {
           src="/work/ax-agentic-lcm.png"
           alt="Architecture diagram: the Augmedix LCM agentic model reading and writing across the iOS app, internal web app, Augmedix web app, and MDS notebuilder"
           caption="The agentic core: one model, the Augmedix LCM, reading and writing across every surface"
+          width={4096}
+          height={2963}
         />
         <PhoneShowcase
           phones={[
