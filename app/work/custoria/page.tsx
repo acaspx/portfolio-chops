@@ -150,10 +150,10 @@ export default function Custoria() {
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, and shipped">
         <p>
-          MVP pilots have run since late 2025, and the numbers say the workflow
-          replacement is real: item records <Hi>2× more accurate</Hi> on details,
-          value, origin, and ownership than manual methods, and a{" "}
-          <Hi>~90% reduction in loss-and-risk exposure</Hi>.
+          MVP pilots have run since late 2025, and the early numbers say the
+          workflow replacement is real: item records <Hi>2× more accurate</Hi> on
+          details, value, origin, and ownership than manual methods, and a{" "}
+          <Hi>~90% reduction in loss-and-risk exposure</Hi> in those pilots.
         </p>
         <p>
           The app is <Hi>available on the App Store</Hi> now. Next: converting

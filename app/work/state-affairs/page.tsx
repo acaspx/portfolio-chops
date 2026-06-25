@@ -41,8 +41,8 @@ export default function StateAffairs() {
           Corporate policy teams drown in legislative text, committee schedules,
           and fragmented local reporting. State Affairs had the data and the
           journalists but no product turning it into decisions, and had never
-          shipped AI. I led <Hi>360° Views and AI Chat</Hi> through the rebrand. If
-          users didn&apos;t trust the AI on first contact, there was no second chance.
+          shipped AI. I led <Hi>360° Views and AI Chat</Hi>. If users didn&apos;t
+          trust the AI on first contact, there was no second chance.
         </p>
       </Section>
 
@@ -56,11 +56,9 @@ export default function StateAffairs() {
           for <em>their</em> business was.
         </p>
         <p>
-          A shallow answer here doesn&apos;t just disappoint: policy teams act on it
-          in front of executives and regulators. So I stopped designing a better
-          conversation and started <Hi>designing the job</Hi>: a system that pulls
-          the bills, weighs what is moving, drafts the brief, and shapes it to the
-          person, end to end.
+          So I stopped designing a better conversation and started{" "}
+          <Hi>designing the job</Hi>: a system that pulls the bills, weighs what is
+          moving, drafts the brief, and shapes it to the person, end to end.
         </p>
       </Section>
 
@@ -150,10 +148,9 @@ export default function StateAffairs() {
           adoption into <Hi>State Affairs&apos; first enterprise contracts</Hi>.
         </p>
         <p>
-          The result is an experience that feels{" "}
-          <Hi>personalized, proactive, and relevant</Hi> in a context as critical
-          as the legislative and political arena, the bar an agentic product has to
-          clear before anyone bets a decision on it.
+          The result feels{" "}
+          <Hi>personalized, proactive, and relevant</Hi>, the bar an agentic
+          product has to clear before anyone bets a decision on it.
         </p>
         <CaseImage
           src="/work/sa-report.png"

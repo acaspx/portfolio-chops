@@ -47,9 +47,9 @@ export default function Rocket() {
 
       <Section id="problem" kicker="The hard problem" title="A chatbot can't fake its way through a mortgage">
         <p>
-          Trust was the entire game. People won&apos;t hand the largest transaction of
-          their lives to a bot that bluffs, and lending agents won&apos;t trust a
-          system that sends them the wrong clients. The design question wasn&apos;t
+          People won&apos;t hand the largest transaction of their lives to a bot
+          that bluffs, and lending agents won&apos;t trust a system that sends them
+          the wrong clients. The design question wasn&apos;t
           &quot;what can Liv say?&quot; but <em>when should Liv stop talking</em>: how the
           assistant collects context upfront, when it hands off to a human banker,
           and how it does both in Rocket&apos;s voice without pretending to be a person.

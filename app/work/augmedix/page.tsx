@@ -28,7 +28,7 @@ export default function Augmedix() {
       >
 
       <CaseLead
-        hook="Scaling Augmedix's AI clinical documentation from one product to four, then through a $139M acquisition. I owned the design system and the call that let it scale without fragmenting."
+        hook="Scaling Augmedix's AI clinical documentation from one product to four, then through a $139M acquisition. I owned the design system, and the bet on modular over one-size-fits-all that let it scale without fragmenting."
         stats={[
           { value: "+65%", label: "engagement in a year" },
           { value: "1→4", label: "products, web and mobile" },
@@ -40,13 +40,13 @@ export default function Augmedix() {
         <p>
           Healthcare systems face a worsening clinician shortage; documentation is a
           leading driver of burnout, with notes written on personal time long after
-          patients leave. Augmedix&apos;s AI drafted clinical notes, but as a single
-          product with a single rigid workflow, in a market where every clinic,
-          specialty, and clinician works differently.
+          patients leave. Augmedix&apos;s AI already drafted clinical notes, but as
+          one rigid product in a market where every clinic, specialty, and
+          clinician works differently.
         </p>
       </Section>
 
-      <Section id="problem" kicker="The hard problem" title="One AI, four products, zero tolerance for error">
+      <Section id="problem" kicker="The challenge" title="One agentic system, four purpose-built products, zero tolerance for error in healthcare">
         <p>
           Growth meant expanding from one offering to four, across web and mobile,
           emergency and primary care, without fragmenting the experience or the
@@ -109,9 +109,9 @@ export default function Augmedix() {
         </p>
         <p>
           The agentic model raised the design stakes. An agent that drafts a
-          clinical note is making consequential calls in a domain with{" "}
-          <Hi>zero tolerance for error</Hi>, so I built the interaction around
-          review and repair, not automation theater: the AI drafts, the clinician
+          clinical note is making <Hi>consequential calls a clinician signs their
+          name to</Hi>, so I built the interaction around review and repair, not
+          automation theater: the AI drafts, the clinician
           sees what it was confident about and what it flagged, and every
           correction becomes signal the model learns from. Human-in-the-loop
           wasn&apos;t a safety toggle; it was the core interaction, because the{" "}
