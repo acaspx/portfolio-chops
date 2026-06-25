@@ -12,7 +12,6 @@ import SocialLinks from "@/components/SocialLinks";
 const links = [
   { href: "/#work", label: "Work" },
   { href: "/#prototypes", label: "Built" },
-  { href: "/#experience", label: "Experience" },
 ];
 
 export default function Nav() {
