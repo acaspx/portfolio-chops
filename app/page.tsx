@@ -8,7 +8,7 @@ const works: Work[] = [
   {
     slug: "state-affairs",
     company: "State Affairs",
-    title: "Turning dense policy data into decisions enterprise teams act on",
+    title: "State Affairs' first AI product, from 0→1 to Walmart and DoorDash",
     tags: "0→1 Enterprise AI",
     year: "2026",
     result:
@@ -26,7 +26,7 @@ const works: Work[] = [
   {
     slug: "augmedix",
     company: "Augmedix",
-    title: "Scaling AI clinical documentation from one product to four",
+    title: "A $139M acquisition, scaling AI documentation from one product to four",
     tags: "AI Platform & Design Systems",
     year: "2023–24",
     result:
@@ -45,7 +45,7 @@ const works: Work[] = [
   {
     slug: "rocket",
     company: "Rocket",
-    title: "Liv, a conversational AI serving millions of homeowners",
+    title: "−75% onboarding, for an AI serving millions of homeowners",
     tags: "Conversational AI",
     year: "2022–23",
     result:
