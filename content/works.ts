@@ -9,7 +9,7 @@ export const works: Work[] = [
     tags: "0→1 Enterprise AI",
     year: "2026",
     result:
-      "They had the data and the journalists but no product turning it into decisions, and had never shipped AI. I led their first AI product to its first enterprise contracts.",
+      "The data and the journalists were there, but no product turning it into decisions, and no AI. I led the AI features that landed State Affairs' first enterprise contracts.",
     metrics: [
       { value: "0→1", label: "first AI product" },
       { value: "First", label: "enterprise contracts" },
