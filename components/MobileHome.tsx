@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AsteriskMark from "@/components/AsteriskMark";
 import AppStoreBadge from "@/components/AppStoreBadge";
+import EnjoyBubbles from "@/components/EnjoyBubbles";
 import { works } from "@/content/works";
 import type { Work } from "@/components/WorkCard";
 
@@ -57,7 +58,8 @@ function MobileCard({ w }: { w: Work }) {
  */
 export default function MobileHome() {
   return (
-    <div className="px-5 pb-20">
+    <>
+      <div className="px-5">
       {/* Hero */}
       <section className="pb-10 pt-12">
         <AsteriskMark className="h-12 w-12 text-ink" />
@@ -166,23 +168,8 @@ export default function MobileHome() {
         </p>
       </section>
 
-      {/* Contact */}
-      <section className="mt-10 border-t border-line pt-12 text-center">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">
-          Currently designing policy intelligence at State Affairs
-        </p>
-        <h2 className="mt-5 font-serif text-3xl font-medium tracking-tight">
-          Let&apos;s build something that <em className="text-accent">ships</em>.
-        </h2>
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-7 inline-block rounded-full cta-metal px-8 py-4 text-sm font-medium transition-transform active:scale-[0.98]"
-        >
-          Resume ↓
-        </a>
-      </section>
-    </div>
+      </div>
+      <EnjoyBubbles />
+    </>
   );
 }
