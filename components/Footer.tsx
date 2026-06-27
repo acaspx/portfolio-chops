@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-16 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-mono text-xs text-muted">
-          © {new Date().getFullYear()} Anton Castro · designed & built by me,{" "}
+          © {new Date().getFullYear()} studioacas · designed & built{" "}
           <a
             href="https://github.com/acaspx/portfolio-chops"
             target="_blank"
