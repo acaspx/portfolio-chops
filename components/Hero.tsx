@@ -31,16 +31,7 @@ export default function Hero() {
         Welcome, I&apos;m Anton, a product designer building intuitive AI-native products
         for high-stakes work, where the real problem is{" "}
         <em className="font-serif italic text-accent">trust</em>. 0→1 four times across
-        healthcare, fintech, and govtech. I design and ship in&nbsp;code, including{" "}
-        <a
-          href="https://github.com/acaspx/portfolio-chops"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-line text-ink"
-        >
-          this site
-        </a>
-        .
+        healthcare, fintech, and govtech.
       </motion.p>
     </section>
   );

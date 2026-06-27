@@ -73,16 +73,7 @@ export default function MobileHome() {
         <p className="mt-6 text-lg leading-relaxed">
           I design AI-native products for high-stakes work, where the hard problem isn&apos;t
           the model, it&apos;s <em className="font-serif italic text-accent">trust</em>. 0→1 four
-          times, across healthcare, fintech, and govtech. I build them in code too, including{" "}
-          <a
-            href="https://github.com/acaspx/portfolio-chops"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-line text-ink"
-          >
-            this site
-          </a>
-          .
+          times, across healthcare, fintech, and govtech.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <a
