@@ -11,14 +11,30 @@ import Reveal from "@/components/Reveal";
  */
 export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   const [missing, setMissing] = useState(false);
+  // Chrome (bezel radius/padding, island) is sized in container-query units so
+  // it scales with the phone's rendered width and stays proportional whether the
+  // phone is 260px (desktop) or ~170px (mobile two-up).
   return (
-    <div className="relative mx-auto w-full max-w-[260px] transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5">
+    <div
+      className="relative mx-auto w-full max-w-[260px] transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5"
+      style={{ containerType: "inline-size" }}
+    >
       {/* Bezel */}
-      <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.8rem] bg-[#1b1b1d] p-[7px] shadow-xl ring-1 ring-black/20 transition-shadow duration-300 hover:shadow-2xl">
+      <div
+        className="relative aspect-[9/19.5] overflow-hidden bg-[#1b1b1d] shadow-xl ring-1 ring-black/20 transition-shadow duration-300 hover:shadow-2xl"
+        style={{ borderRadius: "17.2cqw", padding: "2.7cqw" }}
+      >
         {/* Edge highlight */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[2.8rem] ring-1 ring-inset ring-white/15" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/15"
+          style={{ borderRadius: "17.2cqw" }}
+        />
         {/* Screen */}
-        <div className="relative h-full w-full overflow-hidden rounded-[2.35rem] bg-ink">
+        <div
+          className="relative h-full w-full overflow-hidden bg-ink"
+          style={{ borderRadius: "14.5cqw" }}
+        >
           {missing ? (
             <div className="grid h-full place-items-center px-4 text-center">
               <span className="font-mono text-[10px] text-paper/60">{src.split("/").pop()}</span>
@@ -36,7 +52,8 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
           {/* Dynamic Island */}
           <div
             aria-hidden
-            className="absolute left-1/2 top-[10px] h-[22px] w-[80px] -translate-x-1/2 rounded-full bg-black"
+            className="absolute left-1/2 -translate-x-1/2 rounded-full bg-black"
+            style={{ top: "3.8cqw", height: "8.5cqw", width: "30.8cqw" }}
           />
         </div>
       </div>
