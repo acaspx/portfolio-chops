@@ -20,6 +20,9 @@ export default function EnjoyBubbles() {
         <p className="text-center font-mono text-xs uppercase tracking-widest text-muted">
           Off the clock
         </p>
+        <p className="mt-2 text-center text-sm text-muted">
+          Experiences that help me develop my &ldquo;taste&rdquo;
+        </p>
         <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-line bg-gradient-to-b from-accent/[0.07] to-accent/[0.01] p-7 shadow-sm sm:p-12">
           <ul className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {enjoy.map((e) => (
