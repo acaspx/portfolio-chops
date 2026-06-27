@@ -15,7 +15,7 @@ export const works: Work[] = [
       { value: "First", label: "enterprise contracts" },
     ],
     images: [
-      { file: "sa-360-overview.png", alt: "360° View overview with AI briefing and state map" },
+      { file: "sa-bill.png", alt: "Bill detail view for A 9349: AI analysis, legislative progress, momentum, and bill management" },
       { file: "sa-bills.png", alt: "Bills grouped by AI momentum score" },
       { file: "sa-whats-changed.png", alt: "What's Changed priority panel since last visit" },
     ],
