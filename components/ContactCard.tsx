@@ -121,7 +121,7 @@ export default function ContactCard({
             boxShadow: "0 18px 44px rgba(24,20,12,0.22), inset 0 1px 0 rgba(255,255,255,0.5)",
             transformOrigin: "top right",
           }}
-          className="absolute right-0 top-full z-50 mt-3 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-md px-7 py-7 text-left"
+          className="fixed inset-x-4 top-20 z-50 mx-auto max-w-sm overflow-hidden rounded-md px-7 py-7 text-left sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mx-0 sm:mt-3 sm:w-80 sm:max-w-[calc(100vw-2rem)]"
         >
           {/* paper grain */}
           <div
