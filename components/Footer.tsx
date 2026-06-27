@@ -16,7 +16,7 @@ export default function Footer() {
           </a>
           .
         </p>
-        <SocialLinks className="flex items-center gap-3" />
+        <SocialLinks className="inline-flex" />
       </div>
     </footer>
   );

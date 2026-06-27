@@ -81,11 +81,7 @@ export default function Nav() {
         </div>
 
         {/* Right: social links, kept right-aligned */}
-        <SocialLinks
-          className="hidden items-center gap-0.5 sm:flex"
-          linkClassName="grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:text-accent"
-          iconClassName="h-[18px] w-[18px]"
-        />
+        <SocialLinks className="hidden sm:inline-flex" />
       </nav>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </header>
