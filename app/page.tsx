@@ -66,8 +66,6 @@ const works: Work[] = [
 export default function Home() {
   return (
     <>
-      {/* Soft gradient + grain backdrop, landing only */}
-      <div aria-hidden className="bg-landing pointer-events-none fixed inset-0 -z-10" />
       <Hero />
 
       <section id="work" aria-label="Selected work" className="mx-auto max-w-5xl px-6 pb-24">

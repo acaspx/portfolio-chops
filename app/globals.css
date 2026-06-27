@@ -79,6 +79,13 @@ html.asterisk-cursor * {
   cursor: none !important;
 }
 
+/* Site-wide surface: paper tone with a subtle square mosaic, one clean plane */
+.bg-surface {
+  background-color: var(--color-paper);
+  background-image: url("/bg-squares.png");
+  background-repeat: repeat;
+}
+
 /* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
 .bg-landing {
   /* Reference gradient structure (bright upper-left, drifting clouds, grounded
