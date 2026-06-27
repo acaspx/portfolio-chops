@@ -25,8 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        {/* One clean textured surface behind the whole site */}
-        <div aria-hidden className="bg-surface fixed inset-0 -z-10" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2 focus:rounded"
