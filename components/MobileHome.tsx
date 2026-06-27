@@ -63,7 +63,12 @@ export default function MobileHome() {
       {/* Hero */}
       <section className="pb-10 pt-12">
         <AsteriskMark className="h-12 w-12 text-ink" />
-        <h1 className="mt-5 text-3xl font-medium tracking-tighter">Anton Castro</h1>
+        <h1
+          className="mt-5 font-serif text-3xl tracking-tight"
+          style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
+        >
+          Anton Castro
+        </h1>
         <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
         <p className="mt-6 text-lg leading-relaxed">
           I design AI-native products for high-stakes work, where the hard problem isn&apos;t

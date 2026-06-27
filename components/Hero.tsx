@@ -16,7 +16,12 @@ export default function Hero() {
       <motion.div {...fade(0)} className="flex items-center gap-5">
         <AsteriskMark className="h-14 w-14 shrink-0 text-ink" />
         <div>
-          <h1 className="text-3xl sm:text-4xl font-medium tracking-tighter">Anton Castro</h1>
+          <h1
+            className="font-serif text-3xl sm:text-4xl tracking-tight"
+            style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
+          >
+            Anton Castro
+          </h1>
           <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
         </div>
       </motion.div>
