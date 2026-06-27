@@ -20,6 +20,33 @@ function AppStoreLink({ href }: { href: string }) {
   );
 }
 
+type LiveSite = { href: string; label: string; image?: string };
+
+/** "Visit the live product" link with an optional preview thumbnail. */
+function LiveSiteLink({ site }: { site: LiveSite }) {
+  return (
+    <div>
+      <p className="mb-2.5 font-mono text-[11px] uppercase tracking-widest text-muted">
+        Live product
+      </p>
+      <a href={site.href} target="_blank" rel="noopener noreferrer" className="group block">
+        {site.image && (
+          <div className="overflow-hidden rounded-lg border border-line bg-ink/[0.03]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={site.image}
+              alt=""
+              loading="lazy"
+              className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+          </div>
+        )}
+        <span className="link-line mt-2.5 inline-block text-sm">{site.label} ↗</span>
+      </a>
+    </div>
+  );
+}
+
 /** Inline highlight for the numbers and outcomes recruiters scan for. */
 export function Hi({ children }: { children: ReactNode }) {
   return <span className="font-semibold text-accent">{children}</span>;
@@ -111,12 +138,14 @@ export function CaseLayout({
   title,
   meta,
   appStore,
+  liveSite,
   children,
 }: {
   company: string;
   title: string;
   meta: Meta[];
   appStore?: string;
+  liveSite?: LiveSite;
   children: ReactNode;
 }) {
   return (
@@ -138,6 +167,11 @@ export function CaseLayout({
                 <AppStoreLink href={appStore} />
               </div>
             )}
+            {liveSite && (
+              <div className="mt-7">
+                <LiveSiteLink site={liveSite} />
+              </div>
+            )}
           </div>
         </header>
         {children}
@@ -153,6 +187,11 @@ export function CaseLayout({
           {appStore && (
             <div className="mt-8">
               <AppStoreLink href={appStore} />
+            </div>
+          )}
+          {liveSite && (
+            <div className="mt-8">
+              <LiveSiteLink site={liveSite} />
             </div>
           )}
         </div>

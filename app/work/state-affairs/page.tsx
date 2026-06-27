@@ -25,6 +25,11 @@ export default function StateAffairs() {
           { label: "Scope", value: "Led 360° Views + AI Chat: the agentic system design (a dozen agents across three layers), voice & tone, interaction patterns" },
           { label: "Outcome", value: "First enterprise contracts: Walmart, DoorDash, trade associations" },
         ]}
+        liveSite={{
+          href: "https://pro.stateaffairs.com/ca",
+          label: "Visit State Affairs Pro",
+          image: "/work/sa-360-overview.png",
+        }}
       >
 
       <CaseLead
