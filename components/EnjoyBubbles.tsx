@@ -74,29 +74,11 @@ export default function EnjoyBubbles() {
                     onClick={() => setActive(i)}
                     aria-pressed={on}
                     aria-label={e.label}
-                    className={`group inline-flex h-16 items-center overflow-hidden rounded-2xl border shadow-sm backdrop-blur transition-all duration-300 ease-out ${
-                      on
-                        ? "border-accent bg-accent px-5 shadow-md"
-                        : "border-white/70 bg-white/50 hover:bg-accent hover:px-5 hover:shadow-md"
+                    className={`grid h-16 w-16 place-items-center rounded-2xl bg-paper/70 text-2xl ${
+                      on ? "emboss emboss-active" : "emboss emboss-hover"
                     }`}
                   >
-                    <span
-                      aria-hidden
-                      className={`grid h-16 w-16 shrink-0 place-items-center text-2xl transition-all duration-300 ease-out ${
-                        on ? "w-0 opacity-0" : "group-hover:w-0 group-hover:opacity-0"
-                      }`}
-                    >
-                      {e.icon}
-                    </span>
-                    <span
-                      className={`overflow-hidden whitespace-nowrap text-sm font-medium text-paper transition-all duration-300 ease-out ${
-                        on
-                          ? "max-w-[12rem] opacity-100"
-                          : "max-w-0 opacity-0 group-hover:max-w-[12rem] group-hover:opacity-100"
-                      }`}
-                    >
-                      {e.label}
-                    </span>
+                    <span aria-hidden>{e.icon}</span>
                   </button>
                 </li>
               );
