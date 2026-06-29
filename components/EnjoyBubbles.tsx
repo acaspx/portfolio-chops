@@ -15,7 +15,7 @@ const enjoy = [
  */
 export default function EnjoyBubbles() {
   return (
-    <section aria-label="Things I enjoy" className="border-t border-line">
+    <section aria-label="Things I enjoy">
       <div className="mx-auto max-w-5xl px-6 py-20 sm:py-24">
         <p className="text-center font-mono text-xs uppercase tracking-widest text-muted">
           Off the clock
