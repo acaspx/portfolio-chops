@@ -30,39 +30,33 @@ export default function Footer() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <div className="grid gap-12 sm:grid-cols-[1.4fr_1fr]">
-          {/* Contact CTA */}
-          <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">Contact</p>
-            <h2 className="mt-4 max-w-md font-serif text-4xl font-medium tracking-tight sm:text-5xl">
-              Let&apos;s build something that <em className="text-accent">ships</em>.
-            </h2>
-            <a
-              href="mailto:ac.design.px@gmail.com"
-              aria-label="Email Anton Castro"
-              className="mt-8 inline-block transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.98]"
+        <div className="flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between">
+          {/* Pixel heart, links to email */}
+          <a
+            href="mailto:ac.design.px@gmail.com"
+            aria-label="Email Anton Castro"
+            className="inline-block transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.98]"
+          >
+            <span
+              aria-hidden
+              className="grid w-[200px] gap-[5px]"
+              style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
             >
-              <span
-                aria-hidden
-                className="grid w-[200px] gap-[5px]"
-                style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
-              >
-                {HEART.flatMap((row, r) =>
-                  [...row].map((c, i) => (
-                    <span
-                      key={`${r}-${i}`}
-                      className={`aspect-square rounded-[2px] ${
-                        c === "1" ? "bg-[#e2403a]" : "bg-ink/[0.05]"
-                      }`}
-                    />
-                  ))
-                )}
-              </span>
-            </a>
-          </div>
+              {HEART.flatMap((row, r) =>
+                [...row].map((c, i) => (
+                  <span
+                    key={`${r}-${i}`}
+                    className={`aspect-square rounded-[2px] ${
+                      c === "1" ? "bg-[#e2403a]" : "bg-ink/[0.05]"
+                    }`}
+                  />
+                ))
+              )}
+            </span>
+          </a>
 
           {/* Nav columns */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-10">
             <div>
               <p className="font-mono text-xs uppercase tracking-widest text-muted">Explore</p>
               <ul className="mt-4 space-y-2.5 text-sm">
