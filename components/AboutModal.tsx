@@ -23,7 +23,7 @@ const cards: Card[] = [
     ],
     visual: "photo",
     photo: "/about-photo-bw.jpg",
-    tint: "#0e6f88",
+    tint: "#1e2a44",
   },
   // Single color family across the deck: accent for content cards,
   // violet reserved for the closing card. Decorative color is tokenized.
@@ -36,7 +36,7 @@ const cards: Card[] = [
     ],
     visual: "principles",
     photo: "/how-i-work.jpg",
-    tint: "#0e6f88",
+    tint: "#1e2a44",
   },
   {
     kicker: "WHAT",
@@ -47,7 +47,7 @@ const cards: Card[] = [
     ],
     visual: "tools",
     photo: "/build-with.jpg",
-    tint: "#0e6f88",
+    tint: "#1e2a44",
   },
   {
     kicker: "BEFORE",

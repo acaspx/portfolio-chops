@@ -7,7 +7,7 @@ import AsteriskMark from "@/components/AsteriskMark";
 const CLICKABLE = "a, button, [role='button'], summary, input, select, textarea, label";
 
 const INK = "#16140f";
-const ACCENT = "#0e6f88";
+const ACCENT = "#1e2a44";
 
 /**
  * Custom cursor: the brand asterisk stands in for the native pointer across
