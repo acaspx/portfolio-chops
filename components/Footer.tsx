@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+// 11x7 pixel heart (1 = lit red square), matching the filled-heart peg pattern.
+const HEART = [
+  "00110001100",
+  "01111111110",
+  "01111111110",
+  "00111111100",
+  "00011111000",
+  "00001110000",
+  "00000100000",
+];
+
 const explore = [
   { label: "Work", href: "/#work" },
   { label: "Built", href: "/#prototypes" },
@@ -28,10 +39,25 @@ export default function Footer() {
             </h2>
             <a
               href="mailto:ac.design.px@gmail.com"
-              className="cta-metal mt-7 inline-flex items-center gap-3 rounded-full px-7 py-4 text-sm font-medium transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              aria-label="Email Anton Castro"
+              className="mt-8 inline-block transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.98]"
             >
-              ac.design.px@gmail.com
-              <span aria-hidden>→</span>
+              <span
+                aria-hidden
+                className="grid w-[200px] gap-[5px]"
+                style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
+              >
+                {HEART.flatMap((row, r) =>
+                  [...row].map((c, i) => (
+                    <span
+                      key={`${r}-${i}`}
+                      className={`aspect-square rounded-[2px] ${
+                        c === "1" ? "bg-[#e2403a]" : "bg-ink/[0.05]"
+                      }`}
+                    />
+                  ))
+                )}
+              </span>
             </a>
           </div>
 
