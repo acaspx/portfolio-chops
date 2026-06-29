@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// 11x7 pixel heart (1 = lit red square), matching the filled-heart peg pattern.
+// 11x7 pixel heart (1 = LED cell), matching the filled-heart peg pattern.
 const HEART = [
   "00110001100",
   "01111111110",
@@ -10,6 +10,15 @@ const HEART = [
   "00001110000",
   "00000100000",
 ];
+
+// Serpentine path through the lit cells, so the trail snakes continuously.
+const litPath = HEART.flatMap((row, r) => {
+  const cols = [...row].reduce<number[]>((a, c, i) => (c === "1" ? [...a, i] : a), []);
+  return (r % 2 === 0 ? cols : cols.reverse()).map((c) => `${r}-${c}`);
+});
+const LIT_TOTAL = litPath.length;
+const litIndex = new Map(litPath.map((k, i) => [k, i]));
+const CYCLE = 4; // seconds, matches .led-trail animation duration
 
 const explore = [
   { label: "Work", href: "/#work" },
@@ -43,14 +52,21 @@ export default function Footer() {
               style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
             >
               {HEART.flatMap((row, r) =>
-                [...row].map((c, i) => (
-                  <span
-                    key={`${r}-${i}`}
-                    className={`aspect-square rounded-[2px] ${
-                      c === "1" ? "bg-[#e2403a]" : "bg-ink/[0.05]"
-                    }`}
-                  />
-                ))
+                [...row].map((c, i) => {
+                  if (c !== "1") {
+                    return (
+                      <span key={`${r}-${i}`} className="aspect-square rounded-[2px] bg-ink/[0.05]" />
+                    );
+                  }
+                  const idx = litIndex.get(`${r}-${i}`) ?? 0;
+                  return (
+                    <span
+                      key={`${r}-${i}`}
+                      className="led-trail aspect-square rounded-[2px] bg-[#f1c8c4]"
+                      style={{ animationDelay: `-${((idx / LIT_TOTAL) * CYCLE).toFixed(2)}s` }}
+                    />
+                  );
+                })
               )}
             </span>
           </a>
