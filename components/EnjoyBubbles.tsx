@@ -56,7 +56,7 @@ export default function EnjoyBubbles() {
         </p>
 
         {/* Photo row for the active interest */}
-        <div className="mx-auto mt-8 grid max-w-3xl grid-cols-4 gap-3">
+        <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           {[1, 2, 3, 4].map((n) => (
             <Photo key={`${cat.slug}-${n}`} src={`/enjoy/${cat.slug}/${n}.jpg`} />
           ))}

@@ -6,3 +6,10 @@ out
 .DS_Store
 next-env.d.ts
 source-images
+
+# Off-the-clock: keep only the normalized 1-4.jpg, ignore camera originals (HEIC, big JPGs)
+/public/enjoy/*/*
+!/public/enjoy/*/1.jpg
+!/public/enjoy/*/2.jpg
+!/public/enjoy/*/3.jpg
+!/public/enjoy/*/4.jpg
