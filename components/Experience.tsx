@@ -78,7 +78,7 @@ const roles: Role[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" aria-label="Experience" className="border-t border-line">
+    <section id="experience" aria-label="Experience">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <Reveal>
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Experience</h2>

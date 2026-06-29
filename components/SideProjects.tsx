@@ -23,7 +23,7 @@ const custoria: Work = {
 
 export default function SideProjects() {
   return (
-    <section id="prototypes" aria-label="Built" className="border-t border-line">
+    <section id="prototypes" aria-label="Built">
       <div className="mx-auto max-w-5xl px-6 py-24">
         <Reveal>
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">

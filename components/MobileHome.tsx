@@ -92,7 +92,7 @@ export default function MobileHome() {
       </section>
 
       {/* Selected work */}
-      <section id="mwork" className="scroll-mt-24 border-t border-line pt-10">
+      <section id="mwork" className="scroll-mt-24 pt-10">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Curated work</h2>
         <div className="mt-5 space-y-5">
           {works.map((w) => (
@@ -102,7 +102,7 @@ export default function MobileHome() {
       </section>
 
       {/* Built / featured */}
-      <section className="mt-10 border-t border-line pt-10">
+      <section className="mt-10 pt-10">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Built</h2>
         <Link
           href="/work/custoria"
@@ -139,7 +139,7 @@ export default function MobileHome() {
       </section>
 
       {/* Writing */}
-      <section className="mt-10 border-t border-line pt-10">
+      <section className="mt-10 pt-10">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Writing</h2>
         <p className="mt-4 text-lg leading-relaxed">
           Notes on designing AI-native products: agentic systems, trust, and design that ships in
@@ -156,7 +156,7 @@ export default function MobileHome() {
       </section>
 
       {/* About */}
-      <section className="mt-10 border-t border-line pt-10">
+      <section className="mt-10 pt-10">
         <h2 className="font-mono text-xs uppercase tracking-widest text-muted">About</h2>
         <p className="mt-4 text-lg leading-relaxed">
           U.S. Navy engineer turned designer. BFA in Human-Computer Interaction, MBA in Design
