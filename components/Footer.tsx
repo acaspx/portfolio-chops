@@ -22,7 +22,7 @@ const connect = [
 export default function Footer() {
   const [aboutOpen, setAboutOpen] = useState(false);
   return (
-    <footer className="border-t border-line">
+    <footer>
       <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
         <div className="flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between">
           {/* Pixel heart, links to email */}
