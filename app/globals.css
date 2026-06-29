@@ -2,7 +2,7 @@
 
 @theme {
   --color-ink: #16140f;
-  --color-paper: #f7f5f0;
+  --color-paper: #faf9f6;
   --color-muted: #76716a;
   --color-line: #e3dfd7;
   --color-accent: #1e2a44;
@@ -152,8 +152,7 @@ html.asterisk-cursor * {
     radial-gradient(55% 45% at 62% 22%, rgba(58, 52, 40, 0.1), transparent 65%),
     radial-gradient(45% 40% at 88% 55%, rgba(58, 52, 40, 0.12), transparent 68%),
     radial-gradient(50% 40% at 35% 65%, rgba(58, 52, 40, 0.07), transparent 70%),
-    radial-gradient(130% 32% at 50% 103%, rgba(22, 20, 15, 0.38), transparent 70%),
-    #f2f0ea;
+    #faf9f6;
 }
 .bg-landing::after {
   content: "";
