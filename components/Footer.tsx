@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import AboutModal from "@/components/AboutModal";
 
 // 11x7 pixel heart (1 = LED cell), matching the filled-heart peg pattern.
 const HEART = [
@@ -23,7 +27,6 @@ const CYCLE = 4; // seconds, matches .led-trail animation duration
 const explore = [
   { label: "Work", href: "/#work" },
   { label: "Built", href: "/#prototypes" },
-  { label: "Experience", href: "/#experience" },
 ];
 
 const connect = [
@@ -36,6 +39,7 @@ const connect = [
 ];
 
 export default function Footer() {
+  const [aboutOpen, setAboutOpen] = useState(false);
   return (
     <footer className="border-t border-line">
       <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
@@ -84,6 +88,14 @@ export default function Footer() {
                   </li>
                 ))}
                 <li>
+                  <button
+                    onClick={() => setAboutOpen(true)}
+                    className="link-line text-muted hover:text-ink"
+                  >
+                    About
+                  </button>
+                </li>
+                <li>
                   <a
                     href="/resume.pdf"
                     target="_blank"
@@ -131,6 +143,7 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </footer>
   );
 }
