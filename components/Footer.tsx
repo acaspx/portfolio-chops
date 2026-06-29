@@ -117,16 +117,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 border-t border-line pt-6">
           <p className="font-mono text-xs text-muted">
-            © {new Date().getFullYear()} studioacas · designed &amp; built{" "}
-            <a
-              href="https://github.com/acaspx/portfolio-chops"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-line text-ink/80 hover:text-ink"
-            >
-              in code
-            </a>{" "}
-            · Next.js + Tailwind
+            © {new Date().getFullYear()} studioacas · designed &amp; built with ❤️ and intention
           </p>
         </div>
       </div>
