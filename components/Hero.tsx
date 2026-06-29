@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
       <motion.div {...fade(0)} className="flex items-center gap-5">
-        <AsteriskMark className="h-14 w-14 shrink-0 text-ink" />
+        <AsteriskMark className="h-14 w-14 shrink-0 text-accent" />
         <div>
           <h1
             className="font-serif text-3xl sm:text-4xl tracking-tight"
