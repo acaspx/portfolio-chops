@@ -93,7 +93,7 @@ export default function MobileHome() {
 
       {/* Selected work */}
       <section id="mwork" className="scroll-mt-24 border-t border-line pt-10">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Selected work</h2>
+        <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Curated work</h2>
         <div className="mt-5 space-y-5">
           {works.map((w) => (
             <MobileCard key={w.company} w={w} />

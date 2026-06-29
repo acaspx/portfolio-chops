@@ -22,13 +22,13 @@ export default function Home() {
       <div className="hidden md:block">
         <Hero />
 
-        <section id="work" aria-label="Selected work" className="mx-auto max-w-5xl px-6 pb-24">
+        <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-24">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted mb-2">
-              Selected work
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
+              Curated work
             </h2>
           </Reveal>
-          <div className="space-y-5">
+          <div className="mt-10 space-y-5">
             {works.map((w, i) => (
               <WorkCard key={w.company} work={w} index={i} />
             ))}
