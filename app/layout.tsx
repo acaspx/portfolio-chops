@@ -8,11 +8,11 @@ import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studioacas.com"),
-  title: "Anton Castro · Product Designer & Design Engineer",
+  title: "Anton Castro · Senior Product Designer & Builder",
   description:
     "Anton Castro designs AI products that ship and scale: from first prototype to design system to enterprise contract. SF-based, 0→1 four times across healthcare, fintech, and govtech AI.",
   openGraph: {
-    title: "Anton Castro · Product Designer & Design Engineer",
+    title: "Anton Castro · Senior Product Designer & Builder",
     description:
       "AI-native product designer who prototypes in code. 0→1 four times across healthcare, fintech, and govtech.",
     type: "website",
