@@ -78,7 +78,7 @@ export default function Rocket() {
         </p>
         {/* Detailed system screenshot on larger screens; a clean simplified
             version stands in on mobile where the dense diagram is unreadable. */}
-        <div className="hidden sm:block">
+        <div className="hidden md:block">
           <CaseImage
             src="/work/rk-system.png"
             alt="The end-to-end Liv system: multiple entry points feed one personalized Q&A conversation that smart-routes to the right Rocket solution"
@@ -87,7 +87,7 @@ export default function Rocket() {
             height={964}
           />
         </div>
-        <div className="sm:hidden">
+        <div className="md:hidden">
           <RocketSystem />
         </div>
         <p>
