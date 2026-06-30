@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import AboutModal from "@/components/AboutModal";
 import HeartMatrix from "@/components/HeartMatrix";
+import PixelHeart from "@/components/PixelHeart";
 
 const explore = [
   { label: "Work", href: "/#work" },
@@ -98,7 +99,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 border-t border-line pt-6">
           <p className="font-mono text-xs text-muted">
-            © {new Date().getFullYear()} studioacas · designed &amp; built with ❤️ and intention
+            © {new Date().getFullYear()} studioacas · designed &amp; built with <PixelHeart /> and intention
           </p>
         </div>
       </div>
