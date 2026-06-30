@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import RocketSystem from "@/components/RocketSystem";
 
 export const metadata: Metadata = {
   title: "Rocket · Liv, Conversational AI | Anton Castro",
@@ -75,13 +76,20 @@ export default function Rocket() {
           Rebuilding onboarding around these patterns{" "}
           <Hi>cut client onboarding time 75%</Hi>.
         </p>
-        <CaseImage
-          src="/work/rk-system.png"
-          alt="The end-to-end Liv system: multiple entry points feed one personalized Q&A conversation that smart-routes to the right Rocket solution"
-          caption="The end-to-end journey: every entry point flows into one personalized conversation, then smart-routes to the right banker, product, or resource."
-          width={2416}
-          height={964}
-        />
+        {/* Detailed system screenshot on larger screens; a clean simplified
+            version stands in on mobile where the dense diagram is unreadable. */}
+        <div className="hidden sm:block">
+          <CaseImage
+            src="/work/rk-system.png"
+            alt="The end-to-end Liv system: multiple entry points feed one personalized Q&A conversation that smart-routes to the right Rocket solution"
+            caption="The end-to-end journey: every entry point flows into one personalized conversation, then smart-routes to the right banker, product, or resource."
+            width={2416}
+            height={964}
+          />
+        </div>
+        <div className="sm:hidden">
+          <RocketSystem />
+        </div>
         <p>
           The craft was in the unhappy path. Liv was designed to{" "}
           <Hi>hand off on low confidence rather than guess</Hi>: when it
