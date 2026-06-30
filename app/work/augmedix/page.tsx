@@ -25,6 +25,11 @@ export default function Augmedix() {
           { label: "Scope", value: "Web + mobile products, design system, agentic AI integration" },
           { label: "Outcome", value: "+65% engagement in a year; acquisition by Commure (2024)" },
         ]}
+        liveSite={{
+          href: "https://www.commure.com/",
+          label: "Visit Commure",
+          image: "https://cdn.prod.website-files.com/66b319e3933cb4cb9c43ebdc/66cb9c13447baaa8b66e7511_Commure%20-%20Open%20Graph%20Image.jpg",
+        }}
       >
 
       <CaseLead
