@@ -61,21 +61,51 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Grid of framed phones, each with its own step label + descriptor. */
+/**
+ * Frameless screen: for assets that are already full-device screen captures
+ * (their own status bar baked in). Just a rounded, bordered "screen" so we
+ * don't double up the chrome or crop a non-19.5:9 capture.
+ */
+export function PhoneShot({ src, alt }: { src: string; alt: string }) {
+  const [missing, setMissing] = useState(false);
+  return (
+    <div className="relative mx-auto w-full max-w-[240px] overflow-hidden rounded-[1.9rem] border border-line bg-ink/[0.03] shadow-xl ring-1 ring-black/5 transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5">
+      {missing ? (
+        <div className="grid aspect-[9/19] place-items-center px-4 text-center">
+          <span className="font-mono text-[10px] text-muted">{src.split("/").pop()}</span>
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="block h-auto w-full"
+          onError={() => setMissing(true)}
+        />
+      )}
+    </div>
+  );
+}
+
+/** Grid of phones (framed by default), each with its own step label + descriptor. */
 export function PhoneShowcase({
   phones,
   caption,
+  framed = true,
 }: {
   phones: { src: string; alt: string; step: string; note: string }[];
   caption?: string;
+  framed?: boolean;
 }) {
+  const Shot = framed ? PhoneFrame : PhoneShot;
   return (
     <Reveal>
       <figure className="my-12">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3">
+        <div className="grid grid-cols-2 items-start gap-x-5 gap-y-9 sm:grid-cols-3">
           {phones.map((p) => (
             <div key={p.src} className="flex flex-col">
-              <PhoneFrame src={p.src} alt={p.alt} />
+              <Shot src={p.src} alt={p.alt} />
               <p className="mt-3.5 text-center font-mono text-[11px] uppercase tracking-widest text-accent">
                 {p.step}
               </p>
