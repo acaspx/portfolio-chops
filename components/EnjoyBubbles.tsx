@@ -54,7 +54,7 @@ export default function EnjoyBubbles() {
           Off the clock
         </p>
         <p className="mt-2 text-center text-sm text-muted">
-          Experiences that help me develop my &ldquo;taste&rdquo;
+          Experiences that help me develop &ldquo;taste&rdquo;
         </p>
 
         {/* Photo row for the active interest, crossfaded on tab switch */}
