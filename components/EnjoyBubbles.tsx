@@ -76,7 +76,7 @@ export default function EnjoyBubbles() {
         </div>
 
         {/* Tabs: a quiet icon row sitting just under the photos (no panel) */}
-        <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <ul className="mx-auto mt-9 flex max-w-3xl flex-wrap items-center justify-center gap-3 sm:gap-4">
           {enjoy.map((e, i) => {
             const on = active === i;
             return (
