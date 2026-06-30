@@ -111,7 +111,7 @@ export default function Rocket() {
 
       </CaseLayout>
 
-      <NextCase href="/work/state-affairs" label="State Affairs · policy intelligence AI" />
+      <NextCase href="/work/custoria" label="Custoria Labs · the digital vault" />
     </article>
   );
 }
