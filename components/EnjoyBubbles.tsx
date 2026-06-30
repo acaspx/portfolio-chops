@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 // Each interest is a tab; tapping its icon swaps the row of four photos.
 // Drop photos at public/enjoy/<slug>/1.jpg ... 4.jpg (any aspect, cropped square).
@@ -43,6 +44,7 @@ function Photo({ src }: { src: string }) {
  */
 export default function EnjoyBubbles() {
   const [active, setActive] = useState(0);
+  const reduce = useReducedMotion();
   const cat = enjoy[active];
 
   return (
@@ -55,36 +57,45 @@ export default function EnjoyBubbles() {
           Experiences that help me develop my &ldquo;taste&rdquo;
         </p>
 
-        {/* Photo row for the active interest */}
-        <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-          {[1, 2, 3, 4].map((n) => (
-            <Photo key={`${cat.slug}-${n}`} src={`/enjoy/${cat.slug}/${n}.jpg`} />
-          ))}
+        {/* Photo row for the active interest, crossfaded on tab switch */}
+        <div className="relative mx-auto mt-8 max-w-3xl">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={cat.slug}
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={reduce ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-2 gap-3 sm:grid-cols-4"
+            >
+              {[1, 2, 3, 4].map((n) => (
+                <Photo key={`${cat.slug}-${n}`} src={`/enjoy/${cat.slug}/${n}.jpg`} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Tab bar */}
-        <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-line bg-gradient-to-b from-accent/[0.07] to-accent/[0.01] p-7 shadow-sm sm:p-12">
-          <ul className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {enjoy.map((e, i) => {
-              const on = active === i;
-              return (
-                <li key={e.label}>
-                  <button
-                    type="button"
-                    onClick={() => setActive(i)}
-                    aria-pressed={on}
-                    aria-label={e.label}
-                    className={`grid h-16 w-16 place-items-center rounded-2xl bg-paper/70 text-2xl ${
-                      on ? "emboss emboss-active" : "emboss emboss-hover"
-                    }`}
-                  >
-                    <span aria-hidden>{e.icon}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {/* Tabs: a quiet icon row sitting just under the photos (no panel) */}
+        <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-3 sm:gap-4">
+          {enjoy.map((e, i) => {
+            const on = active === i;
+            return (
+              <li key={e.label}>
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-pressed={on}
+                  aria-label={e.label}
+                  className={`grid h-14 w-14 place-items-center rounded-2xl bg-paper/70 text-2xl ${
+                    on ? "emboss emboss-active" : "emboss emboss-hover"
+                  }`}
+                >
+                  <span aria-hidden>{e.icon}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
