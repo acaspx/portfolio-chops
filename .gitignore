@@ -13,3 +13,6 @@ source-images
 !/public/enjoy/*/2.jpg
 !/public/enjoy/*/3.jpg
 !/public/enjoy/*/4.jpg
+
+# Raw drop with spaces in the name; the optimized rk-system.png is committed instead
+/public/work/Rocket system design.png

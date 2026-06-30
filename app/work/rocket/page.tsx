@@ -75,6 +75,13 @@ export default function Rocket() {
           Rebuilding onboarding around these patterns{" "}
           <Hi>cut client onboarding time 75%</Hi>.
         </p>
+        <CaseImage
+          src="/work/rk-system.png"
+          alt="The end-to-end Liv system: multiple entry points feed one personalized Q&A conversation that smart-routes to the right Rocket solution"
+          caption="The end-to-end journey: every entry point flows into one personalized conversation, then smart-routes to the right banker, product, or resource."
+          width={2416}
+          height={964}
+        />
         <p>
           The craft was in the unhappy path. Liv was designed to{" "}
           <Hi>hand off on low confidence rather than guess</Hi>: when it
