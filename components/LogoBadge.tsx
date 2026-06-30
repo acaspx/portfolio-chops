@@ -5,9 +5,20 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Company logo with graceful fallback: tries /logos/<slug>.png; if missing,
  * renders a monogram badge. Drop real logos into public/logos/ and they
- * appear automatically - no code change, no broken images.
+ * appear automatically - no code change, no broken images. `size` (px) scales
+ * the badge; `className` can override rounding etc.
  */
-export default function LogoBadge({ slug, name }: { slug: string; name: string }) {
+export default function LogoBadge({
+  slug,
+  name,
+  size = 40,
+  className = "",
+}: {
+  slug: string;
+  name: string;
+  size?: number;
+  className?: string;
+}) {
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -18,9 +29,9 @@ export default function LogoBadge({ slug, name }: { slug: string; name: string }
     if (img && img.complete && img.naturalWidth === 0) setFailed(true);
   }, []);
 
+  const dim = { width: size, height: size };
+
   if (failed) {
-    // Consistent 2-letter monogram: initials for multi-word names,
-    // first two letters for single-word names (so "Rocket" → "Ro", not "R").
     const words = name.replace(/[^A-Za-z ]/g, "").split(" ").filter(Boolean);
     const monogram =
       words.length > 1
@@ -29,7 +40,8 @@ export default function LogoBadge({ slug, name }: { slug: string; name: string }
     return (
       <span
         aria-hidden
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-line bg-ink/[0.04] font-mono text-xs font-semibold tracking-tight text-muted"
+        style={{ ...dim, fontSize: Math.round(size * 0.3) }}
+        className={`grid shrink-0 place-items-center rounded-lg border border-line bg-ink/[0.04] font-mono font-semibold tracking-tight text-muted ${className}`}
       >
         {monogram}
       </span>
@@ -43,9 +55,8 @@ export default function LogoBadge({ slug, name }: { slug: string; name: string }
       src={`/logos/${slug}.png`}
       alt=""
       aria-hidden
-      width={40}
-      height={40}
-      className="h-10 w-10 shrink-0 rounded-lg border border-line object-contain bg-white p-1"
+      style={dim}
+      className={`shrink-0 rounded-lg border border-line bg-white object-contain p-1 ${className}`}
       onError={() => setFailed(true)}
     />
   );
