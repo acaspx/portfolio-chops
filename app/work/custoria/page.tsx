@@ -32,7 +32,7 @@ export default function Custoria() {
       >
 
       <CaseLead
-        hook="Co-founding Custoria: a digital vault for what people value most. I designed it end to end and built the iOS app in Swift, design and code in one pair of hands."
+        hook="Designing an ecosystem to support a robust sharing model that proves value and ownership without surrendering privacy."
         stats={[
           { value: "2×", label: "more accurate item records" },
           { value: "~90%", label: "less loss-and-risk exposure" },
