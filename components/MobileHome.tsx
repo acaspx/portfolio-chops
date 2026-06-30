@@ -2,6 +2,7 @@ import Link from "next/link";
 import AsteriskMark from "@/components/AsteriskMark";
 import AppStoreBadge from "@/components/AppStoreBadge";
 import EnjoyBubbles from "@/components/EnjoyBubbles";
+import Experience from "@/components/Experience";
 import { works } from "@/content/works";
 import type { Work } from "@/components/WorkCard";
 
@@ -165,6 +166,7 @@ export default function MobileHome() {
       </section>
 
       </div>
+      <Experience id="experience-m" />
       <EnjoyBubbles />
     </>
   );
