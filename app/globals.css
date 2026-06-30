@@ -11,6 +11,15 @@
   --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces Variable", Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+  /* Corner-radius scale: tightened a step for a more architectural feel, with
+     a consistent nesting ratio (container > nested > control). rounded-full
+     stays full for pills/circles. */
+  --radius-md: 0.3125rem; /* 5px  - chips, small controls */
+  --radius-lg: 0.5rem;    /* 8px  - nested elements, image borders */
+  --radius-xl: 0.625rem;  /* 10px - panels */
+  --radius-2xl: 0.75rem;  /* 12px - cards (was 16px) */
+  --radius-3xl: 1rem;     /* 16px - large surfaces (was 24px) */
 }
 
 :root {

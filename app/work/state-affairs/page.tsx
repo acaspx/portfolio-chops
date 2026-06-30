@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import AgentStack from "@/components/AgentStack";
+import LegislativeLadder from "@/components/LegislativeLadder";
 
 export const metadata: Metadata = {
   title: "State Affairs · Policy Intelligence AI | Anton Castro",
@@ -83,6 +84,54 @@ export default function StateAffairs() {
           and drafting agents reason and assemble, the personalization agent voices
           it for each user. Robust on a few jobs beats shallow on many, because in
           this arena you only get one first try.
+        </p>
+      </Section>
+
+      <Section id="builder" kicker="How it was built" title="A deterministic builder became the training set">
+        <p>
+          The 360° View didn&apos;t start as a model. It started as a{" "}
+          <Hi>deterministic builder</Hi>: a guided flow that captured intent, the
+          states, the date range, the position, the reason, and showed users
+          exactly what their query would return before generating anything. That
+          structure did two jobs at once. It gave users a legible way to refine
+          their data, and it gave us <Hi>labeled intent at scale</Hi>.
+        </p>
+        <CaseImage
+          src="/work/sa-builder-entry.png"
+          alt="State Affairs bills page: the entry point where a user's intent starts as a structured, trackable query"
+          caption="The entry point: intent starts as a structured query on the bills page"
+          width={1600}
+          height={1091}
+        />
+        <CaseImage
+          src="/work/sa-builder-review.png"
+          alt="The deterministic 360° View builder confirming scope, states, date range, position, and reason before generating"
+          caption="The builder confirms every parameter before generating, so intent is explicit and easy to label"
+          width={1600}
+          height={1091}
+        />
+        <p>
+          Once we saw which queries ran highest-volume, we labeled and categorized
+          that data and used it to train the model, running regression and{" "}
+          <Hi>fine-tuning across the six personas and the four jobs</Hi> we were
+          prioritizing. The builder that captured intent became the training set
+          for the agent that acts on it.
+        </p>
+      </Section>
+
+      <Section id="prioritize" kicker="Prioritizing the signal" title="Eight stages in, one signal out">
+        <p>
+          With the model trained on real intent, the next question was what to
+          surface. A bill moves through eight stages, from introduced to enacted,
+          and most of that motion is noise; the value is knowing{" "}
+          <Hi>which bills, at which stage, matter to you</Hi>. So we scored every
+          stage for momentum and mapped it into AI Chat and the 360° View.
+        </p>
+        <LegislativeLadder />
+        <p>
+          The same system then surfaces the right bill and the right data point for
+          an enterprise tracking <Hi>all fifty states</Hi> and for a single-state
+          user, in the same pointed way.
         </p>
       </Section>
 
