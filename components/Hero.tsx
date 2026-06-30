@@ -30,8 +30,9 @@ export default function Hero() {
       <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
         Welcome, I&apos;m Anton, a product designer building intuitive AI-native products
         for high-stakes work, where the real problem is{" "}
-        <em className="font-serif italic text-accent">trust</em>. 0→1 four times across
-        healthcare, fintech, and govtech.
+        <em className="font-serif italic text-accent">trust</em>.
+        <br />
+        0→1 four times across healthcare, fintech, and govtech.
       </motion.p>
     </section>
   );
