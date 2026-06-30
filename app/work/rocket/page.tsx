@@ -23,6 +23,11 @@ export default function Rocket() {
           { label: "Scope", value: "End-to-end conversation journey, visual voice, conversation design system (B2B2C)" },
           { label: "Outcome", value: "−75% client onboarding time · +22% routing to lending bankers · 94% routing accuracy" },
         ]}
+        liveSite={{
+          href: "https://www.rocketmortgage.com/",
+          label: "Visit Rocket Mortgage",
+          image: "https://prod.rockmedialibrary.com/api/public/content/30bf1353-downloadOriginal-D-SiteOpenGraphImage-20250623.jpg?v=7a450e50",
+        }}
       >
 
       <CaseLead
