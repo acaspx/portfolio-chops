@@ -125,7 +125,7 @@ export default function Augmedix() {
           trust had to live.
         </p>
         <PhoneShowcase
-          framed={false}
+          island={false}
           phones={[
             { src: "/work/ax-app-tracker.png", alt: "Augmedix patient visit tracker: a shift queue of patients with note status and a capture mic", step: "Capture", note: "The shift queue. One tap on the mic starts an ambient recording." },
             { src: "/work/ax-app-record.png", alt: "Live voice transcription waveform during a patient visit", step: "Listen", note: "Augmedix listens to the visit; the transcript builds in the background." },
@@ -146,7 +146,7 @@ export default function Augmedix() {
           height={2963}
         />
         <PhoneShowcase
-          framed={false}
+          island={false}
           phones={[
             { src: "/work/ax-app-carecues.png", alt: "AI CareCues surfacing EKG interpretation insights for clinician review", step: "Surface", note: "The AI surfaces clinical insights in context, to accept or correct." },
             { src: "/work/ax-fb-rate.png", alt: "A generated clinical note with a thumbs up or down rating control", step: "Rate", note: "Any note can be rated in one tap, the lightest possible correction." },

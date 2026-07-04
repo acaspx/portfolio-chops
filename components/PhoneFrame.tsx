@@ -9,7 +9,16 @@ import Reveal from "@/components/Reveal";
  * correct 19.5:9 proportions. Falls back to a labeled slot if the file
  * doesn't exist yet.
  */
-export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
+export function PhoneFrame({
+  src,
+  alt,
+  island = true,
+}: {
+  src: string;
+  alt: string;
+  /** Dynamic Island. Turn off for captures that already have a baked status bar. */
+  island?: boolean;
+}) {
   const [missing, setMissing] = useState(false);
   // Chrome (bezel radius/padding, island) is sized in container-query units so
   // it scales with the phone's rendered width and stays proportional whether the
@@ -49,12 +58,14 @@ export function PhoneFrame({ src, alt }: { src: string; alt: string }) {
               onError={() => setMissing(true)}
             />
           )}
-          {/* Dynamic Island */}
-          <div
-            aria-hidden
-            className="absolute left-1/2 -translate-x-1/2 rounded-full bg-black"
-            style={{ top: "3.8cqw", height: "8.5cqw", width: "30.8cqw" }}
-          />
+          {/* Dynamic Island (skip for captures with a baked status bar) */}
+          {island && (
+            <div
+              aria-hidden
+              className="absolute left-1/2 -translate-x-1/2 rounded-full bg-black"
+              style={{ top: "3.8cqw", height: "8.5cqw", width: "30.8cqw" }}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -93,12 +104,14 @@ export function PhoneShowcase({
   phones,
   caption,
   framed = true,
+  island = true,
 }: {
   phones: { src: string; alt: string; step: string; note: string }[];
   caption?: string;
   framed?: boolean;
+  /** Dynamic Island on the frame; off for captures with a baked status bar. */
+  island?: boolean;
 }) {
-  const Shot = framed ? PhoneFrame : PhoneShot;
   return (
     <Reveal>
       <figure className="my-12">
@@ -106,7 +119,11 @@ export function PhoneShowcase({
           <div className="grid grid-cols-2 items-start gap-x-5 gap-y-9 sm:grid-cols-3">
             {phones.map((p) => (
               <div key={p.src} className="flex flex-col">
-                <Shot src={p.src} alt={p.alt} />
+                {framed ? (
+                  <PhoneFrame src={p.src} alt={p.alt} island={island} />
+                ) : (
+                  <PhoneShot src={p.src} alt={p.alt} />
+                )}
               <p className="mt-3.5 text-center font-mono text-[11px] uppercase tracking-widest text-accent">
                 {p.step}
               </p>
