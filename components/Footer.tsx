@@ -97,10 +97,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 border-t border-line pt-6">
+        <div className="mt-14 flex flex-col items-start gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-muted">
-            © {new Date().getFullYear()} studioacas · designed &amp; built with <HeartCounter /> and intention
+            © {new Date().getFullYear()} studioacas · designed &amp; built with intention
           </p>
+          <HeartCounter />
         </div>
       </div>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
