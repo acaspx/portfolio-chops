@@ -18,6 +18,7 @@ export default function StateAffairs() {
         alt="A policy professional reviewing the State Affairs intelligence dashboard on a laptop"
       />
       <CaseLayout
+        tone="sage"
         company="State Affairs · Policy Intelligence"
         title="From a chatbot that answers to an agent that does the job"
         meta={[

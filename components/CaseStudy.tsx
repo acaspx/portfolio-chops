@@ -6,9 +6,11 @@ import AppStoreBadge from "@/components/AppStoreBadge";
 import type { CSSProperties, ReactNode } from "react";
 
 /** Per-case dark, tinted canvas gradients for in-body case images. */
-export type CaseTone = "navy" | "indigo" | "charcoal" | "violet" | "custoria";
+export type CaseTone = "navy" | "indigo" | "charcoal" | "violet" | "custoria" | "sage";
 const CANVAS: Record<CaseTone, string> = {
   navy: "#20293f url('/textures/case-navy.jpg') center/cover",
+  // State Affairs: a moody sage cloud, recolored from the product's green accent.
+  sage: "#16261d url('/textures/case-sage.jpg') center/cover",
   indigo: "#232350 url('/textures/case-indigo.jpg') center/cover",
   charcoal: "#211c19 url('/textures/case-charcoal.jpg') center/cover",
   violet: "#2c2142 url('/textures/case-violet.jpg') center/cover",
@@ -24,6 +26,7 @@ const PHONE_CANVAS: Record<CaseTone, string> = {
   charcoal: "radial-gradient(85% 85% at 12% 88%, rgba(120,60,45,0.10), transparent 60%), linear-gradient(135deg, #f4f1ec, #efe8e1 55%, #f3ede9)",
   violet: "radial-gradient(85% 85% at 85% 88%, rgba(120,80,150,0.12), transparent 60%), linear-gradient(135deg, #f3ecfa, #eae1f4 55%, #f6ecf1)",
   custoria: "#dfe3ec url('/work/cu-canvas.jpg') center/cover",
+  sage: "radial-gradient(85% 85% at 85% 12%, rgba(40,70,55,0.10), transparent 60%), linear-gradient(135deg, #eef3ee, #e6efe8 55%, #eff3ed)",
 };
 
 /** App Store download link + badge, shared by the rail and mobile header. */
