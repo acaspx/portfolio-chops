@@ -52,6 +52,26 @@ export default function Rocket() {
         </p>
       </Section>
 
+      <Section id="parity" kicker="Meeting them where they are" title="Two ways in: the familiar form, or a conversation">
+        <p>
+          Meeting homeowners where they are meant not forcing a channel on them.
+          Some trust the familiar web form; others would rather just say where they
+          are in the process. So I designed Liv in{" "}
+          <Hi>parity with Rocket&apos;s new web onboarding</Hi>: the same questions,
+          the same estimated-credit math, the same next step, offered either as the
+          standard flow or as a conversation with Liv. Whichever channel someone
+          picks, they share the same goals and land in the same place, so the choice
+          never costs them progress.
+        </p>
+        <CaseImage
+          src="/work/rk-parity.png"
+          alt="Rocket onboarding designed for parity: the same intake as a familiar web form asking when the user plans to purchase, and as a conversation with Liv sharing the same goals"
+          caption="Parity by design: the same onboarding as a familiar web form, or a conversation with Liv, sharing the same goals and the same next step."
+          width={1324}
+          height={898}
+        />
+      </Section>
+
       <Section id="problem" kicker="The hard problem" title="A chatbot can't fake its way through a mortgage">
         <p>
           People won&apos;t hand the largest transaction of their lives to a bot

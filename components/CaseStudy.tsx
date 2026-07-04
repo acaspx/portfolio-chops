@@ -6,12 +6,14 @@ import AppStoreBadge from "@/components/AppStoreBadge";
 import type { CSSProperties, ReactNode } from "react";
 
 /** Per-case dark, tinted canvas gradients for in-body case images. */
-export type CaseTone = "navy" | "indigo" | "charcoal" | "violet";
+export type CaseTone = "navy" | "indigo" | "charcoal" | "violet" | "custoria";
 const CANVAS: Record<CaseTone, string> = {
   navy: "#20293f url('/textures/case-navy.jpg') center/cover",
   indigo: "#232350 url('/textures/case-indigo.jpg') center/cover",
   charcoal: "#211c19 url('/textures/case-charcoal.jpg') center/cover",
   violet: "#2c2142 url('/textures/case-violet.jpg') center/cover",
+  // Custoria: a soft navy-accent cloudy gradient (dark app screens pop on it).
+  custoria: "#dfe3ec url('/work/cu-canvas.jpg') center/cover",
 };
 
 /** Softer, light per-case gradients for the phone showcases (device frames and
@@ -21,6 +23,7 @@ const PHONE_CANVAS: Record<CaseTone, string> = {
   indigo: "radial-gradient(85% 85% at 85% 12%, rgba(45,45,92,0.11), transparent 60%), linear-gradient(135deg, #efeffb, #e6e7f7 55%, #f1ecf6)",
   charcoal: "radial-gradient(85% 85% at 12% 88%, rgba(120,60,45,0.10), transparent 60%), linear-gradient(135deg, #f4f1ec, #efe8e1 55%, #f3ede9)",
   violet: "radial-gradient(85% 85% at 85% 88%, rgba(120,80,150,0.12), transparent 60%), linear-gradient(135deg, #f3ecfa, #eae1f4 55%, #f6ecf1)",
+  custoria: "#dfe3ec url('/work/cu-canvas.jpg') center/cover",
 };
 
 /** App Store download link + badge, shared by the rail and mobile header. */

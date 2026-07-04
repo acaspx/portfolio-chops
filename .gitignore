@@ -19,3 +19,6 @@ source-images
 
 # Heavy source PNGs for case canvases; the optimized .jpg versions are committed
 /public/textures/*.png
+
+# Raw drop with a colon in the name; rk-parity.png is committed instead
+/public/work/rk-chat:web parity.png
