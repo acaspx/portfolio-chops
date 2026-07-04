@@ -36,7 +36,7 @@ export const works: Work[] = [
     ],
     images: [
       { file: "ax-web-app.png", alt: "Augmedix web app documentation flow" },
-      { file: "ax-mobile.png", alt: "Augmedix Assist mobile app" },
+      { file: "ax-platform.png", alt: "Augmedix platform overview: visit, documentation, and EHR" },
       { file: "ax-design-system.png", alt: "Augmedix design system components" },
     ],
   },
@@ -54,9 +54,9 @@ export const works: Work[] = [
       { value: "94%", label: "routing accuracy" },
     ],
     images: [
-      { file: "rk-hero.png", alt: "Liv chat on Rocket's homepage" },
       { file: "rk-patterns.png", alt: "Conversation design pattern library" },
       { file: "rk-routing.png", alt: "Banker console routing accuracy" },
+      { file: "rk-disaster.png", alt: "Rocket's natural-disaster recovery guide, with Liv" },
     ],
   },
 ];

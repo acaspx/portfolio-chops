@@ -88,42 +88,10 @@ html.asterisk-cursor * {
   cursor: none !important;
 }
 
-/* Social icons: a fanned deck (LinkedIn on top) that fans into a row on hover.
-   Touch devices (no hover) get a plain spaced row so every icon is reachable. */
-.social-stack > li {
-  position: relative;
-  transition:
-    margin 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.3s ease;
-}
+/* Social icons: a clean spaced row of rounded-square buttons (same chrome as
+   the home mark). Each blooms on its own hover via .emboss-hover. */
 .social-stack > li:not(:last-child) {
-  margin-right: 0.4rem; /* default: spaced row (touch) */
-}
-@media (hover: hover) {
-  .social-stack > li:not(:last-child) {
-    margin-right: -1.6rem; /* idle: collapsed deck */
-  }
-  .social-stack > li:last-child {
-    z-index: 3;
-  }
-  .social-stack > li:nth-last-child(2) {
-    z-index: 2;
-    transform: scale(0.9);
-    opacity: 0.6;
-  }
-  .social-stack > li:nth-last-child(3) {
-    z-index: 1;
-    transform: scale(0.82);
-    opacity: 0.38;
-  }
-  .social-stack:hover > li {
-    transform: none;
-    opacity: 1;
-  }
-  .social-stack:hover > li:not(:last-child) {
-    margin-right: 0.4rem; /* fanned-out row */
-  }
+  margin-right: 0.5rem;
 }
 
 /* Pixel-heart LEDs: dim red when off, a bright trail sweeps through (staggered
