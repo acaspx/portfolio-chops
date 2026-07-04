@@ -22,7 +22,7 @@ export default function Home() {
       <div className="hidden md:block">
         <Hero />
 
-        <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-24">
+        <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-12">
           <Reveal>
             <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
               Curated work

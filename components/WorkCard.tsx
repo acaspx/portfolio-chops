@@ -49,10 +49,10 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
 
   return (
     <motion.article
-      initial={reduce ? false : { opacity: 0, y: 32 }}
+      initial={reduce ? false : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "0px 0px 100px 0px" }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       whileHover={reduce ? undefined : "hover"}
       className={`group relative rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8 ${
         work.comingSoon ? "opacity-60" : ""

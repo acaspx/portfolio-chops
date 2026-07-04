@@ -49,7 +49,7 @@ export default function EnjoyBubbles() {
 
   return (
     <section aria-label="Things I enjoy">
-      <div className="mx-auto max-w-5xl px-6 pt-16 pb-10 sm:pt-20 sm:pb-12">
+      <div className="mx-auto max-w-5xl px-6 pt-12 pb-10 sm:pt-14 sm:pb-12">
         <p className="text-center font-mono text-xs uppercase tracking-widest text-muted">
           Off the clock
         </p>

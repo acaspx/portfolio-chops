@@ -91,7 +91,7 @@ const STEP = 30; // px of horizontal rise per step (desktop only)
 export default function Experience({ id = "experience" }: { id?: string }) {
   return (
     <section id={id} aria-label="Experience">
-      <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+      <div className="mx-auto max-w-5xl px-6 py-14 sm:py-16">
         <Reveal>
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Experience</h2>
         </Reveal>
