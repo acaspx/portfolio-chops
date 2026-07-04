@@ -83,10 +83,11 @@ export default function CustomCursor() {
     >
       <div className="-translate-x-1/2 -translate-y-1/2">
         <motion.div
-          animate={{ scale, color: active ? ACCENT : INK }}
+          animate={{ scale, color: active ? ACCENT : INK, opacity: active ? 0.6 : 1 }}
           transition={{
             scale: { type: "spring", stiffness: 520, damping: 15, mass: 0.5 },
             color: { duration: 0.18 },
+            opacity: { duration: 0.18 },
           }}
           style={{ color: INK, filter: "drop-shadow(0 0 1.6px rgba(247,245,240,0.95))" }}
         >
