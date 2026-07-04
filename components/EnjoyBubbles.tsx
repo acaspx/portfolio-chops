@@ -51,7 +51,7 @@ export default function EnjoyBubbles() {
     <section aria-label="Things I enjoy">
       <div className="mx-auto max-w-5xl px-6 pt-12 pb-10 sm:pt-14 sm:pb-12">
         <p className="text-center font-mono text-xs uppercase tracking-widest text-muted">
-          Off the clock
+          IRL
         </p>
         <p className="mt-2 text-center text-sm text-muted">
           Experiences that help me develop &ldquo;taste&rdquo;
