@@ -15,7 +15,7 @@ export default function Hero() {
     <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
       <motion.div {...fade(0)}>
         <div className="relative inline-block">
-          <AsteriskMark className="absolute -left-5 -top-5 h-8 w-8 text-accent sm:-left-7 sm:-top-6 sm:h-9 sm:w-9" />
+          <AsteriskMark className="absolute -left-5 -top-4 h-7 w-7 text-accent sm:-left-6 sm:-top-5 sm:h-8 sm:w-8" />
           <h1
             className="font-serif text-3xl sm:text-4xl tracking-tight"
             style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
