@@ -16,3 +16,6 @@ source-images
 
 # Raw drop with spaces in the name; the optimized rk-system.png is committed instead
 /public/work/Rocket system design.png
+
+# Heavy source PNGs for case canvases; the optimized .jpg versions are committed
+/public/textures/*.png

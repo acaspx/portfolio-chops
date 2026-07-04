@@ -3,7 +3,16 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import FadeImage from "@/components/FadeImage";
 import AppStoreBadge from "@/components/AppStoreBadge";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
+
+/** Per-case dark, tinted canvas gradients for in-body case images. */
+export type CaseTone = "navy" | "indigo" | "charcoal" | "violet";
+const CANVAS: Record<CaseTone, string> = {
+  navy: "#20293f url('/textures/case-navy.jpg') center/cover",
+  indigo: "#232350 url('/textures/case-indigo.jpg') center/cover",
+  charcoal: "#211c19 url('/textures/case-charcoal.jpg') center/cover",
+  violet: "#2c2142 url('/textures/case-violet.jpg') center/cover",
+};
 
 /** App Store download link + badge, shared by the rail and mobile header. */
 function AppStoreLink({ href }: { href: string }) {
@@ -98,14 +107,16 @@ export function CaseImage({
 }) {
   return (
     <figure className="my-6">
-      <FadeImage
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className="h-auto w-full rounded-lg border border-line shadow-sm"
-      />
-      <figcaption className="mt-2 font-mono text-xs text-muted">{caption}</figcaption>
+      <div className="case-canvas overflow-hidden rounded-2xl p-4 sm:p-8">
+        <FadeImage
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className="relative z-[1] h-auto w-full rounded-lg shadow-2xl ring-1 ring-black/25"
+        />
+      </div>
+      <figcaption className="mt-2.5 font-mono text-xs text-muted">{caption}</figcaption>
     </figure>
   );
 }
@@ -139,6 +150,7 @@ export function CaseLayout({
   meta,
   appStore,
   liveSite,
+  tone = "navy",
   children,
 }: {
   company: string;
@@ -146,10 +158,14 @@ export function CaseLayout({
   meta: Meta[];
   appStore?: string;
   liveSite?: LiveSite;
+  tone?: CaseTone;
   children: ReactNode;
 }) {
   return (
-    <div className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14">
+    <div
+      className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14"
+      style={{ "--case-canvas": CANVAS[tone] } as CSSProperties}
+    >
       {/* Main scrolling column */}
       <div className="min-w-0">
         <header className="pt-16 pb-8">

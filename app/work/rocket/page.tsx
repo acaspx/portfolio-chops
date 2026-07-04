@@ -16,6 +16,7 @@ export default function Rocket() {
         alt="Rocket Mortgage homepage with the Liv chat assistant open"
       />
       <CaseLayout
+        tone="charcoal"
         company="Rocket"
         title="Meeting homeowners where they are: designing Liv, Rocket's conversational AI"
         meta={[

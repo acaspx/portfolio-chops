@@ -20,6 +20,7 @@ export default function Custoria() {
         height={1300}
       />
       <CaseLayout
+        tone="violet"
         company="Custoria Labs · co-founded with Yiyi Qin"
         title="Founding Custoria: a digital vault for what people value most"
         meta={[

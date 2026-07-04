@@ -17,6 +17,7 @@ export default function Augmedix() {
         height={1080}
       />
       <CaseLayout
+        tone="indigo"
         company="Augmedix (acquired by Commure, $139M)"
         title="Scaling AI clinical documentation from one product to four"
         meta={[
