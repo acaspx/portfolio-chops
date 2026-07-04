@@ -14,6 +14,15 @@ const CANVAS: Record<CaseTone, string> = {
   violet: "#2c2142 url('/textures/case-violet.jpg') center/cover",
 };
 
+/** Softer, light per-case gradients for the phone showcases (device frames and
+ *  frameless shots read best on a light wash rather than the dark canvas). */
+const PHONE_CANVAS: Record<CaseTone, string> = {
+  navy: "radial-gradient(85% 85% at 85% 12%, rgba(30,42,68,0.10), transparent 60%), linear-gradient(135deg, #eef1f7, #e7edf6 55%, #efedf5)",
+  indigo: "radial-gradient(85% 85% at 85% 12%, rgba(45,45,92,0.11), transparent 60%), linear-gradient(135deg, #efeffb, #e6e7f7 55%, #f1ecf6)",
+  charcoal: "radial-gradient(85% 85% at 12% 88%, rgba(120,60,45,0.10), transparent 60%), linear-gradient(135deg, #f4f1ec, #efe8e1 55%, #f3ede9)",
+  violet: "radial-gradient(85% 85% at 85% 88%, rgba(120,80,150,0.12), transparent 60%), linear-gradient(135deg, #f3ecfa, #eae1f4 55%, #f6ecf1)",
+};
+
 /** App Store download link + badge, shared by the rail and mobile header. */
 function AppStoreLink({ href }: { href: string }) {
   return (
@@ -164,7 +173,12 @@ export function CaseLayout({
   return (
     <div
       className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14"
-      style={{ "--case-canvas": CANVAS[tone] } as CSSProperties}
+      style={
+        {
+          "--case-canvas": CANVAS[tone],
+          "--phone-canvas": PHONE_CANVAS[tone],
+        } as CSSProperties
+      }
     >
       {/* Main scrolling column */}
       <div className="min-w-0">

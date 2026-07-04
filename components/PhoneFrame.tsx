@@ -102,10 +102,11 @@ export function PhoneShowcase({
   return (
     <Reveal>
       <figure className="my-12">
-        <div className="grid grid-cols-2 items-start gap-x-5 gap-y-9 sm:grid-cols-3">
-          {phones.map((p) => (
-            <div key={p.src} className="flex flex-col">
-              <Shot src={p.src} alt={p.alt} />
+        <div className="phone-canvas overflow-hidden rounded-2xl p-5 sm:p-9">
+          <div className="grid grid-cols-2 items-start gap-x-5 gap-y-9 sm:grid-cols-3">
+            {phones.map((p) => (
+              <div key={p.src} className="flex flex-col">
+                <Shot src={p.src} alt={p.alt} />
               <p className="mt-3.5 text-center font-mono text-[11px] uppercase tracking-widest text-accent">
                 {p.step}
               </p>
@@ -113,7 +114,8 @@ export function PhoneShowcase({
                 {p.note}
               </p>
             </div>
-          ))}
+            ))}
+          </div>
         </div>
         {caption && (
           <figcaption className="mt-6 text-center font-mono text-xs text-muted">{caption}</figcaption>
