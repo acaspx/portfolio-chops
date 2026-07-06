@@ -38,7 +38,7 @@ export default function Footer() {
           {/* Nav columns */}
           <div className="grid grid-cols-2 gap-x-12 gap-y-10">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-muted">Explore</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-muted">What&apos;s more</p>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {explore.map((l) => (
                   <li key={l.label}>

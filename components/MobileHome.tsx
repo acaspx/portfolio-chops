@@ -74,9 +74,9 @@ export default function MobileHome() {
         </div>
         <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
         <p className="mt-6 text-lg leading-relaxed">
-          I design AI-native products for high-stakes work, where the hard problem isn&apos;t
-          the model, it&apos;s <em className="font-serif italic text-accent">trust</em>. 0→1 four
-          times, across healthcare, fintech, and govtech.
+          Designing AI-native products for high-stakes work, where the real challenge is
+          building <em className="font-serif italic text-accent">trust</em>. Four 0→1s across
+          healthcare, fintech, and govtech. Currently building AI systems at State Affairs.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
           <a
