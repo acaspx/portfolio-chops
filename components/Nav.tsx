@@ -78,7 +78,7 @@ export default function Nav() {
                     About
                   </button>
                 </li>
-                <li className="relative">
+                <li>
                   <button
                     ref={contactBtnRef}
                     onClick={() => setContactOpen((o) => !o)}
@@ -88,11 +88,6 @@ export default function Nav() {
                   >
                     Contact
                   </button>
-                  <ContactCard
-                    open={contactOpen}
-                    onClose={() => setContactOpen(false)}
-                    anchorRef={contactBtnRef}
-                  />
                 </li>
               </ul>
             </div>
@@ -100,6 +95,13 @@ export default function Nav() {
             {/* Right: social links, kept right-aligned */}
             <SocialLinks className="hidden sm:inline-flex" />
           </nav>
+
+          {/* Contact popover: anchored to the floating nav, drops below it */}
+          <ContactCard
+            open={contactOpen}
+            onClose={() => setContactOpen(false)}
+            anchorRef={contactBtnRef}
+          />
         </div>
       </div>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
