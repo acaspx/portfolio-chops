@@ -41,6 +41,8 @@ export type Work = {
   /** App Store URL - renders a Download badge inside the card */
   appStore?: string;
   comingSoon?: boolean;
+  /** Password-gated case study: cursor signals it, and the page shows a gate. */
+  locked?: boolean;
 };
 
 export default function WorkCard({ work, index }: { work: Work; index: number }) {
@@ -54,6 +56,8 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       viewport={{ once: true, margin: "0px 0px 100px 0px" }}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       whileHover={reduce ? undefined : "hover"}
+      data-cursor={linked ? (work.locked ? "Password protected" : "View case") : undefined}
+      data-locked={work.locked ? "true" : undefined}
       className={`group relative rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8 ${
         work.comingSoon ? "opacity-60" : ""
       }`}

@@ -8,6 +8,7 @@ export const works: Work[] = [
     title: "State Affairs' first AI product, from 0→1 to Walmart and DoorDash",
     tags: "0→1 Enterprise AI",
     year: "2026",
+    locked: true,
     result:
       "The data and the journalists were there, but no product turning it into decisions, and no AI. I led the AI features that landed State Affairs' first enterprise contracts.",
     metrics: [

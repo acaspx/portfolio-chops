@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
 import AgentStack from "@/components/AgentStack";
 import LegislativeLadder from "@/components/LegislativeLadder";
+import CaseGate from "@/components/CaseGate";
 
 export const metadata: Metadata = {
   title: "State Affairs · Policy Intelligence AI | Anton Castro",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 // Images: processed from Figma exports in source-images/SA images (all demo data).
 export default function StateAffairs() {
   return (
+    <CaseGate>
     <article>
       <CaseHero
         src="/work/sa-hero.png"
@@ -223,5 +225,6 @@ export default function StateAffairs() {
 
       <NextCase href="/work/augmedix" label="Augmedix · scaling AI clinical documentation" />
     </article>
+    </CaseGate>
   );
 }
