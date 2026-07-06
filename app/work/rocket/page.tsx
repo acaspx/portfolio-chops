@@ -70,6 +70,20 @@ export default function Rocket() {
           width={1324}
           height={898}
         />
+        <p>
+          That parity held across devices. On mobile, the{" "}
+          <Hi>same guided onboarding</Hi>, home description, property use, then a
+          calculated next step, runs the identical logic, with Liv one tap away on
+          every screen. The device changes; the questions, the pacing, and where a
+          person lands do not.
+        </p>
+        <CaseImage
+          src="/work/rk-mobile-onboarding.png"
+          alt="Rocket's mobile onboarding: home description, property use, a calculating step, and a handoff to a human expert, with Liv's input available on every screen"
+          caption="The same onboarding on mobile, step by step, with Liv available throughout and a clean handoff to a human expert."
+          width={1630}
+          height={654}
+        />
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="A chatbot can't fake its way through a mortgage">
@@ -147,6 +161,20 @@ export default function Rocket() {
           src="/work/rk-routing.png"
           alt="Before and after of the banker console with routing accuracy results"
           caption="Banker-side view: correct-client routing, before and after"
+        />
+        <p>
+          The payoff is what Liv leaves behind. What a homeowner tells Liv, loan
+          type, timeline, goals, <Hi>personalizes their Rocket dashboard</Hi>: the
+          right next step surfaced first, the services that fit them up top, the
+          rest out of the way. The conversation isn&apos;t a detour from the product;
+          it becomes the product&apos;s memory.
+        </p>
+        <CaseImage
+          src="/work/rk-personalization.png"
+          alt="A loan-type selection on mobile flowing into a personalized Rocket dashboard, where the services and next steps that match the user's stated goals are surfaced first"
+          caption="The end result: a dashboard personalized by what Liv learned, so the next step and the services that fit surface first."
+          width={2000}
+          height={1210}
         />
       </Section>
 
