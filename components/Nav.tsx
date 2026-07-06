@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "motion/react";
 import AboutModal from "@/components/AboutModal";
@@ -23,11 +23,24 @@ export default function Nav() {
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
   const isCaseStudy = pathname?.startsWith("/work");
 
+  // Opaque at the very top; fades more transparent once scrolled down.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header className="sticky top-0 z-40">
       <div className="mx-auto max-w-5xl px-4 pt-3 sm:px-6 sm:pt-4">
         {/* Floating, contained nav bar */}
-        <div className="relative rounded-2xl border border-line bg-paper/80 shadow-[0_6px_22px_-8px_rgba(22,20,15,0.16)] backdrop-blur-md">
+        <div
+          className={`relative rounded-2xl border border-line shadow-[0_6px_22px_-8px_rgba(22,20,15,0.16)] backdrop-blur-md transition-colors duration-300 ${
+            scrolled ? "bg-paper/45" : "bg-paper/80"
+          }`}
+        >
           {/* Reading progress - only on case studies; a thin bar spanning the floating nav */}
           {isCaseStudy && (
             <motion.div
