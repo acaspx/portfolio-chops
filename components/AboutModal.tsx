@@ -15,14 +15,6 @@ const signature = Allura({ weight: "400", subsets: ["latin"], display: "swap" })
  * treatment (mono kicker, serif italic title) as the rest of the site.
  */
 
-// Photos washed across the backdrop, blurred. Color versions read richer here.
-const BACKDROP = [
-  { src: "/about-photo.jpg", className: "left-[-14vw] top-[-6vh] h-[62vh] w-[42vw]" },
-  { src: "/how-i-work.jpg", className: "right-[-12vw] top-[8vh] h-[58vh] w-[40vw]" },
-  { src: "/build-with.jpg", className: "left-[6vw] bottom-[-10vh] h-[56vh] w-[38vw]" },
-  { src: "/military-1.jpg", className: "right-[2vw] bottom-[-8vh] h-[54vh] w-[40vw]" },
-];
-
 const WORKED_WITH = [
   ["State Affairs", "Augmedix"],
   ["Custoria Labs", "Rocket"],
@@ -107,25 +99,17 @@ export default function AboutModal({
           aria-modal="true"
           aria-label="About Anton Castro"
         >
-          {/* Blurred image wash: the about photos overlaid on the home screen */}
+          {/* Clean frosted stage: the home blurs out behind (container's
+              backdrop-blur) under a calm paper veil with a soft top highlight. */}
           <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-paper/60" />
-            {BACKDROP.map((b) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={b.src}
-                src={b.src}
-                alt=""
-                className={`absolute rounded-[40%] object-cover opacity-45 saturate-[1.4] ${b.className}`}
-                style={{ filter: "blur(80px)" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
-            ))}
-            {/* Soft color bleed + paper legibility wash */}
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-violet-400/[0.10]" />
-            <div className="absolute inset-0 bg-paper/25" />
+            <div className="absolute inset-0 bg-paper/75" />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,0.65), transparent 55%)",
+              }}
+            />
           </div>
 
           {/* Close */}
