@@ -17,8 +17,8 @@ export const works: Work[] = [
       { value: "Walmart + DoorDash", label: "first enterprise customers" },
     ],
     images: [
+      { file: "sa-agent-laptop.jpg", alt: "A hand on a MacBook showing the State Affairs AI Agent answering a question about a bill, on a wooden desk" },
       { file: "sa-bill.png", alt: "Bill detail view for A 9349: AI analysis, legislative progress, momentum, and bill management" },
-      { file: "sa-bills.png", alt: "Bills grouped by AI momentum score" },
       { file: "sa-whats-changed.png", alt: "What's Changed priority panel since last visit" },
     ],
   },

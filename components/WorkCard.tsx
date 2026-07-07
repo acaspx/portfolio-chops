@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import AppStoreBadge from "@/components/AppStoreBadge";
+import CaseGateLink from "@/components/CaseGateLink";
 
 /** Card thumbnail: renders /work/<file> if it exists, dashed placeholder if not. */
 function CardImage({ file, alt }: { file: string; alt: string }) {
@@ -118,12 +118,18 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
         </div>
       </div>
 
-      {/* Stretched link makes the whole card navigate, while the App Store badge
-          (z-2) stays independently clickable. */}
+      {/* Stretched target makes the whole card actionable, while the App Store
+          badge (z-2) stays independently clickable. A locked case opens the
+          password modal in place instead of navigating. */}
       {linked && (
-        <Link
+        <CaseGateLink
           href={`/work/${work.slug}`}
-          aria-label={`Read the ${work.company} case study`}
+          locked={work.locked}
+          ariaLabel={
+            work.locked
+              ? `Unlock the ${work.company} case study`
+              : `Read the ${work.company} case study`
+          }
           className="absolute inset-0 z-[1] rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
         />
       )}

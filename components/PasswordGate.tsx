@@ -8,14 +8,23 @@ import { motion, useReducedMotion } from "motion/react";
 // For true protection, gate on the server (middleware + cookie).
 export const CASE_PASSWORD = "SA26";
 export const UNLOCK_KEY = "sa-unlocked";
+const CONTACT_EMAIL = "ac.design.px@gmail.com";
 
-/** Full-screen password modal with a transparent, blurred overlay. */
+/**
+ * Password modal that overlays in place. The page behind stays visible through a
+ * slight blur so the visitor keeps their bearings, and (when `onClose` is given)
+ * clicking the backdrop, the close button, or pressing Escape dismisses it and
+ * returns them exactly where they were.
+ */
 export default function PasswordGate({
   onUnlock,
+  onClose,
   title = "This case study is protected",
   subtitle = "Enter the password to view the State Affairs case study.",
 }: {
   onUnlock: () => void;
+  /** Dismiss without unlocking (backdrop click, close button, or Escape). */
+  onClose?: () => void;
   title?: string;
   subtitle?: string;
 }) {
@@ -27,6 +36,15 @@ export default function PasswordGate({
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    if (!onClose) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,19 +59,36 @@ export default function PasswordGate({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] grid place-items-center px-6">
-      {/* Transparent, blurred overlay */}
-      <div aria-hidden className="absolute inset-0 bg-ink/40 backdrop-blur-md" />
+    <div
+      className="fixed inset-0 z-[100] grid place-items-center px-6"
+      onClick={() => onClose?.()}
+    >
+      {/* Slight blur so the page behind stays legible: they know where they are. */}
+      <div aria-hidden className="absolute inset-0 bg-ink/20 backdrop-blur-sm" />
 
       <motion.div
         role="dialog"
         aria-modal="true"
         aria-label="Password required"
+        onClick={(e) => e.stopPropagation()}
         initial={reduce ? false : { opacity: 0, y: 12, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative w-full max-w-sm rounded-2xl border border-line bg-paper/95 p-8 shadow-2xl backdrop-blur"
       >
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full text-muted transition-colors hover:bg-ink/[0.06] hover:text-ink"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          </button>
+        )}
+
         <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-paper">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
             <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
@@ -93,7 +128,12 @@ export default function PasswordGate({
         </form>
 
         <p className="mt-5 text-center font-mono text-[11px] uppercase tracking-widest text-muted">
-          Reach out for access
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=State%20Affairs%20case%20study%20access`}
+            className="underline decoration-line underline-offset-4 transition-colors hover:text-accent"
+          >
+            Reach out for access
+          </a>
         </p>
       </motion.div>
     </div>

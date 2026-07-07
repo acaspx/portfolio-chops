@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import AsteriskMark from "@/components/AsteriskMark";
+import HeroLede from "@/components/HeroLede";
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -27,13 +28,7 @@ export default function Hero() {
       </motion.div>
 
 
-      <motion.p {...fade(0.2)} className="mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed">
-        Designing AI-native products for high-stakes work, where the real challenge
-        is building <em className="font-serif italic text-accent">trust</em>.
-        <br />
-        Four 0→1s across healthcare, fintech, and govtech. Currently building AI
-        systems at State Affairs.
-      </motion.p>
+      <HeroLede />
     </section>
   );
 }

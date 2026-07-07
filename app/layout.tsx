@@ -5,6 +5,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import CaseGateOverlay from "@/components/CaseGateOverlay";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studioacas.com"),
@@ -32,6 +33,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <CustomCursor />
+        <CaseGateOverlay />
         <Nav />
         <main id="main" className="flex-1">
           {children}

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import AsteriskMark from "@/components/AsteriskMark";
+import CaseGateLink from "@/components/CaseGateLink";
+import HeroLede from "@/components/HeroLede";
 import AppStoreBadge from "@/components/AppStoreBadge";
 import EnjoyBubbles from "@/components/EnjoyBubbles";
 import Experience from "@/components/Experience";
@@ -13,9 +15,15 @@ const SUBSTACK =
 function MobileCard({ w }: { w: Work }) {
   const cover = w.images?.[0];
   return (
-    <Link
+    <CaseGateLink
       href={`/work/${w.slug}`}
-      className="group block rounded-2xl bg-paper/70 p-4 emboss emboss-hover"
+      locked={w.locked}
+      ariaLabel={
+        w.locked
+          ? `Unlock the ${w.company} case study`
+          : `Read the ${w.company} case study`
+      }
+      className="group block w-full text-left rounded-2xl bg-paper/70 p-4 emboss emboss-hover"
     >
       {cover && (
         <div className="mb-4 overflow-hidden rounded-lg border border-line bg-ink/[0.03]">
@@ -46,8 +54,16 @@ function MobileCard({ w }: { w: Work }) {
           ))}
         </ul>
       )}
-      <span className="link-line mt-4 inline-block text-sm">Read the case study →</span>
-    </Link>
+      <span className="link-line mt-4 inline-flex items-center gap-1.5 text-sm">
+        {w.locked && (
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
+            <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" strokeLinecap="round" />
+          </svg>
+        )}
+        {w.locked ? "Enter password to view →" : "Read the case study →"}
+      </span>
+    </CaseGateLink>
   );
 }
 
@@ -73,11 +89,10 @@ export default function MobileHome() {
           </h1>
         </div>
         <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
-        <p className="mt-6 text-lg leading-relaxed">
-          Designing AI-native products for high-stakes work, where the real challenge is
-          building <em className="font-serif italic text-accent">trust</em>. Four 0→1s across
-          healthcare, fintech, and govtech. Currently building AI systems at State Affairs.
-        </p>
+        <HeroLede
+          leadClassName="mt-6 text-lg leading-relaxed"
+          statusClassName="mt-4 font-mono text-[11px] tracking-wide text-muted"
+        />
         <div className="mt-7 flex flex-wrap gap-3">
           <a
             href="#mwork"

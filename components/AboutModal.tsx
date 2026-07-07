@@ -1,92 +1,49 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-type Card = {
-  kicker: string;
-  title: string;
-  body: string[];
-  visual: "photo" | "principles" | "tools" | "service";
-  photo?: string; // optional image; falls back to tinted glyph until file exists
-  tint: string; // per-card accent
-};
+/**
+ * About overlay. Instead of a stack of cards, the whole page becomes the
+ * backdrop: the home behind blurs out, and Anton's four about photos wash across
+ * it, heavily blurred with a soft color bleed. A single crisp lead photo and a
+ * column of frosted-glass panels float on top, carrying the same copy and type
+ * treatment (mono kicker, serif italic title) as the rest of the site.
+ */
 
-const cards: Card[] = [
-  {
-    kicker: "WHO",
-    title: "I am",
-    body: [
-      "My name is Anton, and I design AI products that ship and scale.",
-      "Currently Sr. Interaction Designer at State Affairs, building policy intelligence, the company's first AI product. Before that: founding designer twice, and AI products at Augmedix, Rocket, and Intuit.",
-    ],
-    visual: "photo",
-    photo: "/about-photo-bw.jpg",
-    tint: "#1e2a44",
-  },
-  // Single color family across the deck: accent for content cards,
-  // violet reserved for the closing card. Decorative color is tokenized.
-  {
-    kicker: "HOW",
-    title: "I work",
-    body: [
-      "I lead with the story. Before any pixels, I make the problem legible: what's broken, who it's hurting, and why it's worth solving now. Clarity is the unlock.",
-      "From there I build momentum. Sharp narratives and working prototypes bring people along, turn ambiguity into shared direction, and get the work that matters shipped.",
-    ],
-    visual: "principles",
-    photo: "/how-i-work.jpg",
-    tint: "#1e2a44",
-  },
-  {
-    kicker: "WHAT",
-    title: "I build with",
-    body: [
-      "Figma to Framer to React and Swift, and these days deep into AI-assisted prototyping with Claude and Cursor.",
-      "Four AI products taught me the hard problem isn't the model. It's deciding what the AI does alone, and where people stay in the loop.",
-    ],
-    visual: "tools",
-    photo: "/build-with.jpg",
-    tint: "#1e2a44",
-  },
-  {
-    kicker: "BEFORE",
-    title: "All this",
-    body: [
-      "U.S. Navy engineer, four years. That's where I learned that systems fail at their seams, and discipline is a design material.",
-      "BFA in Human-Computer Interaction, MBA in Design Strategy. Always up for a coffee chat. ☕",
-    ],
-    visual: "service",
-    photo: "/military-1-bw.jpg",
-    tint: "#8b5cf6",
-  },
+// Photos washed across the backdrop, blurred. Color versions read richer here.
+const BACKDROP = [
+  { src: "/about-photo.jpg", className: "left-[-14vw] top-[-6vh] h-[62vh] w-[42vw]" },
+  { src: "/how-i-work.jpg", className: "right-[-12vw] top-[8vh] h-[58vh] w-[40vw]" },
+  { src: "/build-with.jpg", className: "left-[6vw] bottom-[-10vh] h-[56vh] w-[38vw]" },
+  { src: "/military-1.jpg", className: "right-[2vw] bottom-[-8vh] h-[54vh] w-[40vw]" },
 ];
 
-function CardVisual({ kind, tint, photo }: { kind: Card["visual"]; tint: string; photo?: string }) {
-  const glyph =
-    kind === "principles" ? "◳" : kind === "tools" ? "⌘" : kind === "service" ? "⚓" : "☺";
+const WORKED_WITH = [
+  ["State Affairs", "Augmedix"],
+  ["Custoria Labs", "Rocket"],
+  ["Intuit", "Anti-Defamation League"],
+  ["Electronic Arts", "U.S. Navy"],
+];
+
+type PanelProps = { kicker?: string; title?: string; children: ReactNode; className?: string };
+
+function Panel({ kicker, title, children, className = "" }: PanelProps) {
   return (
-    <div
-      className="relative h-full min-h-[260px] overflow-hidden rounded-xl sm:min-h-[320px]"
-      style={{ background: `linear-gradient(160deg, ${tint}14 0%, ${tint}30 100%)` }}
+    <section
+      className={`rounded-2xl border border-white/60 bg-white/55 p-6 shadow-[0_8px_30px_rgba(20,20,15,0.06)] backdrop-blur-xl sm:p-7 ${className}`}
     >
-      <div className="grid h-full place-items-center">
-        <span aria-hidden className="text-7xl" style={{ color: tint }}>
-          {glyph}
-        </span>
-      </div>
-      {photo && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={photo}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
-          }}
-        />
+      {kicker && (
+        <p className="font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</p>
       )}
-    </div>
+      {title && (
+        <p className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">{title}</p>
+      )}
+      <div className={`${kicker || title ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}>
+        {children}
+      </div>
+    </section>
   );
 }
 
@@ -97,58 +54,30 @@ export default function AboutModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Portal target only exists client-side
   useEffect(() => setMounted(true), []);
-
-  const next = useCallback(() => setIndex((i) => (i + 1) % cards.length), []);
-  const prev = useCallback(() => setIndex((i) => (i - 1 + cards.length) % cards.length), []);
 
   useEffect(() => {
     if (!open) return;
-    setIndex(0);
     closeRef.current?.focus();
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "Tab" && dialogRef.current) {
-        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
-          'button, a[href], [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        const active = document.activeElement as HTMLElement | null;
-        if (e.shiftKey && (active === first || !dialogRef.current.contains(active))) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && (active === last || !dialogRef.current.contains(active))) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [open, onClose, next, prev]);
-
-  const card = cards[index];
-  const peek = cards[(index + 1) % cards.length];
+  }, [open, onClose]);
 
   if (!mounted) return null;
 
-  // Portaled to <body>: the sticky header's backdrop-filter creates a CSS
-  // containing block that would otherwise trap position:fixed inside it.
+  // Portaled to <body> so position:fixed isn't trapped by the sticky nav's
+  // backdrop-filter containing block.
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -156,108 +85,124 @@ export default function AboutModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-paper/80 backdrop-blur-md p-4 sm:p-8"
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-2xl"
           onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label="About Anton Castro"
         >
-          {/* Soft rainbow glow behind the deck */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[18%] h-64 w-[42rem] max-w-[90vw] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
-            style={{
-              background:
-                "linear-gradient(90deg, #f9a8d4, #fde68a, #86efac, #93c5fd, #d8b4fe)",
-            }}
-          />
-
-          <div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="About Anton Castro"
-            className="relative w-full max-w-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              ref={closeRef}
-              onClick={onClose}
-              aria-label="Close"
-              className="fixed right-6 top-6 grid h-12 w-12 place-items-center rounded-full border border-line bg-paper text-2xl shadow-md transition-transform hover:scale-105 hover:text-accent"
-            >
-              ×
-            </button>
-
-            {/* Next card peeking from behind */}
-            <div
-              aria-hidden
-              className="absolute inset-x-4 -top-4 h-20 overflow-hidden rounded-2xl border border-line bg-white/95 shadow-sm select-none"
-            >
-              <div className="h-1.5 w-full" style={{ background: peek.tint, opacity: 0.35 }} />
-              <p className="px-7 pt-2 text-2xl font-bold tracking-tight text-ink/25">
-                {peek.kicker}
-              </p>
-            </div>
-
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.div
-                key={index}
-                initial={reduce ? false : { opacity: 0, y: 28, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -28, scale: 0.97 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                onClick={next}
-                className="relative grid cursor-pointer gap-6 rounded-2xl border border-line p-5 shadow-2xl sm:grid-cols-[300px_1fr] sm:p-6"
-                style={{
-                  background: `linear-gradient(150deg, #ffffff 55%, ${card.tint}0d 100%)`,
+          {/* Blurred image wash: the about photos overlaid on the home screen */}
+          <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
+            <div className="absolute inset-0 bg-paper/60" />
+            {BACKDROP.map((b) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={b.src}
+                src={b.src}
+                alt=""
+                className={`absolute rounded-[40%] object-cover opacity-45 saturate-[1.4] ${b.className}`}
+                style={{ filter: "blur(80px)" }}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = "none";
                 }}
-              >
-                <CardVisual kind={card.visual} tint={card.tint} photo={card.photo} />
-                <div className="py-1 sm:py-3">
-                  <p className="text-4xl font-bold tracking-tight leading-none">{card.kicker}</p>
-                  <p className="font-serif text-2xl italic tracking-tight text-ink/80">
-                    {card.title}
-                  </p>
-                  <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted">
-                    {card.body.map((p) => (
-                      <p key={p.slice(0, 24)}>{p}</p>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              />
+            ))}
+            {/* Soft color bleed + paper legibility wash */}
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] via-transparent to-violet-400/[0.10]" />
+            <div className="absolute inset-0 bg-paper/25" />
+          </div>
 
-            <div className="mt-5 flex items-center justify-between">
-              <div className="flex gap-2">
-                {cards.map((c, i) => (
-                  <button
-                    key={c.kicker}
-                    onClick={() => setIndex(i)}
-                    aria-label={`Card ${i + 1}: ${c.kicker} ${c.title}`}
-                    aria-current={i === index}
-                    className="h-2 rounded-full transition-all"
-                    style={{
-                      width: i === index ? 24 : 8,
-                      background: i === index ? card.tint : "var(--color-line)",
-                    }}
-                  />
-                ))}
+          {/* Close */}
+          <button
+            ref={closeRef}
+            onClick={onClose}
+            aria-label="Close"
+            className="fixed right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full border border-white/60 bg-white/70 text-2xl shadow-md backdrop-blur-md transition-transform hover:scale-105 hover:text-accent sm:right-6 sm:top-6"
+          >
+            ×
+          </button>
+
+          {/* Centered content column */}
+          <div className="relative mx-auto min-h-full max-w-lg px-4 py-16 sm:py-20">
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="space-y-3"
+            >
+              {/* Crisp lead photo */}
+              <div className="overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_40px_rgba(20,20,15,0.12)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/about-photo-bw.jpg"
+                  alt="Anton Castro"
+                  className="aspect-[4/3] w-full object-cover"
+                />
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={prev}
-                  aria-label="Previous card"
-                  className="grid h-10 w-10 place-items-center rounded-full border border-line bg-paper shadow-sm hover:text-accent"
-                >
-                  ←
-                </button>
-                <button
-                  onClick={next}
-                  aria-label="Next card"
-                  className="grid h-10 w-10 place-items-center rounded-full border border-line bg-paper shadow-sm hover:text-accent"
-                >
-                  →
-                </button>
-              </div>
-            </div>
+
+              <Panel kicker="Who" title="I am">
+                <p>My name is Anton, and I design AI products that ship and scale.</p>
+                <p>
+                  Currently Sr. Interaction Designer at State Affairs, building policy
+                  intelligence, the company&apos;s first AI product. Before that: founding
+                  designer twice, and AI products at Augmedix, Rocket, and Intuit.
+                </p>
+              </Panel>
+
+              <Panel kicker="Worked with" className="!pb-6">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-[15px] leading-relaxed text-ink/80">
+                  {WORKED_WITH.flat().map((name) => (
+                    <span key={name}>{name}</span>
+                  ))}
+                </div>
+              </Panel>
+
+              <Panel kicker="How" title="I work">
+                <p>
+                  I lead with the story. Before any pixels, I make the problem legible:
+                  what&apos;s broken, who it&apos;s hurting, and why it&apos;s worth solving now.
+                  Clarity is the unlock.
+                </p>
+                <p>
+                  From there I build momentum. Sharp narratives and working prototypes bring
+                  people along, turn ambiguity into shared direction, and get the work that
+                  matters shipped.
+                </p>
+              </Panel>
+
+              <Panel kicker="What" title="I build with">
+                <p>
+                  Figma to Framer to React and Swift, and these days deep into AI-assisted
+                  prototyping with Claude and Cursor.
+                </p>
+                <p>
+                  Four AI products taught me the hard problem isn&apos;t the model. It&apos;s
+                  deciding what the AI does alone, and where people stay in the loop.
+                </p>
+              </Panel>
+
+              <Panel kicker="Before" title="All this">
+                <p>
+                  U.S. Navy engineer, four years. That&apos;s where I learned that systems fail
+                  at their seams, and discipline is a design material.
+                </p>
+                <p>BFA in Human-Computer Interaction, MBA in Design Strategy.</p>
+              </Panel>
+
+              <Panel>
+                <p className="text-ink/80">
+                  Always up for a coffee chat. ☕{" "}
+                  <a
+                    href="mailto:ac.design.px@gmail.com"
+                    className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                  >
+                    ac.design.px@gmail.com
+                  </a>
+                </p>
+              </Panel>
+            </motion.div>
           </div>
         </motion.div>
       )}
