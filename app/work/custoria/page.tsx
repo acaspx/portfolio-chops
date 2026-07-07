@@ -33,7 +33,7 @@ export default function Custoria() {
       >
 
       <CaseLead
-        hook="Designing an ecosystem to support a robust sharing model that proves value and ownership without surrendering privacy."
+        hook="Designing an ecosystem to support a robust sharing model that proves value and ownership without compromising privacy."
         stats={[
           { value: "2×", label: "more accurate item records" },
           { value: "~90%", label: "less loss-and-risk exposure" },
@@ -84,7 +84,7 @@ export default function Custoria() {
           The security and sharing model is the product. The vault is encrypted and
           biometric-locked, but the hard design problem was the share: an owner
           needs to prove ownership, value, and authenticity to an insurer,
-          appraiser, or buyer <em>without</em> surrendering their privacy.
+          appraiser, or buyer <em>without</em> compromising their privacy.
         </p>
         <p>
           The model gives the owner three dials. <Hi>What</Hi>: field-level
