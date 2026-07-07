@@ -46,15 +46,15 @@ function Panel({ kicker, title, children, className = "", image }: PanelProps) {
       {title && (
         <p className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">{title}</p>
       )}
-      <div className={`${kicker || title ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}>
-        {children}
-      </div>
       {image && (
-        <div className="mt-5 overflow-hidden rounded-xl border border-white/60">
+        <div className={`${kicker || title ? "mt-4" : ""} overflow-hidden rounded-xl border border-white/60`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} className="aspect-[16/10] w-full object-cover" />
+          <img src={image.src} alt={image.alt} className="block w-full" />
         </div>
       )}
+      <div className={`${kicker || title || image ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}>
+        {children}
+      </div>
     </section>
   );
 }
