@@ -89,7 +89,7 @@ export function CaseHero({
   height?: number;
 }) {
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6">
       <Image
         src={src}
         alt={alt}
@@ -178,7 +178,7 @@ export function CaseLayout({
 }) {
   return (
     <div
-      className="mx-auto max-w-6xl px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14"
+      className="mx-auto max-w-5xl px-4 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-14"
       style={
         {
           "--case-canvas": CANVAS[tone],
