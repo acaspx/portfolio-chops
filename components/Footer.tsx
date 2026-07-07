@@ -99,7 +99,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-start gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-muted">
-            © {new Date().getFullYear()} studioacas · designed &amp; built with intention
+            © {new Date().getFullYear()} studioacas · build like you mean it
           </p>
           <HeartCounter />
         </div>
