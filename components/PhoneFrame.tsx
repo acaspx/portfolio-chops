@@ -99,11 +99,12 @@ export function PhoneShot({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Grid of phones (framed by default), each with its own step label + descriptor. */
+/** Grid of phones (frameless by default: rounded screen, no device bezel, shown
+ *  at the capture's natural aspect), each with its own step label + descriptor. */
 export function PhoneShowcase({
   phones,
   caption,
-  framed = true,
+  framed = false,
   island = true,
 }: {
   phones: { src: string; alt: string; step: string; note: string }[];
@@ -142,7 +143,7 @@ export function PhoneShowcase({
   );
 }
 
-/** Row of framed phones with one shared caption - the bevyip-style mobile showcase. */
+/** Row of frameless phones with one shared caption - the mobile showcase. */
 export function PhoneRow({
   phones,
   caption,
@@ -163,7 +164,7 @@ export function PhoneRow({
           }`}
         >
           {phones.map((p) => (
-            <PhoneFrame key={p.src} src={p.src} alt={p.alt} />
+            <PhoneShot key={p.src} src={p.src} alt={p.alt} />
           ))}
         </div>
         <figcaption className="mt-4 text-center font-mono text-xs text-muted">
