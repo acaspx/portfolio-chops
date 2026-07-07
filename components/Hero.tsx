@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import AsteriskMark from "@/components/AsteriskMark";
 import HeroLede from "@/components/HeroLede";
+import HeroShowcase from "@/components/HeroShowcase";
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -13,7 +14,7 @@ export default function Hero() {
   });
 
   return (
-    <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
+    <section className="relative mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
       <motion.div {...fade(0)}>
         <div className="relative inline-block">
           <AsteriskMark className="absolute -left-5 -top-4 h-7 w-7 text-accent sm:-left-6 sm:-top-5 sm:h-8 sm:w-8" />
@@ -29,6 +30,7 @@ export default function Hero() {
 
 
       <HeroLede />
+      <HeroShowcase />
     </section>
   );
 }

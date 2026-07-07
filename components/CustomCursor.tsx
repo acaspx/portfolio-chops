@@ -93,9 +93,10 @@ export default function CustomCursor() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: pressed ? 0.94 : 1 }}
           transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-          style={{ transform: "translate(15px, 12px)", backgroundColor: "rgba(30,42,68,0.82)" }}
+          style={{ transform: "translate(15px, 12px)", backgroundColor: "rgba(30,42,68,0.72)" }}
           className="flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-widest text-white shadow-lg ring-1 ring-white/15 backdrop-blur-sm"
         >
+          {label}
           {locked ? (
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
@@ -106,7 +107,6 @@ export default function CustomCursor() {
               <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
-          {label}
         </motion.div>
       ) : (
         <div className="-translate-x-1/2 -translate-y-1/2">

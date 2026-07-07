@@ -34,10 +34,10 @@ const LEAD: { w: string; accent?: boolean }[] = [
   { w: "govtech." },
 ];
 
-const START = 0.35;
-const STEP = 0.04;
+const START = 0.15;
+const STEP = 0.03;
 const EASE = [0.16, 1, 0.3, 1] as const;
-const WORD_DURATION = 1.9;
+const WORD_DURATION = 0.65;
 
 export default function HeroLede({
   leadClassName = "mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed",
@@ -73,7 +73,7 @@ export default function HeroLede({
       <motion.p
         initial={reduce ? false : { opacity: 0, y: 14, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 1.9, delay: START + LEAD.length * STEP + 0.2, ease: EASE }}
+        transition={{ duration: 0.8, delay: START + LEAD.length * STEP + 0.15, ease: EASE }}
         className={statusClassName}
       >
         Currently building AI systems at State Affairs
