@@ -29,7 +29,6 @@ export default function Hero() {
 
 
       <HeroLede />
-      <HeroShowcase />
     </section>
   );
 }
