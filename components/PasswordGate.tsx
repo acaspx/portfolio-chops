@@ -20,7 +20,7 @@ export default function PasswordGate({
   onUnlock,
   onClose,
   title = "This case study is protected",
-  subtitle = "Enter the password to view the State Affairs case study.",
+  subtitle = "Enter the password to view more",
 }: {
   onUnlock: () => void;
   /** Dismiss without unlocking (backdrop click, close button, or Escape). */
@@ -89,14 +89,7 @@ export default function PasswordGate({
           </button>
         )}
 
-        <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-paper">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
-            <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
-            <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" strokeLinecap="round" />
-          </svg>
-        </div>
-
-        <h2 className="mt-5 font-serif text-2xl tracking-tight">{title}</h2>
+        <h2 className="font-serif text-2xl tracking-tight">{title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">{subtitle}</p>
 
         <form onSubmit={submit} className="mt-6">

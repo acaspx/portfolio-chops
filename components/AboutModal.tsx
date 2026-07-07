@@ -27,9 +27,15 @@ const WORKED_WITH = [
   ["Electronic Arts", "U.S. Navy"],
 ];
 
-type PanelProps = { kicker?: string; title?: string; children: ReactNode; className?: string };
+type PanelProps = {
+  kicker?: string;
+  title?: string;
+  children: ReactNode;
+  className?: string;
+  image?: { src: string; alt: string };
+};
 
-function Panel({ kicker, title, children, className = "" }: PanelProps) {
+function Panel({ kicker, title, children, className = "", image }: PanelProps) {
   return (
     <section
       className={`rounded-2xl border border-white/60 bg-white/55 p-6 shadow-[0_8px_30px_rgba(20,20,15,0.06)] backdrop-blur-xl sm:p-7 ${className}`}
@@ -43,6 +49,12 @@ function Panel({ kicker, title, children, className = "" }: PanelProps) {
       <div className={`${kicker || title ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}>
         {children}
       </div>
+      {image && (
+        <div className="mt-5 overflow-hidden rounded-xl border border-white/60">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={image.src} alt={image.alt} className="aspect-[16/10] w-full object-cover" />
+        </div>
+      )}
     </section>
   );
 }
@@ -138,7 +150,7 @@ export default function AboutModal({
                 <img
                   src="/about-photo-bw.jpg"
                   alt="Anton Castro"
-                  className="aspect-[4/3] w-full object-cover"
+                  className="block w-full"
                 />
               </div>
 
@@ -159,7 +171,11 @@ export default function AboutModal({
                 </div>
               </Panel>
 
-              <Panel kicker="How" title="I work">
+              <Panel
+                kicker="How"
+                title="I work"
+                image={{ src: "/how-i-work.jpg", alt: "Anton leading a working session, mapping the problem before any pixels" }}
+              >
                 <p>
                   I lead with the story. Before any pixels, I make the problem legible:
                   what&apos;s broken, who it&apos;s hurting, and why it&apos;s worth solving now.
@@ -172,7 +188,11 @@ export default function AboutModal({
                 </p>
               </Panel>
 
-              <Panel kicker="What" title="I build with">
+              <Panel
+                kicker="What"
+                title="I build with"
+                image={{ src: "/build-with.jpg", alt: "The tools of the craft, from Figma and Framer to React, Swift, and AI-assisted prototyping" }}
+              >
                 <p>
                   Figma to Framer to React and Swift, and these days deep into AI-assisted
                   prototyping with Claude and Cursor.
@@ -183,7 +203,11 @@ export default function AboutModal({
                 </p>
               </Panel>
 
-              <Panel kicker="Before" title="All this">
+              <Panel
+                kicker="Before"
+                title="All this"
+                image={{ src: "/military-1-bw.jpg", alt: "Anton during his four years as a U.S. Navy engineer" }}
+              >
                 <p>
                   U.S. Navy engineer, four years. That&apos;s where I learned that systems fail
                   at their seams, and discipline is a design material.
