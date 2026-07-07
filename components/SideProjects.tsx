@@ -37,30 +37,6 @@ export default function SideProjects() {
         <div className="mt-10 space-y-6">
           {/* Custoria - same case-study card as the work grid */}
           <WorkCard work={custoria} index={0} />
-
-          {/* portfolio-chops - full-width repo card */}
-          <Reveal delay={0.1}>
-            <a
-              href="https://github.com/acaspx/portfolio-chops"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block rounded-2xl bg-paper/70 p-6 emboss emboss-hover sm:p-8"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-mono text-base font-semibold tracking-tight transition-colors group-hover:text-accent">
-                  portfolio-chops
-                </h3>
-                <span className="shrink-0 rounded-full border border-line px-3 py-0.5 font-mono text-[11px] text-muted">
-                  You&apos;re looking at it
-                </span>
-              </div>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-                The source of this site: Next.js 15, Tailwind 4, and Motion, designed and built
-                by me. Every interaction you&apos;ve seen here is in this repo.
-              </p>
-              <span className="link-line mt-4 inline-block text-sm">View source on GitHub →</span>
-            </a>
-          </Reveal>
         </div>
       </div>
     </section>

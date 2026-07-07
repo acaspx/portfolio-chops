@@ -218,7 +218,6 @@ export default function AboutModal({
                   U.S. Navy engineer, four years. That&apos;s where I learned that systems fail
                   at their seams, and discipline is a design material.
                 </p>
-                <p>BFA in Human-Computer Interaction, MBA in Design Strategy.</p>
               </Panel>
 
               <Panel>
