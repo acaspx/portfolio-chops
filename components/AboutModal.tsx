@@ -93,24 +93,15 @@ export default function AboutModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-2xl"
+          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-3xl"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
           aria-label="About Anton Castro"
         >
-          {/* Clean frosted stage: the home blurs out behind (container's
-              backdrop-blur) under a calm paper veil with a soft top highlight. */}
-          <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-paper/75" />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,0.65), transparent 55%)",
-              }}
-            />
-          </div>
+          {/* Barely-there neutral wash so the transparent blur reads evenly
+              regardless of what's behind it. */}
+          <div aria-hidden className="pointer-events-none fixed inset-0 bg-paper/15" />
 
           {/* Close */}
           <button
