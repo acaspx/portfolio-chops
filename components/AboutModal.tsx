@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Allura } from "next/font/google";
+
+const signature = Allura({ weight: "400", subsets: ["latin"], display: "swap" });
 
 /**
  * About overlay. Instead of a stack of cards, the whole page becomes the
@@ -155,7 +158,10 @@ export default function AboutModal({
               </div>
 
               <Panel kicker="Who" title="I am">
-                <p>My name is Anton, and I design AI products that ship and scale.</p>
+                <p>
+                  Bienvenue! I&apos;m Anton, a passionate designer, dialed in on making
+                  technology look and feel great, no matter the context.
+                </p>
                 <p>
                   Currently Sr. Interaction Designer at State Affairs, building policy
                   intelligence, the company&apos;s first AI product. Before that: founding
@@ -225,6 +231,17 @@ export default function AboutModal({
                     ac.design.px@gmail.com
                   </a>
                 </p>
+                <motion.p
+                  aria-label="Anton Castro"
+                  initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
+                  whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+                  viewport={{ once: true, margin: "0px 0px -12% 0px" }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                  className={`${signature.className} mt-2 text-accent`}
+                  style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
+                >
+                  Anton Castro
+                </motion.p>
               </Panel>
             </motion.div>
           </div>
