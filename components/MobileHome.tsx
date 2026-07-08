@@ -90,7 +90,7 @@ export default function MobileHome() {
         </div>
         <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
         <HeroLede
-          leadClassName="mt-6 text-lg leading-relaxed"
+          leadClassName="mt-6 text-lg leading-relaxed text-balance"
           statusClassName="mt-4 font-mono text-[11px] tracking-wide text-muted"
         />
         <div className="mt-7 flex flex-wrap gap-3">

@@ -40,7 +40,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const WORD_DURATION = 0.65;
 
 export default function HeroLede({
-  leadClassName = "mt-10 max-w-2xl text-lg sm:text-xl leading-relaxed",
+  leadClassName = "mt-10 max-w-lg text-lg sm:text-xl leading-relaxed text-balance",
   statusClassName = "mt-5 font-mono text-xs sm:text-sm tracking-wide text-muted",
 }: {
   leadClassName?: string;
