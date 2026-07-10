@@ -97,18 +97,6 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
               ))}
             </ul>
           )}
-          {work.appStore && (
-            <a
-              href={work.appStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              aria-label={`Download ${work.company} on the App Store`}
-              className="relative z-[2] mt-5 inline-block transition-transform hover:scale-[1.03] active:scale-[0.98]"
-            >
-              <AppStoreBadge className="h-10 w-auto" />
-            </a>
-          )}
         </div>
         <div className="flex items-center gap-4 font-mono text-xs text-muted shrink-0">
           <span>{work.year}</span>
@@ -117,6 +105,22 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
           )}
         </div>
       </div>
+
+      {/* App Store badge anchored to the bottom-right corner so the card keeps
+          the same height as the others (no extra line). Sits above the stretched
+          link and stays independently clickable. */}
+      {work.appStore && (
+        <a
+          href={work.appStore}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          aria-label={`Download ${work.company} on the App Store`}
+          className="absolute bottom-6 right-6 z-[2] transition-transform hover:scale-[1.03] active:scale-[0.98] sm:bottom-8 sm:right-8"
+        >
+          <AppStoreBadge className="h-10 w-auto" />
+        </a>
+      )}
 
       {/* Stretched target makes the whole card actionable, while the App Store
           badge (z-2) stays independently clickable. A locked case opens the
