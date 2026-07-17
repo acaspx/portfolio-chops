@@ -95,14 +95,8 @@ export default function MobileHome() {
         />
         <div className="mt-7 flex flex-wrap gap-3">
           <a
-            href="#mwork"
-            className="rounded-full cta-metal px-6 py-3 text-sm font-medium transition-transform active:scale-[0.98]"
-          >
-            View work
-          </a>
-          <a
             href="mailto:ac.design.px@gmail.com"
-            className="rounded-full border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:text-accent"
+            className="rounded-full cta-metal px-6 py-3 text-sm font-medium transition-transform active:scale-[0.98]"
           >
             Say hello
           </a>
