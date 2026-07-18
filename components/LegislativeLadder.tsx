@@ -55,13 +55,13 @@ function CheckBadge() {
 function StageCard({ s }: { s: Stage }) {
   return (
     <div
-      className={`relative flex min-h-[4.6rem] min-w-0 flex-1 flex-col rounded-xl border p-2.5 ${
+      className={`relative flex min-h-[4.6rem] min-w-0 flex-1 flex-col rounded-xl border p-2 ${
         s.done ? "border-[#cfe3d4] bg-[#eef5ef]" : "border-line bg-[#f3f1ec]"
       }`}
     >
       {s.done && <CheckBadge />}
       <span className="font-mono text-[10px] text-muted/80">{s.n}</span>
-      <span className="mt-1.5 text-xs font-medium leading-tight tracking-tight">{s.title}</span>
+      <span className="mt-1.5 break-words text-[11px] font-medium leading-tight tracking-tight">{s.title}</span>
       {typeof s.momentum === "number" && (
         <div className="mt-auto h-[5px] overflow-hidden rounded-full bg-line">
           <span className="block h-full rounded-full bg-[#2f7a59]" style={{ width: `${s.momentum}%` }} />
@@ -109,7 +109,7 @@ export default function LegislativeLadder() {
           <div className="flex-1 basis-48">
             <p className="text-lg font-medium tracking-tight text-paper">State Affairs Intelligence</p>
             <p className="mt-0.5 text-[13px] text-paper/65">
-              AI Chat + 360&deg; View, reading all eight stages at once
+              AI Chat + 360&deg; View, context aware at all eight stages
             </p>
           </div>
           <div className="grid flex-1 basis-60 grid-cols-2 gap-1.5">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
 import { PhoneShowcase } from "@/components/PhoneFrame";
@@ -33,7 +33,7 @@ export default function Custoria() {
       >
 
       <CaseLead
-        hook="Designing an ecosystem to support a robust sharing model that proves value and ownership without compromising privacy."
+        hook="Co-founded and built Custoria, a digital vault for what people value most. The hard problem: let owners prove what they hold to an insurer, appraiser, or buyer without exposing their privacy. Designed it end to end, and shipped it to the App Store in Swift."
         stats={[
           { value: "2×", label: "more accurate item records" },
           { value: "~90%", label: "less loss-and-risk exposure" },
@@ -43,22 +43,22 @@ export default function Custoria() {
 
       <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
         <p>
-          Custoria began as our MBA Design Strategy thesis: a consumer data privacy
-          app. <Hi>It found product-market fit, and we killed it anyway.</Hi> The
-          strategy interrogation exposed the real problem: distribution. Privacy is
-          owned by legacy trust brands (Norton, McAfee), privacy-first challengers
-          (DuckDuckGo, Brave), and platforms that embed it free (Apple, Google).
-          When your competitors are already installed, trusted, or free, a better
-          product doesn&apos;t win; a different market does.
+          Custoria began as our MBA Design Strategy thesis: a consumer data-privacy
+          app. <Hi>It found product-market fit, and we killed it anyway.</Hi>{" "}
+          Interrogating the strategy exposed the real problem, <Hi>distribution</Hi>.
+          Privacy is already owned: by legacy trust brands (Norton, McAfee),
+          privacy-first challengers (DuckDuckGo, Brave), and the platforms that
+          bundle it free (Apple, Google). When your competitor is already installed,
+          trusted, or free, a better product doesn&apos;t win. A different market does.
         </p>
       </Section>
 
       <Section id="pivot" kicker="The pivot" title="From protecting data to proving ownership">
         <p>
-          The wedge came from my co-founder, Yiyi Qin, who works in the jewelry and
-          art gallery world: galleries, collectors, and appraisers carry real
-          privacy, insurance, and consignment risk around the objects they hold,
-          and track ownership with tools never designed for it. Niche but hungry:{" "}
+          The wedge came from my co-founder, Yiyi Qin, who works in jewelry and art
+          galleries. Galleries, collectors, and appraisers carry real privacy,
+          insurance, and consignment risk on the objects they hold, and track
+          ownership with tools never built for it. Niche but hungry:{" "}
           <Hi>~20,000 commercial galleries worldwide</Hi>, plus the long tail of
           collectors, appraisers, and small businesses.
         </p>
@@ -71,71 +71,64 @@ export default function Custoria() {
           </footer>
         </blockquote>
         <p>
-          Our privacy playbook mapped cleanly onto it. Custoria became a digital
-          vault for the things people value most: capture an item in seconds, keep
-          storage and tracking effortless, and prove ownership and value (or
-          transfer it) with security and privacy as the product&apos;s spine, not a
-          settings page.
+          Our privacy playbook mapped straight onto it. Custoria became a{" "}
+          <Hi>digital vault for the things people value most</Hi>: capture an item in
+          seconds, keep tracking effortless, and prove ownership and value (or
+          transfer it) with privacy as the spine, not a settings page.
         </p>
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="Sharing that proves, without exposing">
         <p>
-          The security and sharing model is the product. The vault is encrypted and
-          biometric-locked, but the hard design problem was the share: an owner
-          needs to prove ownership, value, and authenticity to an insurer,
-          appraiser, or buyer <em>without</em> compromising their privacy.
+          The sharing model is the product. The vault is encrypted and
+          biometric-locked; the hard part was the share: proving ownership, value,
+          and authenticity to an insurer, appraiser, or buyer <em>without</em>{" "}
+          compromising privacy. So the owner gets <Hi>three dials</Hi>:
+        </p>
+        <KeyPoints
+          items={[
+            <><Hi>What</Hi>: field-level control over which facts a share exposes.</>,
+            <><Hi>How long</Hi>: every share is time-boxed.</>,
+            <><Hi>Who</Hi>: named or anonymous, because proving you own something shouldn&apos;t force you to reveal who you are.</>,
+          ]}
+        />
+        <p>
+          Every shared record carries a Custoria watermark and stamp of authenticity.
+          That does two jobs: it makes the record trustworthy to whoever receives it,
+          and it puts our brand in front of the insurers, appraisers, and buyers we
+          need to reach. <Hi>The distribution lesson that killed v1, designed into
+          v2.</Hi>
         </p>
         <p>
-          The model gives the owner three dials. <Hi>What</Hi>: field-level
-          control over which facts a share exposes. <Hi>How long</Hi>: every
-          share is time-boxed. <Hi>Who they are</Hi>: named or anonymous, because
-          proving you own something and revealing who you are shouldn&apos;t be the
-          same act.
-        </p>
-        <p>
-          Every shared record carries a Custoria watermark and stamp of
-          authenticity. It does two jobs: makes the record trustworthy to whoever
-          receives it, and puts our brand in front of the insurers, appraisers, and
-          buyers we need to reach. That&apos;s the distribution lesson that killed v1,
-          designed into v2.
-        </p>
-        <p>
-          Underneath it all: zero-knowledge, end-to-end encryption (even Custoria
-          can&apos;t see inside your vault) with blockchain-backed chain of ownership
-          and expiring access links doing the enforcement the legalese usually
-          pretends to.
+          Underneath: <Hi>zero-knowledge, end-to-end encryption</Hi> (even Custoria
+          can&apos;t see inside your vault), with a blockchain-backed chain of
+          ownership and expiring access links doing the enforcement the legalese
+          usually only pretends to.
         </p>
         <ShareDemo />
       </Section>
 
       <Section id="building" kicker="Building it" title="Designed and coded by the same two hands">
         <p>
-          The whole product is one flow: point a camera at something you own and,
-          seconds later, it&apos;s a protected, valued record in your vault. Here is
-          that path, and who does the work at each step.
+          The whole product is one flow: point a camera at something you own, and
+          seconds later it&apos;s a protected, valued record in your vault.
         </p>
         <CaptureJourney />
         <p>
-          As co-founder I own design end-to-end, and the code. Custoria is a
-          native iOS app in Swift, with Gemini Flash doing the unglamorous work
-          that makes the vault effortless: scan an item and the AI identifies it,
-          fills in the metadata (value, brand, identification) and labels it
-          with categories and tags. No forms, no manual cataloging.
+          I own the design end to end, and the code. Custoria is a native iOS app in
+          Swift, with <Hi>Gemini Flash</Hi> doing the unglamorous work that makes the
+          vault effortless: scan an item and the AI names it, fills the metadata
+          (value, brand, ID), and tags it. No forms, no manual cataloging. Add a
+          receipt or certificate and the record gets stronger.
         </p>
-        <p>
-          Documentation compounds it: add a receipt or certificate and the record
-          gets stronger. The vault isn&apos;t an archive; it&apos;s where the work of
-          owning valuable things happens.
-        </p>
-        <p>
-          Coding it changed how I design. Owning the dependencies forced me to
-          think about systems at scale; owning the data pipeline taught me it&apos;s a
-          differentiator, not plumbing. And it surfaced the intangibles a Figma
-          file can&apos;t capture: how fast the app feels, how reliably it behaves,
-          the qualities users now expect from AI-native products and judge in the
-          first thirty seconds.
-        </p>
+        <p>Coding it changed how I design:</p>
+        <KeyPoints
+          items={[
+            <>Owning the dependencies made me <Hi>think in systems at scale</Hi>.</>,
+            <>Owning the data pipeline taught me it&apos;s a <Hi>differentiator, not plumbing</Hi>.</>,
+            <>It surfaced what a Figma file can&apos;t: <Hi>how fast and how reliably the app feels</Hi>, the things users judge in the first thirty seconds.</>,
+          ]}
+        />
         <PhoneShowcase
           phones={[
             { src: "/work/cu-capture.png", alt: "Custoria AI camera scan capturing photos of an item", step: "Capture", note: "Snap a few photos. No forms, no manual entry." },
@@ -151,14 +144,14 @@ export default function Custoria() {
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, and shipped">
         <p>
-          MVP pilots have run since late 2025, and the early numbers say the
-          workflow replacement is real: item records <Hi>2× more accurate</Hi> on
-          details, value, origin, and ownership than manual methods, and a{" "}
-          <Hi>~90% reduction in loss-and-risk exposure</Hi> in those pilots.
+          MVP pilots have run since late 2025, and the early numbers say the workflow
+          replacement is real: records <Hi>2× more accurate</Hi> on details, value,
+          origin, and ownership than manual methods, and a{" "}
+          <Hi>~90% cut in loss-and-risk exposure</Hi>.
         </p>
         <p>
-          The app is <Hi>available on the App Store</Hi> now. Next: converting
-          the gallery pilot network into the first paying customers.
+          The app is <Hi>live on the App Store</Hi>. Next: converting the gallery
+          pilot network into the first paying customers.
         </p>
       </Section>
 
