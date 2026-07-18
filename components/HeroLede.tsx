@@ -1,43 +1,15 @@
 "use client";
 
-import { Fragment } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 /**
- * The hero lede in two tiers. Tier one (positioning + proof) reveals word by
- * word: each word eases up from the bottom as its blur clears, staggered in
- * reading order so the reveal sweeps left-to-right and down the block. Tier two
- * is a quiet mono status line that blurs in last. Shared by desktop and mobile
- * so the copy and motion stay identical.
+ * The hero lede in two tiers, each revealing as a single unit: the header block
+ * and the mono status line blur in with a small upward drift, the status line
+ * staggered just behind. One blur clearing per tier reads calmer, smoother, and
+ * far lighter than a per-word cascade. Shared by desktop and mobile.
  */
 
-const LEAD: { w: string; accent?: boolean }[] = [
-  { w: "Designing" },
-  { w: "AI-native" },
-  { w: "products" },
-  { w: "for" },
-  { w: "high-stakes" },
-  { w: "work," },
-  { w: "where" },
-  { w: "the" },
-  { w: "real" },
-  { w: "challenge" },
-  { w: "is" },
-  { w: "building" },
-  { w: "trust.", accent: true },
-  { w: "Four" },
-  { w: "0→1s" },
-  { w: "across" },
-  { w: "healthcare," },
-  { w: "fintech," },
-  { w: "and" },
-  { w: "govtech." },
-];
-
-const START = 0.15;
-const STEP = 0.03;
-const EASE = [0.16, 1, 0.3, 1] as const;
-const WORD_DURATION = 0.65;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function HeroLede({
   leadClassName = "mt-10 max-w-lg text-lg sm:text-xl leading-relaxed text-balance",
@@ -47,35 +19,21 @@ export default function HeroLede({
   statusClassName?: string;
 }) {
   const reduce = useReducedMotion();
+  const rise = (delay: number) => ({
+    initial: reduce ? false : ({ opacity: 0, y: 12, filter: "blur(8px)" } as const),
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    transition: { duration: 0.7, delay, ease: EASE },
+    style: { willChange: "filter, transform" },
+  });
 
   return (
     <>
-      <p className={leadClassName}>
-        {LEAD.map((t, i) => (
-          <Fragment key={i}>
-            <motion.span
-              initial={reduce ? false : { opacity: 0, y: 14, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: WORD_DURATION, delay: START + (LEAD.length - 1 - i) * STEP, ease: EASE }}
-              className="inline-block"
-            >
-              {t.accent ? (
-                <>
-                  <em className="font-serif italic text-accent">trust</em>.
-                </>
-              ) : (
-                t.w
-              )}
-            </motion.span>{" "}
-          </Fragment>
-        ))}
-      </p>
-      <motion.p
-        initial={reduce ? false : { opacity: 0, y: 14, filter: "blur(10px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.8, delay: START + LEAD.length * STEP + 0.15, ease: EASE }}
-        className={statusClassName}
-      >
+      <motion.p {...rise(0.1)} className={leadClassName}>
+        Designing AI-native products for high-stakes work, where the real challenge
+        is building <em className="font-serif italic text-accent">trust</em>. Four
+        0→1s across healthcare, fintech, and govtech.
+      </motion.p>
+      <motion.p {...rise(0.3)} className={statusClassName}>
         Currently building AI systems at State Affairs
       </motion.p>
     </>
