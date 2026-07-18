@@ -115,7 +115,7 @@ export default function ShareDemo() {
             <div className="checker h-3 text-accent" aria-hidden />
             <div className="p-5">
               <div className="flex items-baseline justify-between gap-3">
-                <p className="font-serif text-lg font-medium tracking-tight">
+                <p className="text-lg font-medium tracking-tight">
                   Heath Ceramic Clock
                 </p>
                 <span className="rounded-full bg-accent/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-accent whitespace-nowrap">

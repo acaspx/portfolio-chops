@@ -191,7 +191,7 @@ export function CaseLayout({
         <header className="pt-16 pb-8">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-widest text-muted">{company}</p>
-            <h1 className="mt-4 max-w-[46rem] font-serif text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
+            <h1 className="mt-4 max-w-[46rem] text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
               {title}
             </h1>
           </Reveal>
@@ -257,7 +257,7 @@ export function CaseLead({
         <div className="mt-7 flex flex-wrap gap-x-10 gap-y-5">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="font-serif text-3xl font-medium leading-none tracking-tight text-accent sm:text-[2.5rem]">
+              <div className="text-3xl font-medium leading-none tracking-tight text-accent sm:text-[2.5rem]">
                 {s.value}
               </div>
               <div className="mt-1.5 max-w-[12rem] font-mono text-[11px] uppercase tracking-widest text-muted">
@@ -291,6 +291,20 @@ export function Section({
         <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
       </div>
     </section>
+  );
+}
+
+/** Scannable key-points list: accent-dot bullets for distilling a section. */
+export function KeyPoints({ items }: { items: ReactNode[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {items.map((item, i) => (
+        <li key={i} className="flex gap-3">
+          <span aria-hidden className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
