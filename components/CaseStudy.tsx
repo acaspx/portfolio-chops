@@ -11,7 +11,10 @@ const CANVAS: Record<CaseTone, string> = {
   navy: "#20293f url('/textures/case-navy.jpg') center/cover",
   // State Affairs: a moody sage cloud, recolored from the product's green accent.
   sage: "#16261d url('/textures/case-sage.jpg') center/cover",
-  indigo: "#232350 url('/textures/case-indigo.jpg') center/cover",
+  // Augmedix: the same light purple wash used behind the phone mocks, so the
+  // in-body case images sit on one calm surface instead of the dark texture.
+  indigo:
+    "radial-gradient(85% 85% at 85% 12%, rgba(45,45,92,0.11), transparent 60%), linear-gradient(135deg, #efeffb, #e6e7f7 55%, #f1ecf6)",
   charcoal: "#211c19 url('/textures/case-charcoal.jpg') center/cover",
   violet: "#2c2142 url('/textures/case-violet.jpg') center/cover",
   // Custoria: a soft navy-accent cloudy gradient (dark app screens pop on it).

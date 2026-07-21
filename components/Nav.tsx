@@ -37,7 +37,7 @@ export default function Nav() {
       <div className="mx-auto max-w-5xl px-4 pt-3 sm:px-6 sm:pt-4">
         {/* Floating, contained nav bar */}
         <div
-          className={`relative rounded-2xl border border-line shadow-[0_6px_22px_-8px_rgba(22,20,15,0.16)] backdrop-blur-md transition-colors duration-300 ${
+          className={`relative rounded-2xl shadow-[0_6px_22px_-8px_rgba(22,20,15,0.16),0_0_0_1px_rgba(22,20,15,0.06)] backdrop-blur-md transition-colors duration-300 ${
             scrolled ? "bg-paper/45" : "bg-paper/80"
           }`}
         >
