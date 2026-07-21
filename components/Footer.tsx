@@ -5,6 +5,7 @@ import Link from "next/link";
 import AboutModal from "@/components/AboutModal";
 import HeartMatrix from "@/components/HeartMatrix";
 import HeartCounter from "@/components/HeartCounter";
+import ShareButton from "@/components/ShareButton";
 
 const explore = [
   { label: "Work", href: "/#work" },
@@ -26,14 +27,17 @@ export default function Footer() {
     <footer>
       <div className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pb-20 sm:pt-12">
         <div className="flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between">
-          {/* Pixel heart, links to email */}
-          <a
-            href="mailto:ac.design.px@gmail.com"
-            aria-label="Email Anton Castro"
-            className="inline-block transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.98]"
-          >
-            <HeartMatrix />
-          </a>
+          {/* Pixel heart (links to email), with the share action beneath it */}
+          <div className="flex flex-col items-start gap-5">
+            <a
+              href="mailto:ac.design.px@gmail.com"
+              aria-label="Email Anton Castro"
+              className="inline-block transition-transform duration-300 ease-out hover:scale-[1.04] active:scale-[0.98]"
+            >
+              <HeartMatrix />
+            </a>
+            <ShareButton />
+          </div>
 
           {/* Nav columns */}
           <div className="grid grid-cols-2 gap-x-12 gap-y-10">
