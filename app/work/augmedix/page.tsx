@@ -156,6 +156,29 @@ export default function Augmedix() {
         />
       </Section>
 
+      <Section id="pilot" kicker="The pilot" title="1,500 clinicians, and the first AI scribe in the ED">
+        <p>
+          We piloted with <Hi>HCA Healthcare</Hi>, the largest healthcare provider in
+          the country: <Hi>1,500 clinicians</Hi> across every medical practice,
+          including the emergency department. Augmedix Go ED went in as the{" "}
+          <Hi>first generative AI scribe deployed in an ED context</Hi>.
+        </p>
+        <p>
+          The emergency department is the hardest room in the hospital to document
+          in: fast, constantly interrupted, high-acuity, and the place where a
+          clinician&apos;s attention is scarcest. Making it work there, where capture
+          has to survive interruption and a note has to be reviewable in seconds,
+          set the bar every other practice was held to.
+        </p>
+        <CaseImage
+          src="/work/ax-hca-pilot.jpg"
+          alt="Two HCA emergency medicine clinicians at Lake Nona Medical Center reviewing an AI-drafted note on Augmedix Go ED"
+          caption="Augmedix Go ED in the field at HCA: the first generative AI scribe built for emergency clinicians"
+          width={2000}
+          height={1673}
+        />
+      </Section>
+
       <Section id="outcome" kicker="Outcome" title="+65% engagement, then an acquisition">
         <p>
           <Hi>Engagement grew 65% in a year</Hi> as the product line went from one
@@ -172,6 +195,13 @@ export default function Augmedix() {
           principle I&apos;d argued for stopped being my position and became the
           default the four product lines were planned against.
         </p>
+        <CaseImage
+          src="/work/ax-acquisition.png"
+          alt="Commure's announcement that it signed a deal to acquire Augmedix (NASDAQ: AUGX), alongside a LinkedIn post from Commure's Chief Clinical AI Officer on scaling Augmedix Go ED with HCA Healthcare"
+          caption="The exit: Commure acquires Augmedix for $139M, and the ED partnership that helped get it there"
+          width={2000}
+          height={1412}
+        />
       </Section>
 
       </CaseLayout>

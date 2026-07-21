@@ -45,7 +45,7 @@ export default function ShareButton() {
       type="button"
       onClick={share}
       aria-live="polite"
-      className="inline-flex items-center gap-2.5 rounded-full border border-line bg-paper/70 px-5 py-2.5 text-sm text-muted transition-colors hover:border-accent/40 hover:text-ink"
+      className="emboss emboss-hover inline-flex items-center gap-2.5 rounded-2xl bg-paper/70 px-5 py-2.5 text-sm text-muted transition-[color,box-shadow] duration-300 ease-out hover:text-ink"
     >
       {copied ? (
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden>
