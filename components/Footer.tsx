@@ -15,10 +15,7 @@ const explore = [
 const connect = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/antoncastroe/" },
   { label: "GitHub", href: "https://github.com/acaspx" },
-  {
-    label: "Substack",
-    href: "https://substack.com/@acdesignpx?r=1ou43l&utm_medium=ios&utm_source=stories&shareImageVariant=blur",
-  },
+  { label: "X", href: "https://x.com/studioacas" },
 ];
 
 export default function Footer() {
