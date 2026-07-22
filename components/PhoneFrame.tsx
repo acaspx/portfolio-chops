@@ -73,6 +73,57 @@ export function PhoneFrame({
 }
 
 /**
+ * White/silver device frame that hugs the capture's NATURAL aspect: the bezel
+ * wraps the screen instead of cropping it into a rigid 19.5:9, so captures
+ * with baked status bars render pixel-accurate. No Dynamic Island (the capture
+ * already carries its own status bar).
+ */
+export function PhoneFrameLight({ src, alt }: { src: string; alt: string }) {
+  const [missing, setMissing] = useState(false);
+  return (
+    <div
+      className="relative mx-auto w-full max-w-[260px] transition-transform duration-300 ease-out will-change-transform hover:-translate-y-1.5"
+      style={{ containerType: "inline-size" }}
+    >
+      <div
+        className="relative overflow-hidden shadow-[0_14px_36px_-12px_rgba(22,20,15,0.28)] ring-1 ring-black/[0.08]"
+        style={{
+          borderRadius: "15.5cqw",
+          padding: "3cqw",
+          background: "linear-gradient(160deg, #ffffff 0%, #f2f0ec 55%, #e7e4de 100%)",
+        }}
+      >
+        {/* Inner bezel edge highlight */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/80"
+          style={{ borderRadius: "15.5cqw" }}
+        />
+        <div
+          className="relative w-full overflow-hidden bg-ink/[0.04] ring-1 ring-black/[0.10]"
+          style={{ borderRadius: "12.5cqw" }}
+        >
+          {missing ? (
+            <div className="grid aspect-[9/19] place-items-center px-4 text-center">
+              <span className="font-mono text-[10px] text-muted">{src.split("/").pop()}</span>
+            </div>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={src}
+              alt={alt}
+              loading="lazy"
+              className="block h-auto w-full"
+              onError={() => setMissing(true)}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Frameless screen: for assets that are already full-device screen captures
  * (their own status bar baked in). Just a rounded, bordered "screen" so we
  * don't double up the chrome or crop a non-19.5:9 capture.
@@ -100,17 +151,21 @@ export function PhoneShot({ src, alt }: { src: string; alt: string }) {
 }
 
 /** Grid of phones (frameless by default: rounded screen, no device bezel, shown
- *  at the capture's natural aspect), each with its own step label + descriptor. */
+ *  at the capture's natural aspect), each with its own step label + descriptor.
+ *  `frame="light"` wraps each screen in the white device bezel instead. */
 export function PhoneShowcase({
   phones,
   caption,
   framed = false,
+  frame = "dark",
   island = true,
 }: {
   phones: { src: string; alt: string; step: string; note: string }[];
   caption?: string;
   framed?: boolean;
-  /** Dynamic Island on the frame; off for captures with a baked status bar. */
+  /** Bezel style when framed: dark titanium (19.5:9) or light natural-aspect. */
+  frame?: "dark" | "light";
+  /** Dynamic Island on the dark frame; off for captures with a baked status bar. */
   island?: boolean;
 }) {
   return (
@@ -121,7 +176,11 @@ export function PhoneShowcase({
             {phones.map((p) => (
               <div key={p.src} className="flex flex-col">
                 {framed ? (
-                  <PhoneFrame src={p.src} alt={p.alt} island={island} />
+                  frame === "light" ? (
+                    <PhoneFrameLight src={p.src} alt={p.alt} />
+                  ) : (
+                    <PhoneFrame src={p.src} alt={p.alt} island={island} />
+                  )
                 ) : (
                   <PhoneShot src={p.src} alt={p.alt} />
                 )}
