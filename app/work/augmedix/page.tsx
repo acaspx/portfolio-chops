@@ -197,10 +197,10 @@ export default function Augmedix() {
         </p>
         <CaseImage
           src="/work/ax-acquisition.png"
-          alt="Commure's announcement that it signed a deal to acquire Augmedix (NASDAQ: AUGX), alongside a LinkedIn post from Commure's Chief Clinical AI Officer on scaling Augmedix Go ED with HCA Healthcare"
-          caption="The exit: Commure acquires Augmedix for $139M, and the ED partnership that helped get it there"
+          alt="News headline: Commure signs deal to acquire Augmedix (NASDAQ: AUGX), creating the largest company in the category"
+          caption="The exit: Commure acquires Augmedix for $139M"
           width={2000}
-          height={1412}
+          height={386}
         />
       </Section>
 
