@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import MaskReveal from "@/components/MaskReveal";
 import FadeImage from "@/components/FadeImage";
 import AppStoreBadge from "@/components/AppStoreBadge";
 import type { CSSProperties, ReactNode } from "react";
@@ -192,12 +193,14 @@ export function CaseLayout({
       {/* Main scrolling column */}
       <div className="min-w-0">
         <header className="pt-16 pb-8">
-          <Reveal>
+          <MaskReveal>
             <p className="font-mono text-xs uppercase tracking-widest text-muted">{company}</p>
-            <h1 className="mt-4 max-w-[46rem] text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
+          </MaskReveal>
+          <MaskReveal className="mt-4" delay={0.08}>
+            <h1 className="max-w-[46rem] text-4xl sm:text-5xl font-medium tracking-tight leading-[1.12]">
               {title}
             </h1>
-          </Reveal>
+          </MaskReveal>
           {/* Mobile-only details: stacked under the title */}
           <div className="mt-8 border-t border-line pt-6 lg:hidden">
             <DetailsList meta={meta} />
@@ -252,25 +255,25 @@ export function CaseLead({
   stats: { value: string; label: string }[];
 }) {
   return (
-    <Reveal>
-      <div className="max-w-[44rem] border-b border-line pb-9">
+    <div className="max-w-[44rem] border-b border-line pb-9">
+      <MaskReveal>
         <p className="text-xl font-medium leading-snug tracking-tight text-ink/90 sm:text-2xl">
           {hook}
         </p>
-        <div className="mt-7 flex flex-wrap gap-x-10 gap-y-5">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-3xl font-medium leading-none tracking-tight text-accent sm:text-[2.5rem]">
-                {s.value}
-              </div>
-              <div className="mt-1.5 max-w-[12rem] font-mono text-[11px] uppercase tracking-widest text-muted">
-                {s.label}
-              </div>
+      </MaskReveal>
+      <Reveal delay={0.15} className="mt-7 flex flex-wrap gap-x-10 gap-y-5">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <div className="text-3xl font-medium leading-none tracking-tight text-accent sm:text-[2.5rem]">
+              {s.value}
             </div>
-          ))}
-        </div>
-      </div>
-    </Reveal>
+            <div className="mt-1.5 max-w-[12rem] font-mono text-[11px] uppercase tracking-widest text-muted">
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </Reveal>
+    </div>
   );
 }
 
@@ -287,10 +290,14 @@ export function Section({
 }) {
   return (
     <section id={id} className="py-10 scroll-mt-28">
-      {/* No scroll reveal on reading pages: content should simply be there. */}
       <div className="max-w-[44rem]">
-        <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
-        <h2 className="mt-3 text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
+        {/* Headers rise in behind a mask; body copy stays present for scanning. */}
+        <MaskReveal>
+          <p className="font-mono text-[11px] uppercase tracking-widest text-accent">{kicker}</p>
+        </MaskReveal>
+        <MaskReveal className="mt-3" delay={0.07}>
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight">{title}</h2>
+        </MaskReveal>
         <div className="mt-5 space-y-5 text-[17px] leading-relaxed text-ink/85">{children}</div>
       </div>
     </section>
