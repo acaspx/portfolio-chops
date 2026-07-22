@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseLead, CaseHero, Section, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
 import VaultProcess from "@/components/VaultProcess";
@@ -14,10 +14,10 @@ export default function Custoria() {
   return (
     <article>
       <CaseHero
-        src="/work/cu-event.jpg"
-        alt="Anton Castro presenting Custoria Labs at a demo day, the 'How Custoria Labs Works' slide projected behind him to a seated audience"
-        width={2600}
-        height={1300}
+        src="/work/cu-hero-desk.jpg"
+        alt="The Custoria Labs web vault on a MacBook in a jewelry studio: a private, secure catalog of rings, earrings, and loose stones"
+        width={2000}
+        height={1103}
       />
       <CaseLayout
         tone="custoria"
@@ -143,6 +143,13 @@ export default function Custoria() {
           The app is <Hi>live on the App Store</Hi>. Next: converting the gallery
           pilot network into the first paying customers.
         </p>
+        <CaseImage
+          src="/work/cu-event.jpg"
+          alt="Anton Castro presenting 'How Custoria Labs Works' at a demo day, with co-founder Yiyi Qin beside him and a seated audience"
+          caption="Taking it to the room: presenting Custoria at a gallery-network demo day"
+          width={747}
+          height={373}
+        />
       </Section>
 
       </CaseLayout>
