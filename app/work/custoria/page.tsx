@@ -3,6 +3,7 @@ import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, Next
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
 import VaultProcess from "@/components/VaultProcess";
+import CustoriaBento from "@/components/CustoriaBento";
 
 export const metadata: Metadata = {
   title: "Custoria · Founding a Digital Vault | Anton Castro",
@@ -130,6 +131,23 @@ export default function Custoria() {
           ]}
         />
         <VaultProcess />
+      </Section>
+
+      <Section id="design-language" kicker="The design language" title="A vault that looks like one">
+        <p>
+          As the product matured, the brand caught up with the value prop. We
+          rebuilt the design system around the people the vault protects,{" "}
+          <Hi>serious collectors</Hi> and an <Hi>international user base</Hi>, with
+          three moves:
+        </p>
+        <KeyPoints
+          items={[
+            <><Hi>Vault-dark surfaces.</Hi> Near-black interiors that feel like the inside of a safe, and make jewelry photography read like a catalog.</>,
+            <><Hi>Appraisal serifs.</Hi> Values and item names set in serif numerals, so a $2,800 record carries the weight of an appraisal document.</>,
+            <><Hi>A status language, not status text.</Hi> Gold for unverified, green for AI confidence, purple for the brand at work: states that read at a glance in any language.</>,
+          ]}
+        />
+        <CustoriaBento />
       </Section>
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, and shipped">
