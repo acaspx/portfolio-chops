@@ -29,7 +29,8 @@ export default function MaskReveal({
 
   return (
     <motion.div
-      className={`overflow-hidden ${className}`}
+      // pb/-mb give descenders room inside the clip without shifting layout.
+      className={`overflow-hidden pb-[0.22em] -mb-[0.22em] ${className}`}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "0px 0px -8% 0px" }}

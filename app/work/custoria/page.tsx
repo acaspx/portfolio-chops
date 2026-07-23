@@ -3,7 +3,7 @@ import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, Next
 import ShareDemo from "@/components/ShareDemo";
 import CaptureJourney from "@/components/CaptureJourney";
 import VaultProcess from "@/components/VaultProcess";
-import CustoriaBento from "@/components/CustoriaBento";
+import { PhoneShowcase } from "@/components/PhoneFrame";
 
 export const metadata: Metadata = {
   title: "Custoria · Founding a Digital Vault | Anton Castro",
@@ -147,7 +147,17 @@ export default function Custoria() {
             <><Hi>A status language, not status text.</Hi> Gold for unverified, green for AI confidence, purple for the brand at work: states that read at a glance in any language.</>,
           ]}
         />
-        <CustoriaBento />
+        <PhoneShowcase
+          phones={[
+            { src: "/work/cu2-item.jpg", alt: "Custoria item page: a vintage ring photographed large, serif title, verification banner", step: "Item record", note: "Photography first, serif title, verification up top." },
+            { src: "/work/cu2-vaultanalysis.jpg", alt: "Vault analytics: average value, items and value by category", step: "Analytics", note: "A collection read like a portfolio: value and coverage by category." },
+            { src: "/work/cu2-analyzing.jpg", alt: "AI analysis in progress, reading photos and estimating value", step: "AI at work", note: "Analysis as a concierge moment, not a spinner." },
+            { src: "/work/cu2-result.jpg", alt: "AI analysis result: 80% confidence, processing time, photos used", step: "AI result", note: "Confidence, time, and model, stated plainly." },
+            { src: "/work/cu2-analysis.jpg", alt: "Full analysis: rarity, value estimate and range", step: "Valuation", note: "Estimate, range, and rarity in appraisal serifs." },
+            { src: "/work/cu2-saved.jpg", alt: "Item saved: proof-of-ownership prompt listing accepted documents", step: "Proof", note: "Every item prompts the documents that make it provable." },
+          ]}
+          caption="The rebranded system: vault-dark surfaces, appraisal serifs, and a status language that reads at a glance."
+        />
       </Section>
 
       <Section id="status" kicker="Where it stands" title="Piloted, measured, and shipped">
