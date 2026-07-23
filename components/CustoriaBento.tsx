@@ -15,17 +15,17 @@ import Reveal from "@/components/Reveal";
 type TileDef = { src: string; alt: string; label: string };
 
 const HERO: TileDef = {
-  src: "/work/cu2-item.png",
+  src: "/work/cu2-item.jpg",
   alt: "Custoria item page: a vintage gold-tone ring photographed large, with a serif title and an ownership-verification banner",
   label: "Item record",
 };
 
 const SUPPORT: TileDef[] = [
-  { src: "/work/cu2-vault.png", alt: "My Vault dashboard: total value in serif numerals, verification percentage, and the item list", label: "Vault" },
-  { src: "/work/cu2-result.png", alt: "AI analysis result: 80% confidence, processing time, and photos used", label: "AI result" },
-  { src: "/work/cu2-saved.png", alt: "Item saved: the proof-of-ownership prompt listing accepted documents", label: "Proof of ownership" },
-  { src: "/work/cu2-analyzing.png", alt: "AI analysis in progress, reading photos and estimating value", label: "AI at work" },
-  { src: "/work/cu2-analysis.png", alt: "Full analysis: rarity, value estimate and range, and AI metadata", label: "Valuation" },
+  { src: "/work/cu2-vaultanalysis.jpg", alt: "Vault analytics: average value and items and value broken down by category", label: "Analytics" },
+  { src: "/work/cu2-result.jpg", alt: "AI analysis result: 80% confidence, processing time, and photos used", label: "AI result" },
+  { src: "/work/cu2-saved.jpg", alt: "Item saved: the proof-of-ownership prompt listing accepted documents", label: "Proof of ownership" },
+  { src: "/work/cu2-analyzing.jpg", alt: "AI analysis in progress, reading photos and estimating value", label: "AI at work" },
+  { src: "/work/cu2-analysis.jpg", alt: "Full analysis: rarity, value estimate and range, and AI metadata", label: "Valuation" },
 ];
 
 function Tile({ tile, className = "" }: { tile: TileDef; className?: string }) {
