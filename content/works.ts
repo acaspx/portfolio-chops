@@ -13,7 +13,6 @@ export const works: Work[] = [
       "The data and the journalists were there, but no product turning it into decisions, and no AI. I led the AI features that landed State Affairs' first enterprise contracts.",
     metrics: [
       { value: "0→1", label: "first AI product" },
-      { value: "12 agents", label: "across 360° Views + AI Chat" },
       { value: "Walmart + DoorDash", label: "first enterprise customers" },
     ],
     images: [
