@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
 import { PhoneShowcase } from "@/components/PhoneFrame";
 export const metadata: Metadata = {
   title: "Augmedix · AI Clinical Documentation | Anton Castro",
@@ -54,13 +54,12 @@ export default function Augmedix() {
 
       <Section id="problem" kicker="The challenge" title="One agentic system, four purpose-built products, zero tolerance for error in healthcare">
         <p>
-          Growth meant expanding from one offering to four, across web and mobile,
-          emergency and primary care, without fragmenting the experience or the
-          team&apos;s velocity. Research made two things clear:{" "}
-          <Hi>~40% of clinicians wanted a human in the loop</Hi>, and{" "}
-          <Hi>30% asked for a desktop workflow</Hi> to finish notes where they
-          already lived: the EHR. We rebuilt around both. Capture on the move,
-          finish at the desk, specialist support one tap away.
+          Growth meant one offering becoming four, across web and mobile,
+          emergency and primary care, without fragmenting the experience. Research
+          set two constraints: <Hi>~40% of clinicians wanted a human in the
+          loop</Hi>, and <Hi>30% asked for a desktop workflow</Hi> to finish notes
+          where they already lived, the EHR. We rebuilt around both: capture on
+          the move, finish at the desk.
         </p>
         <blockquote className="border-l-2 border-accent pl-5 italic text-ink/75">
           &quot;So far the technology speeds up my workflow, but I still have to
@@ -87,42 +86,39 @@ export default function Augmedix() {
       <Section id="decision" kicker="The decision" title="A flexibility flywheel, and the system that shipped it">
         <p>
           The first product, <Hi>Augmedix Go</Hi>, launched as a pure-AI scribe.
-          Then the data complicated the story: model accuracy kept improving, but
-          note creation dropped and retention settled near <Hi>43%</Hi>. The
-          blocker wasn&apos;t the model. It was fit: clinicians were bending their
-          work to the tool instead of the other way around.
+          Model accuracy kept improving, but retention settled near <Hi>43%</Hi>.
+          The blocker wasn&apos;t the model. It was fit: clinicians were bending
+          their work to the tool instead of the other way around.
         </p>
         <p>
-          Under tight deadlines, our PMs advocated a one-size-fits-all workflow,
-          the clearest path to shipping. I argued the opposite, and not on empathy
-          grounds alone: <Hi>rigid workflows would cap the AI itself</Hi>. My
-          system mappings showed a modular alternative (templates, preferences,
-          self-serve settings) where every clinician who adapted the tool
-          generated the feedback the models needed to improve.
+          Under deadline, our PMs advocated one-size-fits-all, the clearest path
+          to shipping. I argued the opposite, on two grounds:
+        </p>
+        <KeyPoints
+          items={[
+            <><Hi>Rigid workflows would cap the AI itself.</Hi> Every clinician who adapts the tool generates the feedback the models need to improve.</>,
+            <><Hi>Clinicians weren&apos;t rejecting AI.</Hi> Onsite at HCA hospitals, they were rejecting being told how to work.</>,
+          ]}
+        />
+        <p>
+          We shipped the modular approach, templates, preferences, self-serve
+          settings, within the same timeline, and it became{" "}
+          <Hi>the foundation the product scaled on</Hi>.
         </p>
         <p>
-          The evidence came from onsite visits to HCA hospitals: clinicians
-          weren&apos;t rejecting AI; they were rejecting being told how to work. We
-          shipped the modular approach within the timeline we had, and it became
-          the foundation the product scaled on.
+          To hold four product lines together (Go, Assist, Live, and the MDS
+          console), I built the web and mobile <Hi>design system</Hi>: the
+          connective tissue across <Hi>nine PMs and AI leads</Hi> that let us fold
+          a new agentic model into the core flow and <Hi>ship it in four
+          months</Hi>.
         </p>
         <p>
-          To make the modular approach work across the four product lines (Go,
-          Assist, Live, and the MDS console), I built the web and mobile design
-          system in Figma: the connective tissue that let me work across nine PMs
-          and AI leads, fold a new agentic AI model into the core flow, and ship it
-          in four months.
-        </p>
-        <p>
-          The agentic model raised the design stakes. An agent that drafts a
-          clinical note is making <Hi>consequential calls a clinician signs their
-          name to</Hi>, so I built the interaction around review and repair, not
-          automation theater: the AI drafts, the clinician
-          sees what it was confident about and what it flagged, and every
-          correction becomes signal the model learns from. Human-in-the-loop
-          wasn&apos;t a safety toggle; it was the core interaction, because the{" "}
-          <Hi>~40% who wanted a human in the loop</Hi> were right about where the
-          trust had to live.
+          The agentic model raised the stakes: an agent drafting a clinical note
+          makes <Hi>calls a clinician signs their name to</Hi>. So the core
+          interaction is <Hi>review and repair</Hi>, not automation theater. The
+          AI drafts and shows what it flagged; the clinician corrects; every
+          correction becomes training signal. The ~40% who wanted a human in the
+          loop were right about where the trust had to live.
         </p>
         <PhoneShowcase
           framed
@@ -183,11 +179,10 @@ export default function Augmedix() {
 
       <Section id="outcome" kicker="Outcome" title="+65% engagement, then an acquisition">
         <p>
-          <Hi>Engagement grew 65% in a year</Hi> as the product line went from one
-          offering to four, measured on notes volume, workflow completion, and
-          transcription accuracy. Not vanity metrics: they proved the promise that
-          turns a pilot into a workflow: capture the conversation, deliver a note
-          clinicians trust into the EHR.
+          <Hi>Engagement grew 65% in a year</Hi> as one offering became four,
+          measured on notes volume, workflow completion, and transcription
+          accuracy. Not vanity metrics: the promise that turns a pilot into a
+          workflow is <Hi>a note clinicians trust, delivered into the EHR</Hi>.
         </p>
         <p>
           The pilot scaled from <Hi>25 clinicians to contracts for thousands</Hi>{" "}

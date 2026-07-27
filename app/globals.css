@@ -101,21 +101,23 @@ html.asterisk-cursor * {
   margin-right: 0.4rem; /* default: spaced row (touch) */
 }
 @media (hover: hover) {
+  /* Idle: fully collapsed, only the front icon visible - one clean mark that
+     blooms into the full row on hover (no half-clipped icons peeking out). */
   .social-stack > li:not(:last-child) {
-    margin-right: -1.6rem; /* idle: collapsed deck */
+    margin-right: -2.25rem;
   }
   .social-stack > li:last-child {
     z-index: 3;
   }
   .social-stack > li:nth-last-child(2) {
     z-index: 2;
-    transform: scale(0.9);
-    opacity: 0.6;
+    transform: scale(0.85);
+    opacity: 0;
   }
   .social-stack > li:nth-last-child(3) {
     z-index: 1;
-    transform: scale(0.82);
-    opacity: 0.38;
+    transform: scale(0.75);
+    opacity: 0;
   }
   .social-stack:hover > li {
     transform: none;

@@ -66,6 +66,17 @@ export default function Footer() {
                     Résumé ↓
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="https://github.com/acaspx/portfolio-chops"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="This site, designed and coded by me"
+                    className="link-line text-muted hover:text-ink"
+                  >
+                    Site source ↗
+                  </a>
+                </li>
               </ul>
             </div>
 

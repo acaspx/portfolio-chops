@@ -38,7 +38,7 @@ export default function Nav() {
         {/* Floating, contained nav bar */}
         <div
           className={`relative rounded-2xl shadow-[0_6px_22px_-8px_rgba(22,20,15,0.16),0_0_0_1px_rgba(22,20,15,0.06)] backdrop-blur-md transition-colors duration-300 ${
-            scrolled ? "bg-paper/45" : "bg-paper/80"
+            scrolled ? "bg-paper/70" : "bg-paper/85"
           }`}
         >
           {/* Reading progress - only on case studies; a thin bar spanning the floating nav */}

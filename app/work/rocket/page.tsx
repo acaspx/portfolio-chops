@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, NextCase } from "@/components/CaseStudy";
+import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
 import RocketSystem from "@/components/RocketSystem";
 
 export const metadata: Metadata = {
@@ -54,14 +54,11 @@ export default function Rocket() {
 
       <Section id="parity" kicker="Meeting them where they are" title="Two ways in: the familiar form, or a conversation">
         <p>
-          Meeting homeowners where they are meant not forcing a channel on them.
-          Some trust the familiar web form; others would rather just say where they
-          are in the process. So I designed Liv in{" "}
-          <Hi>parity with Rocket&apos;s new web onboarding</Hi>: the same questions,
-          the same estimated-credit math, the same next step, offered either as the
-          standard flow or as a conversation with Liv. Whichever channel someone
-          picks, they share the same goals and land in the same place, so the choice
-          never costs them progress.
+          Some homeowners trust the familiar form; others would rather just say
+          where they are. So I designed Liv in <Hi>parity with Rocket&apos;s web
+          onboarding</Hi>: same questions, same estimated-credit math, same next
+          step, as a form or as a conversation. <Hi>The choice never costs
+          progress.</Hi>
         </p>
         <CaseImage
           src="/work/rk-parity.png"
@@ -71,11 +68,9 @@ export default function Rocket() {
           height={898}
         />
         <p>
-          That parity held across devices. On mobile, the{" "}
-          <Hi>same guided onboarding</Hi>, home description, property use, then a
-          calculated next step, runs the identical logic, with Liv one tap away on
-          every screen. The device changes; the questions, the pacing, and where a
-          person lands do not.
+          The parity held across devices too: the <Hi>same guided onboarding on
+          mobile</Hi>, with Liv one tap away on every screen. The device changes;
+          the questions and where a person lands do not.
         </p>
         <CaseImage
           src="/work/rk-mobile-onboarding.png"
@@ -89,11 +84,11 @@ export default function Rocket() {
       <Section id="problem" kicker="The hard problem" title="A chatbot can't fake its way through a mortgage">
         <p>
           People won&apos;t hand the largest transaction of their lives to a bot
-          that bluffs, and lending agents won&apos;t trust a system that sends them
-          the wrong clients. The design question wasn&apos;t
-          &quot;what can Liv say?&quot; but <em>when should Liv stop talking</em>: how the
-          assistant collects context upfront, when it hands off to a human banker,
-          and how it does both in Rocket&apos;s voice without pretending to be a person.
+          that bluffs, and bankers won&apos;t trust a system that sends them the
+          wrong clients. The design question wasn&apos;t &quot;what can Liv
+          say?&quot; but <Hi>when should Liv stop talking</Hi>: when to collect
+          context, when to hand off to a human, and how to do both in
+          Rocket&apos;s voice without pretending to be a person.
         </p>
         <CaseImage
           src="/work/rk-disaster.png"
@@ -105,9 +100,17 @@ export default function Rocket() {
       <Section id="system" kicker="The system" title="A conversation design system, not a script">
         <p>
           I owned Liv&apos;s end-to-end journey and visual voice, and built the
-          conversation patterns that made it scalable: Pitstop, Queueing,
-          Interstitial, and Agent Intro, reusable states for pacing a conversation,
-          holding context, and handing off to a human without losing it.
+          conversation into <Hi>four reusable patterns</Hi>:
+        </p>
+        <KeyPoints
+          items={[
+            <><Hi>Pitstop</Hi>: pace the conversation so it never overwhelms.</>,
+            <><Hi>Queueing</Hi>: hold context while a human becomes available.</>,
+            <><Hi>Interstitial</Hi>: keep progress visible between steps.</>,
+            <><Hi>Agent Intro</Hi>: hand off to a banker without losing anything.</>,
+          ]}
+        />
+        <p>
           Rebuilding onboarding around these patterns{" "}
           <Hi>cut client onboarding time 75%</Hi>.
         </p>
@@ -126,14 +129,12 @@ export default function Rocket() {
           <RocketSystem />
         </div>
         <p>
-          The craft was in the unhappy path. Liv was designed to{" "}
-          <Hi>hand off on low confidence rather than guess</Hi>: when it
-          wasn&apos;t sure, it stopped talking, summarized what it had, and queued a
-          human instead of bluffing through a mortgage question. Each handoff
-          carried the full conversation context to the banker, so the homeowner
-          never restarted from zero. That is what the 94% correct-routing number
-          really measures: not just who Liv routed to, but how much the human
-          already knew when the conversation landed in front of them.
+          The craft was in the unhappy path. Liv{" "}
+          <Hi>hands off on low confidence rather than guess</Hi>: it stops talking,
+          summarizes what it has, and queues a human, with the full conversation
+          context attached so the homeowner never restarts from zero. That&apos;s
+          what the 94% really measures: <Hi>how much the banker already knew</Hi>{" "}
+          when the conversation landed in front of them.
         </p>
         <CaseImage
           src="/work/rk-patterns.png"
@@ -145,17 +146,17 @@ export default function Rocket() {
       <Section id="outcome" kicker="Outcome" title="Trusted by users, and by the bankers behind them">
         <p>
           Where Liv ran, <Hi>engagement rose 11%</Hi> and{" "}
-          <Hi>routing to a lending banker increased 22%</Hi>. The number I&apos;m
-          proudest of is the quietest one: <Hi>94% of loan bankers said Liv was
-          routing them the correct client</Hi>. That&apos;s the human side of the loop
-          trusting the AI side.
+          <Hi>routing to a lending banker rose 22%</Hi>. The number I&apos;m
+          proudest of is the quietest: <Hi>94% of loan bankers said Liv routed
+          them the correct client</Hi>. The human side of the loop trusting the
+          AI side.
         </p>
         <p>
-          What didn&apos;t go to plan: conversion stayed softer than engagement as
-          rates kept buyers sidelined; no conversation design outruns market
-          conditions. And bankers needed real training on how client data reached
-          them. Next time I ship a human handoff, the human&apos;s onboarding gets
-          designed as deliberately as the user&apos;s.
+          What didn&apos;t go to plan: conversion stayed softer than engagement,
+          no conversation design outruns mortgage rates, and bankers needed real
+          training on how client data reached them. Next time,{" "}
+          <Hi>the human&apos;s onboarding gets designed as deliberately as the
+          user&apos;s</Hi>.
         </p>
         <CaseImage
           src="/work/rk-routing.png"
