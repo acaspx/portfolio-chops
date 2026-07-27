@@ -34,7 +34,7 @@ export default function HeroLede({
         0→1s across healthcare, fintech, and govtech.
       </motion.p>
       <motion.p {...rise(0.3)} className={statusClassName}>
-        Currently building AI systems at State Affairs
+        Currently building agentic systems at State Affairs
       </motion.p>
     </>
   );
