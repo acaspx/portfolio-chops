@@ -76,10 +76,11 @@ export default function Augmedix() {
         />
         <CaseImage
           src="/work/ax-research.png"
-          alt="Research stats: 30% requested desktop workflow, ~40% preferred a human in the loop"
+          alt="A Sutter Health physician's quote about needing a seamless desktop workflow, beside the Augmedix web app on a laptop and the mobile login"
           caption="The research that drove both pivots"
-          width={3285}
-          height={1274}
+          width={2400}
+          height={930}
+          plain
         />
       </Section>
 

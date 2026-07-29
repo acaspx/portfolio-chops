@@ -117,12 +117,15 @@ export function CaseImage({
   caption,
   width = 1920,
   height = 1080,
+  plain = false,
 }: {
   src: string;
   alt: string;
   caption: string;
   width?: number;
   height?: number;
+  /** Transparent-background art: no card chrome (ring/shadow), sits directly on the canvas. */
+  plain?: boolean;
 }) {
   return (
     <figure className="my-6">
@@ -132,7 +135,11 @@ export function CaseImage({
           alt={alt}
           width={width}
           height={height}
-          className="relative z-[1] h-auto w-full rounded-lg shadow-2xl ring-1 ring-black/25"
+          className={
+            plain
+              ? "relative z-[1] h-auto w-full"
+              : "relative z-[1] h-auto w-full rounded-lg shadow-2xl ring-1 ring-black/25"
+          }
         />
       </div>
       <figcaption className="mt-2.5 font-mono text-xs text-muted">{caption}</figcaption>
