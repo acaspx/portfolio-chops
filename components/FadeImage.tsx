@@ -10,6 +10,8 @@ export default function FadeImage({ className = "", ...props }: ImageProps) {
     <Image
       {...props}
       onLoad={() => setLoaded(true)}
+      // If optimization/loading fails, reveal rather than hold an invisible box.
+      onError={() => setLoaded(true)}
       className={`${className} transition-opacity duration-700 ease-out ${
         loaded ? "opacity-100" : "opacity-0"
       }`}

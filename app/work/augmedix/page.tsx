@@ -139,8 +139,8 @@ export default function Augmedix() {
           src="/work/ax-agentic-lcm.png"
           alt="Architecture diagram: the Augmedix LCM agentic model reading and writing across the iOS app, internal web app, Augmedix web app, and MDS notebuilder"
           caption="The agentic core: one model, the Augmedix LCM, reading and writing across every surface"
-          width={4096}
-          height={2963}
+          width={2000}
+          height={1447}
         />
         <PhoneShowcase
           framed
