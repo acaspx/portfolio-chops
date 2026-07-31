@@ -42,26 +42,22 @@ export default function Custoria() {
         ]}
       />
 
-      <Section id="origin" kicker="Origin" title="Product-market fit wasn't enough">
+      <Section id="origin" kicker="Origin" title="We killed a product with product-market fit">
         <p>
           Custoria began as our MBA Design Strategy thesis: a consumer data-privacy
-          app. <Hi>It found product-market fit, and we killed it anyway.</Hi>{" "}
-          Interrogating the strategy exposed the real problem, <Hi>distribution</Hi>.
-          Privacy is already owned: by legacy trust brands (Norton, McAfee),
-          privacy-first challengers (DuckDuckGo, Brave), and the platforms that
-          bundle it free (Apple, Google). When your competitor is already installed,
-          trusted, or free, a better product doesn&apos;t win. A different market does.
+          app. <Hi>It found product-market fit, and we killed it anyway.</Hi> The
+          real problem was <Hi>distribution</Hi>: privacy is already owned by legacy
+          trust brands, privacy-first challengers, and the platforms that bundle it
+          free. A better product doesn&apos;t win that market. A different market
+          does.
         </p>
-      </Section>
-
-      <Section id="pivot" kicker="The pivot" title="From protecting data to proving ownership">
         <p>
           The wedge came from my co-founder, Yiyi Qin, who works in jewelry and art
-          galleries. Galleries, collectors, and appraisers carry real privacy,
-          insurance, and consignment risk on the objects they hold, and track
-          ownership with tools never built for it. Niche but hungry:{" "}
-          <Hi>~20,000 commercial galleries worldwide</Hi>, plus the long tail of
-          collectors, appraisers, and small businesses.
+          galleries: <Hi>~20,000 galleries worldwide</Hi>, plus collectors and
+          appraisers, carrying real insurance and consignment risk on objects they
+          track with tools never built for it. Our privacy playbook mapped straight
+          on. Custoria became a <Hi>digital vault for the things people value
+          most</Hi>, with privacy as the spine, not a settings page.
         </p>
         <blockquote className="border-l-2 border-accent pl-5 italic text-ink/75">
           &quot;Every time an agent takes that Yayoi Kusama Pumpkin for a client
@@ -71,12 +67,6 @@ export default function Custoria() {
             Gallery manager, pilot research
           </footer>
         </blockquote>
-        <p>
-          Our privacy playbook mapped straight onto it. Custoria became a{" "}
-          <Hi>digital vault for the things people value most</Hi>: capture an item in
-          seconds, keep tracking effortless, and prove ownership and value (or
-          transfer it) with privacy as the spine, not a settings page.
-        </p>
       </Section>
 
       <Section id="problem" kicker="The hard problem" title="Sharing that proves, without exposing">
@@ -94,17 +84,12 @@ export default function Custoria() {
           ]}
         />
         <p>
-          Every shared record carries a Custoria watermark and stamp of authenticity.
-          That does two jobs: it makes the record trustworthy to whoever receives it,
-          and it puts our brand in front of the insurers, appraisers, and buyers we
-          need to reach. <Hi>The distribution lesson that killed v1, designed into
-          v2.</Hi>
-        </p>
-        <p>
-          Underneath: <Hi>zero-knowledge, end-to-end encryption</Hi> (even Custoria
-          can&apos;t see inside your vault), with a blockchain-backed chain of
-          ownership and expiring access links doing the enforcement the legalese
-          usually only pretends to.
+          Every share carries a Custoria <Hi>watermark and stamp of
+          authenticity</Hi>: trust for whoever receives it, and our brand in front
+          of the insurers and appraisers we need to reach, the distribution lesson
+          from v1, designed into v2. Underneath, <Hi>zero-knowledge
+          encryption</Hi> and a blockchain-backed chain of ownership do the
+          enforcement the legalese usually pretends to.
         </p>
         <ShareDemo />
       </Section>
