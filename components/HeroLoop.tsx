@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import AsteriskMark from "@/components/AsteriskMark";
 
 /**
  * The hero's right-side loop: Voice, Visual, Code cascading inside a large
@@ -60,18 +61,16 @@ export default function HeroLoop() {
         transition={{ duration: 1.6, delay: T.arc, ease: EASE }}
       />
 
-      {/* Spinning asterisk hub */}
+      {/* Spinning asterisk hub: the real brand mark, so it blooms on hover
+          exactly like the nav logo (6 rays to 12, gentle turn) */}
       <motion.g
-        stroke={NAVY}
-        strokeWidth="8"
-        strokeLinecap="round"
         style={{ transformOrigin: "200px 245px" }}
         animate={reduce ? undefined : { rotate: 360 }}
         transition={reduce ? undefined : { duration: 30, ease: "linear", repeat: Infinity }}
       >
-        <line x1="200" y1="197" x2="200" y2="293" />
-        <line x1="159" y1="221" x2="241" y2="269" />
-        <line x1="159" y1="269" x2="241" y2="221" />
+        <g transform="translate(140, 185)">
+          <AsteriskMark className="h-[120px] w-[120px] text-accent" />
+        </g>
       </motion.g>
 
       {/* The cascade: Voice -> Visual -> Code, with Code feeding back to Visual */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import AsteriskMark from "@/components/AsteriskMark";
 import HeroLede from "@/components/HeroLede";
 import HeroLoop from "@/components/HeroLoop";
 
@@ -18,15 +17,12 @@ export default function Hero() {
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:gap-12">
         <div>
           <motion.div {...fade(0)}>
-            <div className="relative inline-block">
-              <AsteriskMark className="absolute -left-5 -top-4 h-[24px] w-[24px] text-accent sm:-left-6 sm:-top-5 sm:h-[27px] sm:w-[27px]" />
-              <h1
-                className="font-serif text-3xl sm:text-4xl tracking-tight"
-                style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
-              >
-                Anton Castro
-              </h1>
-            </div>
+            <h1
+              className="font-serif text-3xl sm:text-4xl tracking-tight"
+              style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
+            >
+              Anton Castro
+            </h1>
             <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
           </motion.div>
 
