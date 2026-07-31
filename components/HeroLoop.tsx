@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import AsteriskMark from "@/components/AsteriskMark";
 
 /**
  * The hero's right-side loop: Voice, Visual, Code cascading inside a large
@@ -61,16 +60,45 @@ export default function HeroLoop() {
         transition={{ duration: 1.6, delay: T.arc, ease: EASE }}
       />
 
-      {/* Spinning asterisk hub: the real brand mark, so it blooms on hover
-          exactly like the nav logo (6 rays to 12, gentle turn) */}
+      {/* Spinning asterisk hub, small as before. Hover blooms it from 6 rays
+          to 12 with a gentle turn, mirroring the nav logo's behavior, drawn
+          natively at this scale (nesting the AsteriskMark svg missized it). */}
       <motion.g
         style={{ transformOrigin: "200px 245px" }}
         animate={reduce ? undefined : { rotate: 360 }}
         transition={reduce ? undefined : { duration: 30, ease: "linear", repeat: Infinity }}
       >
-        <g transform="translate(140, 185)">
-          <AsteriskMark className="h-[120px] w-[120px] text-accent" />
-        </g>
+        <motion.g
+          initial="rest"
+          animate="rest"
+          whileHover={reduce ? undefined : "hover"}
+          variants={{ rest: { rotate: 0 }, hover: { rotate: 30 } }}
+          transition={{ duration: 0.45, ease: EASE }}
+          style={{ transformOrigin: "200px 245px" }}
+          stroke={NAVY}
+          strokeWidth="8"
+          strokeLinecap="round"
+        >
+          {/* Generous invisible hover target */}
+          <circle cx="200" cy="245" r="62" fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
+          {/* Base rays */}
+          <line x1="200" y1="197" x2="200" y2="293" />
+          <line x1="159" y1="221" x2="241" y2="269" />
+          <line x1="159" y1="269" x2="241" y2="221" />
+          {/* Bloom rays */}
+          {[
+            { x1: 152, y1: 245, x2: 248, y2: 245 },
+            { x1: 176, y1: 203.4, x2: 224, y2: 286.6 },
+            { x1: 224, y1: 203.4, x2: 176, y2: 286.6 },
+          ].map((l, i) => (
+            <motion.line
+              key={i}
+              {...l}
+              variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+              transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
+            />
+          ))}
+        </motion.g>
       </motion.g>
 
       {/* The cascade: Voice -> Visual -> Code, with Code feeding back to Visual */}
