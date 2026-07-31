@@ -38,7 +38,7 @@ export default function Custoria() {
         stats={[
           { value: "2×", label: "more accurate item records" },
           { value: "~90%", label: "less loss-and-risk exposure" },
-          { value: "Available", label: "on the App Store" },
+          { value: "~150", label: "users in 90 days on the App Store" },
         ]}
       />
 
@@ -168,8 +168,9 @@ export default function Custoria() {
           <Hi>~90% cut in loss-and-risk exposure</Hi>.
         </p>
         <p>
-          The app is <Hi>live on the App Store</Hi>. Next: converting the gallery
-          pilot network into the first paying customers.
+          The app is <Hi>live on the App Store, ~150 users in the first 90
+          days</Hi>. Next: converting the gallery pilot network into the first
+          paying customers.
         </p>
         <CaseImage
           src="/work/cu-event.jpg"
