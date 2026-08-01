@@ -4,18 +4,33 @@ import { motion, useReducedMotion } from "motion/react";
 
 /**
  * The hero's right-side loop: Voice, Visual, Code cascading inside a large
- * return loop (after the reference composition), recast in the site's ink
- * navy with the brand asterisk slowly spinning at the hub. Reveals once on
- * load, timed to land just after the lede settles: the loop draws itself,
- * then each stage and connector eases in down the cascade. Reduced-motion
- * renders the finished diagram, no spin.
+ * return loop, recast in ink navy with the brand asterisk at the hub.
+ *
+ * Reveal choreography (once, on load):
+ * 1. The asterisk scales up from nothing - the cue to watch.
+ * 2. The loop draws itself; its arrowhead pops in only as the stroke arrives
+ *    (a marker would float at the path's end the whole time).
+ * 3. The cascade eases in stage by stage.
+ * The hub then spins slowly forever, and blooms 6 -> 12 rays on hover like
+ * the nav logo. Reduced-motion renders the finished static diagram.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const NAVY = "#1e2a44";
 
-// Reveal timing (s): loop draw, then the cascade.
-const T = { arc: 0.5, voice: 1.3, a1: 1.6, visual: 1.9, a2: 2.2, code: 2.5, a3: 2.8 };
+// Reveal timing (s)
+const T = {
+  mark: 0.3,
+  arc: 1.0,
+  arcDur: 1.4,
+  head: 2.25,
+  voice: 2.5,
+  a1: 2.75,
+  visual: 2.95,
+  a2: 3.2,
+  code: 3.4,
+  a3: 3.65,
+};
 
 export default function HeroLoop() {
   const reduce = useReducedMotion();
@@ -35,7 +50,7 @@ export default function HeroLoop() {
     >
       <defs>
         <marker
-          id="loop-head"
+          id="loop-head-sm"
           viewBox="0 0 10 10"
           refX="6.5"
           refY="5"
@@ -47,57 +62,66 @@ export default function HeroLoop() {
         </marker>
       </defs>
 
-      {/* Large return loop, drawn in */}
+      {/* Large return loop, drawn in; head arrives with the stroke */}
       <motion.path
         d="M 309 375 A 170 170 0 1 1 252 88"
         fill="none"
         stroke={NAVY}
         strokeWidth="6"
         strokeLinecap="round"
-        markerEnd="url(#loop-head)"
         initial={reduce ? false : { pathLength: 0 }}
         animate={{ pathLength: 1 }}
-        transition={{ duration: 1.6, delay: T.arc, ease: EASE }}
+        transition={{ duration: T.arcDur, delay: T.arc, ease: EASE }}
       />
-
-      {/* Spinning asterisk hub, small as before. Hover blooms it from 6 rays
-          to 12 with a gentle turn, mirroring the nav logo's behavior, drawn
-          natively at this scale (nesting the AsteriskMark svg missized it). */}
       <motion.g
+        initial={reduce ? false : { opacity: 0, scale: 0.4 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, delay: T.head, ease: EASE }}
+        style={{ transformOrigin: "252px 88px" }}
+      >
+        <path d="M0 -13 L26 0 L0 13 z" fill={NAVY} transform="translate(252,88) rotate(20)" />
+      </motion.g>
+
+      {/* Hub: scales in first as the visual cue, then spins; hover blooms */}
+      <motion.g
+        initial={reduce ? false : { scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, delay: T.mark, ease: [0.34, 1.3, 0.5, 1] }}
         style={{ transformOrigin: "200px 245px" }}
-        animate={reduce ? undefined : { rotate: 360 }}
-        transition={reduce ? undefined : { duration: 30, ease: "linear", repeat: Infinity }}
       >
         <motion.g
-          initial="rest"
-          animate="rest"
-          whileHover={reduce ? undefined : "hover"}
-          variants={{ rest: { rotate: 0 }, hover: { rotate: 30 } }}
-          transition={{ duration: 0.45, ease: EASE }}
           style={{ transformOrigin: "200px 245px" }}
-          stroke={NAVY}
-          strokeWidth="8"
-          strokeLinecap="round"
+          animate={reduce ? undefined : { rotate: 360 }}
+          transition={reduce ? undefined : { duration: 30, ease: "linear", repeat: Infinity }}
         >
-          {/* Generous invisible hover target */}
-          <circle cx="200" cy="245" r="62" fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
-          {/* Base rays */}
-          <line x1="200" y1="197" x2="200" y2="293" />
-          <line x1="159" y1="221" x2="241" y2="269" />
-          <line x1="159" y1="269" x2="241" y2="221" />
-          {/* Bloom rays */}
-          {[
-            { x1: 152, y1: 245, x2: 248, y2: 245 },
-            { x1: 176, y1: 203.4, x2: 224, y2: 286.6 },
-            { x1: 224, y1: 203.4, x2: 176, y2: 286.6 },
-          ].map((l, i) => (
-            <motion.line
-              key={i}
-              {...l}
-              variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
-              transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
-            />
-          ))}
+          <motion.g
+            initial="rest"
+            animate="rest"
+            whileHover={reduce ? undefined : "hover"}
+            variants={{ rest: { rotate: 0 }, hover: { rotate: 30 } }}
+            transition={{ duration: 0.45, ease: EASE }}
+            style={{ transformOrigin: "200px 245px" }}
+            stroke={NAVY}
+            strokeWidth="8"
+            strokeLinecap="round"
+          >
+            <circle cx="200" cy="245" r="62" fill="transparent" stroke="none" style={{ pointerEvents: "all" }} />
+            <line x1="200" y1="197" x2="200" y2="293" />
+            <line x1="159" y1="221" x2="241" y2="269" />
+            <line x1="159" y1="269" x2="241" y2="221" />
+            {[
+              { x1: 152, y1: 245, x2: 248, y2: 245 },
+              { x1: 176, y1: 203.4, x2: 224, y2: 286.6 },
+              { x1: 224, y1: 203.4, x2: 176, y2: 286.6 },
+            ].map((l, i) => (
+              <motion.line
+                key={i}
+                {...l}
+                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                transition={{ duration: 0.3, delay: i * 0.05, ease: "easeOut" }}
+              />
+            ))}
+          </motion.g>
         </motion.g>
       </motion.g>
 
@@ -122,7 +146,7 @@ export default function HeroLoop() {
         stroke={NAVY}
         strokeWidth="5"
         strokeLinecap="round"
-        markerEnd="url(#loop-head)"
+        markerEnd="url(#loop-head-sm)"
       />
       <motion.text
         {...fade(T.visual)}
@@ -144,7 +168,7 @@ export default function HeroLoop() {
         stroke={NAVY}
         strokeWidth="5"
         strokeLinecap="round"
-        markerEnd="url(#loop-head)"
+        markerEnd="url(#loop-head-sm)"
       />
       <motion.text
         {...fade(T.code)}
@@ -166,7 +190,7 @@ export default function HeroLoop() {
         stroke={NAVY}
         strokeWidth="5"
         strokeLinecap="round"
-        markerEnd="url(#loop-head)"
+        markerEnd="url(#loop-head-sm)"
       />
     </svg>
   );
