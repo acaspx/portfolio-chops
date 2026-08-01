@@ -18,18 +18,18 @@ import { motion, useReducedMotion } from "motion/react";
 const EASE = [0.22, 1, 0.36, 1] as const;
 const NAVY = "#1e2a44";
 
-// Reveal timing (s)
+// Reveal timing (s): tighter overall, everything eases on the same curve.
 const T = {
-  mark: 0.3,
-  arc: 1.0,
-  arcDur: 1.4,
-  head: 2.25,
-  voice: 2.5,
-  a1: 2.75,
-  visual: 2.95,
-  a2: 3.2,
-  code: 3.4,
-  a3: 3.65,
+  mark: 0.2,
+  arc: 0.55,
+  arcDur: 1.1,
+  head: 1.5,
+  voice: 1.75,
+  a1: 1.95,
+  visual: 2.15,
+  a2: 2.35,
+  code: 2.55,
+  a3: 2.75,
 };
 
 export default function HeroLoop() {
@@ -62,31 +62,36 @@ export default function HeroLoop() {
         </marker>
       </defs>
 
-      {/* Large return loop, drawn in; head arrives with the stroke */}
+      {/* Large return loop, drawn in; head arrives with the stroke. Opacity
+          gates the path until its draw starts: a zero-length round-capped
+          stroke otherwise renders visible dots at both endpoints. */}
       <motion.path
         d="M 309 375 A 170 170 0 1 1 252 88"
         fill="none"
         stroke={NAVY}
         strokeWidth="6"
         strokeLinecap="round"
-        initial={reduce ? false : { pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: T.arcDur, delay: T.arc, ease: EASE }}
+        initial={reduce ? false : { pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{
+          pathLength: { duration: T.arcDur, delay: T.arc, ease: EASE },
+          opacity: { duration: 0.01, delay: T.arc },
+        }}
       />
       <motion.g
-        initial={reduce ? false : { opacity: 0, scale: 0.4 }}
+        initial={reduce ? false : { opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: T.head, ease: EASE }}
+        transition={{ duration: 0.25, delay: T.head, ease: EASE }}
         style={{ transformOrigin: "252px 88px" }}
       >
         <path d="M0 -13 L26 0 L0 13 z" fill={NAVY} transform="translate(252,88) rotate(20)" />
       </motion.g>
 
-      {/* Hub: scales in first as the visual cue, then spins; hover blooms */}
+      {/* Hub: eases in small-to-full first as the visual cue, then spins */}
       <motion.g
-        initial={reduce ? false : { scale: 0, opacity: 0 }}
+        initial={reduce ? false : { scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: T.mark, ease: [0.34, 1.3, 0.5, 1] }}
+        transition={{ duration: 0.6, delay: T.mark, ease: EASE }}
         style={{ transformOrigin: "200px 245px" }}
       >
         <motion.g
