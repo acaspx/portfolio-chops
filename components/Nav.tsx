@@ -9,10 +9,7 @@ import ContactCard from "@/components/ContactCard";
 import AsteriskMark from "@/components/AsteriskMark";
 import SocialLinks from "@/components/SocialLinks";
 
-const links = [
-  { href: "/#work", label: "Work" },
-  { href: "/#prototypes", label: "Built" },
-];
+const links = [{ href: "/#work", label: "Work" }];
 
 export default function Nav() {
   const pathname = usePathname();
