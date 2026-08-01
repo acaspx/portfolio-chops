@@ -29,7 +29,7 @@ export default function HeroLede({
   return (
     <>
       <motion.p {...rise(0.1)} className={leadClassName}>
-        Designing AI-native products for high-stakes work, where the real challenge
+        Designing products for high-stakes work, where the real challenge
         is building <em className="font-serif italic text-accent">trust</em>. Four
         0→1s across healthcare, fintech, and govtech.
       </motion.p>
