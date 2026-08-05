@@ -35,7 +35,8 @@ export default function RootLayout({
         <CustomCursor />
         <CaseGateOverlay />
         <Nav />
-        <main id="main" className="flex-1">
+        {/* pt on mobile replaces the old top bar's space; the bar now floats at the bottom */}
+        <main id="main" className="flex-1 pt-5 sm:pt-0">
           {children}
         </main>
         <Footer />
