@@ -18,5 +18,9 @@ export default function LocalTime() {
     return () => clearInterval(id);
   }, []);
 
-  return <span className="text-ink/80">{time ? `${time} PT` : "—"}</span>;
+  return (
+    <p className="font-mono text-xs text-muted" suppressHydrationWarning>
+      San Francisco, CA{time ? ` · ${time} PT` : ""}
+    </p>
+  );
 }

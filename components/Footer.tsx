@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import AboutModal from "@/components/AboutModal";
 import HeartMatrix from "@/components/HeartMatrix";
-import HeartCounter from "@/components/HeartCounter";
+import LocalTime from "@/components/LocalTime";
 import ShareButton from "@/components/ShareButton";
 
 const explore = [
@@ -102,7 +102,7 @@ export default function Footer() {
           <p className="font-mono text-xs text-muted">
             © {new Date().getFullYear()} studioacas · build like you mean it
           </p>
-          <HeartCounter />
+          <LocalTime />
         </div>
       </div>
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
