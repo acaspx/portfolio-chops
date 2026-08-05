@@ -9,7 +9,7 @@ import CaseGateLink from "@/components/CaseGateLink";
 function CardImage({ file, alt }: { file: string; alt: string }) {
   const [missing, setMissing] = useState(false);
   return (
-    <div className="aspect-[16/10] overflow-hidden rounded-lg border border-line bg-ink/[0.03] transition-transform duration-500 group-hover:scale-[1.015]">
+    <div className="aspect-[16/11] overflow-hidden rounded-lg border border-line bg-ink/[0.03] transition-transform duration-500 group-hover:scale-[1.015]">
       {missing ? (
         <div className="grid h-full place-items-center border border-dashed border-line rounded-lg">
           <span className="px-3 text-center font-mono text-[10px] text-muted">{file}</span>
@@ -83,7 +83,6 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
               {work.title}
             </motion.span>
           </h3>
-          <p className="mt-3 text-sm text-muted">{work.result}</p>
           {work.metrics && (
             <ul className="mt-4 flex flex-wrap gap-2">
               {work.metrics.map((m) => (

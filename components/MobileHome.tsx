@@ -40,7 +40,6 @@ function MobileCard({ w }: { w: Work }) {
         {w.company} · {w.tags}
       </p>
       <h3 className="mt-1.5 text-xl font-medium leading-snug tracking-tight">{w.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{w.result}</p>
       {w.metrics && (
         <ul className="mt-3 flex flex-wrap gap-2">
           {w.metrics.map((m) => (
