@@ -231,9 +231,6 @@ export default function ProfileCard({
             </div>
             <h2 className="text-base font-semibold tracking-tight">Anton Castro</h2>
             <p className="text-sm text-muted">Product Engineer &amp; Designer</p>
-            <p className="mt-1.5 max-w-[220px] text-xs leading-relaxed text-muted/80">
-              Designing products for high-stakes work, where the real challenge is building trust.
-            </p>
           </div>
 
           {/* Meta */}
