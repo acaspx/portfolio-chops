@@ -28,7 +28,8 @@ export default function Home() {
               Curated work
             </h2>
           </Reveal>
-          <div className="mt-10 space-y-5">
+          {/* No card edges now, so the rhythm has to come from whitespace */}
+          <div className="mt-12 space-y-20 sm:mt-14 sm:space-y-28">
             {works.map((w, i) => (
               <WorkCard key={w.company} work={w} index={i} />
             ))}

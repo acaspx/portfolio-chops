@@ -98,9 +98,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       whileHover={reduce ? undefined : "hover"}
       data-cursor={linked ? (work.locked ? "Password protected" : "View case") : undefined}
       data-locked={work.locked ? "true" : undefined}
-      className={`group relative rounded-2xl bg-paper/70 px-6 pb-9 pt-10 emboss emboss-hover sm:px-8 sm:pb-11 sm:pt-12 ${
-        work.comingSoon ? "opacity-60" : ""
-      }`}
+      className={`group relative px-2 sm:px-4 ${work.comingSoon ? "opacity-60" : ""}`}
     >
       {shots.length > 0 && (
         <div className="mb-9 flex items-center justify-center">
@@ -144,12 +142,11 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
           </ul>
         )}
 
-        <div className="mt-6 flex items-center justify-center gap-4 font-mono text-xs text-muted">
-          <span>{work.year}</span>
-          {work.comingSoon && (
+        {work.comingSoon && (
+          <div className="mt-6 flex justify-center font-mono text-xs text-muted">
             <span className="rounded-full border border-line px-3 py-1">coming soon</span>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Centered with the rest of the column now that the card is symmetric.
             Sits above the stretched link so it stays independently clickable. */}

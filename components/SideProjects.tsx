@@ -36,7 +36,7 @@ export default function SideProjects() {
           </div>
         </Reveal>
 
-        <div className="mt-10 space-y-6">
+        <div className="mt-12 space-y-20 sm:mt-14 sm:space-y-28">
           {/* Custoria - same case-study card as the work grid */}
           <WorkCard work={custoria} index={0} />
         </div>
