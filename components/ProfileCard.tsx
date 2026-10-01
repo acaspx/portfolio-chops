@@ -78,6 +78,16 @@ const ClockIcon = (
 /** Avatar with a graceful monogram fallback if /avatar.jpg isn't there yet. */
 export function Avatar({ className = "" }: { className?: string }) {
   const [missing, setMissing] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // A 404 resolves before hydration, so the onError handler below never gets
+  // attached in time and the browser paints its broken-image glyph. Re-check
+  // the already-settled image on mount and fall back to the monogram.
+  useEffect(() => {
+    const el = imgRef.current;
+    if (el && el.complete && el.naturalWidth === 0) setMissing(true);
+  }, []);
+
   if (missing) {
     return (
       <div className={`grid place-items-center bg-accent/10 font-serif text-accent ${className}`}>
@@ -88,6 +98,7 @@ export function Avatar({ className = "" }: { className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
+      ref={imgRef}
       src="/avatar.jpg"
       alt="Anton Castro"
       className={`object-cover ${className}`}
