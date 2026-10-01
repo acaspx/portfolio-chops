@@ -26,12 +26,14 @@ export default function SideProjects() {
     <section id="prototypes" aria-label="Built">
       <div className="mx-auto max-w-5xl px-6 py-14">
         <Reveal>
-          <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
-            Built
-          </h2>
-          <p className="mt-4 max-w-xl text-muted">
-            Designed, built, and shipped by me.
-          </p>
+          <div className="text-center">
+            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
+              Built
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted">
+              Designed, built, and shipped by me.
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-10 space-y-6">

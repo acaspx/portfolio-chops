@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "Anton Castro · Senior Product Designer & Builder";
+export const alt = "Anton Castro · Product Engineer & Designer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

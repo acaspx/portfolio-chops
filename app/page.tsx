@@ -24,7 +24,7 @@ export default function Home() {
 
         <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-12">
           <Reveal>
-            <h2 className="font-mono text-xs uppercase tracking-widest text-muted">
+            <h2 className="text-center font-mono text-xs uppercase tracking-widest text-muted">
               Curated work
             </h2>
           </Reveal>

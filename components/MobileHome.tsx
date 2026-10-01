@@ -87,7 +87,7 @@ export default function MobileHome() {
             Anton Castro
           </h1>
         </div>
-        <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
+        <p className="mt-1 text-muted">Product Engineer & Designer</p>
         <HeroLede
           leadClassName="mt-6 text-lg leading-relaxed text-balance"
           statusClassName="mt-4 font-mono text-[11px] tracking-wide text-muted"

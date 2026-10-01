@@ -23,7 +23,7 @@ export default function Hero() {
             >
               Anton Castro
             </h1>
-            <p className="mt-1 text-muted">Sr. Product Designer & Builder in San Francisco</p>
+            <p className="mt-1 text-muted">Product Engineer & Designer</p>
           </motion.div>
 
           <HeroLede />

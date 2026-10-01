@@ -15,7 +15,7 @@ export default function ShareButton() {
     const url =
       typeof window !== "undefined" ? window.location.origin : "https://studioacas.com";
     const data = {
-      title: "Anton Castro · Sr. Product Designer & Builder",
+      title: "Anton Castro · Product Engineer & Designer",
       text: "Designing AI-native products for high-stakes work.",
       url,
     };

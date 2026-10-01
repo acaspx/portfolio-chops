@@ -22,8 +22,8 @@ export default function Footer() {
   const [aboutOpen, setAboutOpen] = useState(false);
   return (
     <footer>
-      {/* extra bottom room on mobile so the floating bottom bar never covers content */}
-      <div className="mx-auto max-w-5xl px-6 pb-28 pt-10 sm:pb-20 sm:pt-12">
+      {/* the nav floats at the bottom on every breakpoint, so clear it everywhere */}
+      <div className="mx-auto max-w-5xl px-6 pb-36 pt-10 sm:pb-40 sm:pt-12">
         <div className="flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between">
           {/* Pixel heart (links to email), with the share action beneath it */}
           <div className="flex flex-col items-start gap-5">

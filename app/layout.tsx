@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/fraunces/full.css";
 import "./globals.css";
-import Nav from "@/components/Nav";
+import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import CaseGateOverlay from "@/components/CaseGateOverlay";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studioacas.com"),
-  title: "Anton Castro · Senior Product Designer & Builder",
+  title: "Anton Castro · Product Engineer & Designer",
   description:
     "Anton Castro designs AI products that ship and scale: from first prototype to design system to enterprise contract. SF-based, 0→1 four times across healthcare, fintech, and govtech AI.",
   openGraph: {
-    title: "Anton Castro · Senior Product Designer & Builder",
+    title: "Anton Castro · Product Engineer & Designer",
     description:
       "AI-native product designer who prototypes in code. 0→1 four times across healthcare, fintech, and govtech.",
     type: "website",
@@ -34,9 +34,9 @@ export default function RootLayout({
         </a>
         <CustomCursor />
         <CaseGateOverlay />
-        <Nav />
-        {/* pt on mobile replaces the old top bar's space; the bar now floats at the bottom */}
-        <main id="main" className="flex-1 pt-5 sm:pt-0">
+        <BottomNav />
+        {/* The nav floats at the bottom now, so the page starts at the top edge. */}
+        <main id="main" className="flex-1 pt-8 sm:pt-10">
           {children}
         </main>
         <Footer />
