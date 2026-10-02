@@ -13,7 +13,7 @@ export default function Hero() {
   });
 
   return (
-    <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
+    <section className="mx-auto max-w-5xl px-6 pb-12 pt-14 sm:pb-16 sm:pt-24 lg:pt-28">
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:gap-12">
         <div>
           <motion.div {...fade(0)}>

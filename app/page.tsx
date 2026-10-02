@@ -3,45 +3,41 @@ import WorkCard from "@/components/WorkCard";
 import Reveal from "@/components/Reveal";
 import SideProjects from "@/components/SideProjects";
 import Experience from "@/components/Experience";
-import MobileHome from "@/components/MobileHome";
 import EnjoyBubbles from "@/components/EnjoyBubbles";
 import { works } from "@/content/works";
 
+/**
+ * One responsive layout at every width. The separate mobile home was retired
+ * so the two can't drift: the hero stacks below lg, HeroLoop hides itself
+ * there, and the sticker stacks scale down with the viewport.
+ */
 export default function Home() {
   return (
     <>
       {/* Soft gradient + grain backdrop, landing only */}
       <div aria-hidden className="bg-landing pointer-events-none fixed inset-0 -z-10" />
 
-      {/* Mobile-only layout */}
-      <div className="md:hidden">
-        <MobileHome />
-      </div>
+      <Hero />
 
-      {/* Desktop layout (unchanged) */}
-      <div className="hidden md:block">
-        <Hero />
+      <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-12">
+        <Reveal>
+          <h2 className="text-center font-mono text-xs uppercase tracking-widest text-muted">
+            Curated work
+          </h2>
+        </Reveal>
+        {/* No card edges now, so the rhythm has to come from whitespace */}
+        <div className="mt-12 space-y-20 sm:mt-14 sm:space-y-28">
+          {works.map((w, i) => (
+            <WorkCard key={w.company} work={w} index={i} />
+          ))}
+        </div>
+      </section>
 
-        <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-12">
-          <Reveal>
-            <h2 className="text-center font-mono text-xs uppercase tracking-widest text-muted">
-              Curated work
-            </h2>
-          </Reveal>
-          {/* No card edges now, so the rhythm has to come from whitespace */}
-          <div className="mt-12 space-y-20 sm:mt-14 sm:space-y-28">
-            {works.map((w, i) => (
-              <WorkCard key={w.company} work={w} index={i} />
-            ))}
-          </div>
-        </section>
+      <SideProjects />
 
-        <SideProjects />
+      <Experience />
 
-        <Experience />
-
-        <EnjoyBubbles />
-      </div>
+      <EnjoyBubbles />
     </>
   );
 }

@@ -11,7 +11,7 @@ import { motion, useReducedMotion } from "motion/react";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function HeroLede({
-  leadClassName = "mt-10 max-w-lg text-lg sm:text-xl leading-relaxed text-balance",
+  leadClassName = "mt-6 max-w-lg text-lg leading-relaxed text-balance sm:mt-10 sm:text-xl",
 }: {
   leadClassName?: string;
 }) {

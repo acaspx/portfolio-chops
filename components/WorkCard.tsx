@@ -43,7 +43,9 @@ function Sticker({
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       style={{ zIndex: pose.z, boxShadow: STICKER_SHADOW }}
       className={`shrink-0 rounded-[7px] bg-white p-[7px] ring-1 ring-ink/[0.06] ${
-        solo ? "w-72 lg:w-[26rem]" : "-mx-4 w-52 lg:w-[15.5rem]"
+        solo
+          ? "w-56 sm:w-72 lg:w-[26rem]"
+          : "-mx-2 w-[6.5rem] sm:-mx-3 sm:w-44 lg:-mx-4 lg:w-[15.5rem]"
       }`}
     >
       <div className="aspect-[16/11] overflow-hidden rounded-[3px] bg-ink/[0.03]">
