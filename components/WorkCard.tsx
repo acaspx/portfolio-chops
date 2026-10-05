@@ -44,8 +44,8 @@ function Sticker({
       style={{ zIndex: pose.z, boxShadow: STICKER_SHADOW }}
       className={`shrink-0 rounded-[7px] bg-white p-[7px] ring-1 ring-ink/[0.06] ${
         solo
-          ? "w-56 sm:w-72 lg:w-[26rem]"
-          : "-mx-2 w-[6.5rem] sm:-mx-3 sm:w-44 lg:-mx-4 lg:w-[15.5rem]"
+          ? "w-64 sm:w-80 lg:w-[29rem]"
+          : "-mx-2 w-28 sm:-mx-3 sm:w-48 lg:-mx-4 lg:w-[17.5rem]"
       }`}
     >
       <div className="aspect-[16/11] overflow-hidden rounded-[3px] bg-ink/[0.03]">
@@ -100,7 +100,7 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       whileHover={reduce ? undefined : "hover"}
       data-cursor={linked ? (work.locked ? "Password protected" : "View case") : undefined}
       data-locked={work.locked ? "true" : undefined}
-      className={`group relative px-2 sm:px-4 ${work.comingSoon ? "opacity-60" : ""}`}
+      className={`group relative px-0 sm:px-4 ${work.comingSoon ? "opacity-60" : ""}`}
     >
       {shots.length > 0 && (
         // pointer-events-none is load-bearing: the stickers carry z-index 1-3 so
