@@ -103,7 +103,11 @@ export default function WorkCard({ work, index }: { work: Work; index: number })
       className={`group relative px-2 sm:px-4 ${work.comingSoon ? "opacity-60" : ""}`}
     >
       {shots.length > 0 && (
-        <div className="mb-9 flex items-center justify-center">
+        // pointer-events-none is load-bearing: the stickers carry z-index 1-3 so
+        // they can overlap, which puts two of them above the stretched link and
+        // makes them eat the click. Hover still fires, since whileHover lives on
+        // the article, not here.
+        <div className="pointer-events-none mb-9 flex items-center justify-center">
           {shots.slice(0, 3).map((img, i) => (
             <Sticker
               key={img.file}
