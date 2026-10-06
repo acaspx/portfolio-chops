@@ -7,6 +7,9 @@
   --color-line: #e3dfd7;
   --color-accent: #1e2a44;
   --color-violet: #8b5cf6;
+  /* State Affairs sage, sampled from the product screenshots (#4a6b5c) and
+     lifted slightly so it reads as an accent in line art. */
+  --color-sage: #4a7a62;
   --color-cta: #3548a0;
   --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces Variable", Georgia, serif;

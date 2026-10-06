@@ -1,13 +1,23 @@
 import Reveal from "@/components/Reveal";
+import StackIcon, { type StackIconName } from "@/components/StackIcons";
 
 /**
- * The three-layer agentic stack behind State Affairs' AI, drawn in CSS.
+ * The three-layer agentic stack behind State Affairs' AI.
  * Reads top-down the way users meet it (experience first) and bottom-up the
- * way a job runs (ground, reason, present). Pure markup, no client JS.
+ * way a job runs (ground, reason, present). Each row is led by an animated
+ * isometric icon carrying that layer's concept; see StackIcons.
  */
-const layers = [
+const layers: {
+  n: string;
+  icon: StackIconName;
+  name: string;
+  job: string;
+  agents: string[];
+  note: string;
+}[] = [
   {
     n: "03",
+    icon: "experience",
     name: "Experience",
     job: "shape it to the person",
     agents: ["Personalization agent"],
@@ -15,6 +25,7 @@ const layers = [
   },
   {
     n: "02",
+    icon: "reasoning",
     name: "Reasoning",
     job: "reason over it",
     agents: ["Momentum-scoring agent", "Drafting agent"],
@@ -22,6 +33,7 @@ const layers = [
   },
   {
     n: "01",
+    icon: "context",
     name: "Context",
     job: "ground it",
     agents: ["Retrieval agent"],
@@ -46,15 +58,22 @@ export default function AgentStack() {
             {layers.map((l) => (
               <li
                 key={l.n}
-                className="grid grid-cols-[2.25rem_1fr] gap-4 rounded-lg border border-accent/15 bg-accent/[0.04] p-4 sm:grid-cols-[2.75rem_1fr]"
+                className="grid grid-cols-[3.25rem_1fr] items-start gap-4 rounded-lg border border-accent/15 bg-accent/[0.04] p-4 sm:grid-cols-[4.25rem_1fr] sm:gap-5"
               >
-                <span className="pt-0.5 font-mono text-sm text-accent/70">{l.n}</span>
+                <span
+                  className="mt-0.5 block h-[3.25rem] w-[3.25rem] sm:h-[4.25rem] sm:w-[4.25rem]"
+                  aria-hidden
+                >
+                  <StackIcon name={l.icon} />
+                </span>
                 <div>
-                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="font-medium tracking-tight">{l.name}</span>
-                    <span className="font-mono text-[11px] uppercase tracking-widest text-muted">
+                  {/* stacked, not inline: the sans name and the mono job line
+                      never sat flush on a shared baseline at these sizes */}
+                  <div className="text-left">
+                    <p className="font-medium leading-tight tracking-tight">{l.name}</p>
+                    <p className="mt-1 font-mono text-[11px] uppercase leading-tight tracking-widest text-muted">
                       {l.job}
-                    </span>
+                    </p>
                   </div>
                   <div className="mt-2.5 flex flex-wrap gap-2">
                     {l.agents.map((a) => (
