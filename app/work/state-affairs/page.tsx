@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CaseLayout, CaseLead, CaseHero, Section, CaseImage, Hi, KeyPoints, NextCase } from "@/components/CaseStudy";
 import AgentStack from "@/components/AgentStack";
+import CaseVideo from "@/components/CaseVideo";
 import LegislativeLadder from "@/components/LegislativeLadder";
 import CaseGate from "@/components/CaseGate";
 
@@ -204,10 +205,19 @@ export default function StateAffairs() {
           caption="Create a Report, validated: executive-ready output drafted by the system"
         />
         <p>
-          What I&apos;d build next: make the output as adaptive as the input,
-          notification depth and view detail tunable in a couple of chat queries,
-          until the system <Hi>shapes itself to each org</Hi>.
+          What I&apos;d build next: the agent as a <Hi>standing partner, not a feature
+          you open</Hi>. Assignees, positions, and priorities already live on the bill.
+          An agent that reads that shared context, who owns what and what the account
+          already decided, could be queried from anywhere in the platform and answer
+          for the team rather than the session, until the system{" "}
+          <Hi>shapes itself to each org</Hi>.
         </p>
+        <CaseVideo
+          src="/work/sa-collab-context.mp4"
+          poster="/work/sa-collab-context-poster.jpg"
+          label="Assigning a bill to teammates on the bill detail page, alongside labels, priority, and position"
+          caption="Direction, not shipped: the shared context an account already builds on a bill. The next step is an agent that reads it and answers from it, anywhere in the platform."
+        />
       </Section>
 
       </CaseLayout>
