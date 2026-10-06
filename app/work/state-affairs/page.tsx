@@ -51,8 +51,7 @@ export default function StateAffairs() {
           scattered local reporting. State Affairs had the data and the journalists,
           but <Hi>nothing that turned either into a decision</Hi>, and it had never
           shipped AI. I led the two features that would: <Hi>360° Views and AI
-          Chat</Hi>. In this field, if the AI loses trust on the first answer,
-          there&apos;s no second one.
+          Chat</Hi>.
         </p>
         <CaseImage
           src="/work/sa-previous-state.png"
@@ -79,7 +78,7 @@ export default function StateAffairs() {
       </Section>
 
       <Section id="job-not-conversation" kicker="Designing a job, not a conversation" title="Four jobs, a dozen agents, three layers">
-        <p>Users never meet a chatbot. They meet <Hi>four jobs</Hi>:</p>
+        <p>Users never meet a chatbot. They meet four jobs:</p>
         <KeyPoints
           items={[
             <><Hi>Bill Compare</Hi>: weigh related bills against each other.</>,
@@ -89,8 +88,8 @@ export default function StateAffairs() {
           ]}
         />
         <p>
-          Behind each, about <Hi>a dozen agents</Hi> run the tool calls across{" "}
-          <Hi>three layers</Hi>: ground it, reason over it, shape it to the person.
+          Behind each, about <Hi>a dozen agents across three layers</Hi>: ground it,
+          reason over it, shape it to the person.
         </p>
         <AgentStack />
         <p>
@@ -106,15 +105,9 @@ export default function StateAffairs() {
           The 360° View didn&apos;t start as a model. It started as a{" "}
           <Hi>deterministic builder</Hi>: a guided flow that captured intent, the
           states, the date range, the position, the reason, and showed users exactly
-          what their query would return before it generated anything. That did two
-          jobs at once:
+          what their query would return before it generated anything. Users got a
+          legible way to refine. We got <Hi>labeled intent at scale</Hi>.
         </p>
-        <KeyPoints
-          items={[
-            <>Users got a <Hi>legible way to refine</Hi> their data.</>,
-            <>We got <Hi>labeled intent at scale</Hi>.</>,
-          ]}
-        />
         <CaseImage
           src="/work/sa-builder-entry.png"
           alt="State Affairs bills page: the entry point where a user's intent starts as a structured, trackable query"
@@ -130,8 +123,7 @@ export default function StateAffairs() {
           height={1091}
         />
         <p>
-          Once we saw which queries ran hottest, we labeled that data and{" "}
-          <Hi>fine-tuned the model</Hi> across our six personas and four priority
+          We fine-tuned on the hottest queries across six personas and four priority
           jobs. The builder that captured intent became the <Hi>training set for the
           agent that acts on it</Hi>.
         </p>
@@ -139,7 +131,7 @@ export default function StateAffairs() {
 
       <Section id="prioritize" kicker="Prioritizing the signal" title="Eight stages in, one signal out">
         <p>
-          A bill moves through <Hi>eight stages</Hi>, introduced to enacted, and most
+          A bill moves through eight stages, introduced to enacted, and most
           of that motion is noise. The value is knowing <Hi>which bills, at which
           stage, matter to you</Hi>. So we scored every stage for momentum and
           surfaced it in AI Chat and the 360° View, the same pointed way whether you
@@ -172,9 +164,6 @@ export default function StateAffairs() {
             <><Hi>The analyst disposes.</Hi> One click drops you on the exact data point behind an update, so you verify the source before you brief.</>,
           ]}
         />
-        <p>
-          Proactive enough to be useful, <Hi>accountable enough to be trusted</Hi>.
-        </p>
         <CaseImage
           src="/work/sa-whats-changed.png"
           alt="What's Changed panel: the most important items since your last visit, ranked high to medium priority, each clickable"
@@ -191,25 +180,13 @@ export default function StateAffairs() {
         <p>
           A great policy analyst has a process: what to check, how to weigh momentum,
           how to brief an executive without burying the point. My job was to{" "}
-          <Hi>encode that process into the system</Hi>, and to give it a voice that
-          works for two audiences at once: <Hi>credible to policy experts, legible to
-          the executives</Hi> they brief.
+          <Hi>encode that process into the system</Hi>, in a voice credible to policy
+          experts and legible to the executives they brief.
         </p>
         <p>
-          Because this was the company&apos;s first AI product, those calls became the
-          template for how State Affairs ships AI now, not just how these two features
-          shipped:
-        </p>
-        <KeyPoints
-          items={[
-            <>The <Hi>layer boundaries</Hi>: what grounds, what reasons, what personalizes.</>,
-            <>The <Hi>cite-everything rule</Hi>: no claim without a source.</>,
-            <>The <Hi>steer-and-execute model</Hi>: agents act, humans decide.</>,
-          ]}
-        />
-        <p>
-          As the <Hi>first design hire on AI</Hi>, I set the bar the next features
-          answer to.
+          As the <Hi>first design hire on AI</Hi>, those calls outlived the features.
+          The layer boundaries, the cite-everything rule, and the steer-and-execute
+          model are now <Hi>how State Affairs ships AI</Hi>.
         </p>
       </Section>
 
