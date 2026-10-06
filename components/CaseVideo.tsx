@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 
 /**
  * Screen-recording companion to CaseImage: same canvas, same caption treatment.
  *
- * Silent clips autoplay on loop, but only once scrolled near the viewport, so a
- * case study with several of these doesn't decode video the reader never sees.
+ * Silent clips autoplay on loop. The src is attached up front rather than lazily
+ * (an earlier version deferred it and the play() call raced the attach, so
+ * nothing ever started); these clips are a few hundred KB, so the lazy path cost
+ * more in fragility than it saved in bytes. An observer only pauses the video
+ * while it is offscreen.
+ *
  * Under prefers-reduced-motion nothing plays on its own and the native controls
  * appear instead, so the clip stays reachable without moving unbidden.
  */
@@ -25,21 +29,22 @@ export default function CaseVideo({
 }) {
   const reduce = !!useReducedMotion();
   const ref = useRef<HTMLVideoElement>(null);
-  const [near, setNear] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduce) return;
+    if (!el) return;
+
+    // React sets muted as a property, and it can miss the initial attribute,
+    // which is the difference between autoplay working and being blocked.
+    el.muted = true;
+    if (reduce) return;
+
+    const start = () => el.play().catch(() => {});
+    start();
+
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setNear(true);
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { rootMargin: "200px 0px" }
+      ([e]) => (e.isIntersecting ? start() : el.pause()),
+      { rootMargin: "150px 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -50,14 +55,15 @@ export default function CaseVideo({
       <div className="case-canvas overflow-hidden rounded-2xl p-4 sm:p-8">
         <video
           ref={ref}
-          src={reduce || near ? src : undefined}
+          src={src}
           poster={poster}
           aria-label={label}
+          autoPlay={!reduce}
           muted
           loop
           playsInline
           controls={reduce}
-          preload="none"
+          preload="metadata"
           className="relative z-[1] h-auto w-full rounded-lg shadow-2xl ring-1 ring-black/25"
         />
       </div>
