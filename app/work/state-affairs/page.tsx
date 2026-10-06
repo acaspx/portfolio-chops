@@ -54,6 +54,13 @@ export default function StateAffairs() {
           Chat</Hi>. In this field, if the AI loses trust on the first answer,
           there&apos;s no second one.
         </p>
+        <CaseImage
+          src="/work/sa-previous-state.png"
+          alt="The previous state of 360 Views: an empty prompt box with a Generate button and four suggested prompts, marked In Testing"
+          caption="Previous state: 360° Views began as an empty prompt box. The burden of knowing what to ask sat entirely with the user."
+          width={2000}
+          height={1104}
+        />
       </Section>
 
       <Section id="chat-vs-agent" kicker="Chat vs. agent" title="Answering a question isn't doing the job">
