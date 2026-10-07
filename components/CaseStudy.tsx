@@ -390,16 +390,25 @@ const CASES: Record<
  * End-of-case preview of the next case: a dark title band over the case's own
  * canvas and hero art, the whole block one link.
  */
+/** Canvases light enough that the preview text has to flip to ink. */
+const LIGHT_TONES = new Set<CaseTone>(["indigo", "custoria"]);
+
 export function NextCase({ slug }: { slug: keyof typeof CASES }) {
   const c = CASES[slug];
+  const light = LIGHT_TONES.has(c.tone);
+  const muted = light ? "text-muted" : "text-paper/50";
+
   return (
     <section className="mt-16 border-t border-line">
       <Link href={`/work/${slug}`} className="group block">
-        <div className="bg-ink px-6 py-7 text-paper sm:px-10 sm:py-8">
+        <div
+          className={`overflow-hidden px-6 py-9 sm:px-10 sm:py-11 ${
+            light ? "text-ink" : "text-paper"
+          }`}
+          style={{ background: CANVAS[c.tone] }}
+        >
           <div className="mx-auto max-w-5xl">
-            <p className="font-mono text-[11px] uppercase tracking-widest text-paper/45">
-              Next
-            </p>
+            <p className={`font-mono text-[11px] uppercase tracking-widest ${muted}`}>Next</p>
             <h2 className="mt-2 max-w-3xl text-2xl font-medium tracking-tight text-balance sm:text-[2rem] sm:leading-[1.15]">
               {c.title}
               <span
@@ -409,22 +418,17 @@ export function NextCase({ slug }: { slug: keyof typeof CASES }) {
                 &rarr;
               </span>
             </h2>
-            <p className="mt-2.5 font-mono text-[11px] uppercase tracking-widest text-paper/45">
+            <p className={`mt-2.5 font-mono text-[11px] uppercase tracking-widest ${muted}`}>
               {c.company}
             </p>
+            <FadeImage
+              src={c.src}
+              alt={c.alt}
+              width={1920}
+              height={1080}
+              className="mx-auto mt-8 h-auto w-full max-w-2xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012] sm:mt-9"
+            />
           </div>
-        </div>
-        <div
-          className="overflow-hidden px-6 py-7 sm:px-10 sm:py-9"
-          style={{ background: CANVAS[c.tone] }}
-        >
-          <FadeImage
-            src={c.src}
-            alt={c.alt}
-            width={1920}
-            height={1080}
-            className="mx-auto h-auto w-full max-w-2xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012]"
-          />
         </div>
       </Link>
     </section>
