@@ -181,7 +181,7 @@ export default function Rocket() {
 
       </CaseLayout>
 
-      <NextCase href="/work/custoria" label="Custoria Labs · the digital vault" />
+      <NextCase slug="custoria" />
     </article>
   );
 }

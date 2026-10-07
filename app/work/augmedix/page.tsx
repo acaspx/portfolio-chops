@@ -204,7 +204,7 @@ export default function Augmedix() {
 
       </CaseLayout>
 
-      <NextCase href="/work/rocket" label="Rocket · Liv, conversational AI" />
+      <NextCase slug="rocket" />
     </article>
   );
 }

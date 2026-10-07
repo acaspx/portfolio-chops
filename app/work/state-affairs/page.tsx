@@ -222,7 +222,7 @@ export default function StateAffairs() {
 
       </CaseLayout>
 
-      <NextCase href="/work/augmedix" label="Augmedix · scaling AI clinical documentation" />
+      <NextCase slug="augmedix" />
     </article>
     </CaseGate>
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import AsteriskMark from "@/components/AsteriskMark";
 import MaskReveal from "@/components/MaskReveal";
 import FadeImage from "@/components/FadeImage";
 import AppStoreBadge from "@/components/AppStoreBadge";
@@ -347,21 +348,93 @@ export function ImageSlot({ caption }: { caption: string }) {
   );
 }
 
-export function NextCase({ href, label }: { href: string; label: string }) {
+/**
+ * Every case, keyed by slug, so a NextCase call site only names where it goes.
+ * Keeps the preview's title, meta, art and canvas from drifting out of sync
+ * with the case page they point at.
+ */
+const CASES: Record<
+  string,
+  { title: string; company: string; year: string; src: string; alt: string; tone: CaseTone }
+> = {
+  "state-affairs": {
+    title: "From a chatbot that answers to an agent that does the job",
+    company: "State Affairs",
+    year: "2026",
+    src: "/work/sa-hero.png",
+    alt: "A policy professional reviewing the State Affairs intelligence dashboard on a laptop",
+    tone: "sage",
+  },
+  augmedix: {
+    title: "Scaling AI clinical documentation from one product to four",
+    company: "Augmedix",
+    year: "2023\u201324",
+    src: "/work/ax-mobile.png",
+    alt: "Augmedix Assist: a phone showing an AI-drafted clinical note",
+    tone: "indigo",
+  },
+  rocket: {
+    title: "Designing Liv, Rocket's conversational AI",
+    company: "Rocket",
+    year: "2022\u201323",
+    src: "/work/rk-hero.png",
+    alt: "Rocket Mortgage homepage with the Liv chat assistant open",
+    tone: "charcoal",
+  },
+  custoria: {
+    title: "Founding Custoria: a digital vault for what people value most",
+    company: "Custoria Labs",
+    year: "2025",
+    src: "/work/cu-hero-desk.jpg",
+    alt: "The Custoria web vault on a MacBook in a jewelry studio",
+    tone: "custoria",
+  },
+};
+
+/**
+ * End-of-case preview of the next case: a dark title band over the case's own
+ * canvas and hero art, the whole block one link.
+ */
+export function NextCase({ slug }: { slug: keyof typeof CASES }) {
+  const c = CASES[slug];
   return (
-    <div className="border-t border-line mt-12">
-      <div className="mx-auto max-w-3xl px-6 py-16">
-        <p className="font-mono text-[11px] uppercase tracking-widest text-muted">Next</p>
-        <Link
-          href={href}
-          className="group mt-3 inline-flex items-center gap-3 text-2xl sm:text-3xl font-medium tracking-tight hover:text-accent transition-colors"
+    <section className="mt-16 border-t border-line">
+      <Link href={`/work/${slug}`} className="group block">
+        <div className="bg-ink px-6 pb-9 pt-7 text-paper sm:px-10 sm:pb-11 sm:pt-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="flex justify-center">
+              <AsteriskMark className="h-5 w-5 text-sage" />
+            </div>
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-widest text-paper/45">
+              Next
+            </p>
+            <h2 className="mt-2 max-w-3xl text-2xl font-medium tracking-tight text-balance sm:text-4xl">
+              {c.title}
+              <span
+                aria-hidden
+                className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+              >
+                &rarr;
+              </span>
+            </h2>
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-paper/45">
+              {c.company} / {c.year}
+            </p>
+          </div>
+        </div>
+        <div
+          className="overflow-hidden px-6 py-10 sm:px-10 sm:py-14"
+          style={{ background: CANVAS[c.tone] }}
         >
-          {label}
-          <span className="transition-transform group-hover:translate-x-2" aria-hidden>
-            →
-          </span>
-        </Link>
-      </div>
-    </div>
+          <FadeImage
+            src={c.src}
+            alt={c.alt}
+            width={1920}
+            height={1080}
+            className="mx-auto h-auto w-full max-w-4xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012]"
+          />
+        </div>
+      </Link>
+    </section>
   );
 }

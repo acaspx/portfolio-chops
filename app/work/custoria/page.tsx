@@ -168,7 +168,7 @@ export default function Custoria() {
 
       </CaseLayout>
 
-      <NextCase href="/work/state-affairs" label="State Affairs · policy intelligence AI" />
+      <NextCase slug="state-affairs" />
     </article>
   );
 }
