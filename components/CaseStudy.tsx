@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import AsteriskMark from "@/components/AsteriskMark";
 import MaskReveal from "@/components/MaskReveal";
 import FadeImage from "@/components/FadeImage";
 import AppStoreBadge from "@/components/AppStoreBadge";
@@ -355,12 +354,11 @@ export function ImageSlot({ caption }: { caption: string }) {
  */
 const CASES: Record<
   string,
-  { title: string; company: string; year: string; src: string; alt: string; tone: CaseTone }
+  { title: string; company: string; src: string; alt: string; tone: CaseTone }
 > = {
   "state-affairs": {
     title: "From a chatbot that answers to an agent that does the job",
     company: "State Affairs",
-    year: "2026",
     src: "/work/sa-hero.png",
     alt: "A policy professional reviewing the State Affairs intelligence dashboard on a laptop",
     tone: "sage",
@@ -368,7 +366,6 @@ const CASES: Record<
   augmedix: {
     title: "Scaling AI clinical documentation from one product to four",
     company: "Augmedix",
-    year: "2023\u201324",
     src: "/work/ax-mobile.png",
     alt: "Augmedix Assist: a phone showing an AI-drafted clinical note",
     tone: "indigo",
@@ -376,7 +373,6 @@ const CASES: Record<
   rocket: {
     title: "Designing Liv, Rocket's conversational AI",
     company: "Rocket",
-    year: "2022\u201323",
     src: "/work/rk-hero.png",
     alt: "Rocket Mortgage homepage with the Liv chat assistant open",
     tone: "charcoal",
@@ -384,7 +380,6 @@ const CASES: Record<
   custoria: {
     title: "Founding Custoria: a digital vault for what people value most",
     company: "Custoria Labs",
-    year: "2025",
     src: "/work/cu-hero-desk.jpg",
     alt: "The Custoria web vault on a MacBook in a jewelry studio",
     tone: "custoria",
@@ -400,15 +395,12 @@ export function NextCase({ slug }: { slug: keyof typeof CASES }) {
   return (
     <section className="mt-16 border-t border-line">
       <Link href={`/work/${slug}`} className="group block">
-        <div className="bg-ink px-6 pb-9 pt-7 text-paper sm:px-10 sm:pb-11 sm:pt-8">
+        <div className="bg-ink px-6 py-7 text-paper sm:px-10 sm:py-8">
           <div className="mx-auto max-w-5xl">
-            <div className="flex justify-center">
-              <AsteriskMark className="h-5 w-5 text-sage" />
-            </div>
-            <p className="mt-6 font-mono text-[11px] uppercase tracking-widest text-paper/45">
+            <p className="font-mono text-[11px] uppercase tracking-widest text-paper/45">
               Next
             </p>
-            <h2 className="mt-2 max-w-3xl text-2xl font-medium tracking-tight text-balance sm:text-4xl">
+            <h2 className="mt-2 max-w-3xl text-2xl font-medium tracking-tight text-balance sm:text-[2rem] sm:leading-[1.15]">
               {c.title}
               <span
                 aria-hidden
@@ -417,13 +409,13 @@ export function NextCase({ slug }: { slug: keyof typeof CASES }) {
                 &rarr;
               </span>
             </h2>
-            <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-paper/45">
-              {c.company} / {c.year}
+            <p className="mt-2.5 font-mono text-[11px] uppercase tracking-widest text-paper/45">
+              {c.company}
             </p>
           </div>
         </div>
         <div
-          className="overflow-hidden px-6 py-10 sm:px-10 sm:py-14"
+          className="overflow-hidden px-6 py-7 sm:px-10 sm:py-9"
           style={{ background: CANVAS[c.tone] }}
         >
           <FadeImage
@@ -431,7 +423,7 @@ export function NextCase({ slug }: { slug: keyof typeof CASES }) {
             alt={c.alt}
             width={1920}
             height={1080}
-            className="mx-auto h-auto w-full max-w-4xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012]"
+            className="mx-auto h-auto w-full max-w-2xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012]"
           />
         </div>
       </Link>
