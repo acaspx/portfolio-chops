@@ -32,15 +32,15 @@ const work: IndexItem[] = [
     label: "Augmedix",
     meta: "$139M acquisition",
     href: "/work/augmedix",
-    img: "/work/ax-web-app.png",
-    alt: "Augmedix web app documentation flow",
+    img: "/work/ax-mobile.png",
+    alt: "Augmedix Assist: a phone showing an AI-drafted clinical note",
   },
   {
     label: "Rocket",
     meta: "−75% onboarding",
     href: "/work/rocket",
-    img: "/work/rk-patterns.png",
-    alt: "Conversation design pattern library",
+    img: "/work/rk-hero.png",
+    alt: "Rocket Mortgage homepage with the Liv chat assistant open",
   },
 ];
 
