@@ -52,13 +52,17 @@ export default function BottomNav() {
 
   return (
     <>
-      {/* Fade so page content dissolves behind the floating pill */}
+      {/* Scrim the pill sits on. It has to reach FULL paper well before the
+          pill's top edge, not just at the viewport floor: on a case study the
+          content under here is images and dense body text, and a half-opacity
+          wash leaves them legible straight through the nav, which is what
+          made it read as floating rather than docked. */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-32"
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-44"
         style={{
           background:
-            "linear-gradient(to top, var(--color-paper) 0%, color-mix(in srgb, var(--color-paper) 70%, transparent) 45%, transparent 100%)",
+            "linear-gradient(to top, var(--color-paper) 0%, var(--color-paper) 42%, color-mix(in srgb, var(--color-paper) 62%, transparent) 68%, transparent 100%)",
         }}
       />
 
@@ -73,7 +77,9 @@ export default function BottomNav() {
             anchorRef={avatarRef}
           />
 
-          <div className="emboss relative z-10 flex items-center gap-1 rounded-full bg-paper/85 p-2 backdrop-blur-xl">
+          <div
+            className="relative z-10 flex items-center gap-1 rounded-full bg-paper p-2 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(22,20,15,0.28),0_2px_6px_-2px_rgba(22,20,15,0.12),inset_0_1px_0_rgba(255,255,255,0.9),0_0_0_1px_rgba(22,20,15,0.09)]"
+          >
             <div ref={listRef} className="relative flex items-center">
               {pill && (
                 <motion.span
