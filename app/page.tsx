@@ -1,43 +1,100 @@
-import Hero from "@/components/Hero";
-import WorkCard from "@/components/WorkCard";
-import Reveal from "@/components/Reveal";
-import SideProjects from "@/components/SideProjects";
-import Experience from "@/components/Experience";
-import EnjoyBubbles from "@/components/EnjoyBubbles";
-import { works } from "@/content/works";
+import MosaicName from "@/components/MosaicName";
+import HeroLede from "@/components/HeroLede";
+import IndexSection, { type IndexItem } from "@/components/IndexSection";
 
 /**
- * One responsive layout at every width. The separate mobile home was retired
- * so the two can't drift: the hero stacks below lg, HeroLoop hides itself
- * there, and the sticker stacks scale down with the viewport.
+ * Index-format landing (yangjames.com pattern): one narrow centred column,
+ * the mosaic nameplate at the top, then quiet sections of label-left /
+ * meta-right rows. The floating nav stays anchored at the bottom centre.
+ *
+ * The one real adaptation: the right column carries the OUTCOME, not a date.
+ * A list of dates reads as a resume; a list of outcomes reads as a record.
+ * Case study pages are untouched and still carry the depth.
  */
+
+const work: IndexItem[] = [
+  {
+    label: "State Affairs",
+    meta: "Walmart + DoorDash",
+    href: "/work/state-affairs",
+    locked: true,
+    img: "/work/sa-agent-laptop.jpg",
+    alt: "The State Affairs AI agent answering a question about a bill",
+  },
+  {
+    label: "Augmedix",
+    meta: "$139M acquisition",
+    href: "/work/augmedix",
+    img: "/work/ax-web-app.png",
+    alt: "Augmedix web app documentation flow",
+  },
+  {
+    label: "Rocket",
+    meta: "−75% onboarding",
+    href: "/work/rocket",
+    img: "/work/rk-patterns.png",
+    alt: "Conversation design pattern library",
+  },
+];
+
+const built: IndexItem[] = [
+  {
+    label: "Custoria Vault",
+    meta: "~150 users in 90 days",
+    href: "/work/custoria",
+    img: "/work/cu-mobile.png",
+    alt: "The Custoria iOS app: AI camera scan and the vault",
+  },
+];
+
+const experience: IndexItem[] = [
+  { label: "State Affairs · Sr. Interaction Designer", meta: "2026 –" },
+  { label: "Custoria Labs · Co-founder", meta: "2025 –" },
+  { label: "Augmedix · Product Designer, AI & Growth", meta: "2023 – 24" },
+  { label: "Rocket · Conversational AI Designer", meta: "2022 – 23" },
+  { label: "Anti-Defamation League · Product Designer", meta: "2021 – 22" },
+  { label: "Intuit & Electronic Arts · Design Internships", meta: "2019 – 20" },
+];
+
+const links = [
+  { label: "email", href: "mailto:ac.design.px@gmail.com" },
+  { label: "github", href: "https://github.com/acaspx" },
+  { label: "linkedin", href: "https://www.linkedin.com/in/antoncastroe/" },
+  { label: "resume", href: "/resume.pdf" },
+];
+
 export default function Home() {
   return (
     <>
-      {/* Soft gradient + grain backdrop, landing only */}
       <div aria-hidden className="bg-landing pointer-events-none fixed inset-0 -z-10" />
 
-      <Hero />
+      <div className="mx-auto w-full max-w-[35rem] px-5 pb-44 pt-12 sm:pt-16">
+        <MosaicName />
 
-      <section id="work" aria-label="Curated work" className="mx-auto max-w-5xl px-6 pb-12">
-        <Reveal>
-          <h2 className="text-center font-mono text-xs uppercase tracking-widest text-muted">
-            Curated work
-          </h2>
-        </Reveal>
-        {/* No card edges now, so the rhythm has to come from whitespace */}
-        <div className="mt-12 space-y-20 sm:mt-14 sm:space-y-28">
-          {works.map((w, i) => (
-            <WorkCard key={w.company} work={w} index={i} />
+        <p className="mt-5 text-[15px] text-muted">Product Engineer &amp; Designer</p>
+        <HeroLede leadClassName="mt-4 text-[15px] leading-relaxed text-balance" />
+
+        <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-muted">
+          {links.map((l) => (
+            <li key={l.label}>
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-line transition-colors hover:text-ink"
+              >
+                {l.label}
+              </a>
+            </li>
           ))}
+        </ul>
+
+        <div className="mt-14">
+          <IndexSection title="Work" items={work} />
+          <IndexSection title="Built" items={built} />
+          <IndexSection title="Experience" items={experience} />
         </div>
-      </section>
-
-      <SideProjects />
-
-      <Experience />
-
-      <EnjoyBubbles />
+      </div>
     </>
   );
 }
