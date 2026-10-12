@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import HeroLede from "@/components/HeroLede";
 import HeroLoop from "@/components/HeroLoop";
+import MosaicName from "@/components/MosaicName";
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -17,13 +18,8 @@ export default function Hero() {
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_400px] lg:items-center lg:gap-12">
         <div>
           <motion.div {...fade(0)}>
-            <h1
-              className="font-serif text-3xl sm:text-4xl tracking-tight"
-              style={{ fontVariationSettings: "'opsz' 88, 'wght' 500, 'SOFT' 0, 'WONK' 0" }}
-            >
-              Anton Castro
-            </h1>
-            <p className="mt-1 text-muted">Product Engineer & Designer</p>
+            <MosaicName />
+            <p className="mt-4 text-muted">Product Engineer &amp; Designer</p>
           </motion.div>
 
           <HeroLede />
