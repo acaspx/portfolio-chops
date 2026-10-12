@@ -177,8 +177,9 @@ export default function AboutModal({
                 image={{ src: "/build-with.jpg", alt: "The tools of the craft, from Figma and Framer to React, Swift, and AI-assisted prototyping" }}
               >
                 <p>
-                  Figma to Framer to React and Swift, and these days deep into AI-assisted
-                  prototyping with Claude and Cursor.
+                  Figma and Paper for UX design and system schemas. These days, translating
+                  AI-assisted prototyping into engineering workflows, pushing PRs with Codex
+                  and Cursor.
                 </p>
                 <p>
                   Four AI products taught me the hard problem isn&apos;t the model. It&apos;s
