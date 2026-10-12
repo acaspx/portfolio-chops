@@ -25,9 +25,11 @@
  */
 
 const NAVY = "#1e2a44";
-const CLAY_LIT = "#c8894f";
+const GOLD = "#d9a24a";
 const PAPER = "#faf9f6";
-const GLAZE = "#eef2ef";
+const GLAZE_A = "#eef2ef";
+const GLAZE_B = "#e9eeea";
+const GROUT = "#c7cfc8";
 
 /* Ornament palette read off the reference: the border's character is the
    orange / pale-blue / olive interplay. Outlines stay site navy. */
@@ -125,6 +127,46 @@ function FloralPattern({ id, w }: { id: string; w: number }) {
   );
 }
 
+/**
+ * Field of letter tiles. Each tile is inset from the pattern cell so the grout
+ * beneath shows as a channel, with rounded corners and two crossed glaze
+ * gradients giving it a convex, fired surface: light off the top-left, shade
+ * into the bottom-right. The repeat spans two tiles so the glaze can vary.
+ */
+function TileField({ id, tile, h }: { id: string; tile: number; h: number }) {
+  const w = tile * 2;
+  const face = (x: number, fill: string) => {
+    const g = { x: x + 1.2, y: 1.2, width: tile - 2.4, height: h - 2.4, rx: 2.5 };
+    return (
+      <g key={x}>
+        <rect {...g} fill={fill} />
+        <rect {...g} fill={`url(#${id}-v)`} />
+        <rect {...g} fill={`url(#${id}-h)`} />
+      </g>
+    );
+  };
+  return (
+    <>
+      <linearGradient id={`${id}-v`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#ffffff" stopOpacity="0.62" />
+        <stop offset="0.26" stopColor="#ffffff" stopOpacity="0.05" />
+        <stop offset="0.62" stopColor="#ffffff" stopOpacity="0" />
+        <stop offset="1" stopColor="#38463c" stopOpacity="0.11" />
+      </linearGradient>
+      <linearGradient id={`${id}-h`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stopColor="#ffffff" stopOpacity="0.34" />
+        <stop offset="0.22" stopColor="#ffffff" stopOpacity="0" />
+        <stop offset="1" stopColor="#38463c" stopOpacity="0.07" />
+      </linearGradient>
+      <pattern id={id} width={w} height={h} patternUnits="userSpaceOnUse">
+        <rect width={w} height={h} fill={GROUT} />
+        {face(0, GLAZE_A)}
+        {face(tile, GLAZE_B)}
+      </pattern>
+    </>
+  );
+}
+
 /** Convex glaze: light off the top of the curve, shading into the bottom edge. */
 function GlazeGradient({ id }: { id: string }) {
   return (
@@ -173,18 +215,23 @@ function Letters({
 }) {
   const chars = [...text];
   const at = (i: number) => i * tile + tile / 2;
+  const common = { fontSize: size, textAnchor: "middle" as const, style: SERIF };
   return (
-    <g fontSize={size} textAnchor="middle" style={SERIF}>
-      <g fill={CLAY_LIT}>
+    <>
+      {/* Gold sits low and left and carries a stroke of its own, so it reads as
+          a hard rim on the letter rather than a soft ghost behind it. The old
+          version offset up-left on BOTH axes, which haloed the navy and was
+          what looked like blur. */}
+      <g {...common} fill={GOLD} stroke={GOLD} strokeWidth="1.1" paintOrder="stroke">
         {chars.map((ch, i) =>
           ch === " " ? null : (
-            <text key={`h${i}`} x={at(i) - 2} y={baseline - 2}>
+            <text key={`h${i}`} x={at(i) - 1.9} y={baseline + 1.4}>
               {ch}
             </text>
           )
         )}
       </g>
-      <g fill={NAVY}>
+      <g {...common} fill={NAVY} stroke={NAVY} strokeWidth="0.5" paintOrder="stroke">
         {chars.map((ch, i) =>
           ch === " " ? null : (
             <text key={`b${i}`} x={at(i)} y={baseline}>
@@ -193,7 +240,7 @@ function Letters({
           )
         )}
       </g>
-    </g>
+    </>
   );
 }
 
@@ -211,11 +258,15 @@ function Wide() {
       <defs>
         <FloralPattern id="flor-w" w={TILE} />
         <GlazeGradient id="glz-w" />
+        <TileField id="tf-w" tile={TILE} h={76} />
       </defs>
-      <rect width={W} height="146" fill={GLAZE} />
+      <rect width={W} height="146" fill={GROUT} />
       <Band y={0} w={W} h={6} />
       <Course y={6} w={W} href="url(#flor-w)" glaze="url(#glz-w)" />
       <Band y={28} w={W} h={7} />
+      <g transform="translate(0 35)">
+        <rect width={W} height="76" fill="url(#tf-w)" />
+      </g>
       <Letters text="ANTON CASTRO" tile={TILE} baseline={91} size={52} />
       <Band y={111} w={W} h={7} flip />
       <Course y={118} w={W} href="url(#flor-w)" glaze="url(#glz-w)" />
@@ -239,15 +290,22 @@ function Narrow() {
       <defs>
         <FloralPattern id="flor-n" w={TILE} />
         <GlazeGradient id="glz-n" />
+        <TileField id="tf-n" tile={TILE} h={61} />
       </defs>
-      <rect width={W} height="186" fill={GLAZE} />
+      <rect width={W} height="186" fill={GROUT} />
       <Band y={0} w={W} h={5} />
       <Course y={5} w={W} href="url(#flor-n)" glaze="url(#glz-n)" />
       <Band y={27} w={W} h={6} />
 
-      <Letters text="ANTON" tile={TILE} baseline={83} size={48} />
-      <Rosette cx={TILE * 5.5} cy={66} s={1.9} />
-      <Letters text="CASTRO" tile={TILE} baseline={145} size={48} />
+      <g transform="translate(0 33)">
+        <rect width={W} height="61" fill="url(#tf-n)" />
+      </g>
+      <g transform="translate(0 96)">
+        <rect width={W} height="61" fill="url(#tf-n)" />
+      </g>
+      <Letters text="ANTON" tile={TILE} baseline={80} size={48} />
+      <Rosette cx={TILE * 5.5} cy={63.5} s={1.9} />
+      <Letters text="CASTRO" tile={TILE} baseline={143} size={48} />
 
       <Band y={157} w={W} h={6} flip />
       <Course y={163} w={W} href="url(#flor-n)" glaze="url(#glz-n)" />
