@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/inter";
+import { Geist, Geist_Mono } from "next/font/google";
 import "@fontsource-variable/fraunces/full.css";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import CaseGateOverlay from "@/components/CaseGateOverlay";
+
+// Geist and Geist Mono were drawn as a pair, so body text and the mono labels
+// (section heads, outcomes column, links, footer) share proportions and stroke
+// weight. next/font self-hosts both at build time; no runtime Google request.
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studioacas.com"),
@@ -24,7 +30,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="min-h-screen flex flex-col">
         <a
           href="#main"
