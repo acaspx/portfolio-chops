@@ -22,6 +22,13 @@ const work: IndexItem[] = [
     alt: "The State Affairs AI agent answering a question about a bill",
   },
   {
+    label: "Custoria Vault",
+    meta: "~150 users in 90 days",
+    href: "/work/custoria",
+    img: "/work/cu-mobile.png",
+    alt: "The Custoria iOS app: AI camera scan and the vault",
+  },
+  {
     label: "Augmedix",
     meta: "$139M acquisition",
     href: "/work/augmedix",
@@ -34,16 +41,6 @@ const work: IndexItem[] = [
     href: "/work/rocket",
     img: "/work/rk-patterns.png",
     alt: "Conversation design pattern library",
-  },
-];
-
-const built: IndexItem[] = [
-  {
-    label: "Custoria Vault",
-    meta: "~150 users in 90 days",
-    href: "/work/custoria",
-    img: "/work/cu-mobile.png",
-    alt: "The Custoria iOS app: AI camera scan and the vault",
   },
 ];
 
@@ -91,7 +88,6 @@ export default function Home() {
 
         <div className="mt-14">
           <IndexSection title="Work" items={work} />
-          <IndexSection title="Built" items={built} />
           <IndexSection title="Experience" items={experience} />
         </div>
       </div>
