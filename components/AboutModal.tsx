@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Allura } from "next/font/google";
+import GenerationReveal from "@/components/GenerationReveal";
 
 const signature = Allura({ weight: "400", subsets: ["latin"], display: "swap" });
 
@@ -33,6 +34,7 @@ type PanelProps = {
 function Panel({ kicker, title, children, className = "", image }: PanelProps) {
   return (
     <section
+      data-gen="card"
       className={`rounded-2xl border border-white/60 bg-white/55 p-6 shadow-[0_8px_30px_rgba(20,20,15,0.06)] backdrop-blur-xl sm:p-7 ${className}`}
     >
       {kicker && (
@@ -113,17 +115,17 @@ export default function AboutModal({
             ×
           </button>
 
-          {/* Centered content column */}
-          <div className="relative mx-auto min-h-full max-w-lg px-4 py-16 sm:py-20">
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="space-y-3"
-            >
+          {/* Centered content column. GenerationReveal traces every
+              data-gen="card" as a dotted skeleton on a live dot grid, then
+              resolves the real cards in; it replaces the old slide-up. */}
+          <GenerationReveal>
+          <div className="relative mx-auto max-w-lg px-4 py-16 sm:py-20">
+            <div onClick={(e) => e.stopPropagation()} className="space-y-3">
               {/* Crisp lead photo */}
-              <div className="overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_40px_rgba(20,20,15,0.12)]">
+              <div
+                data-gen="card"
+                className="overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_40px_rgba(20,20,15,0.12)]"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/about-photo-bw.jpg"
@@ -217,8 +219,9 @@ export default function AboutModal({
                   Anton Castro
                 </motion.p>
               </Panel>
-            </motion.div>
+            </div>
           </div>
+          </GenerationReveal>
         </motion.div>
       )}
     </AnimatePresence>,
