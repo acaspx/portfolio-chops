@@ -45,8 +45,8 @@ const work: IndexItem[] = [
 ];
 
 const experience: IndexItem[] = [
+  { label: "Custoria Labs · Founding Design Engineer", meta: "2025 –" },
   { label: "State Affairs · Sr. Interaction Designer", meta: "2026 –" },
-  { label: "Custoria Labs · Co-founder", meta: "2025 –" },
   { label: "Augmedix · Product Designer, AI & Growth", meta: "2023 – 24" },
   { label: "Rocket · Conversational AI Designer", meta: "2022 – 23" },
   { label: "Anti-Defamation League · Product Designer", meta: "2021 – 22" },
