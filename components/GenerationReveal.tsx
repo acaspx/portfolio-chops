@@ -41,22 +41,35 @@ type Run = { x: number; y: number; dx: number; dy: number; len: number; born: nu
 const INK = "22,20,15";
 const GRID = 20; // dot grid pitch, px
 const STEP = 4; // dot spacing along traced lines, px
+/**
+ * Pace multiplier for the whole sequence. Every duration, delay and stagger
+ * below scales with it, so the rhythm between phases holds when it's tuned.
+ * 1 matches the reference video; higher is slower.
+ */
+const PACE = 1.75;
+const s = (v: number) => v * PACE;
 const T = {
-  gridIn: 0.3,
-  first: 0.14, // first card starts tracing
-  stagger: 0.11, // between cards
+  gridIn: s(0.3),
+  guideIn: s(0.4),
+  labelIn: s(0.2),
+  first: s(0.14), // first card starts tracing
+  stagger: s(0.11), // between cards
   maxStagger: 5, // cards past this all share the last slot
-  cardDur: 0.42, // outline trace
-  textLag: 0.16, // text bars start after their card's outline
-  lineStagger: 0.035,
+  cardDur: s(0.42), // outline trace
+  mediaLag: s(0.08), // image frame starts after its card
+  textLag: s(0.16), // text bars start after their card's outline
+  lineStagger: s(0.035),
   maxLines: 8,
-  lineDur: 0.26,
-  hold: 0.14, // beat between skeleton complete and resolve
-  fadeOut: 0.45,
-  cardIn: 0.5,
-  cardInStagger: 0.06,
-  runLife: 0.5,
-  runRate: 46, // alive-dot runs spawned per second
+  lineDur: s(0.26),
+  runsFrom: s(0.18), // alive dots begin
+  hold: s(0.14), // beat between skeleton complete and resolve
+  resolveMin: s(0.9),
+  resolveMax: s(1.6),
+  fadeOut: s(0.45),
+  cardIn: s(0.5),
+  cardInStagger: s(0.06),
+  runLife: s(0.5),
+  runRate: 46 / PACE, // runs live longer, so spawn fewer to keep the same density
 };
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
@@ -121,7 +134,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
 
     // ---------------------------------------------------------- measure --
     let cards: Card[] = [];
-    let resolveAt = 1.2;
+    let resolveAt = T.resolveMin + T.hold;
     const measure = () => {
       const rr = root.getBoundingClientRect();
       cards = els.map((el, i) => {
@@ -139,7 +152,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
           if (Math.abs(m.width - b.width) < 8 && Math.abs(m.height - b.height) < 8) return;
           strokes.push({
             pts: roundRect(m.left - rr.left, m.top - rr.top - 6, m.width, m.height, radius(frame, 10)),
-            start: start + 0.08,
+            start: start + T.mediaLag,
             dur: T.cardDur * 0.8,
             alpha: 0.32,
             r: 1,
@@ -181,7 +194,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       const ends = cards
         .filter((c) => c.y + rr.top < vh)
         .flatMap((c) => c.strokes.map((s) => s.start + s.dur));
-      resolveAt = Math.min(1.6, Math.max(0.9, Math.max(0, ...ends))) + T.hold;
+      resolveAt = Math.min(T.resolveMax, Math.max(T.resolveMin, Math.max(0, ...ends))) + T.hold;
     };
 
     // ----------------------------------------------------------- canvas --
@@ -265,7 +278,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
 
       // 2. guides off the column edges and the lead card's top
       if (lead) {
-        const g = clamp((t - 0.05) / 0.4);
+        const g = clamp((t - T.first * 0.35) / T.guideIn);
         const ease = 1 - Math.pow(1 - g, 3);
         ctx.globalAlpha = 0.17 * out;
         const v = line(0, 0, 0, H * ease);
@@ -289,7 +302,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       }
 
       // 4. alive dots: short runs flaring over the cards
-      if (t > 0.18 && t < resolveAt) {
+      if (t > T.runsFrom && t < resolveAt) {
         let spawn = dt * T.runRate;
         const visible = cards.filter((c) => c.y + oy < H && c.y + c.h + oy > 0 && t >= c.start);
         while (visible.length && spawn > 0) {
@@ -328,7 +341,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       if (dims && active) {
         dims.textContent = `${Math.round(active.w)} × ${Math.round(active.h)}  t+${t.toFixed(2)}s`;
         dims.style.transform = `translate(${active.x + ox}px, ${active.y + oy - 20}px)`;
-        dims.style.opacity = String(clamp(t / 0.2) * out);
+        dims.style.opacity = String(clamp(t / T.labelIn) * out);
       }
       if (coord) {
         if (head) {
