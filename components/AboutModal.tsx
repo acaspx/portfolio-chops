@@ -109,6 +109,39 @@ export default function AboutModal({
     };
   }, [open, onClose]);
 
+  // Sign-off: plain text under the deck, no card. CardStack keeps the deck on
+  // screen and glides it up to make room as this fades in beneath it.
+  const signOff = (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -18% 0px" }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      className="text-center"
+    >
+      <p className="text-[15px] text-ink/80">
+        Always up for a coffee chat. ☕{" "}
+        <a
+          href="mailto:ac.design.px@gmail.com"
+          className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          ac.design.px@gmail.com
+        </a>
+      </p>
+      <motion.p
+        aria-label="Anton Castro"
+        initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
+        whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+        viewport={{ once: true, margin: "0px 0px -18% 0px" }}
+        transition={{ duration: 1.4, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className={`${signature.className} mt-3 text-accent`}
+        style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
+      >
+        Anton Castro
+      </motion.p>
+    </motion.div>
+  );
+
   if (!mounted) return null;
 
   // Portaled to <body> so position:fixed isn't trapped by the sticky nav's
@@ -148,9 +181,9 @@ export default function AboutModal({
               screen and previews the rest of the deck as dotted slots on a
               live grid, then resolves the real card in. */}
           <GenerationReveal>
-            <div className="relative mx-auto max-w-lg px-4 pb-[22vh] pt-16">
+            <div className="relative mx-auto max-w-lg px-4 pt-16">
               <div onClick={(e) => e.stopPropagation()}>
-                <CardStack scrollRef={scrollRef}>
+                <CardStack scrollRef={scrollRef} after={signOff}>
                   {/* Crisp lead photo */}
                   <div
                     data-gen="card"
@@ -237,36 +270,6 @@ export default function AboutModal({
                   </Panel>
                 </CardStack>
 
-                {/* Sign-off: plain text under the deck, no card. It fades up as
-                    the finished deck releases and scrolls away above it. */}
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "0px 0px -18% 0px" }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-center"
-                >
-                  <p className="text-[15px] text-ink/80">
-                    Always up for a coffee chat. ☕{" "}
-                    <a
-                      href="mailto:ac.design.px@gmail.com"
-                      className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
-                    >
-                      ac.design.px@gmail.com
-                    </a>
-                  </p>
-                  <motion.p
-                    aria-label="Anton Castro"
-                    initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
-                    whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-                    viewport={{ once: true, margin: "0px 0px -18% 0px" }}
-                    transition={{ duration: 1.4, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className={`${signature.className} mt-3 text-accent`}
-                    style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
-                  >
-                    Anton Castro
-                  </motion.p>
-                </motion.div>
               </div>
             </div>
           </GenerationReveal>
