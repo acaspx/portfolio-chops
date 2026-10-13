@@ -25,7 +25,7 @@ export default function Custoria() {
         company="Custoria Labs · co-founded with Yiyi Qin"
         title="Founding Custoria: a digital vault for what people value most"
         meta={[
-          { label: "Role", value: "Co-founder & Founding Designer: design, strategy, and code" },
+          { label: "Role", value: "Co-founder & Founding Design Engineer: design, strategy, and code" },
           { label: "Timeline", value: "Oct 2025 – Present" },
           { label: "Scope", value: "0→1: strategy, capture-to-share flow, design system, security model, iOS build" },
           { label: "Status", value: "Available on the App Store" },

@@ -60,11 +60,12 @@ function LiveSiteLink({ site }: { site: LiveSite }) {
       <a href={site.href} target="_blank" rel="noopener noreferrer" className="group block">
         {site.image && (
           <div className="overflow-hidden rounded-lg border border-line bg-ink/[0.03]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={site.image}
               alt=""
-              loading="lazy"
+              width={640}
+              height={400}
+              sizes="(max-width: 768px) 90vw, 320px"
               className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>
@@ -100,6 +101,9 @@ export function CaseHero({
         width={width}
         height={height}
         priority
+        // Without sizes, next/image serves a fixed 1x/2x pair, so phones pulled
+        // the 2x of a 2600px-wide hero. With it, they get a file for their width.
+        sizes="(max-width: 1056px) 100vw, 1024px"
         className="w-full rounded-2xl border border-line object-cover"
       />
     </div>
@@ -135,6 +139,7 @@ export function CaseImage({
           alt={alt}
           width={width}
           height={height}
+          sizes="(max-width: 832px) 100vw, 768px"
           className={
             plain
               ? "relative z-[1] h-auto w-full"
@@ -426,6 +431,7 @@ export function NextCase({ slug }: { slug: keyof typeof CASES }) {
               alt={c.alt}
               width={1920}
               height={1080}
+              sizes="(max-width: 704px) 100vw, 672px"
               className="mx-auto mt-8 h-auto w-full max-w-2xl rounded-lg shadow-2xl ring-1 ring-black/25 transition-transform duration-500 ease-out group-hover:scale-[1.012] sm:mt-9"
             />
           </div>

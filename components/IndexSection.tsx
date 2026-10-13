@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import CaseGateLink from "@/components/CaseGateLink";
 
@@ -55,12 +56,15 @@ export default function IndexSection({
               <span className="flex min-w-0 items-center gap-3">
                 {/* Below lg there is no margin for the hover preview (and on
                     touch, no hover), so the work shows inline as a thumbnail. */}
+                {/* next/image so a 44px thumbnail fetches a ~88px file, not
+                    the full-size screenshot. */}
                 {it.img && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={it.img}
                     alt=""
-                    loading="lazy"
+                    width={88}
+                    height={64}
+                    sizes="44px"
                     className="h-8 w-11 shrink-0 rounded-[4px] object-cover object-top ring-1 ring-ink/[0.08] lg:hidden"
                   />
                 )}
@@ -126,10 +130,12 @@ export default function IndexSection({
               className="pointer-events-none absolute left-full ml-12 hidden w-[17rem] lg:block"
             >
               <div className="rounded-[7px] bg-white p-[6px] shadow-[0_14px_30px_-10px_rgba(22,20,15,0.3)] ring-1 ring-ink/[0.06]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={shown.img}
                   alt={shown.alt ?? ""}
+                  width={544}
+                  height={374}
+                  sizes="260px"
                   className="aspect-[16/11] w-full rounded-[3px] object-cover object-top"
                 />
               </div>

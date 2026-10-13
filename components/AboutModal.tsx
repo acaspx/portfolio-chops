@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Allura } from "next/font/google";
 import GenerationReveal from "@/components/GenerationReveal";
@@ -23,6 +24,9 @@ const WORKED_WITH = [
   ["Intuit", "Anti-Defamation League"],
   ["Electronic Arts", "U.S. Navy"],
 ];
+
+// The deck column is max-w-lg (512px) less padding; full width minus gutters on phones.
+const CARD_SIZES = "(max-width: 544px) calc(100vw - 32px), 480px";
 
 type PanelProps = {
   kicker?: string;
@@ -60,9 +64,8 @@ function Panel({ kicker, title, children, className = "", image, footer }: Panel
         )}
       </div>
       {image && (
-        <div className="mt-4 min-h-24 flex-1 overflow-hidden rounded-xl border border-black/5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} className="block h-full w-full object-cover" />
+        <div className="relative mt-4 min-h-24 flex-1 overflow-hidden rounded-xl border border-black/5">
+          <Image src={image.src} alt={image.alt} fill sizes={CARD_SIZES} className="object-cover" />
         </div>
       )}
       <div
@@ -181,11 +184,12 @@ export default function AboutModal({
                     data-gen="card"
                     className="relative h-full overflow-hidden rounded-2xl border border-white/80 shadow-[0_14px_40px_-14px_rgba(20,20,15,0.3)]"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src="/about-photo-bw.jpg"
                       alt="Anton Castro"
-                      className="block h-full w-full object-cover object-[center_22%]"
+                      fill
+                      sizes={CARD_SIZES}
+                      className="object-cover object-[center_22%]"
                     />
                     <div aria-hidden data-stack-dim className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
                   </div>
