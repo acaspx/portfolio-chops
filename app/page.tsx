@@ -25,8 +25,8 @@ const work: IndexItem[] = [
     label: "Custoria Vault",
     meta: "~150 users in 90 days",
     href: "/work/custoria",
-    img: "/work/cu-mobile.png",
-    alt: "The Custoria iOS app: AI camera scan and the vault",
+    img: "/work/cu-preview.jpg",
+    alt: "The Custoria iOS app: an item detail for a vintage ring, vault analytics by category, and the AI analyzing three photos",
   },
   {
     label: "Augmedix",
