@@ -46,6 +46,15 @@ const CARD_H = "[--card-h:min(84vh,600px)] sm:[--card-h:min(70vh,560px)]";
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
+/** Nearest ancestor that scrolls vertically. */
+const findScroller = (el: HTMLElement): HTMLElement | null => {
+  for (let p = el.parentElement; p; p = p.parentElement) {
+    const oy = getComputedStyle(p).overflowY;
+    if (oy === "auto" || oy === "scroll") return p;
+  }
+  return null;
+};
+
 /** Sticky top for slot i: centres the deck (cards plus peeks), together with
  *  the band reserved for `after` when there is one. */
 const slotTop = (i: number, n: number, reserve: number) => {
@@ -73,9 +82,14 @@ export default function CardStack({
   const lastTop = `calc(${slotTop(n - 1, n, reserve)})`;
 
   useLayoutEffect(() => {
-    const sc = scrollRef.current;
     const wrap = wrapRef.current;
-    if (!sc || !wrap) return;
+    if (!wrap) return;
+    // React runs a child's layout effects before it attaches the parent's
+    // ref, so on first mount scrollRef.current is still null here and the
+    // effect used to bail out for good: no fades, no dimming, no sign-off.
+    // Fall back to finding the scroller from the DOM, which always exists.
+    const sc = scrollRef.current ?? findScroller(wrap);
+    if (!sc) return;
     const slots = Array.from(wrap.querySelectorAll<HTMLElement>(":scope > [data-stack-item]"));
 
     let raf = 0;
