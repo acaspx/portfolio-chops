@@ -64,7 +64,14 @@ const more: IndexItem[] = [
     img: "/work/pitstop.jpg",
     alt: "Agent Pit Stop: an open source design system to keep agents on track",
   },
-  // Terrarium: waiting on link, one-liner and preview image.
+  {
+    label: "Terrarium",
+    meta: "Ecosystem simulation",
+    href: "https://terrarium-sim.vercel.app",
+    external: true,
+    img: "/work/terrarium.jpg",
+    alt: "A closed terrarium jar on a shelf: fittonia, moss and springtails over soil and clay pebbles",
+  },
 ];
 
 const links = [
