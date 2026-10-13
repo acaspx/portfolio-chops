@@ -66,6 +66,10 @@ function LiveSiteLink({ site }: { site: LiveSite }) {
               width={640}
               height={400}
               sizes="(max-width: 768px) 90vw, 320px"
+              // Remote previews (a company's own share image) come from hosts
+              // the image optimizer isn't configured for, so it refuses them
+              // and the card shows a broken image. Serve those as-is.
+              unoptimized={site.image.startsWith("http")}
               className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>
