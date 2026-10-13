@@ -35,6 +35,8 @@ type Card = {
   h: number;
   start: number;
   strokes: Stroke[];
+  /** A deck slot drawn in screen space; outline only, never resolved. */
+  ghost?: boolean;
 };
 type Run = { x: number; y: number; dx: number; dy: number; len: number; born: number };
 
@@ -125,7 +127,27 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
     const ctx = canvas?.getContext("2d");
     if (!root || !layer || !canvas || !ctx) return;
 
-    const els = Array.from(root.querySelectorAll<HTMLElement>('[data-gen="card"]'));
+    // Only cards on screen when it opens are revealed. In a CardStack the rest
+    // of the deck is below the fold; those are drawn as ghost outlines in the
+    // sticky slots they will stack into, so the skeleton previews the deck.
+    const scroller = root.closest<HTMLElement>("[data-gen-scroll]");
+    const viewH = scroller?.clientHeight ?? window.innerHeight;
+    const viewTop = scroller?.getBoundingClientRect().top ?? 0;
+    // Stack membership is structural, not positional: on a cold first open the
+    // photos have no height yet, so a position test would wrongly put the whole
+    // deck "on screen". In a stack only the top card is live.
+    const all = Array.from(root.querySelectorAll<HTMLElement>('[data-gen="card"]'));
+    const slotOf = (el: HTMLElement) => el.closest<HTMLElement>("[data-stack-item]");
+    const isTopOfStack = (el: HTMLElement) => {
+      const slot = slotOf(el);
+      return !!slot && slot.parentElement?.querySelector(":scope > [data-stack-item]") === slot;
+    };
+    const els = all.filter((el) =>
+      slotOf(el) ? isTopOfStack(el) : el.getBoundingClientRect().top - viewTop < viewH - 24
+    );
+    const deck = all.filter((el) => slotOf(el) && !isTopOfStack(el));
+    // The deck stays out of sight while its ghost slots draw, then fades in.
+    for (const el of deck) el.style.opacity = "0";
     // Hide before first paint: the skeleton stands in for them.
     for (const el of els) {
       el.style.opacity = "0";
@@ -161,6 +183,8 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
         let li = 0;
         el.querySelectorAll<HTMLElement>("p, span").forEach((t) => {
           if (t.tagName === "SPAN" && t.closest("p")) return;
+          const holder = t.closest<HTMLElement>("[data-stack-text]");
+          if (holder && parseFloat(holder.style.opacity || "1") < 0.5) return;
           const range = document.createRange();
           range.selectNodeContents(t);
           const rows = new Map<number, [number, number, number]>();
@@ -189,10 +213,38 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
         });
         return { el, x, y, w: b.width, h: b.height, start, strokes };
       });
+      const lr0 = layer.getBoundingClientRect();
+      const lead0 = cards[0];
+      deck.forEach((el, k) => {
+        const slot = el.closest<HTMLElement>("[data-stack-item]")!;
+        const b = el.getBoundingClientRect();
+        const x = b.left - lr0.left;
+        const y = (parseFloat(getComputedStyle(slot).top) || 0) + viewTop - lr0.top;
+        const start = (lead0?.start ?? T.first) + (k + 1) * T.stagger * 0.6;
+        cards.push({
+          el,
+          x,
+          y,
+          w: b.width,
+          h: Math.min(b.height, viewH - y - 16),
+          start,
+          ghost: true,
+          strokes: [
+            {
+              pts: roundRect(x, y, b.width, Math.min(b.height, viewH - y - 16), radius(el, 12)),
+              start,
+              dur: T.cardDur,
+              alpha: 0.24,
+              r: 0.95,
+            },
+          ],
+        });
+      });
+
       // resolve once everything on the first screen has finished tracing
       const vh = layer.clientHeight;
       const ends = cards
-        .filter((c) => c.y + rr.top < vh)
+        .filter((c) => c.ghost || c.y + rr.top < vh)
         .flatMap((c) => c.strokes.map((s) => s.start + s.dur));
       resolveAt = Math.min(T.resolveMax, Math.max(T.resolveMin, Math.max(0, ...ends))) + T.hold;
     };
@@ -291,12 +343,14 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       // 3. skeleton strokes, and find the drawing head for the readout
       let head: { card: Card; x: number; y: number } | null = null;
       for (const c of cards) {
+        const cx = c.ghost ? 0 : ox;
+        const cy = c.ghost ? 0 : oy;
         for (const s of c.strokes) {
           const p = clamp((t - s.start) / s.dur);
           if (p <= 0) continue;
           const n = Math.max(1, Math.floor(s.pts.length * (1 - Math.pow(1 - p, 3))));
           ctx.globalAlpha = s.alpha * out;
-          dots(s.pts, n, ox, oy, s.r);
+          dots(s.pts, n, cx, cy, s.r);
           if (p < 1) head = { card: c, x: s.pts[n - 1][0], y: s.pts[n - 1][1] };
         }
       }
@@ -304,7 +358,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       // 4. alive dots: short runs flaring over the cards
       if (t > T.runsFrom && t < resolveAt) {
         let spawn = dt * T.runRate;
-        const visible = cards.filter((c) => c.y + oy < H && c.y + c.h + oy > 0 && t >= c.start);
+        const visible = cards.filter((c) => !c.ghost && c.y + oy < H && c.y + c.h + oy > 0 && t >= c.start);
         while (visible.length && spawn > 0) {
           if (Math.random() < spawn) {
             const c = visible[Math.floor(Math.random() * visible.length)];
@@ -340,13 +394,17 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       const active = head?.card ?? lead;
       if (dims && active) {
         dims.textContent = `${Math.round(active.w)} × ${Math.round(active.h)}  t+${t.toFixed(2)}s`;
-        dims.style.transform = `translate(${active.x + ox}px, ${active.y + oy - 20}px)`;
+        const ax = active.ghost ? 0 : ox;
+        const ay = active.ghost ? 0 : oy;
+        dims.style.transform = `translate(${active.x + ax}px, ${active.y + ay - 20}px)`;
         dims.style.opacity = String(clamp(t / T.labelIn) * out);
       }
       if (coord) {
         if (head) {
           coord.textContent = `${Math.round(head.x - head.card.x)}·${Math.round(head.y - head.card.y)}`;
-          coord.style.transform = `translate(${head.x + ox + 8}px, ${head.y + oy - 16}px)`;
+          const hx = head.card.ghost ? 0 : ox;
+          const hy = head.card.ghost ? 0 : oy;
+          coord.style.transform = `translate(${head.x + hx + 8}px, ${head.y + hy - 16}px)`;
           coord.style.opacity = String(out);
         } else {
           coord.style.opacity = "0";
@@ -356,12 +414,17 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
       // 6. resolve: the real cards take over from their skeletons
       if (!resolved && t >= resolveAt) {
         resolved = true;
-        cards.forEach((c, i) => {
+        cards.filter((c) => !c.ghost).forEach((c, i) => {
           const d = Math.min(i, T.maxStagger) * T.cardInStagger;
           c.el.style.transition = `opacity ${T.cardIn}s ${EASE} ${d}s, transform ${T.cardIn}s ${EASE} ${d}s`;
           c.el.style.opacity = "1";
           c.el.style.transform = "none";
         });
+        // the rest of the deck becomes real just behind the top card
+        for (const el of deck) {
+          el.style.transition = `opacity ${T.cardIn}s ${EASE} ${T.cardInStagger * 2}s`;
+          el.style.opacity = "1";
+        }
       }
 
       if (t < resolveAt + T.fadeOut) {
@@ -375,7 +438,7 @@ export default function GenerationReveal({ children }: { children: ReactNode }) 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      for (const el of els) {
+      for (const el of [...els, ...deck]) {
         el.style.opacity = "";
         el.style.transform = "";
         el.style.transition = "";

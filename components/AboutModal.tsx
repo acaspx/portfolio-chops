@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Allura } from "next/font/google";
 import GenerationReveal from "@/components/GenerationReveal";
+import CardStack from "@/components/CardStack";
 
 const signature = Allura({ weight: "400", subsets: ["latin"], display: "swap" });
 
@@ -31,27 +32,41 @@ type PanelProps = {
   image?: { src: string; alt: string };
 };
 
+/**
+ * One card in the About deck. Solid, not frosted: stacked glass would show
+ * every card beneath through the one on top. Text carries data-stack-text so it
+ * fades in as the card settles; data-stack-dim darkens it as it gets covered.
+ * Images are capped so every card fits on screen before the next slides over.
+ */
 function Panel({ kicker, title, children, className = "", image }: PanelProps) {
   return (
     <section
       data-gen="card"
-      className={`rounded-2xl border border-white/60 bg-white/55 p-6 shadow-[0_8px_30px_rgba(20,20,15,0.06)] backdrop-blur-xl sm:p-7 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-white/80 bg-[#fbfaf7] p-6 shadow-[0_-10px_28px_-14px_rgba(20,20,15,0.28),0_14px_34px_-16px_rgba(20,20,15,0.22)] sm:p-7 ${className}`}
     >
       {kicker && (
-        <p className="font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</p>
+        <p data-stack-text className="font-mono text-[11px] uppercase tracking-widest text-muted">
+          {kicker}
+        </p>
       )}
       {title && (
-        <p className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">{title}</p>
+        <p data-stack-text className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">
+          {title}
+        </p>
       )}
       {image && (
-        <div className={`${kicker || title ? "mt-4" : ""} overflow-hidden rounded-xl border border-white/60`}>
+        <div className={`${kicker || title ? "mt-4" : ""} overflow-hidden rounded-xl border border-black/5`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} className="block w-full" />
+          <img src={image.src} alt={image.alt} className="block max-h-[30vh] w-full object-cover" />
         </div>
       )}
-      <div className={`${kicker || title || image ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}>
+      <div
+        data-stack-text
+        className={`${kicker || title || image ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}
+      >
         {children}
       </div>
+      <div aria-hidden data-stack-dim className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
     </section>
   );
 }
@@ -66,6 +81,7 @@ export default function AboutModal({
   const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -95,6 +111,8 @@ export default function AboutModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
+          ref={scrollRef}
+          data-gen-scroll
           className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-3xl"
           onClick={onClose}
           role="dialog"
@@ -115,113 +133,125 @@ export default function AboutModal({
             ×
           </button>
 
-          {/* Centered content column. GenerationReveal traces every
-              data-gen="card" as a dotted skeleton on a live dot grid, then
-              resolves the real cards in; it replaces the old slide-up. */}
+          {/* Centered content column. The cards form a deck that stacks as
+              you scroll (CardStack); GenerationReveal traces the card on
+              screen and previews the rest of the deck as dotted slots on a
+              live grid, then resolves the real card in. */}
           <GenerationReveal>
-          <div className="relative mx-auto max-w-lg px-4 py-16 sm:py-20">
-            <div onClick={(e) => e.stopPropagation()} className="space-y-3">
-              {/* Crisp lead photo */}
-              <div
-                data-gen="card"
-                className="overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_40px_rgba(20,20,15,0.12)]"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/about-photo-bw.jpg"
-                  alt="Anton Castro"
-                  className="block w-full"
-                />
-              </div>
-
-              <Panel kicker="Who" title="I am">
-                <p>
-                  Bienvenue! I&apos;m Anton, a passionate designer, dialed in on making
-                  technology look and feel great, no matter the context.
-                </p>
-                <p>
-                  Currently Sr. Interaction Designer at State Affairs, building policy
-                  intelligence, the company&apos;s first AI product. Before that: founding
-                  designer twice, and AI products at Augmedix, Rocket, and Intuit.
-                </p>
-              </Panel>
-
-              <Panel kicker="Worked with" className="!pb-6">
-                <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-[15px] leading-relaxed text-ink/80">
-                  {WORKED_WITH.flat().map((name) => (
-                    <span key={name}>{name}</span>
-                  ))}
-                </div>
-              </Panel>
-
-              <Panel
-                kicker="How"
-                title="I work"
-                image={{ src: "/how-i-work.jpg", alt: "Anton leading a working session, mapping the problem before any pixels" }}
-              >
-                <p>
-                  I lead with the story. Before any pixels, I make the problem legible:
-                  what&apos;s broken, who it&apos;s hurting, and why it&apos;s worth solving now.
-                  Clarity is the unlock.
-                </p>
-                <p>
-                  From there I build momentum. Sharp narratives and working prototypes bring
-                  people along, turn ambiguity into shared direction, and get the work that
-                  matters shipped.
-                </p>
-              </Panel>
-
-              <Panel
-                kicker="What"
-                title="I build with"
-                image={{ src: "/build-with.jpg", alt: "The tools of the craft, from Figma and Framer to React, Swift, and AI-assisted prototyping" }}
-              >
-                <p>
-                  Figma and Paper for UX design and system schemas. These days, translating
-                  AI-assisted prototyping into engineering workflows, pushing PRs with Codex
-                  and Cursor.
-                </p>
-                <p>
-                  Four AI products taught me the hard problem isn&apos;t the model. It&apos;s
-                  deciding what the AI does alone, and where people stay in the loop.
-                </p>
-              </Panel>
-
-              <Panel
-                kicker="Before"
-                title="All this"
-                image={{ src: "/military-1-bw.jpg", alt: "Anton during his four years as a U.S. Navy engineer" }}
-              >
-                <p>
-                  U.S. Navy engineer, four years. That&apos;s where I learned that systems fail
-                  at their seams, and discipline is a design material.
-                </p>
-              </Panel>
-
-              <Panel>
-                <p className="text-ink/80">
-                  Always up for a coffee chat. ☕{" "}
-                  <a
-                    href="mailto:ac.design.px@gmail.com"
-                    className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+            <div className="relative mx-auto max-w-lg px-4 pb-[22vh] pt-16">
+              <div onClick={(e) => e.stopPropagation()}>
+                <CardStack scrollRef={scrollRef}>
+                  {/* Crisp lead photo */}
+                  <div
+                    data-gen="card"
+                    className="relative overflow-hidden rounded-2xl border border-white/80 shadow-[0_14px_40px_-14px_rgba(20,20,15,0.3)]"
                   >
-                    ac.design.px@gmail.com
-                  </a>
-                </p>
-                <motion.p
-                  aria-label="Anton Castro"
-                  initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
-                  whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-                  viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  className={`${signature.className} mt-2 text-accent`}
-                  style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/about-photo-bw.jpg"
+                      alt="Anton Castro"
+                      className="block max-h-[60vh] w-full object-cover object-top"
+                    />
+                    <div aria-hidden data-stack-dim className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
+                  </div>
+
+                  <Panel kicker="Who" title="I am">
+                    <p>
+                      Bienvenue! I&apos;m Anton, a passionate designer, dialed in on making
+                      technology look and feel great, no matter the context.
+                    </p>
+                    <p>
+                      Currently Sr. Interaction Designer at State Affairs, building policy
+                      intelligence, the company&apos;s first AI product. Before that: founding
+                      designer twice, and AI products at Augmedix, Rocket, and Intuit.
+                    </p>
+                  </Panel>
+
+                  <Panel kicker="Worked with" className="!pb-6">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-[15px] leading-relaxed text-ink/80">
+                      {WORKED_WITH.flat().map((name) => (
+                        <span key={name}>{name}</span>
+                      ))}
+                    </div>
+                  </Panel>
+
+                  <Panel
+                    kicker="How"
+                    title="I work"
+                    image={{ src: "/how-i-work.jpg", alt: "Anton leading a working session, mapping the problem before any pixels" }}
+                  >
+                    <p>
+                      I lead with the story. Before any pixels, I make the problem legible:
+                      what&apos;s broken, who it&apos;s hurting, and why it&apos;s worth solving now.
+                      Clarity is the unlock.
+                    </p>
+                    <p>
+                      From there I build momentum. Sharp narratives and working prototypes bring
+                      people along, turn ambiguity into shared direction, and get the work that
+                      matters shipped.
+                    </p>
+                  </Panel>
+
+                  <Panel
+                    kicker="What"
+                    title="I build with"
+                    image={{ src: "/build-with.jpg", alt: "The tools of the craft, from Figma and Framer to React, Swift, and AI-assisted prototyping" }}
+                  >
+                    <p>
+                      Figma and Paper for UX design and system schemas. These days, translating
+                      AI-assisted prototyping into engineering workflows, pushing PRs with Codex
+                      and Cursor.
+                    </p>
+                    <p>
+                      Four AI products taught me the hard problem isn&apos;t the model. It&apos;s
+                      deciding what the AI does alone, and where people stay in the loop.
+                    </p>
+                  </Panel>
+
+                  <Panel
+                    kicker="Before"
+                    title="All this"
+                    image={{ src: "/military-1-bw.jpg", alt: "Anton during his four years as a U.S. Navy engineer" }}
+                  >
+                    <p>
+                      U.S. Navy engineer, four years. That&apos;s where I learned that systems fail
+                      at their seams, and discipline is a design material.
+                    </p>
+                  </Panel>
+                </CardStack>
+
+                {/* Sign-off: plain text under the deck, no card. It fades up as
+                    the finished deck releases and scrolls away above it. */}
+                <motion.div
+                  initial={reduce ? false : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -18% 0px" }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-center"
                 >
-                  Anton Castro
-                </motion.p>
-              </Panel>
+                  <p className="text-[15px] text-ink/80">
+                    Always up for a coffee chat. ☕{" "}
+                    <a
+                      href="mailto:ac.design.px@gmail.com"
+                      className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                    >
+                      ac.design.px@gmail.com
+                    </a>
+                  </p>
+                  <motion.p
+                    aria-label="Anton Castro"
+                    initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
+                    whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+                    viewport={{ once: true, margin: "0px 0px -18% 0px" }}
+                    transition={{ duration: 1.4, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    className={`${signature.className} mt-3 text-accent`}
+                    style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
+                  >
+                    Anton Castro
+                  </motion.p>
+                </motion.div>
+              </div>
             </div>
-          </div>
           </GenerationReveal>
         </motion.div>
       )}
