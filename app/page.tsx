@@ -62,7 +62,7 @@ const more: IndexItem[] = [
     href: "https://agent-pitstop.vercel.app",
     external: true,
     img: "/work/pitstop.jpg",
-    alt: "Agent Pit Stop: an open source design system to keep agents on track",
+    alt: "Agent Pit Stop: an agent run as a lap around a track, pulling into a human-in-the-loop pit to approve, deny or steer",
   },
   {
     label: "Terrarium",
@@ -70,7 +70,7 @@ const more: IndexItem[] = [
     href: "https://terrarium-sim.vercel.app",
     external: true,
     img: "/work/terrarium.jpg",
-    alt: "A closed terrarium jar on a shelf: fittonia, moss and springtails over soil and clay pebbles",
+    alt: "A 3D greenhouse terrarium on a desk: fittonia, fern, moss and driftwood over soil and gravel, its glass beaded with condensation",
   },
 ];
 
