@@ -1,6 +1,7 @@
 import MosaicName from "@/components/MosaicName";
 import HeroLede from "@/components/HeroLede";
 import IndexSection, { type IndexItem } from "@/components/IndexSection";
+import AsteriskMark from "@/components/AsteriskMark";
 
 /**
  * Index-format landing (yangjames.com pattern): one narrow centred column,
@@ -92,9 +93,12 @@ export default function Home() {
         <p className="mt-5 text-[15px] text-muted">Product Engineer &amp; Designer</p>
         <HeroLede leadClassName="mt-4 text-[15px] leading-relaxed text-balance" />
 
-        <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-muted">
-          {links.map((l) => (
-            <li key={l.label}>
+        <ul className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] text-muted">
+          {links.map((l, i) => (
+            // The asterisk rides with the link after it, so a wrapped line
+            // never starts or ends on a stray separator.
+            <li key={l.label} className="flex items-center gap-3">
+              {i > 0 && <AsteriskMark dense={false} className="h-[7px] w-[7px] text-accent" />}
               <a
                 href={l.href}
                 target="_blank"
