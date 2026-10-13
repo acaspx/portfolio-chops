@@ -53,6 +53,20 @@ const experience: IndexItem[] = [
   { label: "Intuit & Electronic Arts · Design Internships", meta: "2019 – 20" },
 ];
 
+// Side projects: built on my own time, shipped in public. Same row pattern as
+// Work so the page reads as one index; these open the live thing, not a case.
+const more: IndexItem[] = [
+  {
+    label: "Agent Pit Stop",
+    meta: "Open-source design system",
+    href: "https://agent-pitstop.vercel.app",
+    external: true,
+    img: "/work/pitstop.jpg",
+    alt: "Agent Pit Stop: an open source design system to keep agents on track",
+  },
+  // Terrarium: waiting on link, one-liner and preview image.
+];
+
 const links = [
   { label: "email", href: "mailto:ac.design.px@gmail.com" },
   { label: "github", href: "https://github.com/acaspx" },
@@ -89,6 +103,7 @@ export default function Home() {
         <div className="mt-14">
           <IndexSection title="Work" items={work} />
           <IndexSection title="Experience" items={experience} />
+          <IndexSection title="What's more?" items={more} />
         </div>
       </div>
     </>

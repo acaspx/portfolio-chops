@@ -52,14 +52,30 @@ export default function IndexSection({
         {items.map((it, i) => {
           const inner = (
             <>
-              <span className="truncate">{it.label}</span>
+              <span className="flex min-w-0 items-center gap-3">
+                {/* Below lg there is no margin for the hover preview (and on
+                    touch, no hover), so the work shows inline as a thumbnail. */}
+                {it.img && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={it.img}
+                    alt=""
+                    loading="lazy"
+                    className="h-8 w-11 shrink-0 rounded-[4px] object-cover object-top ring-1 ring-ink/[0.08] lg:hidden"
+                  />
+                )}
+                <span className="truncate">{it.label}</span>
+              </span>
               <span className="shrink-0 pl-6 text-right font-mono text-[12px] text-muted">
                 {it.meta}
               </span>
             </>
           );
-          const rowCls =
-            "flex items-baseline justify-between gap-2 py-[7px] text-[15px] transition-colors";
+          // Baseline-aligned like a text index; rows carrying a thumbnail
+          // centre instead while it shows, so label and meta sit mid-image.
+          const rowCls = `flex items-baseline justify-between gap-2 py-[7px] text-[15px] transition-colors${
+            it.img ? " max-lg:items-center" : ""
+          }`;
 
           return (
             <li
