@@ -109,18 +109,21 @@ export default function AboutModal({
     };
   }, [open, onClose]);
 
-  // Sign-off: plain text under the deck, no card. CardStack keeps the deck on
-  // screen and glides it up to make room as this fades in beneath it.
+  // Sign-off under the deck: signature, then contact. CardStack reserves room
+  // for it beneath the centred deck, fades it in as the last card lands, and
+  // writes the signature on (data-stack-write) as that card settles.
   const signOff = (
-    <motion.div
-      initial={reduce ? false : { opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -18% 0px" }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className="text-center"
-    >
-      <p className="text-[15px] text-ink/80">
-        Always up for a coffee chat. ☕{" "}
+    <div className="text-center">
+      <p
+        data-stack-write
+        aria-label="Anton Castro"
+        className={`${signature.className} text-accent`}
+        style={{ fontSize: "3.25rem", lineHeight: 1.05 }}
+      >
+        Anton Castro
+      </p>
+      <p className="mt-2 text-[15px] text-ink/75">
+        Reach me at{" "}
         <a
           href="mailto:ac.design.px@gmail.com"
           className="text-accent underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
@@ -128,18 +131,7 @@ export default function AboutModal({
           ac.design.px@gmail.com
         </a>
       </p>
-      <motion.p
-        aria-label="Anton Castro"
-        initial={reduce ? false : { clipPath: "inset(0 100% 0 0)" }}
-        whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-        viewport={{ once: true, margin: "0px 0px -18% 0px" }}
-        transition={{ duration: 1.4, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className={`${signature.className} mt-3 text-accent`}
-        style={{ fontSize: "3.5rem", lineHeight: 1.1 }}
-      >
-        Anton Castro
-      </motion.p>
-    </motion.div>
+    </div>
   );
 
   if (!mounted) return null;

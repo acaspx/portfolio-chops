@@ -30,7 +30,13 @@ const PEEK = 10; // each card sits this much lower than the one before
 const MAX_PEEK = 4; // past this many, slots stop stepping down
 const GAP = "8vh"; // scroll travel between one card settling and the next
 const MIN_TOP = 20; // the deck never rises closer than this to the top edge
-const AFTER_GAP = 28; // breathing room between the deck and `after`
+const AFTER_GAP = 20; // the deck yields if `after` comes closer than this (less than AFTER_SPACE, so it holds still at rest)
+// The band under the deck reserved for `after` (the sign-off). The deck is
+// centred together WITH this band, so when the last card settles the sign-off
+// is already on screen beneath it. Nothing is left to scroll to, so proximity
+// snapping can't pull the reader back above it.
+const AFTER_SPACE = 24; // deck bottom to the top of `after`
+const AFTER_H = 112; // fixed height of the `after` band
 const MIN_FIT = 0.7; // the most the deck will shrink to make room on short screens
 // Every card is the same height. A sticky deck only reads cleanly when each
 // card fully covers the one beneath it; mixed heights leave the bottom of a
@@ -40,11 +46,12 @@ const CARD_H = "[--card-h:min(84vh,600px)] sm:[--card-h:min(70vh,560px)]";
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
-/** Sticky top for slot i, centring the whole deck (cards plus peeks). */
-const slotTop = (i: number, n: number) => {
+/** Sticky top for slot i: centres the deck (cards plus peeks), together with
+ *  the band reserved for `after` when there is one. */
+const slotTop = (i: number, n: number, reserve: number) => {
   const deckPeek = Math.min(n - 1, MAX_PEEK) * PEEK;
   const offset = Math.min(i, MAX_PEEK) * PEEK;
-  return `max(${MIN_TOP}px, calc((100dvh - var(--card-h) - ${deckPeek}px) / 2)) + ${offset}px`;
+  return `max(${MIN_TOP}px, calc((100dvh - var(--card-h) - ${deckPeek + reserve}px) / 2)) + ${offset}px`;
 };
 
 export default function CardStack({
@@ -62,6 +69,8 @@ export default function CardStack({
   const afterRef = useRef<HTMLDivElement>(null);
   const items = Children.toArray(children);
   const n = items.length;
+  const reserve = after ? AFTER_SPACE + AFTER_H : 0;
+  const lastTop = `calc(${slotTop(n - 1, n, reserve)})`;
 
   useLayoutEffect(() => {
     const sc = scrollRef.current;
@@ -136,6 +145,20 @@ export default function CardStack({
           t.style.transform = `translateY(${(1 - e) * 10}px)`;
         });
       });
+
+      // `after` arrives with the last card: it fades up over the same travel,
+      // and anything marked [data-stack-write] (the signature) writes itself on
+      // left to right over the back half of it, finishing as the card lands.
+      if (afterEl && slots.length) {
+        const last = away[away.length - 1];
+        const e = reduce ? 1 : 1 - Math.pow(1 - clamp(1 - last / (vh * 0.4)), 3);
+        afterEl.style.opacity = String(e);
+        afterEl.style.transform = reduce ? "" : `translateY(${(1 - e) * 12}px)`;
+        const w = reduce ? 1 : clamp((e - 0.35) / 0.65);
+        afterEl.querySelectorAll<HTMLElement>("[data-stack-write]").forEach((el) => {
+          el.style.clipPath = `inset(0 ${(1 - w) * 100}% 0 0)`;
+        });
+      }
     };
 
     const onScroll = () => {
@@ -161,7 +184,17 @@ export default function CardStack({
   return (
     // `after` sits inside this container, so the sticky slots' range runs to
     // the very end and the deck never releases and scrolls off the top
-    <div ref={wrapRef} className={`relative pb-[6vh] ${CARD_H}`}>
+    <div
+      ref={wrapRef}
+      className={`relative ${CARD_H}`}
+      // End the scroll exactly where the last card settles: whatever room is
+      // left under the reserved band at that moment becomes bottom padding.
+      style={{
+        paddingBottom: after
+          ? `max(0px, calc(100dvh - (${lastTop} + var(--card-h) + ${AFTER_SPACE + AFTER_H}px)))`
+          : "6vh",
+      }}
+    >
       {/* Snap anchors, one per card, at the scroll position where that card
           has just settled into its slot. The scroller uses proximity snapping,
           so a scroll that ends near a card lands it cleanly; one that ends
@@ -173,7 +206,7 @@ export default function CardStack({
           className="pointer-events-none absolute left-0 h-px w-px snap-start"
           style={{
             top: `calc(${i} * (var(--card-h) + ${GAP}))`,
-            scrollMarginTop: `calc(${slotTop(i, n)})`,
+            scrollMarginTop: `calc(${slotTop(i, n, reserve)})`,
           }}
         />
       ))}
@@ -182,7 +215,7 @@ export default function CardStack({
           <div
             data-stack-item
             className="sticky"
-            style={{ top: `calc(${slotTop(i, n)})`, zIndex: i + 1 }}
+            style={{ top: `calc(${slotTop(i, n, reserve)})`, zIndex: i + 1 }}
           >
             <div className="h-[var(--card-h)] origin-top will-change-transform">{child}</div>
           </div>
@@ -194,7 +227,11 @@ export default function CardStack({
         </Fragment>
       ))}
       {after && (
-        <div ref={afterRef} className="relative" style={{ marginTop: GAP }}>
+        <div
+          ref={afterRef}
+          className="relative flex flex-col items-center justify-center"
+          style={{ marginTop: AFTER_SPACE, height: AFTER_H, opacity: reduce ? 1 : 0 }}
+        >
           {after}
         </div>
       )}
