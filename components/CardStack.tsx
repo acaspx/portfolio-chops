@@ -24,7 +24,12 @@ import { useReducedMotion } from "motion/react";
 const TOP = 64; // first slot, px from the top of the scroll container
 const PEEK = 10; // each card sits this much lower than the one before
 const MAX_PEEK = 4; // past this many, slots stop stepping down
-const GAP = "18vh"; // scroll travel between one card settling and the next
+const GAP = "8vh"; // scroll travel between one card settling and the next
+// Every card is the same height. A sticky deck only reads cleanly when each
+// card fully covers the one beneath it; mixed heights leave the bottom of a
+// taller card exposed under a shorter one. Taller share of the screen on
+// phones, where the column is narrow and text wraps more.
+const CARD_H = "[--card-h:min(84vh,600px)] sm:[--card-h:min(70vh,560px)]";
 
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
@@ -75,11 +80,11 @@ export default function CardStack({
         let depth = 0;
         for (let j = i + 1; j < slots.length; j++) depth += clamp(1 - away[j] / h);
         depth = Math.min(depth, 3);
-        if (face) face.style.transform = `scale(${1 - 0.04 * depth})`;
+        if (face) face.style.transform = `scale(${1 - 0.035 * depth})`;
         if (dim) dim.style.opacity = String(0.07 * depth);
 
         // text resolves over the last ~45% of a screen of travel into the slot
-        const e = 1 - Math.pow(1 - clamp(1 - away[i] / (vh * 0.45)), 3);
+        const e = 1 - Math.pow(1 - clamp(1 - away[i] / (vh * 0.4)), 3);
         texts.forEach((t) => {
           t.style.opacity = String(e);
           t.style.transform = `translateY(${(1 - e) * 10}px)`;
@@ -110,7 +115,22 @@ export default function CardStack({
   return (
     // bottom padding holds the finished deck in place for a beat before it
     // releases and scrolls away, uncovering whatever follows it
-    <div ref={wrapRef} className="relative pb-[26vh]">
+    <div ref={wrapRef} className={`relative pb-[22vh] ${CARD_H}`}>
+      {/* Snap anchors, one per card, at the scroll position where that card
+          has just settled into its slot. The scroller uses proximity snapping,
+          so a scroll that ends near a card lands it cleanly; one that ends
+          elsewhere is left alone. */}
+      {items.map((_, i) => (
+        <span
+          key={`snap-${i}`}
+          aria-hidden
+          className="pointer-events-none absolute left-0 h-px w-px snap-start"
+          style={{
+            top: `calc(${i} * (var(--card-h) + ${GAP}))`,
+            scrollMarginTop: stackSlotTop(i),
+          }}
+        />
+      ))}
       {items.map((child, i) => (
         <div
           key={i}
@@ -122,7 +142,7 @@ export default function CardStack({
             marginBottom: i < items.length - 1 ? GAP : 0,
           }}
         >
-          <div className="origin-top will-change-transform">{child}</div>
+          <div className="h-[var(--card-h)] origin-top will-change-transform">{child}</div>
         </div>
       ))}
     </div>

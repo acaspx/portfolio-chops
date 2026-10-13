@@ -30,42 +30,52 @@ type PanelProps = {
   children: ReactNode;
   className?: string;
   image?: { src: string; alt: string };
+  /** Pinned to the bottom of the card, below the body. */
+  footer?: ReactNode;
 };
 
 /**
- * One card in the About deck. Solid, not frosted: stacked glass would show
- * every card beneath through the one on top. Text carries data-stack-text so it
- * fades in as the card settles; data-stack-dim darkens it as it gets covered.
- * Images are capped so every card fits on screen before the next slides over.
+ * One card in the About deck. Every card fills the same fixed height set by
+ * CardStack, laid out the same way: kicker and title at the top, image in the
+ * middle taking whatever room the text leaves, body text at the bottom. The
+ * image is the part that gives on small screens, so no card overflows and every
+ * card in the deck is the same shape.
+ *
+ * Solid, not frosted: stacked glass would show the card beneath through it.
+ * Text carries data-stack-text so it fades in as the card settles;
+ * data-stack-dim darkens the card as the next one covers it.
  */
-function Panel({ kicker, title, children, className = "", image }: PanelProps) {
+function Panel({ kicker, title, children, className = "", image, footer }: PanelProps) {
   return (
     <section
       data-gen="card"
-      className={`relative overflow-hidden rounded-2xl border border-white/80 bg-[#fbfaf7] p-6 shadow-[0_-10px_28px_-14px_rgba(20,20,15,0.28),0_14px_34px_-16px_rgba(20,20,15,0.22)] sm:p-7 ${className}`}
+      className={`relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/80 bg-[#fbfaf7] p-6 shadow-[0_-10px_28px_-14px_rgba(20,20,15,0.28),0_14px_34px_-16px_rgba(20,20,15,0.22)] sm:p-7 ${className}`}
     >
-      {kicker && (
-        <p data-stack-text className="font-mono text-[11px] uppercase tracking-widest text-muted">
-          {kicker}
-        </p>
-      )}
-      {title && (
-        <p data-stack-text className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">
-          {title}
-        </p>
-      )}
+      <div data-stack-text className="shrink-0">
+        {kicker && (
+          <p className="font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</p>
+        )}
+        {title && (
+          <p className="mt-1 font-serif text-2xl italic tracking-tight text-ink/85">{title}</p>
+        )}
+      </div>
       {image && (
-        <div className={`${kicker || title ? "mt-4" : ""} overflow-hidden rounded-xl border border-black/5`}>
+        <div className="mt-4 min-h-24 flex-1 overflow-hidden rounded-xl border border-black/5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} className="block max-h-[30vh] w-full object-cover" />
+          <img src={image.src} alt={image.alt} className="block h-full w-full object-cover" />
         </div>
       )}
       <div
         data-stack-text
-        className={`${kicker || title || image ? "mt-4" : ""} space-y-4 text-[15px] leading-relaxed text-muted`}
+        className="mt-4 shrink-0 space-y-3 text-[15px] leading-relaxed text-muted"
       >
         {children}
       </div>
+      {footer && (
+        <div data-stack-text className="mt-auto shrink-0 pt-5">
+          {footer}
+        </div>
+      )}
       <div aria-hidden data-stack-dim className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
     </section>
   );
@@ -113,7 +123,7 @@ export default function AboutModal({
           transition={{ duration: 0.3 }}
           ref={scrollRef}
           data-gen-scroll
-          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-3xl"
+          className="fixed inset-0 z-50 snap-y snap-proximity overflow-y-auto backdrop-blur-3xl"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
@@ -144,18 +154,33 @@ export default function AboutModal({
                   {/* Crisp lead photo */}
                   <div
                     data-gen="card"
-                    className="relative overflow-hidden rounded-2xl border border-white/80 shadow-[0_14px_40px_-14px_rgba(20,20,15,0.3)]"
+                    className="relative h-full overflow-hidden rounded-2xl border border-white/80 shadow-[0_14px_40px_-14px_rgba(20,20,15,0.3)]"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/about-photo-bw.jpg"
                       alt="Anton Castro"
-                      className="block max-h-[60vh] w-full object-cover object-top"
+                      className="block h-full w-full object-cover object-[center_22%]"
                     />
                     <div aria-hidden data-stack-dim className="pointer-events-none absolute inset-0 bg-ink opacity-0" />
                   </div>
 
-                  <Panel kicker="Who" title="I am">
+                  <Panel
+                    kicker="Who"
+                    title="I am"
+                    footer={
+                      <>
+                        <p className="font-mono text-[11px] uppercase tracking-widest text-muted">
+                          Worked with
+                        </p>
+                        <div className="mt-2.5 grid grid-cols-2 gap-x-6 gap-y-1 text-[14px] leading-relaxed text-ink/80">
+                          {WORKED_WITH.flat().map((name) => (
+                            <span key={name}>{name}</span>
+                          ))}
+                        </div>
+                      </>
+                    }
+                  >
                     <p>
                       Bienvenue! I&apos;m Anton, a passionate designer, dialed in on making
                       technology look and feel great, no matter the context.
@@ -165,14 +190,6 @@ export default function AboutModal({
                       intelligence, the company&apos;s first AI product. Before that: founding
                       designer twice, and AI products at Augmedix, Rocket, and Intuit.
                     </p>
-                  </Panel>
-
-                  <Panel kicker="Worked with" className="!pb-6">
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-[15px] leading-relaxed text-ink/80">
-                      {WORKED_WITH.flat().map((name) => (
-                        <span key={name}>{name}</span>
-                      ))}
-                    </div>
                   </Panel>
 
                   <Panel
