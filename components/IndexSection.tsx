@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -16,28 +16,142 @@ export type IndexItem = {
   /** Shown beside the column on hover. Omit for rows with nothing to show. */
   img?: string;
   alt?: string;
+  /** Below lg: one line under the title, and a swipeable row of images. */
+  desc?: string;
+  gallery?: { src: string; alt: string }[];
 };
+
+/** The item's link, whichever kind it is: gated case, page, external, or none. */
+function ItemLink({
+  it,
+  className,
+  children,
+}: {
+  it: IndexItem;
+  className: string;
+  children: ReactNode;
+}) {
+  if (it.locked && it.href)
+    return (
+      <CaseGateLink
+        href={it.href}
+        locked
+        ariaLabel={`Unlock the ${it.label} case study`}
+        className={`${className} text-left`}
+      >
+        {children}
+      </CaseGateLink>
+    );
+  if (it.href)
+    return (
+      <Link
+        href={it.href}
+        {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className={className}
+      >
+        {children}
+      </Link>
+    );
+  return <div className={className}>{children}</div>;
+}
+
+/**
+ * A horizontal row of large image cards that bleeds to the screen edge, with a
+ * thin progress track underneath standing in for the hidden native scrollbar
+ * (which iOS only shows mid-scroll, so nobody would know there is more).
+ */
+function Gallery({ images, label }: { images: { src: string; alt: string }[]; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [bar, setBar] = useState({ w: 1, x: 0 });
+  const single = images.length === 1;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || single) return;
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const max = el.scrollWidth - el.clientWidth;
+      const w = Math.min(1, el.clientWidth / el.scrollWidth);
+      setBar({ w, x: max > 0 ? (el.scrollLeft / max) * (1 - w) : 0 });
+    };
+    const on = () => {
+      if (!raf) raf = requestAnimationFrame(measure);
+    };
+    measure();
+    el.addEventListener("scroll", on, { passive: true });
+    const ro = new ResizeObserver(on);
+    ro.observe(el);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      el.removeEventListener("scroll", on);
+    };
+  }, [single]);
+
+  return (
+    <div className="mt-4">
+      <div
+        ref={ref}
+        role={single ? undefined : "region"}
+        aria-label={single ? undefined : `${label} images`}
+        tabIndex={single ? undefined : 0}
+        className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((im) => (
+          <div
+            key={im.src}
+            className={`relative aspect-[16/11] shrink-0 snap-start overflow-hidden rounded-[14px] bg-white ring-1 ring-ink/[0.07] ${
+              single ? "w-full" : "w-[82%]"
+            }`}
+          >
+            <Image
+              src={im.src}
+              alt={im.alt}
+              fill
+              sizes={single ? "100vw" : "82vw"}
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+      {!single && (
+        <div aria-hidden className="mt-3 h-[3px] overflow-hidden rounded-full bg-ink/10">
+          <div
+            className="h-full rounded-full bg-ink/35"
+            style={{ width: `${bar.w * 100}%`, transform: `translateX(${(bar.x / bar.w) * 100}%)` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 /**
  * Dense index section: a quiet label over rows of label-left, meta-right.
  *
- * The hover preview lives in the dead space beside the narrow column rather
- * than inside it, so the list keeps its density and the work is still one
- * gesture away. It is keyboard-reachable too (focus drives it, not just
- * pointer), and it never renders under prefers-reduced-motion or on touch,
- * where there is no hover to trigger it and no room to put it.
+ * At lg and up, the hover preview lives in the dead space beside the narrow
+ * column rather than inside it, so the list keeps its density and the work is
+ * still one gesture away. Keyboard focus drives it too, not just pointer.
+ *
+ * Below lg there is no margin to park a preview in and no hover to trigger it,
+ * so sections whose items carry a gallery switch to a showcase: title, one
+ * line, and a swipeable row of large images per item.
  */
 export default function IndexSection({
   title,
   items,
+  className = "",
 }: {
   title: string;
   items: IndexItem[];
+  className?: string;
 }) {
   const reduce = useReducedMotion();
   const [active, setActive] = useState<number | null>(null);
   const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
   const listRef = useRef<HTMLUListElement>(null);
+  const showcase = items.some((it) => it.gallery?.length);
 
   const shown = active !== null ? items[active] : null;
   const top =
@@ -46,75 +160,53 @@ export default function IndexSection({
       : 0;
 
   return (
-    <section className="mt-12 first:mt-0">
+    <section className={`mt-12 first:mt-0 ${className}`}>
       <h2 className="font-mono text-[11px] uppercase tracking-widest text-muted">{title}</h2>
 
-      <ul ref={listRef} className="relative mt-3">
-        {items.map((it, i) => {
-          const inner = (
-            <>
-              <span className="flex min-w-0 items-center gap-3">
-                {/* Below lg there is no margin for the hover preview (and on
-                    touch, no hover), so the work shows inline as a thumbnail. */}
-                {/* next/image so a 44px thumbnail fetches a ~88px file, not
-                    the full-size screenshot. */}
-                {it.img && (
-                  <Image
-                    src={it.img}
-                    alt=""
-                    width={88}
-                    height={64}
-                    sizes="44px"
-                    className="h-8 w-11 shrink-0 rounded-[4px] object-cover object-top ring-1 ring-ink/[0.08] lg:hidden"
-                  />
-                )}
-                <span className="truncate">{it.label}</span>
-              </span>
+      {showcase && (
+        <div className="mt-5 space-y-12 lg:hidden">
+          {items.map((it) => (
+            <article key={it.label}>
+              <ItemLink
+                it={it}
+                className="inline-block text-[18px] tracking-tight underline decoration-ink/20 decoration-1 underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
+              >
+                {it.label}
+              </ItemLink>
+              {it.desc && (
+                <p className="mt-2 text-[15px] leading-relaxed text-muted">{it.desc}</p>
+              )}
+              {it.gallery && <Gallery images={it.gallery} label={it.label} />}
+            </article>
+          ))}
+        </div>
+      )}
+
+      <ul ref={listRef} className={`relative mt-3 ${showcase ? "hidden lg:block" : ""}`}>
+        {items.map((it, i) => (
+          <li
+            key={it.label}
+            ref={(el) => {
+              rowRefs.current[i] = el;
+            }}
+            onMouseEnter={() => setActive(i)}
+            onMouseLeave={() => setActive(null)}
+            onFocus={() => setActive(i)}
+            onBlur={() => setActive(null)}
+          >
+            <ItemLink
+              it={it}
+              className={`flex w-full items-baseline justify-between gap-2 py-[7px] text-[15px] transition-colors ${
+                it.href ? "hover:text-accent" : ""
+              }`}
+            >
+              <span className="truncate">{it.label}</span>
               <span className="shrink-0 pl-6 text-right font-mono text-[12px] text-muted">
                 {it.meta}
               </span>
-            </>
-          );
-          // Baseline-aligned like a text index; rows carrying a thumbnail
-          // centre instead while it shows, so label and meta sit mid-image.
-          const rowCls = `flex items-baseline justify-between gap-2 py-[7px] text-[15px] transition-colors${
-            it.img ? " max-lg:items-center" : ""
-          }`;
-
-          return (
-            <li
-              key={it.label}
-              ref={(el) => {
-                rowRefs.current[i] = el;
-              }}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-              onFocus={() => setActive(i)}
-              onBlur={() => setActive(null)}
-            >
-              {it.locked && it.href ? (
-                <CaseGateLink
-                  href={it.href}
-                  locked
-                  ariaLabel={`Unlock the ${it.label} case study`}
-                  className={`${rowCls} w-full text-left hover:text-accent`}
-                >
-                  {inner}
-                </CaseGateLink>
-              ) : it.href ? (
-                <Link
-                  href={it.href}
-                  {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={`${rowCls} hover:text-accent`}
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <div className={rowCls}>{inner}</div>
-              )}
-            </li>
-          );
-        })}
+            </ItemLink>
+          </li>
+        ))}
 
         {/* Preview, parked in the margin beside the column. */}
         <AnimatePresence>
