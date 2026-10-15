@@ -29,6 +29,11 @@ import { useReducedMotion } from "motion/react";
 const PEEK = 10; // each card sits this much lower than the one before
 const MAX_PEEK = 4; // past this many, slots stop stepping down
 const GAP = "8vh"; // scroll travel between one card settling and the next
+// At rest the second card already rides up over the bottom of the first, so
+// it's obvious there's a deck to scroll through. Only the first pair overlaps:
+// the first card is a photo, so this hides no text. Later cards keep GAP, or
+// each would cover the bottom of the one you're reading.
+const OVERLAP = 48;
 const MIN_TOP = 20; // the deck never rises closer than this to the top edge
 const AFTER_GAP = 20; // the deck yields if `after` comes closer than this (less than AFTER_SPACE, so it holds still at rest)
 // The band under the deck reserved for `after` (the sign-off). The deck is
@@ -153,7 +158,11 @@ export default function CardStack({
         if (dim) dim.style.opacity = String(0.07 * depth);
 
         // text resolves over the last ~40% of a screen of travel into the slot
-        const e = 1 - Math.pow(1 - clamp(1 - away[i] / (vh * 0.4)), 3);
+        // text resolves as the card comes on screen, over the first ~third
+        // of a screen of it showing, so it's readable on the way up rather
+        // than arriving blank and filling in only once it lands
+        const showing = vh - (rects[i].top - scTop);
+        const e = 1 - Math.pow(1 - clamp(showing / (vh * 0.35)), 3);
         texts.forEach((t) => {
           t.style.opacity = String(e);
           t.style.transform = `translateY(${(1 - e) * 10}px)`;
@@ -219,7 +228,12 @@ export default function CardStack({
           aria-hidden
           className="pointer-events-none absolute left-0 h-px w-px snap-start"
           style={{
-            top: `calc(${i} * (var(--card-h) + ${GAP}))`,
+            // where card i sits in the flow: the first pair overlaps, the rest
+            // are one card plus GAP apart
+            top:
+              i === 0
+                ? "0px"
+                : `calc(var(--card-h) - ${OVERLAP}px + ${i - 1} * (var(--card-h) + ${GAP}))`,
             scrollMarginTop: `calc(${slotTop(i, n, reserve)})`,
           }}
         />
@@ -229,7 +243,11 @@ export default function CardStack({
           <div
             data-stack-item
             className="sticky"
-            style={{ top: `calc(${slotTop(i, n, reserve)})`, zIndex: i + 1 }}
+            style={{
+              top: `calc(${slotTop(i, n, reserve)})`,
+              zIndex: i + 1,
+              marginTop: i === 1 ? -OVERLAP : undefined,
+            }}
           >
             <div className="h-[var(--card-h)] origin-top will-change-transform">{child}</div>
           </div>
@@ -237,7 +255,7 @@ export default function CardStack({
               box's margin must stay inside its container, so a card carrying
               the gap as margin-bottom gets shoved upward at the end of the
               scroll on short screens, past the top edge. */}
-          {i < n - 1 && <div aria-hidden style={{ height: GAP }} />}
+          {i > 0 && i < n - 1 && <div aria-hidden style={{ height: GAP }} />}
         </Fragment>
       ))}
       {after && (

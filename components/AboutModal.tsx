@@ -18,11 +18,17 @@ const signature = Allura({ weight: "400", subsets: ["latin"], display: "swap" })
  * treatment (mono kicker, serif italic title) as the rest of the site.
  */
 
+// Logos live in /public/logos as square 160px tiles, each on its own brand
+// background, so the grid reads as a set of app-icon-like boxes.
 const WORKED_WITH = [
-  ["State Affairs", "Augmedix"],
-  ["Custoria Labs", "Rocket"],
-  ["Intuit", "Anti-Defamation League"],
-  ["Electronic Arts", "U.S. Navy"],
+  { slug: "state-affairs", name: "State Affairs" },
+  { slug: "custoria", name: "Custoria Labs" },
+  { slug: "augmedix", name: "Augmedix" },
+  { slug: "rocket", name: "Rocket" },
+  { slug: "intuit", name: "Intuit" },
+  { slug: "adl", name: "Anti-Defamation League" },
+  { slug: "ea", name: "Electronic Arts" },
+  { slug: "navy", name: "U.S. Navy" },
 ];
 
 // The deck column is max-w-lg (512px) less padding; full width minus gutters on phones.
@@ -202,11 +208,23 @@ export default function AboutModal({
                         <p className="font-mono text-[11px] uppercase tracking-widest text-muted">
                           Worked with
                         </p>
-                        <div className="mt-2.5 grid grid-cols-2 gap-x-6 gap-y-1 text-[14px] leading-relaxed text-ink/80">
-                          {WORKED_WITH.flat().map((name) => (
-                            <span key={name}>{name}</span>
+                        <ul className="mt-3 grid grid-cols-4 gap-2.5">
+                          {WORKED_WITH.map((c) => (
+                            <li
+                              key={c.slug}
+                              title={c.name}
+                              className="relative aspect-square overflow-hidden rounded-xl border border-black/[0.07] bg-white shadow-[0_1px_2px_rgba(22,20,15,0.06)]"
+                            >
+                              <Image
+                                src={`/logos/${c.slug}.png`}
+                                alt={c.name}
+                                fill
+                                sizes="80px"
+                                className="object-cover"
+                              />
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </>
                     }
                   >
