@@ -373,6 +373,19 @@ class Setter:
                     self._emit(tx0, ty0, tx1, my, th_[0], gap, jit * 0.7)
                     self._emit(tx0, my, tx1, ty1, bh[0], gap, jit * 0.7)
 
+    def dashes(self, x0, y0, x1, y1, cream, navy, gap=2.0):
+        """One course of alternating cream dashes and navy spacers."""
+        x = x0 - self.rng.uniform(0, navy)
+        jit = (y1 - y0) * 0.06
+        c, n = KEY_IDX["cream"], KEY_IDX["navy"]
+        while x < x1:
+            for length, idx in ((navy, n), (cream, c)):
+                ln = length * self.rng.uniform(0.9, 1.1)
+                tx0, tx1 = max(x, x0), min(x + ln, x1)
+                if tx1 - tx0 > 2:
+                    self._emit(tx0, y0, tx1, y1, idx, gap, jit)
+                x += ln
+
     # ------------------------------------------------------------ output --
     def colour(self, key, v):
         h, l, s = self.variants[key][v]
@@ -428,6 +441,100 @@ class Setter:
         return img.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
 
 
+
+# ------------------------------------------------------------ ornament --
+def _leaf(cx, cy, w, h, down, lean):
+    """
+    A lobed vine leaf filling the bowl of one wave: a broad body, three round
+    lobes on its outer edge, and a pointed tip that leans along the vine.
+    `down` hangs it below the stem; `lean` (+1/-1) sets which way it points.
+    """
+    from shapely.geometry import Point
+    s = 1 if down else -1
+    circ = lambda x, y, r: Point(x, y).buffer(r, 16)
+    leaf = affinity.scale(circ(cx, cy, 1), w * 0.80, h * 0.36)
+    # lobes along the outer edge, the middle one fullest
+    for fx, fy, r in ((-0.52, 0.10, 0.36), (0.0, 0.22, 0.44), (0.50, 0.10, 0.34)):
+        leaf = leaf.union(circ(cx + fx * w, cy + s * fy * h, r * h))
+    # tip: a tapering point out past the leading lobe
+    leaf = leaf.union(Polygon([(cx + lean * w * 0.55, cy - s * h * 0.18),
+                               (cx + lean * w * 1.22, cy - s * h * 0.30),
+                               (cx + lean * w * 0.70, cy + s * h * 0.30)]))
+    # lean the whole leaf with the vine
+    return affinity.rotate(leaf, -lean * s * 12, origin=(cx, cy))
+
+
+def vine_frieze(x0, x1, y0, y1):
+    """Scrolling stem with alternating lobed leaves, clipped to the zone."""
+    from shapely.geometry import LineString, Point
+    zone = box(x0, y0, x1, y1)
+    hgt = y1 - y0
+    yc = (y0 + y1) / 2
+    amp = hgt * 0.38
+    period = hgt * 3.2
+    n = max(2, round((x1 - x0 - 2 * 34) / period))
+    period = (x1 - x0 - 2 * 34) / n
+    sx0, sx1 = x0 + 34, x1 - 34
+    ys = lambda x: yc - amp * math.cos(2 * math.pi * (x - sx0) / period)
+    stem = LineString([(x, ys(x)) for x in np.arange(sx0, sx1 + 0.1, 2)]).buffer(3.2, cap_style=1)
+    # curled ends: an open ring where the stem starts and stops
+    for ex, dirn in ((sx0, -1), (sx1, 1)):
+        ey = ys(ex)
+        c = Point(ex + dirn * 12, ey + 10)
+        ring = c.buffer(13).difference(c.buffer(6.2))
+        stem = stem.union(ring.difference(box(ex - dirn * 40, ey + 10, ex, ey + 40) if dirn < 0 else box(ex, ey + 10, ex + 40, ey + 40)))
+        stem = stem.union(Point(ex + dirn * 12, ey + 10).buffer(4.2))
+    clear = stem.buffer(4.4)
+    leaves = Polygon()
+    # crests sit at even multiples of period/2 (leaf hangs below the stem),
+    # troughs at odd ones (leaf stands above it); tips lean alternately
+    for k in range(1, int(n * 2)):
+        xm = sx0 + k * period / 2
+        ym = ys(xm)
+        down = k % 2 == 0
+        cy = (ym + y1 - 5) / 2 if down else (ym + y0 + 5) / 2
+        lean = 1 if k % 4 in (0, 1) else -1
+        leaf = _leaf(xm - lean * 4, cy, period * 0.23, hgt * 0.50, down, lean)
+        leaves = leaves.union(leaf.difference(clear))
+    return stem.union(leaves).intersection(zone.buffer(-2))
+
+
+def _bell(cx, top, w, h):
+    """A bellflower hanging mouth-down: domed top, flared, scalloped skirt."""
+    pts = []
+    for t in np.linspace(0, 1, 16):
+        # half-width grows from a narrow dome to a flared mouth
+        hw = w * (0.40 + 0.12 * t + 0.48 * t ** 4)
+        pts.append((cx + hw, top + h * t))
+    right = pts
+    left = [(2 * cx - x, y) for x, y in reversed(pts)]
+    bell = Polygon([(cx, top - w * 0.12)] + right + left)
+    # three points on the skirt
+    mouth = top + h
+    for f in (-0.62, 0.0, 0.62):
+        bell = bell.union(Polygon([(cx + f * w - w * 0.2, mouth - 1), (cx + f * w + w * 0.2, mouth - 1),
+                                   (cx + f * w, mouth + h * 0.16)]))
+    return bell
+
+
+def bell_chain(x0, x1, y0, y1):
+    """An oval bud, then bellflowers hung one below the next on a thin stalk."""
+    from shapely.geometry import Point
+    cx = (x0 + x1) / 2
+    zone = box(x0, y0, x1, y1)
+    w = (x1 - x0) * 0.33
+    bud_h = w * 0.95
+    geom = affinity.scale(Point(cx, y0 + 10 + bud_h).buffer(1, 24), w * 0.62, bud_h)
+    y = y0 + 10 + 2 * bud_h + 9
+    bell_h = w * 1.55
+    step = bell_h + w * 0.55
+    while y + bell_h + w * 0.3 < y1 - 6:
+        geom = geom.union(box(cx - 2.2, y - 10, cx + 2.2, y + 6))   # stalk
+        geom = geom.union(_bell(cx, y, w, bell_h))
+        y += step
+    return geom.intersection(zone.buffer(-3))
+
+
 # ------------------------------------------------------------------ build --
 def build(lines, css_width, seed, name):
     rng = random.Random(seed)
@@ -474,33 +581,21 @@ def build(lines, css_width, seed, name):
     inner_x0, inner_x1 = DARK + SAGE, W - DARK - SAGE
     inner_y0, inner_y1 = DARK + SAGE, H - DARK - SAGE
 
-    # frieze: navy ground, dotted top row, vine with alternating leaves
+    # frieze: navy ground; a dashed course along its top and bottom edges;
+    # between them a slender scrolling vine with a lobed leaf tucked under
+    # every crest and over every trough, as on the Wall St tablet. The
+    # ornament is vector geometry and is laid with lay_cut, so every leaf and
+    # the stem get the same clean cut-tile outline as the letters.
     fz0, fz1 = inner_y0, inner_y0 + FRIEZE
     design.rect(inner_x0, fz0, inner_x1, fz1, "navy")
-    period = 150
-    yc = (fz0 + fz1) / 2 + 9
-    amp = 15
-    pts = [
-        (x, yc + amp * math.sin(2 * math.pi * (x - inner_x0) / period))
-        for x in range(int(inner_x0), int(inner_x1) + 1, 3)
-    ]
-    design.line(pts, "cream", 13)
-    for k, x in enumerate(np.arange(inner_x0 + period / 4, inner_x1, period / 2)):
-        up = k % 2 == 0
-        y = yc + amp * math.sin(2 * math.pi * (x - inner_x0) / period)
-        # leaf: a pointed oval angled off the crest, plus a small bud
-        dy = -1 if up else 1
-        # three-lobed leaf sprung off the crest, like the Wall St scroll
-        cx, cy = x + 6, y + dy * 24
-        for ox, oy, r in ((-14, 4, 11), (14, 4, 11), (0, -6, 13)):
-            design.ellipse([cx + ox - r, cy + dy * oy - r, cx + ox + r, cy + dy * oy + r], "cream")
-        design.line([(x, y), (cx, cy)], "cream", 9)
-        # a curled tendril on the far side
-        tx, ty = x - 40, y - dy * 14
-        design.ellipse([tx - 8, ty - 8, tx + 8, ty + 8], "cream")
-    # dotted row along the top of the frieze (single cream tesserae)
-    for x in np.arange(inner_x0 + 6, inner_x1 - 6, 22):
-        design.rect(x, fz0 + 8, x + 10, fz0 + 18, "cream")
+    DASH = 12
+    oy0, oy1 = fz0 + DASH, fz1 - DASH          # ornament zone between the dashes
+    frieze_orn = vine_frieze(inner_x0, inner_x1, oy0, oy1)
+
+    # pilasters: an oval bud, then a hanging chain of bellflowers
+    pil_orn = []
+    for px0 in (inner_x0, fx1 + KEY):
+        pil_orn.append(bell_chain(px0, px0 + PIL_W, fz1, fy1 + KEY))
 
     # sage keyline frame around the name field
     design.rect(fx0 - KEY, fy0 - KEY, fx1 + KEY, fy1 + KEY, "sage")
@@ -577,10 +672,13 @@ def build(lines, css_width, seed, name):
     s.lay(DARK, DARK + SAGE, DARK + SAGE, H - DARK - SAGE, SAGE * 1.6, SAGE, bond=False)
     s.lay(W - DARK - SAGE, DARK + SAGE, W - DARK, H - DARK - SAGE, SAGE * 1.6, SAGE, bond=False)
 
-    # frieze and pilasters: finer tesserae for the ornament
-    s.lay(inner_x0, fz0, inner_x1, fz1, 9, 11.5)
-    s.lay(inner_x0, fz1, inner_x0 + PIL_W, fy1 + KEY, 9, 11.5)
-    s.lay(fx1 + KEY, fz1, inner_x1, fy1 + KEY, 9, 11.5)
+    # frieze: dashed courses top and bottom, ornament between, all finer tile
+    s.dashes(inner_x0, fz0, inner_x1, oy0, cream=17, navy=8)
+    s.dashes(inner_x0, oy1, inner_x1, fz1, cream=17, navy=8)
+    s.lay_cut(inner_x0, oy0, inner_x1, oy1, 7.6, 9.5, frieze_orn, ground="navy", figure="cream", gap=2.0)
+    # pilasters
+    for (px0, orn) in zip((inner_x0, fx1 + KEY), pil_orn):
+        s.lay_cut(px0, fz1, px0 + PIL_W, fy1 + KEY, 7.6, 9.5, orn, ground="navy", figure="cream", gap=2.0)
 
     # keyline: one course of sage around the field
     s.lay(fx0 - KEY, fy0 - KEY, fx1 + KEY, fy0, KEY, KEY * 1.5)

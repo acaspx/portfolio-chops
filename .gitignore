@@ -33,3 +33,4 @@ components/CustoriaBento.tsx
 
 # mosaic generator previews
 scripts/out/
+__pycache__/
