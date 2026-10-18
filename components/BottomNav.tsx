@@ -52,19 +52,36 @@ export default function BottomNav() {
 
   return (
     <>
-      {/* Scrim the pill sits on. It has to reach FULL paper well before the
-          pill's top edge, not just at the viewport floor: on a case study the
-          content under here is images and dense body text, and a half-opacity
-          wash leaves them legible straight through the nav, which is what
-          made it read as floating rather than docked. */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-44"
-        style={{
-          background:
-            "linear-gradient(to top, var(--color-paper) 0%, var(--color-paper) 42%, color-mix(in srgb, var(--color-paper) 62%, transparent) 68%, transparent 100%)",
-        }}
-      />
+      {/* Progressive blur under the pill instead of an opaque wash, so what's
+          coming next stays visible as you scroll, just softened. Three
+          stacked layers, each blurring a little more and masked to a shorter
+          band, ramp the blur up smoothly toward the bottom edge; a faint
+          paper tint keeps the pill's edge legible over busy images. */}
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-36">
+        {[
+          { blur: 2, from: 0, to: 100 },
+          { blur: 6, from: 0, to: 70 },
+          { blur: 12, from: 0, to: 40 },
+        ].map((l) => (
+          <div
+            key={l.blur}
+            className="absolute inset-0"
+            style={{
+              backdropFilter: `blur(${l.blur}px)`,
+              WebkitBackdropFilter: `blur(${l.blur}px)`,
+              maskImage: `linear-gradient(to top, black ${l.from}%, transparent ${l.to}%)`,
+              WebkitMaskImage: `linear-gradient(to top, black ${l.from}%, transparent ${l.to}%)`,
+            }}
+          />
+        ))}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, color-mix(in srgb, var(--color-paper) 45%, transparent) 0%, color-mix(in srgb, var(--color-paper) 20%, transparent) 45%, transparent 100%)",
+          }}
+        />
+      </div>
 
       <nav
         aria-label="Main"
