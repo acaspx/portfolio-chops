@@ -13,8 +13,11 @@ import { useEffect, useRef } from "react";
  *     travel with it at sub-pixel positions: they glide rather than blink.
  *   - Between two ramp colours each pixel picks one or the other with a 4x4
  *     Bayer threshold, which gives the checkerboard and sparse-dot textures.
- *   - A slow sine offsets the ramp per row and column, so the boundaries
- *     between colour zones undulate.
+ *   - Each column rides a travelling sine wave, so the pixels bob up and
+ *     down smoothly as they drift; the canvas clips them at its top and
+ *     bottom, which stay clean straight lines.
+ *   - The two ends dissolve: pixels thin out and fade over the last EDGE px,
+ *     with a soft mask on top, so the strip ends in a ragged pixel blur.
  *   - A few pixels per zone take a highlight colour (cyan in the blues, white
  *     in the black) for sparkle, picked by a stable hash so they don't flicker.
  *
@@ -25,6 +28,10 @@ import { useEffect, useRef } from "react";
 const CELL = 20 / 7; // px per pixel: 7 rows in the 20px strip, as fine as the reference
 const SPEED = 16; // px per second, right to left
 const PERIOD = 640; // px per full colour cycle
+const WAVE_AMP = 3.2; // px each column swings up and down
+const WAVE_LEN = 150; // px between wave crests
+const WAVE_SPEED = 1.1; // radians per second
+const EDGE = 36; // px over which each end dissolves
 
 type Stop = [number, string];
 // The ramp, read off the reference strip. Periodic: the last stop wraps to the first.
@@ -102,21 +109,37 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
       for (let c = 0; c < cols; c++) {
         const gx = first + c; // pixel's fixed column in pattern space
         const x = c * CELL - shift;
-        for (let r = 0; r < rows; r++) {
-          // slow wave: nudges the ramp by row and column so zone edges undulate
-          const wave =
-            0.03 * Math.sin((gx * CELL) / 70 + r * 0.9 - t * 0.7) +
-            0.015 * Math.sin((gx * CELL) / 23 - t * 1.3);
-          const { k, n, f } = locate((gx * CELL) / PERIOD + wave);
-          const pick = f > BAYER[r % 4][((gx % 4) + 4) % 4] ? n : k;
+        // Swell: each column rides a travelling sine, so the pixels bob up and
+        // down smoothly as they drift left. The canvas edge clips them, which
+        // keeps the strip's top and bottom as clean straight lines.
+        const px = gx * CELL;
+        const dy =
+          WAVE_AMP * Math.sin((2 * Math.PI * px) / WAVE_LEN - t * WAVE_SPEED) +
+          WAVE_AMP * 0.35 * Math.sin((2 * Math.PI * px) / (WAVE_LEN * 0.43) - t * WAVE_SPEED * 1.6);
+        const lift = Math.floor(dy / CELL); // whole rows the column has risen
+        const sub = dy - lift * CELL;
+        // Ends: within EDGE px of either end, pixels thin out and fade. A
+        // pixel drops once its own stable hash falls under how far into the
+        // end it is, so the ends read as a ragged, pixelated dissolve.
+        const edge = Math.min(x + CELL / 2, w - x - CELL / 2) / EDGE;
+        const keep = Math.min(1, Math.max(0, edge));
+        if (keep <= 0) continue;
+        const alpha = keep < 1 ? 0.35 + 0.65 * keep * keep * (3 - 2 * keep) : 1;
+        ctx.globalAlpha = alpha;
+        for (let r = -1; r <= rows; r++) {
+          const pr = r - lift; // pattern row this cell shows
+          if (keep < 1 && hash(gx * 7 + 3, pr) > keep) continue;
+          const { k, n, f } = locate(px / PERIOD);
+          const pick = f > BAYER[((pr % 4) + 4) % 4][((gx % 4) + 4) % 4] ? n : k;
           let color = STOPS[pick][1];
           const spark = SPARK[pick];
-          if (spark && hash(gx, r) < 0.07) color = spark;
+          if (spark && hash(gx, pr) < 0.07) color = spark;
           ctx.fillStyle = color;
           // a hair of overlap so sub-pixel positions never leave a seam between pixels
-          ctx.fillRect(x, r * CELL, CELL + 0.5, CELL + 0.5);
+          ctx.fillRect(x, r * CELL + sub, CELL + 0.5, CELL + 0.5);
         }
       }
+      ctx.globalAlpha = 1;
     };
 
     resize();
@@ -154,6 +177,11 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
       ref={ref}
       aria-hidden
       className={`block h-5 w-full [image-rendering:pixelated] ${className}`}
+      // soft falloff at the two ends only; top and bottom stay crisp
+      style={{
+        maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+        WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+      }}
     />
   );
 }
