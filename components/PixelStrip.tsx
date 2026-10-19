@@ -3,8 +3,9 @@
 import { useEffect, useRef } from "react";
 
 /**
- * A 20px pixel-dither strip: blue into green, a black core flecked with
- * light, green and blue again, then magenta dissolving into white. It drifts
+ * A 20px pixel-dither strip in an iridescent halftone palette: black into
+ * silver, coral, deep blue, periwinkle and cyan, then purple and coral back
+ * to silver and black. It drifts
  * right to left and its colour boundaries slowly wave.
  *
  * How it's drawn:
@@ -18,8 +19,8 @@ import { useEffect, useRef } from "react";
  *     bottom, which stay clean straight lines.
  *   - The two ends dissolve: pixels thin out and fade over the last EDGE px,
  *     with a soft mask on top, so the strip ends in a ragged pixel blur.
- *   - A few pixels per zone take a highlight colour (cyan in the blues, white
- *     in the black) for sparkle, picked by a stable hash so they don't flicker.
+ *   - A few pixels per zone take a highlight colour (white in the silvers, pale
+ *     tints elsewhere) for sparkle, picked by a stable hash so they don't flicker.
  *
  * Canvas, one fillRect per pixel (about 1,300 at this size), paused when off
  * screen. Under prefers-reduced-motion it draws one still frame.
@@ -34,25 +35,29 @@ const WAVE_SPEED = 1.1; // radians per second
 const EDGE = 36; // px over which each end dissolves
 
 type Stop = [number, string];
-// The ramp, read off the reference strip. Periodic: the last stop wraps to the first.
+// The ramp, read off the reference (iamnoman.com, piece w28): an iridescent
+// sweep of silver, coral, deep blue, periwinkle and cyan, dithered against
+// black so it reads as a halftone. Periodic: the last stop wraps to the first.
 const STOPS: Stop[] = [
-  [0.0, "#2f62ff"],
-  [0.1, "#4aa8ff"],
-  [0.2, "#3aa646"],
-  [0.31, "#060806"],
-  [0.43, "#060806"],
-  [0.53, "#3aa646"],
-  [0.63, "#3d7dff"],
-  [0.72, "#2234d8"],
-  [0.81, "#df52f2"],
-  [0.9, "#ffffff"],
-  [0.97, "#ffffff"],
+  [0.0, "#060608"],
+  [0.08, "#c9ccd2"],
+  [0.17, "#e3998d"],
+  [0.25, "#2f44d4"],
+  [0.35, "#6c7cf0"],
+  [0.45, "#6fe0d2"],
+  [0.54, "#93b4ab"],
+  [0.62, "#7a52c2"],
+  [0.7, "#d97a6e"],
+  [0.79, "#e4e6ea"],
+  [0.89, "#060608"],
 ];
 // Sparkle colour per stop (null = none)
 const SPARK: (string | null)[] = [
-  "#8fe3ff", "#c8f1ff", "#9be38f", "#ffffff", "#7ddc6e", "#9be38f",
-  "#8fe3ff", "#6f9bff", "#ffd3ff", "#141414", "#e052f2",
+  "#e4e6ea", "#ffffff", "#ffd2c9", "#6fe0d2", "#b9c2ff", "#d8fff8",
+  "#ffffff", "#c6a8ff", "#ffc4b8", "#ffffff", "#9aa3ff",
 ];
+
+const INK = "#0b0b0e"; // the black between halftone dots
 
 const BAYER = [
   [0, 8, 2, 10],
@@ -124,6 +129,8 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
         const edge = Math.min(x + CELL / 2, w - x - CELL / 2) / EDGE;
         const keep = Math.min(1, Math.max(0, edge));
         if (keep <= 0) continue;
+        const density =
+          0.5 + 0.3 * Math.sin(px / 95 + t * 0.35) + 0.12 * Math.sin(px / 37 - t * 0.6);
         const alpha = keep < 1 ? 0.35 + 0.65 * keep * keep * (3 - 2 * keep) : 1;
         ctx.globalAlpha = alpha;
         for (let r = -1; r <= rows; r++) {
@@ -134,6 +141,10 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
           let color = STOPS[pick][1];
           const spark = SPARK[pick];
           if (spark && hash(gx, pr) < 0.07) color = spark;
+          // Halftone: colour pixels sit on a black field, as in the
+          // reference. Density swells and thins in soft bands along the
+          // strip, so it shimmers like light across an iridescent surface.
+          else if (BAYER[((pr + 2) % 4 + 4) % 4][((gx + 1) % 4 + 4) % 4] > density) color = INK;
           ctx.fillStyle = color;
           // a hair of overlap so sub-pixel positions never leave a seam between pixels
           ctx.fillRect(x, r * CELL + sub, CELL + 0.5, CELL + 0.5);
