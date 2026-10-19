@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react";
 
 /**
  * A 20px halftone strip after Noman Ijaz's w28 (iamnoman.com/?piece=w28):
- * a fine screen of square dots on black, a dim silvery body washed with blue
- * and violet, crossed by thin iridescent streaks (coral into white into cyan
- * and blue) that sweep and undulate as the light drifts right to left.
+ * a screen of square dots on black carrying an iridescent sheen (maroon,
+ * coral, violet, royal blue, periwinkle, cyan) in slanted bands, crossed by
+ * bright streaks (coral into a white core into cyan and blue) that sweep and
+ * undulate as the light drifts right to left.
  *
  * How it's drawn:
  *   - The dot screen is fixed, like a halftone. What moves is the light
@@ -20,11 +21,11 @@ import { useEffect, useRef } from "react";
  *   - Within EDGE px of either end the dots thin out and fade, so the strip
  *     dissolves at its ends; top and bottom stay clean straight edges.
  *
- * Canvas, about 2,600 dots a frame at this size, paused when off screen.
+ * Canvas, about 1,000 dots a frame at this size, paused when off screen.
  * Under prefers-reduced-motion it draws one still frame.
  */
 
-const PITCH = 2; // px between dot centres: a fine screen, 10 rows in 20px
+const PITCH = 3; // px between dot centres: 6 rows in 20px, chunky like the reference
 const SPEED = 14; // px per second the light field drifts right to left
 const EDGE = 36; // px over which each end dissolves
 const GROUND = "#050507";
@@ -37,11 +38,18 @@ const mix = (a: RGB, b: RGB, t: number): RGB => [
   a[2] + (b[2] - a[2]) * t,
 ];
 
-// body tints, read off the reference: silver, a deep blue, a violet, a teal
-const SILVER = hex("#c3c7cf");
-const BLUE = hex("#3a50d6");
-const VIOLET = hex("#6e4fc0");
-const TEAL = hex("#62cbbd");
+// Body: an iridescent ramp read off the reference, periodic so it can loop:
+// maroon, coral, violet, royal blue, periwinkle, cyan, sea-grey, violet.
+const RAMP: RGB[] = [
+  "#5e1b2c", "#b8484a", "#6a3aa6", "#2f3fc6", "#6c76ea", "#5ad4cf", "#6c9c97", "#5a3a9a",
+].map(hex);
+const ramp = (u: number): RGB => {
+  const v = (u - Math.floor(u)) * RAMP.length;
+  const i = Math.floor(v);
+  const f = v - i;
+  // smoothstep between neighbours so the colour bands blend like a sheen
+  return mix(RAMP[i], RAMP[(i + 1) % RAMP.length], f * f * (3 - 2 * f));
+};
 // streak spectrum, from its leading edge through the core to its trailing edge
 const SPECTRUM: [number, RGB][] = [
   [-1, hex("#9e3a3a")],
@@ -67,8 +75,9 @@ const hash = (x: number, y: number) => {
 
 // two streaks with their own rhythm: phase, wavelength, swing, width, run
 const STREAKS = [
-  { phase: 0, len: 120, swing: 0.36, width: 1.5, run: 300, speed: 0.55 },
-  { phase: 2.4, len: 170, swing: 0.3, width: 1.1, run: 420, speed: 0.4 },
+  { phase: 0, len: 150, swing: 0.34, width: 2.6, run: 260, speed: 0.5 },
+  { phase: 2.4, len: 210, swing: 0.3, width: 2.0, run: 340, speed: 0.38 },
+  { phase: 4.1, len: 120, swing: 0.38, width: 1.6, run: 200, speed: 0.62 },
 ];
 
 export default function PixelStrip({ className = "" }: { className?: string }) {
@@ -115,19 +124,10 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
         const keep = Math.min(1, Math.max(0, Math.min(x, w - x) / EDGE));
         if (keep <= 0) continue;
 
-        // body tint: slow, broad washes of blue, violet and teal over silver
-        const wash = 0.5 + 0.5 * Math.sin(X / 150 - t * 0.12);
-        const wash2 = 0.5 + 0.5 * Math.sin(X / 63 + 1.7 + t * 0.09);
-        const tint = mix(
-          mix(SILVER, BLUE, Math.pow(wash, 1.6) * 0.7),
-          wash2 > 0.75 ? TEAL : VIOLET,
-          Math.max(0, wash2 - 0.55) * 0.9,
-        );
-
         // streak centrelines for this column (px from the top)
         const lines = STREAKS.map((s) => ({
           y: h * (0.5 + s.swing * Math.sin((2 * Math.PI * X) / s.len + s.phase - t * s.speed)),
-          on: Math.pow(Math.max(0, Math.sin((2 * Math.PI * X) / s.run + s.phase * 1.3)), 2),
+          on: Math.pow(0.5 + 0.5 * Math.sin((2 * Math.PI * X) / s.run + s.phase * 1.3), 1.4),
           width: s.width,
         }));
 
@@ -135,29 +135,33 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
           const y = oy + (r + 0.5) * PITCH;
           if (keep < 1 && hash(c, r) > keep) continue;
 
-          // body brightness: drifting ripples, brighter where the silver shows
+          // body: the ramp runs along a diagonal that slowly warps, so the
+          // colour lies in slanted iridescent bands like the reference
+          const d = (X + y * 7 + 18 * Math.sin(X / 90 - t * 0.3)) / 520 - t * 0.02;
+          let col: RGB = ramp(d);
           let L =
-            0.2 +
-            0.3 *
-              (0.5 + 0.5 * Math.sin(X / 41 + y / 5 - t * 0.5)) *
-              (0.5 + 0.5 * Math.sin(X / 97 - y / 9 + t * 0.21));
-          let col: RGB = tint;
+            0.34 +
+            0.4 *
+              (0.5 + 0.5 * Math.sin(X / 47 + y / 4 - t * 0.5)) *
+              (0.55 + 0.45 * Math.sin(X / 110 - y / 7 + t * 0.21));
           for (const ln of lines) {
             if (ln.on < 0.02) continue;
-            const s = (y - ln.y) / (ln.width * 2.2); // about -1..1 across the band
+            const s = (y - ln.y) / (ln.width * 2); // about -1..1 across the band
             if (s < -1.6 || s > 1.6) continue;
             const k = Math.exp(-s * s * 1.6) * ln.on;
-            col = mix(col, spectrum(Math.max(-1, Math.min(1, s))), Math.min(1, k * 1.2));
+            col = mix(col, spectrum(Math.max(-1, Math.min(1, s))), Math.min(1, k * 1.4));
             L = Math.max(L, k);
           }
-          // halftone: dim areas fall to a checkerboard, then thin out further
-          if (L < 0.26 && (c + r) % 2 === 1) continue;
-          if (L < 0.17 && hash(c * 3 + 1, r) > L * 4) continue;
-          const size = PITCH * Math.min(1, 0.3 + 0.75 * L);
-          const lum = 0.55 + 0.45 * L;
-          ctx.fillStyle = `rgb(${(col[0] * lum) | 0},${(col[1] * lum) | 0},${(col[2] * lum) | 0})`;
+          // halftone: dimmer areas fall to a checkerboard, then thin out further
+          if (L < 0.42 && (c + r) % 2 === 1) continue;
+          if (L < 0.36 && hash(c * 3 + 1, r) > L * 2.4) continue;
+          const size = PITCH * Math.min(0.92, 0.45 + 0.55 * L);
+          const lum = 0.6 + 0.55 * L;
+          ctx.fillStyle = `rgb(${Math.min(255, col[0] * lum) | 0},${Math.min(255, col[1] * lum) | 0},${Math.min(255, col[2] * lum) | 0})`;
           ctx.globalAlpha = keep < 1 ? 0.35 + 0.65 * keep : 1;
-          ctx.fillRect(x - size / 2, y - size / 2, size, size);
+          // snap to half pixels (device pixels at 2x) so dots stay crisp squares
+          const sz = Math.min(PITCH - 0.5, Math.max(1, Math.round(size * 2) / 2)); // always a gap between dots
+          ctx.fillRect(Math.round((x - sz / 2) * 2) / 2, Math.round((y - sz / 2) * 2) / 2, sz, sz);
         }
       }
       ctx.globalAlpha = 1;
