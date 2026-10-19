@@ -5,8 +5,10 @@ import { useEffect, useRef } from "react";
 /**
  * The footer rule: a single line of small square pixels in an iridescent
  * run of colours (violet, blue, cyan, green-gold, coral, magenta) that drifts
- * slowly left to right. A few pixels sit dimmer or brighter than their
- * neighbours so the line reads as pixels rather than a gradient.
+ * right to left. Like oil on water, the hues also shimmer in place (a slow
+ * ripple nudges each pixel's position in the cycle) and a soft glint of light
+ * travels along the line, so it reads as a sheen rather than a scrolling
+ * gradient. A small stable brightness nudge per pixel keeps it pixel-like.
  *
  * Canvas, one row of pixels, paused when off screen. Under
  * prefers-reduced-motion it draws one still frame.
@@ -14,7 +16,7 @@ import { useEffect, useRef } from "react";
 
 const PX = 3; // pixel size
 const GAP = 1; // space between pixels
-const SPEED = 10; // px per second the colours drift left to right
+const SPEED = 18; // px per second the colours drift right to left
 const PERIOD = 360; // px per full trip round the colour cycle
 
 // iridescent stops, looping
@@ -28,7 +30,8 @@ const colorAt = (u: number) => {
   const f = v - i;
   const a = STOPS[i];
   const b = STOPS[(i + 1) % STOPS.length];
-  return a.map((c, k) => c + (b[k] - c) * f);
+  const e = f * f * (3 - 2 * f); // smoothstep: no visible seams between stops
+  return a.map((c, k) => c + (b[k] - c) * e);
 };
 
 const hash = (n: number) => {
@@ -63,10 +66,18 @@ export default function PixelStrip({ className = "" }: { className?: string }) {
       const ox = Math.round((w - (n * step - GAP)) / 2);
       for (let i = 0; i < n; i++) {
         const x = ox + i * step;
-        const [r, g, b] = colorAt((x - t * SPEED) / PERIOD);
+        // the cycle drifts right to left; a slow ripple makes the hues shimmer
+        const ripple = 0.05 * Math.sin(x / 47 + t * 0.9) + 0.03 * Math.sin(x / 19 - t * 1.4);
+        const [r, g, b] = colorAt((x + t * SPEED) / PERIOD + ripple);
+        // a soft glint that travels along the line, faster than the colours
+        const span = w + 240;
+        const gx = span - ((t * SPEED * 2.4) % span) - 120;
+        const glint = 0.32 * Math.exp(-(((x - gx) / 46) ** 2));
         // a stable per-pixel brightness nudge so it reads as pixels
-        const k = 0.82 + 0.3 * hash(i + 1);
-        ctx.fillStyle = `rgb(${Math.min(255, r * k) | 0},${Math.min(255, g * k) | 0},${Math.min(255, b * k) | 0})`;
+        const k = 0.9 + 0.16 * hash(i + 1) + glint;
+        // the glint lifts toward white, like light catching a film
+        const lift = glint * 120;
+        ctx.fillStyle = `rgb(${Math.min(255, r * k + lift) | 0},${Math.min(255, g * k + lift) | 0},${Math.min(255, b * k + lift) | 0})`;
         ctx.fillRect(x, 0, PX, PX);
       }
     };
