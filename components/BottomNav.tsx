@@ -104,13 +104,15 @@ export default function BottomNav() {
           />
 
           <div
-            className="relative z-10 flex items-center gap-1 rounded-full bg-paper p-2 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(22,20,15,0.28),0_2px_6px_-2px_rgba(22,20,15,0.12),inset_0_1px_0_rgba(255,255,255,0.9),0_0_0_1px_rgba(22,20,15,0.09)]"
+            className="relative z-10 flex items-center gap-1 rounded-[22px] bg-paper p-2 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(22,20,15,0.28),0_2px_6px_-2px_rgba(22,20,15,0.12),inset_0_1px_0_rgba(255,255,255,0.9),0_0_0_1px_rgba(22,20,15,0.09)]"
           >
+            {/* iOS-notification corners: 22px on the bar, and the highlight
+                inset 8px inside it at 14px, so the two curves stay concentric */}
             <div ref={listRef} className="relative flex items-center">
               {pill && (
                 <motion.span
                   aria-hidden
-                  className="absolute h-10 rounded-full bg-accent/[0.07]"
+                  className="absolute h-10 rounded-[14px] bg-accent/[0.07]"
                   initial={false}
                   animate={{ left: pill.left, width: pill.width }}
                   transition={
