@@ -316,3 +316,74 @@ html.asterisk-cursor * {
   mix-blend-mode: multiply;
   pointer-events: none;
 }
+
+/* Footer border beam: a 1px gray rule with a glow sliding along it right to
+   left, after libraries.dev/beam. Two parts share one timing:
+   - the bright segment is a second background on the rule itself, so it can
+     never run past the rule's ends;
+   - the violet haze above it is a child element, free to bloom upward. */
+.beam-rule {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(168, 85, 247, 0.55) 25%,
+        rgba(240, 200, 255, 0.95) 50%,
+        rgba(168, 85, 247, 0.55) 75%,
+        transparent
+      )
+      100% 0 / 220px 1px no-repeat,
+    color-mix(in srgb, var(--color-ink) 12%, transparent);
+  animation: beam-line 7s linear infinite;
+}
+.beam-rule__beam {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% - 220px);
+  width: 220px;
+  height: 28px;
+  pointer-events: none;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(168, 85, 247, 0.28), rgba(168, 85, 247, 0.08) 45%, transparent 75%);
+  filter: blur(3px);
+  animation: beam-haze 7s linear infinite;
+}
+@keyframes beam-line {
+  from {
+    background-position: 100% 0, 0 0;
+  }
+  to {
+    background-position: 0% 0, 0 0;
+  }
+}
+/* the haze tracks the segment and fades in and out at the ends */
+@keyframes beam-haze {
+  from {
+    left: calc(100% - 220px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  to {
+    left: 0;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .beam-rule,
+  .beam-rule__beam {
+    animation: none;
+  }
+  .beam-rule {
+    background-position: 50% 0, 0 0;
+  }
+  .beam-rule__beam {
+    left: calc(50% - 110px);
+  }
+}

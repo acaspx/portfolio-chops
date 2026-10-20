@@ -1,5 +1,4 @@
 import LocalTime from "@/components/LocalTime";
-import PixelStrip from "@/components/PixelStrip";
 // The version lives in package.json, so one command bumps it (see below).
 import pkg from "@/package.json";
 
@@ -9,14 +8,19 @@ import pkg from "@/package.json";
  * navigation and contact.
  *
  * Matches the landing's 35rem body column. The rule above the colophon is a
- * 20px animated pixel-dither strip (PixelStrip).
+ * gray hairline with a travelling glow (the .beam-rule styles in globals.css).
  */
 export default function Footer() {
   return (
-    <footer>
+    // overflow-x: clip keeps the footer beam's glow from widening the page
+    <footer className="overflow-x-clip">
       {/* the nav floats at the bottom on every breakpoint, so clear it everywhere */}
       <div className="mx-auto w-full max-w-[35rem] px-5 pb-36 pt-10 sm:pb-40 sm:pt-12">
-        <PixelStrip />
+        {/* Border beam: a quiet gray rule with a violet glow travelling along
+            it right to left, after libraries.dev/beam. Pure CSS (globals.css). */}
+        <div aria-hidden className="beam-rule">
+          <span className="beam-rule__beam" />
+        </div>
         {/* Colophon and local time stack on the left; the version sits at the
             right, aligned to the last line. Bump it with
             `npm version patch|minor|major --no-git-tag-version`. */}
