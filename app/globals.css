@@ -317,57 +317,85 @@ html.asterisk-cursor * {
   pointer-events: none;
 }
 
-/* Footer border beam: a 1px gray rule with a glow sliding along it right to
-   left, after libraries.dev/beam. Two parts share one timing:
-   - the bright segment is a second background on the rule itself, so it can
-     never run past the rule's ends;
-   - the violet haze above it is a child element, free to bloom upward. */
+/* Footer border beam: a 1px gray rule with glows sliding along it right to
+   left, after libraries.dev/beam. Two beams on different clocks, so their
+   meeting and passing never repeats the same way. Each beam is a bright
+   segment riding the rule (::before) and a haze blooming above it (::after);
+   as it travels its colour shifts (violet, magenta, blue, cyan) and the haze
+   swells and narrows, so every pass looks a little different. Segments run
+   end to end within the rule and fade at the ends instead of being cut off. */
 .beam-rule {
   position: relative;
   height: 1px;
   width: 100%;
-  background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(168, 85, 247, 0.55) 25%,
-        rgba(240, 200, 255, 0.95) 50%,
-        rgba(168, 85, 247, 0.55) 75%,
-        transparent
-      )
-      100% 0 / 220px 1px no-repeat,
-    color-mix(in srgb, var(--color-ink) 12%, transparent);
-  animation: beam-line 7s linear infinite;
+  background: color-mix(in srgb, var(--color-ink) 12%, transparent);
 }
 .beam-rule__beam {
+  --w: 260px;
   position: absolute;
   bottom: 0;
-  left: calc(100% - 220px);
-  width: 220px;
-  height: 28px;
+  left: calc(100% - var(--w));
+  width: var(--w);
+  height: 40px;
   pointer-events: none;
-  background: radial-gradient(60% 100% at 50% 100%, rgba(168, 85, 247, 0.28), rgba(168, 85, 247, 0.08) 45%, transparent 75%);
-  filter: blur(3px);
-  animation: beam-haze 7s linear infinite;
+  animation:
+    beam-travel 7s linear infinite,
+    beam-hue 7s ease-in-out infinite;
 }
-@keyframes beam-line {
-  from {
-    background-position: 100% 0, 0 0;
-  }
-  to {
-    background-position: 0% 0, 0 0;
-  }
+.beam-rule__beam--b {
+  --w: 150px;
+  height: 26px;
+  animation:
+    beam-travel 4.6s linear -2.2s infinite,
+    beam-hue-b 4.6s ease-in-out -2.2s infinite;
 }
-/* the haze tracks the segment and fades in and out at the ends */
-@keyframes beam-haze {
+/* the bright segment on the rule */
+.beam-rule__beam::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 85, 247, 0.7) 22%,
+    rgba(250, 225, 255, 1) 50%,
+    rgba(168, 85, 247, 0.7) 78%,
+    transparent
+  );
+  box-shadow: 0 0 6px 1px rgba(192, 132, 252, 0.45);
+}
+/* the haze above it, breathing as it goes */
+.beam-rule__beam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  background: radial-gradient(
+    60% 100% at 50% 100%,
+    rgba(168, 85, 247, 0.42),
+    rgba(168, 85, 247, 0.12) 45%,
+    transparent 75%
+  );
+  filter: blur(4px);
+  animation: beam-breathe 3.1s ease-in-out infinite alternate;
+}
+.beam-rule__beam--b::before {
+  opacity: 0.8;
+}
+.beam-rule__beam--b::after {
+  opacity: 0.7;
+  animation-duration: 2.3s;
+}
+@keyframes beam-travel {
   from {
-    left: calc(100% - 220px);
+    left: calc(100% - var(--w));
     opacity: 0;
   }
-  15% {
+  14% {
     opacity: 1;
   }
-  85% {
+  86% {
     opacity: 1;
   }
   to {
@@ -375,15 +403,54 @@ html.asterisk-cursor * {
     opacity: 0;
   }
 }
+/* colour drifts as it travels: violet, magenta, blue, cyan, back */
+@keyframes beam-hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  30% {
+    filter: hue-rotate(45deg);
+  }
+  60% {
+    filter: hue-rotate(-40deg);
+  }
+  85% {
+    filter: hue-rotate(-75deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+@keyframes beam-hue-b {
+  0% {
+    filter: hue-rotate(-70deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    filter: hue-rotate(-70deg);
+  }
+}
+@keyframes beam-breathe {
+  from {
+    transform: scale(0.75, 0.8);
+    opacity: 0.75;
+  }
+  to {
+    transform: scale(1.2, 1.15);
+    opacity: 1;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .beam-rule,
-  .beam-rule__beam {
+  .beam-rule__beam,
+  .beam-rule__beam::after {
     animation: none;
   }
-  .beam-rule {
-    background-position: 50% 0, 0 0;
-  }
   .beam-rule__beam {
-    left: calc(50% - 110px);
+    left: calc(50% - var(--w) / 2);
+  }
+  .beam-rule__beam--b {
+    display: none;
   }
 }

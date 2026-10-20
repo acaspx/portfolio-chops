@@ -16,10 +16,12 @@ export default function Footer() {
     <footer className="overflow-x-clip">
       {/* the nav floats at the bottom on every breakpoint, so clear it everywhere */}
       <div className="mx-auto w-full max-w-[35rem] px-5 pb-36 pt-10 sm:pb-40 sm:pt-12">
-        {/* Border beam: a quiet gray rule with a violet glow travelling along
-            it right to left, after libraries.dev/beam. Pure CSS (globals.css). */}
+        {/* Border beam: a quiet gray rule with two glows travelling along it
+            right to left on different clocks, shifting colour and swelling
+            as they go. After libraries.dev/beam; pure CSS (globals.css). */}
         <div aria-hidden className="beam-rule">
           <span className="beam-rule__beam" />
+          <span className="beam-rule__beam beam-rule__beam--b" />
         </div>
         {/* Colophon and local time stack on the left; the version sits at the
             right, aligned to the last line. Bump it with
