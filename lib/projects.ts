@@ -2,15 +2,13 @@ import type { IndexItem } from "@/components/IndexSection";
 
 /**
  * The project list, shared by the home index and the Work overlay, so a
- * project added here shows up in both. `company` and `years` feed the overlay
- * cards; `meta`, `desc` and `gallery` feed the home page.
+ * project added here shows up in both. `img` is the overlay card's image;
+ * `meta`, `desc` and `gallery` feed the home page.
  */
 
 export const work: IndexItem[] = [
   {
     label: "State Affairs",
-    company: "State Affairs",
-    years: "2026 —",
     meta: "Walmart + DoorDash",
     href: "/work/state-affairs",
     locked: true,
@@ -26,8 +24,6 @@ export const work: IndexItem[] = [
   },
   {
     label: "Custoria Vault",
-    company: "Custoria Labs",
-    years: "2025 —",
     meta: "~150 users in 90 days",
     href: "/work/custoria",
     img: "/work/cu-preview.jpg",
@@ -40,8 +36,6 @@ export const work: IndexItem[] = [
   },
   {
     label: "Augmedix",
-    company: "Augmedix",
-    years: "2023 — 2024",
     meta: "$139M acquisition",
     href: "/work/augmedix",
     img: "/work/ax-mobile.png",
@@ -55,8 +49,6 @@ export const work: IndexItem[] = [
   },
   {
     label: "Rocket",
-    company: "Rocket",
-    years: "2022 — 2023",
     meta: "−75% onboarding",
     href: "/work/rocket",
     img: "/work/rk-hero.png",
@@ -76,8 +68,6 @@ export const work: IndexItem[] = [
 export const more: IndexItem[] = [
   {
     label: "Agent Pit Stop",
-    company: "Open source",
-    years: "2026",
     meta: "Open-source design system",
     href: "https://agent-pitstop.vercel.app",
     external: true,
@@ -90,8 +80,6 @@ export const more: IndexItem[] = [
   },
   {
     label: "Terrarium",
-    company: "Side project",
-    years: "2026",
     meta: "Ecosystem simulation",
     href: "https://terrarium-sim.vercel.app",
     external: true,

@@ -11,15 +11,14 @@ import type { IndexItem } from "@/components/IndexSection";
 
 /**
  * Work overlay, opened from the floating nav. The six projects as preview
- * cards in a 3x2 grid (2 columns on tablet, 1 on phones) over the same blurred
- * backdrop as the About overlay. Each card links to its case study, or to the
+ * cards in a 3x2 grid (2 columns on tablet, 1 on phones) laid over the page
+ * itself, lightly blurred and washed so it stays recognisable behind them. Each card links to its case study, or to the
  * live project for side projects; the locked case opens the password gate,
  * which sits above this overlay.
  *
  * Card anatomy, after the reference but in this site's tokens: a hairline
  * frame with small square registration marks at its corners holding the
- * image, then a mono "01 / 06" index, the title with an arrow, and a mono
- * company · years line.
+ * image, then the title with an arrow.
  */
 
 const PROJECTS: IndexItem[] = [...work, ...more].slice(0, 6);
@@ -86,7 +85,6 @@ export default function WorkOverlay({ open, onClose }: { open: boolean; onClose:
   }, [open, onClose]);
 
   if (!mounted) return null;
-  const total = String(PROJECTS.length).padStart(2, "0");
 
   return createPortal(
     <AnimatePresence>
@@ -96,23 +94,15 @@ export default function WorkOverlay({ open, onClose }: { open: boolean; onClose:
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-3xl"
+          className="fixed inset-0 z-50 overflow-y-auto backdrop-blur-[6px]"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
           aria-label="Selected work"
         >
-          {/* neutral wash plus a faint accent glow behind the grid, like the
-              light pooling in the reference */}
-          <div aria-hidden className="pointer-events-none fixed inset-0 bg-paper/25" />
-          <div
-            aria-hidden
-            className="pointer-events-none fixed inset-0"
-            style={{
-              background:
-                "radial-gradient(45% 40% at 50% 48%, color-mix(in srgb, var(--color-violet) 16%, transparent), transparent 70%)",
-            }}
-          />
+          {/* a light paper wash: the page underneath stays recognisable,
+              just softened, with enough contrast for the cards to read */}
+          <div aria-hidden className="pointer-events-none fixed inset-0 bg-paper/55" />
 
           <button
             ref={closeRef}
@@ -154,10 +144,7 @@ export default function WorkOverlay({ open, onClose }: { open: boolean; onClose:
                       </div>
                     </div>
 
-                    <p className="mt-5 font-mono text-[12px] tracking-widest text-muted">
-                      {String(i + 1).padStart(2, "0")} / {total}
-                    </p>
-                    <div className="mt-2 flex items-start justify-between gap-4">
+                    <div className="mt-5 flex items-start justify-between gap-4">
                       <h3 className="text-[22px] leading-tight tracking-tight text-ink transition-colors group-hover:text-accent">
                         {it.label}
                       </h3>
@@ -168,13 +155,6 @@ export default function WorkOverlay({ open, onClose }: { open: boolean; onClose:
                         ↗
                       </span>
                     </div>
-                    {(it.company || it.years) && (
-                      <p className="mt-2 font-mono text-[12px] uppercase tracking-widest text-muted">
-                        {it.company}
-                        {it.company && it.years && <span className="mx-2 opacity-60">·</span>}
-                        {it.years}
-                      </p>
-                    )}
                   </CardLink>
                 </motion.li>
               ))}
