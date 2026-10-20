@@ -5,14 +5,15 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import AboutModal from "@/components/AboutModal";
+import WorkOverlay from "@/components/WorkOverlay";
 import ProfileCard, { Avatar } from "@/components/ProfileCard";
 
-type Item = { label: string; href?: string; modal?: boolean };
+type Item = { label: string; href?: string; modal?: "work" | "about" };
 
 const items: Item[] = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/#work" },
-  { label: "About", modal: true },
+  { label: "Work", modal: "work" },
+  { label: "About", modal: "about" },
 ];
 
 /**
@@ -25,6 +26,7 @@ export default function BottomNav() {
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
   const [cardOpen, setCardOpen] = useState(false);
   const avatarRef = useRef<HTMLButtonElement>(null);
 
@@ -33,7 +35,14 @@ export default function BottomNav() {
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
 
-  const activeIndex = aboutOpen ? 2 : pathname?.startsWith("/work") ? 1 : 0;
+  const activeIndex = aboutOpen ? 2 : workOpen || pathname?.startsWith("/work") ? 1 : 0;
+
+  // Leaving the page (a case study opened from the Work overlay, or through
+  // the password gate) closes the overlays behind it.
+  useEffect(() => {
+    setWorkOpen(false);
+    setAboutOpen(false);
+  }, [pathname]);
 
   const measure = useCallback(() => {
     const el = itemRefs.current[activeIndex];
@@ -125,9 +134,11 @@ export default function BottomNav() {
                       ref={(el) => {
                         itemRefs.current[idx] = el;
                       }}
+                      aria-haspopup="dialog"
                       onClick={() => {
                         setCardOpen(false);
-                        setAboutOpen(true);
+                        setAboutOpen(it.modal === "about");
+                        setWorkOpen(it.modal === "work");
                       }}
                       className={cls}
                     >
@@ -171,6 +182,7 @@ export default function BottomNav() {
       </nav>
 
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
+      <WorkOverlay open={workOpen} onClose={() => setWorkOpen(false)} />
     </>
   );
 }

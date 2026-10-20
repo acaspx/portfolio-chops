@@ -16,6 +16,9 @@ export type IndexItem = {
   /** Shown beside the column on hover. Omit for rows with nothing to show. */
   img?: string;
   alt?: string;
+  /** Work overlay card: who it was for, and when. */
+  company?: string;
+  years?: string;
   /** Below lg: one line under the title, and a swipeable row of images. */
   desc?: string;
   gallery?: { src: string; alt: string }[];
