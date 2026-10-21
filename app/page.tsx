@@ -1,4 +1,5 @@
 import MosaicName from "@/components/MosaicName";
+import Manifesto from "@/components/Manifesto";
 import HeroLede from "@/components/HeroLede";
 import IndexSection, { type IndexItem } from "@/components/IndexSection";
 import { work, more } from "@/lib/projects";
@@ -38,7 +39,10 @@ export default function Home() {
       <div aria-hidden className="bg-landing pointer-events-none fixed inset-0 -z-10" />
 
       <div className="mx-auto w-full max-w-[35rem] px-5 pb-44 pt-12 sm:pt-16">
-        <MosaicName />
+        {/* clicking the nameplate opens the manifesto card */}
+        <Manifesto>
+          <MosaicName />
+        </Manifesto>
 
         <p className="mt-5 text-[15px] text-muted">Design Engineer at Custoria Labs</p>
         <HeroLede leadClassName="mt-4 text-[15px] leading-relaxed text-balance" />
