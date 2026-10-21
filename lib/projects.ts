@@ -18,7 +18,7 @@ export const work: IndexItem[] = [
     gallery: [
       { src: "/work/sa-agent-laptop.jpg", alt: "The State Affairs AI agent answering a question about a bill" },
       { src: "/work/sa-ai-chat.png", alt: "AI Chat expanded: policy intelligence on demand, with cited answers over legislative data" },
-      { src: "/work/sa-360-overview.png", alt: "AI Chat generating a 360° View: briefing, active-states map, momentum and forecast in one surface" },
+      { src: "/work/sa-360-overview.png", alt: "360° View overview: a briefing, an active-states map, and insight cards for momentum and passage forecast" },
       { src: "/work/sa-whats-changed.png", alt: "What's Changed panel: the most important items since your last visit, ranked by priority" },
     ],
   },

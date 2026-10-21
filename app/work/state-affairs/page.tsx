@@ -111,10 +111,10 @@ export default function StateAffairs() {
         </p>
         <CaseImage
           src="/work/sa-builder-entry.png"
-          alt="State Affairs bills page: the entry point where a user's intent starts as a structured, trackable query"
+          alt="State Affairs bills page for an Energy Bills group: a 360 View prompt, upcoming hearings and recent actions above a bill table with priority, position and tracking lists"
           caption="The entry point: intent starts as a structured query on the bills page"
-          width={1600}
-          height={1091}
+          width={2400}
+          height={1554}
         />
         <CaseImage
           src="/work/sa-builder-review.png"
@@ -172,7 +172,9 @@ export default function StateAffairs() {
         />
         <CaseImage
           src="/work/sa-360-overview.png"
-          alt="AI Chat generating a 360° View: briefing, active-states map, momentum and forecast in one surface"
+          alt="360° View overview: a briefing of what needs attention today, an active-states map, and insight cards for progress, attention, reach, relevance, momentum and passage forecast"
+          width={2400}
+          height={1553}
           caption="Generate 360° View: a click on any update routes the analyst to that exact data point"
         />
       </Section>
