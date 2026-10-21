@@ -118,10 +118,10 @@ export default function StateAffairs() {
         />
         <CaseImage
           src="/work/sa-builder-review.png"
-          alt="The deterministic 360° View builder confirming scope, states, date range, position, and reason before generating"
+          alt="The deterministic 360° View builder's review step: the prompt, a warning that the scope matches over 3,000 bills with a suggestion to narrow it, and the states, date range, tracking list, position and reason parameters before generating"
           caption="The builder confirms every parameter before generating, so intent is explicit and easy to label"
-          width={1600}
-          height={1091}
+          width={2400}
+          height={1637}
         />
         <p>
           We fine-tuned on the hottest queries across six personas and four priority
