@@ -10,8 +10,6 @@
 // about 8px long, with a hairline of grout.
 const H = 3; // strip height, px
 const GROUT = "#bcb6a6";
-// glazes around the nameplate's frame colour (#191d30)
-const GLAZES = ["#161a2b", "#191d30", "#1c2136", "#1a1f33", "#141827", "#1e2339"];
 
 function strip() {
   let seed = 1904;
@@ -19,37 +17,60 @@ function strip() {
     seed = (seed * 16807) % 2147483647;
     return seed / 2147483647;
   };
-  const W = 160; // one repeat; tiles are laid to fill it exactly
-  const gap = 0.6;
+  const between = (a: number, b: number) => a + rand() * (b - a);
+
+  // Laid in the nameplate's own units (4 per CSS px) with its own setter
+  // rules, then scaled down: course height 12, nominal piece length 31,
+  // lengths vary +/-14%, every corner jitters by 7% of the course height in
+  // both axes, and pieces sit in a 2.4-unit grout joint. That jitter is what
+  // makes the header's frame read as hand-set rather than ruled.
+  const U = 4;
+  const TH = H * U; // 12
+  const TW = 31;
+  const GAP = 2.4;
+  const JIT = TH * 0.09;
+  const W = 160; // one repeat in CSS px
+  const WU = W * U;
+
   const lengths: number[] = [];
   let total = 0;
-  while (total < W - 8) {
-    const l = 6.5 + rand() * 3;
+  while (total < WU - TW * 0.5) {
+    const l = TW * between(0.86, 1.14);
     lengths.push(l);
     total += l;
   }
-  const k = W / total; // stretch so the repeat closes seamlessly
+  const k = WU / total; // close the repeat seamlessly
   let x = 0;
-  const j = () => (rand() - 0.5) * 0.35;
+  const j = () => between(-JIT, JIT);
   const tiles = lengths
     .map((l, i) => {
-      const x0 = x + gap / 2;
-      const x1 = x + l * k - gap / 2;
+      const g = GAP / 2;
+      const x0 = x + g;
+      const x1 = x + l * k - g;
       x += l * k;
-      const y0 = gap / 2;
-      const y1 = H - gap / 2;
+      // the first and last pieces keep a straight outer edge so the repeat
+      // joins without a seam
+      const jx = (edge: boolean) => (edge ? 0 : j());
+      const first = i === 0;
+      const last = i === lengths.length - 1;
       const pts = [
-        [x0 + j(), y0],
-        [x1 + j(), y0],
-        [x1 + j(), y1],
-        [x0 + j(), y1],
+        [x0 + jx(first), g + j()],
+        [x1 + jx(last), g + j()],
+        [x1 + jx(last), TH - g + j()],
+        [x0 + jx(first), TH - g + j()],
       ]
-        .map(([a, b]) => `${a.toFixed(2)},${b.toFixed(2)}`)
+        .map(([a, b]) => `${a.toFixed(1)},${Math.min(TH, Math.max(0, b)).toFixed(1)}`)
         .join(" ");
-      return `<polygon points='${pts}' fill='${GLAZES[(i * 7 + Math.floor(rand() * 3)) % GLAZES.length]}'/>`;
+      // glaze: the frame colour, nudged lighter or darker per piece, with the
+      // odd piece a touch bluer, as fired glass varies
+      const lum = between(-0.07, 0.07) + (rand() < 0.12 ? 0.06 : 0);
+      const [r, gg, b] = [25, 29, 48].map((c, ci) =>
+        Math.round(Math.min(255, Math.max(0, c * (1 + lum) + (ci === 2 ? lum * 30 : 0)))),
+      );
+      return `<polygon points='${pts}' fill='rgb(${r},${gg},${b})'/>`;
     })
     .join("");
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${W}' height='${H}' viewBox='0 0 ${W} ${H}'><rect width='${W}' height='${H}' fill='${GROUT}'/>${tiles}</svg>`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${WU}' height='${TH}' viewBox='0 0 ${WU} ${TH}' shape-rendering='geometricPrecision'><rect width='${WU}' height='${TH}' fill='${GROUT}'/>${tiles}</svg>`;
   return { url: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`, W };
 }
 
