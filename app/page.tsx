@@ -30,7 +30,6 @@ const links = [
   { label: "email", href: "mailto:ac.design.px@gmail.com" },
   { label: "github", href: "https://github.com/acaspx" },
   { label: "linkedin", href: "https://www.linkedin.com/in/antoncastroe/" },
-  { label: "resume", href: "/resume.pdf" },
 ];
 
 export default function Home() {
