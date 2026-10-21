@@ -21,7 +21,7 @@ const experience: IndexItem[] = [
   { label: "Augmedix · Product Designer, AI & Growth", meta: "2023 – 24" },
   { label: "Rocket · Conversational AI Designer", meta: "2022 – 23" },
   { label: "Anti-Defamation League · Product Designer", meta: "2021 – 22" },
-  { label: "Intuit & Electronic Arts · Design Internships", meta: "2019 – 20" },
+  { label: "Intuit & Electronic Arts · Product Designer", meta: "2019 – 20" },
 ];
 
 
