@@ -162,7 +162,7 @@ export default function StateAffairs() {
         <KeyPoints
           items={[
             <><Hi>The agent proposes.</Hi> What&apos;s Changed surfaces the top five things that moved since your last visit.</>,
-            <><Hi>The analyst disposes.</Hi> One click drops you on the exact data point behind an update, so you verify the source before you brief.</>,
+            <><Hi>The analyst verifies.</Hi> One click drops you on the exact data point behind an update, so you check the source before you brief.</>,
           ]}
         />
         <CaseImage
@@ -219,6 +219,14 @@ export default function StateAffairs() {
           poster="/work/sa-collab-context-poster.jpg"
           label="Assigning a bill to teammates on the bill detail page, alongside labels, priority, and position"
           caption="Direction, not shipped: the shared context an account already builds on a bill. The next step is an agent that reads it and answers from it, anywhere in the platform."
+        />
+        <CaseImage
+          src="/work/sa-series-c.png"
+          alt="News headline: State Affairs raises $70 million to help institutions navigate the policy and regulatory economy, on prnewswire.com"
+          caption="The raise: State Affairs closes a $70M Series C"
+          width={2000}
+          height={386}
+          href="https://www.prnewswire.com/news-releases/state-affairs-raises-70-million-to-help-institutions-navigate-the-policy-and-regulatory-economy-302824501.html"
         />
       </Section>
 

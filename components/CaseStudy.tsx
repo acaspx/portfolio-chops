@@ -126,18 +126,19 @@ export function CaseImage({
   width = 1920,
   height = 1080,
   plain = false,
+  href,
 }: {
   src: string;
   alt: string;
   caption: string;
   width?: number;
   height?: number;
+  /** Makes the image a link out (e.g. a news preview opening the article). */
+  href?: string;
   /** Transparent-background art: no card chrome (ring/shadow), sits directly on the canvas. */
   plain?: boolean;
 }) {
-  return (
-    <figure className="my-6">
-      <div className="case-canvas overflow-hidden rounded-2xl p-4 sm:p-8">
+  const image = (
         <FadeImage
           src={src}
           alt={alt}
@@ -150,8 +151,32 @@ export function CaseImage({
               : "relative z-[1] h-auto w-full rounded-lg shadow-2xl ring-1 ring-black/25"
           }
         />
+  );
+  return (
+    <figure className="my-6">
+      <div className="case-canvas overflow-hidden rounded-2xl p-4 sm:p-8">
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transition-transform duration-300 hover:scale-[1.01]"
+          >
+            {image}
+          </a>
+        ) : (
+          image
+        )}
       </div>
-      <figcaption className="mt-2.5 font-mono text-xs text-muted">{caption}</figcaption>
+      <figcaption className="mt-2.5 font-mono text-xs text-muted">
+        {href ? (
+          <a href={href} target="_blank" rel="noopener noreferrer" className="link-line hover:text-ink">
+            {caption} ↗
+          </a>
+        ) : (
+          caption
+        )}
+      </figcaption>
     </figure>
   );
 }
