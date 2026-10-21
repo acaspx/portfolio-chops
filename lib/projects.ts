@@ -9,7 +9,7 @@ import type { IndexItem } from "@/components/IndexSection";
 export const work: IndexItem[] = [
   {
     label: "State Affairs",
-    meta: "Walmart + DoorDash",
+    meta: "$70M Series C",
     href: "/work/state-affairs",
     locked: true,
     img: "/work/sa-agent-laptop.jpg",
