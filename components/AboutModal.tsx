@@ -233,9 +233,9 @@ export default function AboutModal({
                       technology look and feel great, no matter the context.
                     </p>
                     <p>
-                      Currently Sr. Interaction Designer at State Affairs, building policy
-                      intelligence, the company&apos;s first AI product. Before that: founding
-                      designer twice, and AI products at Augmedix, Rocket, and Intuit.
+                      Currently Design Engineer at Custoria Labs, building the AI trust and
+                      verification layer for real-world assets. Before that: AI products at
+                      State Affairs, Augmedix, Rocket, and Intuit.
                     </p>
                   </Panel>
 
