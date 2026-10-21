@@ -40,7 +40,7 @@ export default function Home() {
       <div className="mx-auto w-full max-w-[35rem] px-5 pb-44 pt-12 sm:pt-16">
         <MosaicName />
 
-        <p className="mt-5 text-[15px] text-muted">Product Engineer &amp; Designer</p>
+        <p className="mt-5 text-[15px] text-muted">Design Engineer at Custoria Labs</p>
         <HeroLede leadClassName="mt-4 text-[15px] leading-relaxed text-balance" />
 
         <ul className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] text-muted">
