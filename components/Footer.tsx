@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="flex items-end justify-between gap-6 pt-6">
           <div className="space-y-2">
             <p className="font-mono text-xs text-muted">
-              © {new Date().getFullYear()} studioacas · build like you mean it
+              © {new Date().getFullYear()} studioacas
             </p>
             <LocalTime />
           </div>
