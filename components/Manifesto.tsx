@@ -18,7 +18,7 @@ const typewriter = Special_Elite({ weight: "400", subsets: ["latin"], display: "
  */
 
 const MANIFESTO = {
-  title: "Manifesto",
+  title: "A designer manifesto",
   number: "No. 1",
   paragraphs: [
     "Born and raised in New York, I learned design before I had a word for it.",
@@ -26,7 +26,20 @@ const MANIFESTO = {
     "The Lower East Side taught me craft: small shops where every object was chosen on purpose. When the noise got loud, I biked the Williamsburg Bridge and stared at the water until something clicked.",
     "New York rewards the purpose-built, and the people who chase a dream on purpose. It isn't for the faint of heart. Neither is building.",
   ],
-  note: "On the header: the mosaic nods to the subway tablets I read every day, and to Miotto Mosaic Art Studios, who hand-build mosaics for New York's stations.",
+  note: (
+    <>
+      On the header: the mosaic nods to the subway tablets I read every day, and to{" "}
+      <a
+        href="https://miottomosaicartstudios.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-[#2b2a26]/40 underline-offset-[3px] transition-colors hover:text-accent hover:decoration-accent"
+      >
+        Miotto Mosaic Art Studios
+      </a>
+      , who hand-build mosaics for New York&apos;s stations.
+    </>
+  ),
   signoff: "A.C.",
 };
 
@@ -102,7 +115,7 @@ function Card() {
             style={{ top: LINE * 2 + 17 }}
           />
           <div className="flex items-baseline justify-between" style={{ height: LINE * 2 }}>
-            <h2 className="pt-3 text-[20px] uppercase tracking-[0.18em] sm:text-[22px]">{MANIFESTO.title}</h2>
+            <h2 className="pt-3 text-[15px] uppercase tracking-[0.12em] sm:text-[22px] sm:tracking-[0.18em]">{MANIFESTO.title}</h2>
             <span className="text-[13px] opacity-70">{MANIFESTO.number}</span>
           </div>
           <div className="mt-[18px]">
