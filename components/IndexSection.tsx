@@ -16,6 +16,8 @@ export type IndexItem = {
   /** Shown beside the column on hover. Omit for rows with nothing to show. */
   img?: string;
   alt?: string;
+  /** Company logo icons (slugs in /public/logos) shown before the label. */
+  logos?: string[];
   /** Below lg: one line under the title, and a swipeable row of images. */
   desc?: string;
   gallery?: { src: string; alt: string }[];
@@ -196,11 +198,30 @@ export default function IndexSection({
           >
             <ItemLink
               it={it}
-              className={`flex w-full items-baseline justify-between gap-2 py-[7px] text-[15px] transition-colors ${
+              // rows with logo icons centre on the icon; text-only rows stay baseline-aligned
+              className={`flex w-full ${it.logos ? "items-center" : "items-baseline"} justify-between gap-2 py-[7px] text-[15px] transition-colors ${
                 it.href ? "hover:text-accent" : ""
               }`}
             >
-              <span className="truncate">{it.label}</span>
+              <span className="flex min-w-0 items-center gap-2.5">
+                {it.logos && (
+                  // app-icon style squircles; two companies sit side by side
+                  <span className="flex shrink-0 gap-1">
+                    {it.logos.map((slug) => (
+                      <Image
+                        key={slug}
+                        src={`/logos/${slug}.png`}
+                        alt=""
+                        width={40}
+                        height={40}
+                        sizes="20px"
+                        className="size-5 rounded-[5px] bg-white object-contain ring-1 ring-ink/10"
+                      />
+                    ))}
+                  </span>
+                )}
+                <span className="truncate">{it.label}</span>
+              </span>
               <span className="shrink-0 pl-6 text-right font-mono text-[12px] text-muted">
                 {it.meta}
               </span>

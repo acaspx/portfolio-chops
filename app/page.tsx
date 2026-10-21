@@ -16,12 +16,12 @@ import AsteriskMark from "@/components/AsteriskMark";
 
 
 const experience: IndexItem[] = [
-  { label: "Custoria Labs · Founding Design Engineer", meta: "2025 –" },
-  { label: "State Affairs · Sr. Interaction Designer", meta: "2026 –" },
-  { label: "Augmedix · Product Designer, AI & Growth", meta: "2023 – 24" },
-  { label: "Rocket · Conversational AI Designer", meta: "2022 – 23" },
-  { label: "Anti-Defamation League · Product Designer", meta: "2021 – 22" },
-  { label: "Intuit & Electronic Arts · Product Designer", meta: "2019 – 20" },
+  { label: "Custoria Labs · Founding Design Engineer", meta: "2025 –", logos: ["custoria"] },
+  { label: "State Affairs · Sr. Interaction Designer", meta: "2026 –", logos: ["state-affairs"] },
+  { label: "Augmedix · Product Designer, AI & Growth", meta: "2023 – 24", logos: ["augmedix"] },
+  { label: "Rocket · Conversational AI Designer", meta: "2022 – 23", logos: ["rocket"] },
+  { label: "Anti-Defamation League · Product Designer", meta: "2021 – 22", logos: ["adl"] },
+  { label: "Intuit & Electronic Arts · Product Designer", meta: "2019 – 20", logos: ["intuit", "ea"] },
 ];
 
 
@@ -65,8 +65,8 @@ export default function Home() {
             text-only Experience list moves to the end instead of splitting them. */}
         <div className="mt-14 flex flex-col">
           <IndexSection title="Work" items={work} />
-          <IndexSection title="Experience" items={experience} className="max-lg:order-last" />
           <IndexSection title="What's more?" items={more} />
+          <IndexSection title="Experience" items={experience} />
         </div>
       </div>
     </>
