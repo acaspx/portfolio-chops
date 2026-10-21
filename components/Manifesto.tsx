@@ -25,10 +25,9 @@ const MANIFESTO = {
     "The city taught me systems. The subway map holds millions of plans at once, and Times Square and Union Square are where they collide. I'd stand at the chess tables watching strangers think three moves ahead.",
     "The Lower East Side taught me craft: small shops where every object was chosen on purpose. When the noise got loud, I biked the Williamsburg Bridge and stared at the water until something clicked.",
     "New York rewards the purpose-built, and the people who chase a dream on purpose. It isn't for the faint of heart. Neither is building.",
-    "So I design the way the city runs: for every kind of person, under pressure, with every piece set by hand.",
   ],
   note: "On the header: the mosaic nods to the subway tablets I read every day, and to Miotto Mosaic Art Studios, who hand-build mosaics for New York's stations.",
-  signoff: "A.C., New York",
+  signoff: "A.C.",
 };
 
 const LINE = 26; // px: the card's ruled line height, which the type sits on
