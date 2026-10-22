@@ -230,7 +230,7 @@ export default function ProfileCard({
               <Avatar className="h-full w-full text-xl" />
             </div>
             <h2 className="text-base font-semibold tracking-tight">Anton Castro</h2>
-            <p className="text-sm text-muted">Product Engineer &amp; Designer</p>
+            <p className="text-sm text-muted">Design Engineer</p>
           </div>
 
           {/* Meta */}
