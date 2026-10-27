@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studioacas.com"),
-  title: "Anton Castro · Product Engineer & Designer",
+  title: "Anton Castro · Design Engineer",
   description:
-    "Anton Castro, Product Engineer & Designer. Designs and builds AI products from first prototype to shipped code: four 0→1s across healthcare, fintech, and govtech.",
+    "Anton Castro, Design Engineer. Designs and builds AI products from first prototype to shipped code: four 0→1s across healthcare, fintech, and govtech.",
   openGraph: {
-    title: "Anton Castro · Product Engineer & Designer",
+    title: "Anton Castro · Design Engineer",
     description:
-      "Product engineer and designer building AI products in code. Four 0→1s across healthcare, fintech, and govtech.",
+      "Design engineer building AI products in code. Four 0→1s across healthcare, fintech, and govtech.",
     type: "website",
   },
 };
