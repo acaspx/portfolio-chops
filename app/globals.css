@@ -2,7 +2,7 @@
 
 @theme {
   --color-ink: #16140f;
-  --color-paper: #faf9f6;
+  --color-paper: #ffffff; /* the page and the floating nav: plain white */
   --color-muted: #76716a;
   --color-line: #e3dfd7;
   --color-accent: #1e2a44;
@@ -157,24 +157,9 @@ html.asterisk-cursor * {
   }
 }
 
-/* Landing backdrop: soft cloudy gradient + subtle grain (CSS/SVG only) */
+/* Landing backdrop: plain white, matching the rest of the site */
 .bg-landing {
-  /* Reference gradient structure (bright upper-left, drifting clouds, grounded
-     dark base) translated into the warm paper/ink palette */
-  background:
-    radial-gradient(85% 65% at 12% 6%, rgba(255, 254, 250, 0.95), transparent 58%),
-    radial-gradient(55% 45% at 62% 22%, rgba(58, 52, 40, 0.1), transparent 65%),
-    radial-gradient(45% 40% at 88% 55%, rgba(58, 52, 40, 0.12), transparent 68%),
-    radial-gradient(50% 40% at 35% 65%, rgba(58, 52, 40, 0.07), transparent 70%),
-    #faf9f6;
-}
-.bg-landing::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.045;
-  mix-blend-mode: multiply;
+  background: var(--color-paper);
 }
 
 /* Subtle embossed/raised edge for cards and buttons. Restrained on purpose:
