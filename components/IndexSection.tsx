@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import CaseGateLink from "@/components/CaseGateLink";
+import { FluidHoverHighlight } from "@/components/FluidHoverHighlight";
+import { useFluidHover, useRegisterFluidHoverItem } from "@/hooks/use-fluid-hover";
+import { spring } from "@/lib/springs";
 
 export type IndexItem = {
   label: string;
@@ -129,6 +132,59 @@ function Gallery({ images, label }: { images: { src: string; alt: string }[]; la
   );
 }
 
+/** One row of the desktop list, registered with the list's fluid hover. */
+function Row({
+  it,
+  index,
+  registerItem,
+  onFocus,
+  onBlur,
+}: {
+  it: IndexItem;
+  index: number;
+  registerItem: (index: number, element: HTMLElement | null) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  useRegisterFluidHoverItem(registerItem, index, ref);
+  return (
+    // Bleeds a little past the column on each side, so the highlight has room around
+    // the text while the text stays aligned with the section label. Above the
+    // highlight (z-10), which is positioned and would otherwise paint over it.
+    <li ref={ref} className="relative z-10 -mx-2.5 px-2.5" onFocus={onFocus} onBlur={onBlur}>
+      <ItemLink
+        it={it}
+        // rows with logo icons centre on the icon; text-only rows stay baseline-aligned
+        className={`flex w-full ${it.logos ? "items-center" : "items-baseline"} justify-between gap-2 py-[7px] text-[15px] transition-colors ${
+          it.href ? "hover:text-accent" : ""
+        }`}
+      >
+        <span className="flex min-w-0 items-center gap-2.5">
+          {it.logos && (
+            // app-icon style squircles; two companies sit side by side
+            <span className="flex shrink-0 gap-1">
+              {it.logos.map((slug) => (
+                <Image
+                  key={slug}
+                  src={`/logos/${slug}.png`}
+                  alt=""
+                  width={40}
+                  height={40}
+                  sizes="20px"
+                  className="size-5 rounded-[5px] bg-white object-contain ring-1 ring-ink/10"
+                />
+              ))}
+            </span>
+          )}
+          <span className="truncate">{it.label}</span>
+        </span>
+        <span className="shrink-0 pl-6 text-right font-mono text-[12px] text-muted">{it.meta}</span>
+      </ItemLink>
+    </li>
+  );
+}
+
 /**
  * Dense index section: a quiet label over rows of label-left, meta-right.
  *
@@ -150,16 +206,16 @@ export default function IndexSection({
   className?: string;
 }) {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState<number | null>(null);
-  const rowRefs = useRef<(HTMLLIElement | null)[]>([]);
   const listRef = useRef<HTMLUListElement>(null);
+  // One source of truth for "which row": the fluid hover's lit row. The pointer sets it
+  // through the list's handlers, keyboard focus through setActiveIndex, and the preview
+  // in the margin follows the same index, so highlight and image always agree.
+  const hover = useFluidHover(listRef);
+  const active = hover.activeIndex;
   const showcase = items.some((it) => it.gallery?.length);
 
   const shown = active !== null ? items[active] : null;
-  const top =
-    active !== null && rowRefs.current[active] && listRef.current
-      ? rowRefs.current[active]!.offsetTop
-      : 0;
+  const top = active !== null ? (hover.itemRects[active]?.top ?? 0) : 0;
 
   return (
     <section className={`mt-12 first:mt-0 ${className}`}>
@@ -184,73 +240,60 @@ export default function IndexSection({
         </div>
       )}
 
-      <ul ref={listRef} className={`relative mt-3 ${showcase ? "hidden lg:block" : ""}`}>
+      <ul
+        ref={listRef}
+        className={`relative mt-3 ${showcase ? "hidden lg:block" : ""}`}
+        {...hover.handlers}
+      >
+        {/* the fluid hover: one soft fill that glides from row to row */}
+        <FluidHoverHighlight hover={hover} className="rounded-[7px] bg-ink/[0.045]" />
+
         {items.map((it, i) => (
-          <li
+          <Row
             key={it.label}
-            ref={(el) => {
-              rowRefs.current[i] = el;
-            }}
-            onMouseEnter={() => setActive(i)}
-            onMouseLeave={() => setActive(null)}
-            onFocus={() => setActive(i)}
-            onBlur={() => setActive(null)}
-          >
-            <ItemLink
-              it={it}
-              // rows with logo icons centre on the icon; text-only rows stay baseline-aligned
-              className={`flex w-full ${it.logos ? "items-center" : "items-baseline"} justify-between gap-2 py-[7px] text-[15px] transition-colors ${
-                it.href ? "hover:text-accent" : ""
-              }`}
-            >
-              <span className="flex min-w-0 items-center gap-2.5">
-                {it.logos && (
-                  // app-icon style squircles; two companies sit side by side
-                  <span className="flex shrink-0 gap-1">
-                    {it.logos.map((slug) => (
-                      <Image
-                        key={slug}
-                        src={`/logos/${slug}.png`}
-                        alt=""
-                        width={40}
-                        height={40}
-                        sizes="20px"
-                        className="size-5 rounded-[5px] bg-white object-contain ring-1 ring-ink/10"
-                      />
-                    ))}
-                  </span>
-                )}
-                <span className="truncate">{it.label}</span>
-              </span>
-              <span className="shrink-0 pl-6 text-right font-mono text-[12px] text-muted">
-                {it.meta}
-              </span>
-            </ItemLink>
-          </li>
+            it={it}
+            index={i}
+            registerItem={hover.registerItem}
+            onFocus={() => hover.setActiveIndex(i)}
+            onBlur={() => hover.setActiveIndex(null)}
+          />
         ))}
 
-        {/* Preview, parked in the margin beside the column. */}
+        {/* Preview, parked in the margin beside the column. It travels with the
+            highlight (same row, same moment) and cross-fades its image, instead of
+            popping out and back in for every row. */}
         <AnimatePresence>
           {shown?.img && (
             <motion.div
-              key={shown.label}
+              key="preview"
               aria-hidden
-              initial={reduce ? { opacity: 0 } : { opacity: 0, x: -8, scale: 0.98 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
+              initial={reduce ? { opacity: 0, y: top - 44 } : { opacity: 0, x: -8, scale: 0.98, y: top - 44 }}
+              animate={{ opacity: 1, x: 0, scale: 1, y: top - 44 }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, x: -8, scale: 0.98 }}
-              transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              style={{ top: top - 44 }}
-              className="pointer-events-none absolute left-full ml-12 hidden w-[17rem] lg:block"
+              transition={reduce ? { duration: 0.12 } : { ...spring.moderate, opacity: { duration: 0.14 } }}
+              className="pointer-events-none absolute left-full top-0 ml-12 hidden w-[17rem] lg:block"
             >
-              <div className="rounded-[7px] bg-white p-[6px] shadow-[0_14px_30px_-10px_rgba(22,20,15,0.3)] ring-1 ring-ink/[0.06]">
-                <Image
-                  src={shown.img}
-                  alt={shown.alt ?? ""}
-                  width={544}
-                  height={374}
-                  sizes="260px"
-                  className="aspect-[16/11] w-full rounded-[3px] object-cover object-top"
-                />
+              <div className="relative rounded-[7px] bg-white p-[6px] shadow-[0_14px_30px_-10px_rgba(22,20,15,0.3)] ring-1 ring-ink/[0.06]">
+                <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[3px]">
+                  <AnimatePresence initial={false}>
+                    <motion.div
+                      key={shown.img}
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.16 }}
+                    >
+                      <Image
+                        src={shown.img}
+                        alt={shown.alt ?? ""}
+                        fill
+                        sizes="260px"
+                        className="object-cover object-top"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
             </motion.div>
           )}
