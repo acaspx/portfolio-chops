@@ -67,6 +67,16 @@ export const work: IndexItem[] = [
 // Work so the page reads as one index; these open the live thing, not a case.
 export const more: IndexItem[] = [
   {
+    label: "Corral",
+    meta: "Desktop agent manager",
+    href: "https://github.com/acaspx/Corral-howdy",
+    external: true,
+    img: "/work/corral.png",
+    alt: "Corral: an 8-bit wooden corral at dusk in the desert, holding five glass drops lettered G, C, M, D and O, with an empty spot waiting for one more",
+    desc: "One corral on your Mac desktop for all your AI agents: deploy them, watch them work, and approve what they do.",
+    gallery: [{ src: "/work/corral.png", alt: "Corral: an 8-bit wooden corral at dusk in the desert, holding five glass drops lettered G, C, M, D and O, with an empty spot waiting for one more" }],
+  },
+  {
     label: "Agent Pit Stop",
     meta: "Open-source design system",
     href: "https://agent-pitstop.vercel.app",
