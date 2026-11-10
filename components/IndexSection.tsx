@@ -16,15 +16,23 @@ export type IndexItem = {
   href?: string;
   external?: boolean;
   locked?: boolean;
-  /** Shown beside the column on hover. Omit for rows with nothing to show. */
+  /** Shown beside the column on hover. Omit for rows with nothing to show. An animated
+   *  SVG plays as-is (served unoptimized); give `still` for reduced motion. */
   img?: string;
+  /** A still frame of an animated `img`, shown instead when motion is reduced. */
+  still?: string;
   alt?: string;
   /** Company logo icons (slugs in /public/logos) shown before the label. */
   logos?: string[];
   /** Below lg: one line under the title, and a swipeable row of images. */
   desc?: string;
-  gallery?: { src: string; alt: string }[];
+  gallery?: { src: string; alt: string; still?: string }[];
 };
+
+/** Which file to show: the still under reduced motion, when there is one. */
+const pick = (src: string, still: string | undefined, reduce: boolean | null) => (reduce && still ? still : src);
+/** next/image won't optimize SVG, and an animated one must reach the browser untouched. */
+const isSvg = (src: string) => src.endsWith(".svg");
 
 /** The item's link, whichever kind it is: gated case, page, external, or none. */
 function ItemLink({
@@ -65,8 +73,9 @@ function ItemLink({
  * thin progress track underneath standing in for the hidden native scrollbar
  * (which iOS only shows mid-scroll, so nobody would know there is more).
  */
-function Gallery({ images, label }: { images: { src: string; alt: string }[]; label: string }) {
+function Gallery({ images, label }: { images: { src: string; alt: string; still?: string }[]; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const [bar, setBar] = useState({ w: 1, x: 0 });
   const single = images.length === 1;
 
@@ -111,9 +120,10 @@ function Gallery({ images, label }: { images: { src: string; alt: string }[]; la
             }`}
           >
             <Image
-              src={im.src}
+              src={pick(im.src, im.still, reduce)}
               alt={im.alt}
               fill
+              unoptimized={isSvg(pick(im.src, im.still, reduce))}
               sizes={single ? "100vw" : "82vw"}
               className="object-cover"
             />
@@ -277,7 +287,7 @@ export default function IndexSection({
                 <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[3px]">
                   <AnimatePresence initial={false}>
                     <motion.div
-                      key={shown.img}
+                      key={pick(shown.img, shown.still, reduce)}
                       className="absolute inset-0"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -285,9 +295,10 @@ export default function IndexSection({
                       transition={{ duration: 0.16 }}
                     >
                       <Image
-                        src={shown.img}
+                        src={pick(shown.img, shown.still, reduce)}
                         alt={shown.alt ?? ""}
                         fill
+                        unoptimized={isSvg(pick(shown.img, shown.still, reduce))}
                         sizes="260px"
                         className="object-cover object-top"
                       />

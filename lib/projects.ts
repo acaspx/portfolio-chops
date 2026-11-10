@@ -81,11 +81,12 @@ export const more: IndexItem[] = [
     meta: "Open-source design system",
     href: "https://agent-pitstop.vercel.app",
     external: true,
-    img: "/work/pitstop.jpg",
-    alt: "Agent Pit Stop: an agent run as a lap around a track, pulling into a human-in-the-loop pit to approve, deny or steer",
+    img: "/work/pitstop-track.svg",
+    still: "/work/pitstop-track-still.png",
+    alt: "Agent Pit Stop: an orange car laps a race circuit, pits for an eval, and a green car goes out once the person presses Approve",
     desc: "An open-source design system for the moments an agent hands control back to a person.",
     gallery: [
-      { src: "/work/pitstop.jpg", alt: "Agent Pit Stop: an agent run as a lap around a track, pulling into a human-in-the-loop pit to approve, deny or steer" },
+      { src: "/work/pitstop-track.svg", still: "/work/pitstop-track-still.png", alt: "Agent Pit Stop: an orange car laps a race circuit, pits for an eval, and a green car goes out once the person presses Approve" },
     ],
   },
   {
