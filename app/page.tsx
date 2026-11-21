@@ -25,11 +25,6 @@ const experience: IndexItem[] = [
   { label: "Intuit & Electronic Arts · Product Designer", meta: "2019 – 20", logos: ["intuit", "ea"] },
 ];
 
-const certifications: IndexItem[] = [
-  { label: "DeepLearning.AI · Agentic AI", meta: "2026" },
-  { label: "ELVTR · AI Product Design Certification", meta: "Certified" },
-];
-
 
 const links = [
   { label: "email", href: "mailto:ac.design.px@gmail.com" },
@@ -74,9 +69,7 @@ export default function Home() {
         <div className="mt-14 flex flex-col">
           <IndexSection title="Work" items={work} />
           <IndexSection title="What's more?" items={more} />
-          <IndexSection title="Experience" items={experience} />
-          <IndexSection title="Certifications" items={certifications} />
-        </div>
+          <IndexSection title="Experience" items={experience} />        </div>
       </div>
     </>
   );
